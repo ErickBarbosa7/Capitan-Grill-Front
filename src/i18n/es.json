@@ -1,0 +1,12 @@
+{
+  "header": {
+    "title": "Capitán Grill",
+    "subtitle": "Parrilla de campo & Cortes Premium"
+  },
+  "menu": {
+    "soldOut": "Agotado"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados."
+  }
+}

@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;800&family=Inter:wght@400;500&display=swap');
+
+:root {
+  --font-heading: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: monospace;
+  --bg-primary: #F7F5F0;
+  --text-primary: #2C2A29;
+  --text-secondary: #5E5A56;
+  --capitan-green: #3A5A40;
+  --capitan-wood: #A0522D;
+  --border-light: #E6E2D8;
+  --bg-card: #FFFFFF;
+}
