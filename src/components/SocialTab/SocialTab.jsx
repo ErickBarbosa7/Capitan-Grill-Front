@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import p2 from '../../assets/p2.jpeg';
 import styles from './SocialTab.module.css';
 
 const FACEBOOK_URL = 'https://www.facebook.com/people/Capitangrill/100064038762789/';
@@ -27,6 +28,7 @@ export default function SocialTab() {
   return (
     <div className={styles.wrapper}>
       <section className={styles.section}>
+        <img src={p2} alt="Capitán Grill" className={styles.image} />
         <h2 className={styles.title}>{t('social.title')}</h2>
         <p className={styles.description}>
           {t('social.description')}
