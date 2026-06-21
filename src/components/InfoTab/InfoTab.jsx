@@ -19,6 +19,7 @@ export default function InfoTab() {
   const { t } = useTranslation();
 
   const [currentIndex, setCurrentIndex] = useState(null);
+  const videoRef = useRef(null);
 
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
@@ -57,6 +58,17 @@ export default function InfoTab() {
     return () => {
       document.body.style.overflow = '';
     };
+  }, [currentIndex]);
+
+  useEffect(() => {
+    if (currentIndex === null) return;
+
+    const item = mediaItems[currentIndex];
+    if (item.type === 'video' && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    } else if (videoRef.current) {
+      videoRef.current.pause();
+    }
   }, [currentIndex]);
 
   const handleOpen = (index) => {
@@ -290,11 +302,11 @@ export default function InfoTab() {
           >
             {mediaItems[currentIndex].type === 'video' ? (
               <video
+                ref={videoRef}
                 className={styles.lightboxMedia}
                 controls
                 autoPlay
                 playsInline
-                key={currentIndex}
               >
                 <source
                   src={mediaItems[currentIndex].src}
