@@ -31,11 +31,11 @@ export default function InfoTab() {
         handleClose();
       }
 
-      if (e.key === 'ArrowLeft') {
+      if (e.key === 'ArrowLeft' && currentIndex > 0) {
         handlePrev();
       }
 
-      if (e.key === 'ArrowRight') {
+      if (e.key === 'ArrowRight' && currentIndex < mediaItems.length - 1) {
         handleNext();
       }
     };
@@ -68,15 +68,11 @@ export default function InfoTab() {
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? mediaItems.length - 1 : prev - 1
-    );
+    setCurrentIndex((prev) => prev - 1);
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) =>
-      prev === mediaItems.length - 1 ? 0 : prev + 1
-    );
+    setCurrentIndex((prev) => prev + 1);
   };
 
   const handleTouchStart = (e) => {
@@ -91,9 +87,9 @@ export default function InfoTab() {
     const diff = touchStartX.current - touchEndX.current;
 
     if (Math.abs(diff) > 50) {
-      if (diff > 0) {
+      if (diff > 0 && currentIndex < mediaItems.length - 1) {
         handleNext();
-      } else {
+      } else if (diff < 0 && currentIndex > 0) {
         handlePrev();
       }
     }
@@ -261,25 +257,29 @@ export default function InfoTab() {
             <X size={26} color="#F7F5F0" />
           </button>
 
-          <button
-            className={`${styles.navButton} ${styles.navButtonLeft}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              handlePrev();
-            }}
-          >
-            <ChevronLeft size={32} color="#F7F5F0" />
-          </button>
+          {currentIndex > 0 && (
+            <button
+              className={`${styles.navButton} ${styles.navButtonLeft}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrev();
+              }}
+            >
+              <ChevronLeft size={32} color="#F7F5F0" />
+            </button>
+          )}
 
-          <button
-            className={`${styles.navButton} ${styles.navButtonRight}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleNext();
-            }}
-          >
-            <ChevronRight size={32} color="#F7F5F0" />
-          </button>
+          {currentIndex < mediaItems.length - 1 && (
+            <button
+              className={`${styles.navButton} ${styles.navButtonRight}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNext();
+              }}
+            >
+              <ChevronRight size={32} color="#F7F5F0" />
+            </button>
+          )}
 
           <div
             className={styles.lightboxContent}
