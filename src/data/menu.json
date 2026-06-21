@@ -1,30 +1,31 @@
 {
   "categorias": [
     {
-      "id": "cortes-carne",
-      "nombre": "Cortes de Carne",
-      "descripcion": "Nuestra selección de cortes premium cocinados a la perfección.",
+      "id": "cortes-finos",
+      "nombre": "Cortes Finos",
       "items": [
-        { "id": "c01", "nombre": "Rib Eye", "descripcion": "Corte con excelente marmoleado, jugoso y tierno.", "precio": 380.00, "disponible": true },
-        { "id": "c02", "nombre": "Sirloin", "descripcion": "Corte magro, limpio y con un sabor intenso.", "precio": 320.00, "disponible": true },
-        { "id": "c03", "nombre": "T-Bone", "descripcion": "El equilibrio perfecto: una parte de filete y una de New York divididas por un hueso en forma de T.", "precio": 390.00, "disponible": true },
-        { "id": "c04", "nombre": "Porterhouse", "descripcion": "Similar al T-Bone pero con una porción de filete mucho más grande y jugosa.", "precio": 420.00, "disponible": true },
-        { "id": "c05", "nombre": "Tomahawk", "descripcion": "Un imponente Rib Eye con el hueso de la costilla entero, ideal para compartir.", "precio": 950.00, "disponible": true },
-        { "id": "c06", "nombre": "New York", "descripcion": "Corte tierno, con una textura firme y una banda de grasa lateral que resalta su sabor.", "precio": 360.00, "disponible": true },
-        { "id": "c07", "nombre": "Arrachera", "descripcion": "Corte clásico muy suave, marinado con la receta de la casa.", "precio": 290.00, "disponible": true },
-        { "id": "c08", "nombre": "Entraña", "descripcion": "Corte delgado muy popular por su sabor intenso y jugosidad al grill.", "precio": 310.00, "disponible": true },
-        { "id": "c09", "nombre": "Picaña", "descripcion": "Corte de origen brasileño con una generosa capa de grasa que le da un sabor espectacular.", "precio": 340.00, "disponible": true }
+        { "id": "c01", "nombre": "Rib Eye", "descripcion": "Corte jugoso con marmoleo perfecto y sabor intenso.", "precio": 180, "disponible": true },
+        { "id": "c02", "nombre": "New York", "descripcion": "Equilibrio ideal entre suavidad y textura firme.", "precio": 180, "disponible": true },
+        { "id": "c03", "nombre": "T-Bone", "descripcion": "Corte con doble textura: suavidad del filete y sabor del New York.", "precio": 180, "disponible": true },
+        { "id": "c04", "nombre": "Top Sirloin", "descripcion": "Corte magro, suave y con excelente sabor.", "precio": 180, "disponible": true },
+        { "id": "c05", "nombre": "Arrachera", "descripcion": "Corte tradicional, suave y muy sabroso.", "precio": 180, "disponible": true },
+        { "id": "c06", "nombre": "Costillitas", "descripcion": "Bites jugosos con todo el sabor del asado.", "precio": 180, "disponible": true },
+        { "id": "c07", "nombre": "Prime Rib", "descripcion": "Corte suave, jugoso y de sabor profundo.", "precio": 180, "disponible": true }
+      ]
+    },
+    {
+      "id": "extras",
+      "nombre": "Extras",
+      "items": [
+        { "id": "e01", "nombre": "Guacamole", "descripcion": "Aguacate fresco preparado al momento.", "precio": 50, "disponible": true }
       ]
     },
     {
       "id": "bebidas",
       "nombre": "Bebidas",
-      "descripcion": "Refrescos y cervezas para acompañar tu corte.",
       "items": [
-        { "id": "b01", "nombre": "Corona de Lata", "descripcion": "Cerveza clara, presentación de 355 ml.", "precio": 35.00, "disponible": true },
-        { "id": "b02", "nombre": "Victoria de Lata", "descripcion": "Cerveza tipo vienesa, presentación de 355 ml.", "precio": 35.00, "disponible": true },
-        { "id": "b03", "nombre": "Corona Light de Lata", "descripcion": "Cerveza clara ligera, presentación de 355 ml.", "precio": 35.00, "disponible": true },
-        { "id": "b04", "nombre": "Coca-Cola Original", "descripcion": "Presentación de 355 ml.", "precio": 30.00, "disponible": true }
+        { "id": "b01", "nombre": "Cerveza", "descripcion": "Victoria, Corona, Modelo. En lata pequeña, fría y lista para acompañar tus cortes.", "precio": 45, "disponible": true },
+        { "id": "b02", "nombre": "Refresco", "descripcion": "Coca-Cola. Bebida refrescante ideal para complementar tu comida.", "precio": 35, "disponible": true }
       ]
     }
   ]

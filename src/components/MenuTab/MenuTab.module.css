@@ -1,0 +1,90 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  display: flex;
+  justify-content: center;
+  padding: 2.5rem 1.25rem 1.5rem;
+  background-color: var(--bg-primary);
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-light);
+}
+
+.chipBar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--bg-primary);
+  padding: 1rem 1rem 0.75rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.menuTitle {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.chips {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.chip {
+  background-color: transparent;
+  border: 1.5px solid var(--border-light);
+  color: var(--text-secondary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  flex: 1;
+  max-width: 220px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.chip:hover {
+  border-color: var(--capitan-wood);
+  color: var(--capitan-wood);
+}
+
+.chip:active {
+  color: var(--text-secondary);
+}
+
+.activeChip {
+  background-color: var(--capitan-wood);
+  color: #FFFFFF;
+  border-color: var(--capitan-wood);
+}
+
+.activeChip:hover {
+  color: #FFFFFF;
+}
+
+.activeChip:active {
+  color: #FFFFFF;
+}
+
+.main {
+  padding: 1.25rem 1rem 1rem;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}

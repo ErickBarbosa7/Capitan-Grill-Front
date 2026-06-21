@@ -2,58 +2,10 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
-
-.menuSection {
-  max-width: 600px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 0 1rem;
-  scroll-margin-top: 20px;
-}
-
-.chipScroll {
-  position: sticky;
-  top: 0;
   background-color: var(--bg-primary);
-  padding: 1rem 0 1.5rem 0;
-  z-index: 10;
 }
 
-.chipsContainer {
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.chip {
-  background-color: transparent;
-  border: 1.5px solid var(--border-light);
-  color: var(--text-secondary);
-  padding: 0.75rem 2rem;
-  border-radius: 50px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 1rem;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-  min-width: 140px;
-}
-
-.chip:hover {
-  border-color: var(--capitan-wood);
-  color: var(--capitan-wood);
-}
-
-.activeChip {
-  background-color: var(--capitan-wood);
-  color: #FFFFFF;
-  border-color: var(--capitan-wood);
-}
-
-.main {
+.content {
   flex: 1;
-  padding-bottom: 2rem;
+  padding-bottom: calc(64px + env(safe-area-inset-bottom));
 }
