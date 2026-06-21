@@ -4,10 +4,41 @@
 }
 
 .hero {
+  position: relative;
   display: flex;
   justify-content: center;
   padding: 2.5rem 1.25rem 1.5rem;
   background-color: var(--bg-primary);
+}
+
+.langToggle {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: transparent;
+  border: 1.5px solid var(--border-light);
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.lang {
+  transition: color 0.2s;
+}
+
+.activeLang {
+  color: var(--capitan-wood);
+  font-weight: 600;
+}
+
+.separator {
+  color: var(--border-light);
 }
 
 .logo {

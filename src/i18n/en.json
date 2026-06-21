@@ -6,21 +6,45 @@
   "hero": {
     "cta": "View Menu"
   },
+  "nav": {
+    "menu": "Menu",
+    "info": "Info",
+    "social": "Follow Us"
+  },
+  "menu": {
+    "title": "Menu",
+    "soldOut": "Sold out",
+    "categories": {
+      "cortes-finos": "Fine Cuts",
+      "extras": "Extras",
+      "bebidas": "Drinks"
+    },
+    "items": {
+      "c01": { "name": "Rib Eye", "desc": "Juicy cut with perfect marbling and intense flavor." },
+      "c02": { "name": "New York", "desc": "Ideal balance between tenderness and firm texture." },
+      "c03": { "name": "T-Bone", "desc": "Cut with dual texture: filet tenderness and New York flavor." },
+      "c04": { "name": "Top Sirloin", "desc": "Lean cut, tender with excellent flavor." },
+      "c05": { "name": "Arrachera", "desc": "Traditional cut, tender and very tasty." },
+      "c06": { "name": "Costillitas", "desc": "Juicy bites with all the barbecue flavor." },
+      "c07": { "name": "Prime Rib", "desc": "Tender, juicy cut with deep flavor." },
+      "e01": { "name": "Guacamole", "desc": "Fresh avocado prepared on the spot." },
+      "b01": { "name": "Beer", "desc": "Victoria, Corona, Modelo. Small cold can, ready to accompany your cuts." },
+      "b02": { "name": "Soda", "desc": "Coca-Cola. Refreshing drink ideal to complement your meal." }
+    }
+  },
   "about": {
     "title": "Our Story",
     "description": "At Capitán Grill we transform premium cuts into unforgettable experiences. Field grill, tradition and flavor in every bite."
   },
-  "menu": {
-    "soldOut": "Sold out"
-  },
   "location": {
     "title": "Location",
     "address": "37880 Santuario de Atotonilco, San Miguel de Allende, Gto.",
-    "phone": "+52 1 221 602 9780",
+    "phone": "+52 415-158-3036",
     "hours": "Mon - Sun: 6:00 PM - 11:00 PM"
   },
   "social": {
-    "title": "Follow Us"
+    "title": "Follow Us",
+    "description": "Visit us on Facebook to see photos, promotions and news from Capitán Grill."
   },
   "footer": {
     "rights": "All rights reserved."

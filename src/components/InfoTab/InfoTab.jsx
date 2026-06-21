@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { MapPin, Phone, Clock } from 'lucide-react';
+import { MapPin, Phone } from 'lucide-react';
 import logo from '../../assets/logo.png';
 import styles from './InfoTab.module.css';
 
@@ -34,13 +34,9 @@ export default function InfoTab() {
 
           <div className={styles.infoItem}>
             <Phone size={20} className={styles.icon} />
-            <a href="tel:+522216029780" className={styles.infoText}>{t('location.phone')}</a>
+            <a href="tel:+524151583036" className={styles.infoText}>{t('location.phone')}</a>
           </div>
 
-          <div className={styles.infoItem}>
-            <Clock size={20} className={styles.icon} />
-            <p className={styles.infoText}>{t('location.hours')}</p>
-          </div>
         </div>
 
         <div className={styles.mapContainer}>

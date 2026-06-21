@@ -1,10 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import MenuItem from '../MenuItem/MenuItem';
 import styles from './CategorySection.module.css';
 
 export default function CategorySection({ category }) {
+  const { t } = useTranslation();
+
   return (
     <section className={styles.section}>
-      <h2 className={styles.title}>{category.nombre}</h2>
+      <h2 className={styles.title}>{t(`menu.categories.${category.id}`)}</h2>
       {category.descripcion && (
         <p className={styles.description}>{category.descripcion}</p>
       )}

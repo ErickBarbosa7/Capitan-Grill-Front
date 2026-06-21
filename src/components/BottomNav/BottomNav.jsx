@@ -1,13 +1,21 @@
+import { useTranslation } from 'react-i18next';
 import { Menu, Info, Share2 } from 'lucide-react';
 import styles from './BottomNav.module.css';
 
-const tabs = [
-  { id: 'menu', label: 'Menú', icon: <Menu size={22} /> },
-  { id: 'info', label: 'Info', icon: <Info size={22} /> },
-  { id: 'social', label: 'Síguenos', icon: <Share2 size={22} /> },
-];
+const icons = {
+  menu: <Menu size={22} />,
+  info: <Info size={22} />,
+  social: <Share2 size={22} />,
+};
 
 export default function BottomNav({ activeTab, onTabChange }) {
+  const { t } = useTranslation();
+  const tabs = [
+    { id: 'menu', label: t('nav.menu') },
+    { id: 'info', label: t('nav.info') },
+    { id: 'social', label: t('nav.social') },
+  ];
+
   return (
     <nav className={styles.nav}>
       {tabs.map((tab) => (
@@ -16,7 +24,7 @@ export default function BottomNav({ activeTab, onTabChange }) {
           className={`${styles.tab} ${activeTab === tab.id ? styles.active : ''}`}
           onClick={() => onTabChange(tab.id)}
         >
-          <span className={styles.icon}>{tab.icon}</span>
+          <span className={styles.icon}>{icons[tab.id]}</span>
           <span className={styles.label}>{tab.label}</span>
         </button>
       ))}
