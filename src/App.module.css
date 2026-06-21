@@ -1,53 +1,59 @@
 .app {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-.main {
-  flex: 1;
+.menuSection {
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 1rem;
+  scroll-margin-top: 20px;
 }
 
 .chipScroll {
   position: sticky;
   top: 0;
-  background-color: var(--bg-primary); /* Efecto sticky que oculta lo que pasa por debajo */
-  padding: 0.5rem 0 1.5rem 0;
-  margin-bottom: 1rem;
+  background-color: var(--bg-primary);
+  padding: 1rem 0 1.5rem 0;
   z-index: 10;
 }
 
 .chipsContainer {
   display: flex;
+  justify-content: center;
   gap: 0.75rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem; /* Espacio para el scroll nativo */
-  scrollbar-width: none; /* Firefox */
-}
-
-.chipsContainer::-webkit-scrollbar {
-  display: none; /* Safari y Chrome */
+  flex-wrap: wrap;
 }
 
 .chip {
   background-color: transparent;
   border: 1.5px solid var(--border-light);
   color: var(--text-secondary);
-  padding: 0.5rem 1.25rem;
-  border-radius: 25px; /* Bordes muy redondeados estilo app */
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 1rem;
   cursor: pointer;
-  white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+  white-space: nowrap;
   transition: all 0.2s ease;
+  min-width: 140px;
+}
+
+.chip:hover {
+  border-color: var(--capitan-wood);
+  color: var(--capitan-wood);
 }
 
 .activeChip {
   background-color: var(--capitan-wood);
   color: #FFFFFF;
   border-color: var(--capitan-wood);
+}
+
+.main {
+  flex: 1;
+  padding-bottom: 2rem;
 }

@@ -3,8 +3,24 @@
     "title": "Capitán Grill",
     "subtitle": "Field Grill & Premium Cuts"
   },
+  "hero": {
+    "cta": "View Menu"
+  },
+  "about": {
+    "title": "Our Story",
+    "description": "At Capitán Grill we transform premium cuts into unforgettable experiences. Field grill, tradition and flavor in every bite."
+  },
   "menu": {
     "soldOut": "Sold out"
+  },
+  "location": {
+    "title": "Location",
+    "address": "37880 Santuario de Atotonilco, San Miguel de Allende, Gto.",
+    "phone": "+52 1 221 602 9780",
+    "hours": "Mon - Sun: 6:00 PM - 11:00 PM"
+  },
+  "social": {
+    "title": "Follow Us"
   },
   "footer": {
     "rights": "All rights reserved."

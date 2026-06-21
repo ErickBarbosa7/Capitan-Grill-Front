@@ -6,8 +6,7 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <h1 className={styles.title}>{t('header.title')}</h1>
-      <p className={styles.subtitle}>{t('header.subtitle')}</p>
+      <span className={styles.title}>{t('header.title')}</span>
     </header>
   );
 }

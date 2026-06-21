@@ -3,8 +3,24 @@
     "title": "Capitán Grill",
     "subtitle": "Parrilla de campo & Cortes Premium"
   },
+  "hero": {
+    "cta": "Ver Menú"
+  },
+  "about": {
+    "title": "Nuestra Historia",
+    "description": "En Capitán Grill transformamos cortes premium en experiencias inolvidables. Parrilla de campo, tradición y sabor en cada bocado."
+  },
   "menu": {
     "soldOut": "Agotado"
+  },
+  "location": {
+    "title": "Ubicación",
+    "address": "37880 Santuario de Atotonilco, San Miguel de Allende, Gto.",
+    "phone": "+52 1 221 602 9780",
+    "hours": "Lun - Dom: 6:00 PM - 11:00 PM"
+  },
+  "social": {
+    "title": "Síguenos"
   },
   "footer": {
     "rights": "Todos los derechos reservados."
