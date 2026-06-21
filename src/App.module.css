@@ -10,3 +10,44 @@
 .main {
   flex: 1;
 }
+
+.chipScroll {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-primary); /* Efecto sticky que oculta lo que pasa por debajo */
+  padding: 0.5rem 0 1.5rem 0;
+  margin-bottom: 1rem;
+  z-index: 10;
+}
+
+.chipsContainer {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem; /* Espacio para el scroll nativo */
+  scrollbar-width: none; /* Firefox */
+}
+
+.chipsContainer::-webkit-scrollbar {
+  display: none; /* Safari y Chrome */
+}
+
+.chip {
+  background-color: transparent;
+  border: 1.5px solid var(--border-light);
+  color: var(--text-secondary);
+  padding: 0.5rem 1.25rem;
+  border-radius: 25px; /* Bordes muy redondeados estilo app */
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+  transition: all 0.2s ease;
+}
+
+.activeChip {
+  background-color: var(--capitan-wood);
+  color: #FFFFFF;
+  border-color: var(--capitan-wood);
+}
