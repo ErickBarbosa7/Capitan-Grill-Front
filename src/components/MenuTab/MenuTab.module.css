@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
   padding: 1.25rem 1rem 1.1rem;
-  background-color: #2C2A29;
+  background-color: #2C2A29; /* Usa el color hardcodeado que prefieras o var si está definida */
 }
 
 .langToggle {
@@ -37,7 +37,6 @@
 
 .activeLang {
   color: #C9A87C;
-  font-weight: 700;
 }
 
 .separator {
@@ -119,4 +118,39 @@
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
+}
+
+/* ── Banner Promocional ── */
+.promoBanner {
+  background-color: var(--capitan-wood);
+  color: var(--bg-primary);
+  padding: 1.25rem 1rem;
+  margin-bottom: 1.5rem; /* Separación del menú de categorías */
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(160, 82, 45, 0.2);
+}
+
+.promoTitle {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin: 0 0 0.25rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.promoPrice {
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: #C9A87C;
+}
+
+.promoSubtitle {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  margin: 0;
+  opacity: 0.9;
 }

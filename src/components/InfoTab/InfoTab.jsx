@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MapPin, MessageCircle } from 'lucide-react';
+import { MapPin, MessageCircle, X } from 'lucide-react';
 import logo from '../../assets/logo.png';
 import lugarImg from '../../assets/Lugar.jpg';
 import lugar2 from '../../assets/lugar2.jpg';
@@ -9,6 +10,8 @@ import styles from './InfoTab.module.css';
 
 export default function InfoTab() {
   const { t } = useTranslation();
+  // Estado para controlar qué recurso multimedia se muestra en el Lightbox
+  const [lightboxMedia, setLightboxMedia] = useState(null); // { type: 'image' | 'video', src: string }
 
   return (
     <div className={styles.wrapper}>
@@ -28,7 +31,12 @@ export default function InfoTab() {
         <p className={styles.collageLabel}>{t('info.ourPlace', 'Nuestro Lugar')}</p>
         <div className={styles.collage}>
           <div className={styles.collageMain}>
-            <a href={lugarVideo} target="_blank" rel="noopener noreferrer" className={styles.collageLink}>
+            <div 
+              className={styles.collageLink} 
+              onClick={() => setLightboxMedia({ type: 'video', src: lugarVideo })}
+              role="button"
+              tabIndex={0}
+            >
               <video className={styles.collageVideo} autoPlay muted loop playsInline>
                 <source src={lugarVideo} type="video/quicktime" />
                 <source src={lugarVideo} type="video/mp4" />
@@ -38,33 +46,48 @@ export default function InfoTab() {
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </span>
-            </a>
+            </div>
           </div>
           <div className={styles.collageSub}>
-            <a href={lugarImg} target="_blank" rel="noopener noreferrer" className={styles.collageLink}>
+            <div 
+              className={styles.collageLink} 
+              onClick={() => setLightboxMedia({ type: 'image', src: lugarImg })}
+              role="button"
+              tabIndex={0}
+            >
               <img src={lugarImg} alt="Capitán Grill" className={styles.collagePhoto} />
               <span className={styles.collageOverlay}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={styles.expandIcon}>
                   <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                 </svg>
               </span>
-            </a>
-            <a href={lugar2} target="_blank" rel="noopener noreferrer" className={styles.collageLink}>
+            </div>
+            <div 
+              className={styles.collageLink} 
+              onClick={() => setLightboxMedia({ type: 'image', src: lugar2 })}
+              role="button"
+              tabIndex={0}
+            >
               <img src={lugar2} alt="Capitán Grill" className={styles.collagePhoto} />
               <span className={styles.collageOverlay}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={styles.expandIcon}>
                   <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                 </svg>
               </span>
-            </a>
-            <a href={lugar3} target="_blank" rel="noopener noreferrer" className={styles.collageLink}>
+            </div>
+            <div 
+              className={styles.collageLink} 
+              onClick={() => setLightboxMedia({ type: 'image', src: lugar3 })}
+              role="button"
+              tabIndex={0}
+            >
               <img src={lugar3} alt="Capitán Grill" className={styles.collagePhoto} />
               <span className={styles.collageOverlay}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={styles.expandIcon}>
                   <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                 </svg>
               </span>
-            </a>
+            </div>
           </div>
         </div>
       </div>
@@ -112,8 +135,36 @@ export default function InfoTab() {
             </div>
           </a>
         </div>
-
       </section>
+
+      {/* ── Visor Lightbox (Pantalla Completa) ── */}
+      {lightboxMedia && (
+        <div className={styles.lightboxOverlay} onClick={() => setLightboxMedia(null)}>
+          <button className={styles.closeButton} onClick={() => setLightboxMedia(null)} aria-label="Cerrar">
+            <X size={26} color="#F7F5F0" />
+          </button>
+          
+          {lightboxMedia.type === 'video' ? (
+            <video 
+              className={styles.lightboxMedia} 
+              controls 
+              autoPlay 
+              playsInline 
+              onClick={(e) => e.stopPropagation()}
+            >
+              <source src={lightboxMedia.src} type="video/quicktime" />
+              <source src={lightboxMedia.src} type="video/mp4" />
+            </video>
+          ) : (
+            <img 
+              src={lightboxMedia.src} 
+              className={styles.lightboxMedia} 
+              alt="Vista ampliada"
+              onClick={(e) => e.stopPropagation()} 
+            />
+          )}
+        </div>
+      )}
 
     </div>
   );

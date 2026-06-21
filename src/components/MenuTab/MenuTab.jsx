@@ -47,6 +47,17 @@ export default function MenuTab() {
       </nav>
 
       <main className={styles.main}>
+        {/* Banner Promocional del Gancho Comercial */}
+        <div className={styles.promoBanner}>
+          <h2 className={styles.promoTitle}>
+            Cortes Finos <span className={styles.promoPrice}>$180</span>
+          </h2>
+          <p className={styles.promoSubtitle}>
+            {t('menu.includesBanner')} <strong>{t('menu.includesItems')}</strong>
+          </p>
+        </div>
+
+        {/* Categoría Activa */}
         {activeCategory && (
           <CategorySection key={activeCategory.id} category={activeCategory} />
         )}
