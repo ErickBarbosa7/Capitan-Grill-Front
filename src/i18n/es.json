@@ -14,6 +14,8 @@
   "menu": {
     "title": "Menú",
     "soldOut": "Agotado",
+    "includesBanner": "Todos los cortes incluyen",
+    "includesItems": "tortillas y salsa",
     "categories": {
       "cortes-finos": "Cortes Finos",
       "extras": "Extras",
@@ -40,11 +42,18 @@
     "title": "Ubicación",
     "address": "37880 Santuario de Atotonilco, San Miguel de Allende, Gto.",
     "phone": "+52 415-158-3036",
-    "hours": "Lun - Dom: 6:00 PM - 11:00 PM"
+    "hours": "Lun - Dom: 6:00 PM - 11:00 PM",
+    "tapToChat": "Escríbenos directo"
+  },
+  "info": {
+    "ourPlace": "Nuestro Lugar"
   },
   "social": {
     "title": "Síguenos",
-    "description": "Visítanos en Facebook para ver fotos, promociones y novedades de Capitán Grill."
+    "description": "Visítanos en Facebook y escríbenos por WhatsApp para ver fotos, promociones y novedades de Capitán Grill.",
+    "networksLabel": "Redes Sociales",
+    "follow": "Síguenos",
+    "writeUs": "Escríbenos directo"
   },
   "footer": {
     "rights": "Todos los derechos reservados."

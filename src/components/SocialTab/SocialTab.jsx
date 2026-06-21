@@ -27,32 +27,60 @@ export default function SocialTab() {
 
   return (
     <div className={styles.wrapper}>
-      <section className={styles.section}>
-        <img src={p2} alt="Capitán Grill" className={styles.image} />
-        <h2 className={styles.title}>{t('social.title')}</h2>
-        <p className={styles.description}>
-          {t('social.description')}
-        </p>
 
-        <div className={styles.links}>
+      {/* ── Hero oscuro con foto ── */}
+      <header className={styles.hero}>
+        <img src={p2} alt="Capitán Grill" className={styles.heroImg} />
+        <p className={styles.heroName}>{t('social.title')}</p>
+        <div className={styles.heroPills}>
+          <span className={styles.pill}>Capitán Grill</span>
+          <span className={styles.pill}>El Sabor del Norte</span>
+        </div>
+      </header>
+
+      {/* ── Cuerpo ── */}
+      <section className={styles.section}>
+        <div className={styles.ornament}>
+          <div className={styles.ornLine} />
+          <div className={styles.ornDiamond} />
+          <span className={styles.ornLabel}>{t('social.networksLabel', 'Redes Sociales')}</span>
+          <div className={styles.ornDiamond} />
+          <div className={styles.ornLine} />
+        </div>
+
+        <p className={styles.description}>{t('social.description')}</p>
+
+        <div className={styles.cards}>
           <a
             href={FACEBOOK_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.facebook}
+            className={`${styles.card} ${styles.facebook}`}
           >
-            <FacebookIcon />
-            Facebook
+            <div className={styles.iconWrap}>
+              <FacebookIcon />
+            </div>
+            <div className={styles.cardText}>
+              <p>Facebook</p>
+              <span>Capitangrill · {t('social.follow', 'Síguenos')}</span>
+            </div>
+            <span className={styles.arrow}>›</span>
           </a>
 
           <a
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.whatsapp}
+            className={`${styles.card} ${styles.whatsapp}`}
           >
-            <WhatsAppIcon />
-            WhatsApp
+            <div className={styles.iconWrap}>
+              <WhatsAppIcon />
+            </div>
+            <div className={styles.cardText}>
+              <p>WhatsApp</p>
+              <span>{t('social.writeUs', 'Escríbenos directo')}</span>
+            </div>
+            <span className={styles.arrow}>›</span>
           </a>
         </div>
       </section>
@@ -60,6 +88,7 @@ export default function SocialTab() {
       <footer className={styles.footer}>
         <p>&copy; {year} Capitán Grill. {t('footer.rights')}</p>
       </footer>
+
     </div>
   );
 }

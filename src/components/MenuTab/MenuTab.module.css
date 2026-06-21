@@ -3,90 +3,97 @@
   flex-direction: column;
 }
 
+/* ── Hero oscuro ── */
 .hero {
   position: relative;
   display: flex;
   justify-content: center;
-  padding: 2.5rem 1.25rem 1.5rem;
-  background-color: var(--bg-primary);
+  align-items: center;
+  padding: 1.25rem 1rem 1.1rem;
+  background-color: #2C2A29;
 }
 
 .langToggle {
   position: absolute;
   top: 0.75rem;
-  right: 1rem;
+  right: 0.85rem;
   background: transparent;
-  border: 1.5px solid var(--border-light);
-  padding: 0.35rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 0.25rem 0.6rem;
   border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.25rem;
   font-family: var(--font-body);
-  font-size: 0.9rem;
-  color: var(--text-secondary);
 }
 
 .lang {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
   transition: color 0.2s;
 }
 
 .activeLang {
-  color: var(--capitan-wood);
-  font-weight: 600;
+  color: #C9A87C;
+  font-weight: 700;
 }
 
 .separator {
-  color: var(--border-light);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.18);
 }
 
 .logo {
-  width: 120px;
-  height: 120px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--border-light);
+  border: 2px solid #C9A87C;
 }
 
+/* ── Chipbar sticky ── */
 .chipBar {
   position: sticky;
   top: 0;
   z-index: 10;
   background-color: var(--bg-primary);
-  padding: 1rem 1rem 0.75rem;
+  padding: 0.85rem 1rem 0.75rem;
   border-bottom: 1px solid var(--border-light);
 }
 
 .menuTitle {
   font-family: var(--font-heading);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  font-weight: 800;
   color: var(--text-primary);
   text-align: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.01em;
 }
 
 .chips {
   display: flex;
   justify-content: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .chip {
   background-color: transparent;
   border: 1.5px solid var(--border-light);
   color: var(--text-secondary);
-  padding: 0.75rem 1.5rem;
+  padding: 0.45rem 1rem;
   border-radius: 50px;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.82rem;
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.2s ease;
   flex: 1;
-  max-width: 220px;
+  max-width: 200px;
+  text-align: center;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -95,26 +102,20 @@
   color: var(--capitan-wood);
 }
 
-.chip:active {
-  color: var(--text-secondary);
-}
-
 .activeChip {
   background-color: var(--capitan-wood);
-  color: #FFFFFF;
+  color: #ffffff;
   border-color: var(--capitan-wood);
 }
 
-.activeChip:hover {
-  color: #FFFFFF;
-}
-
+.activeChip:hover,
 .activeChip:active {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
+/* ── Contenido principal ── */
 .main {
-  padding: 1.25rem 1rem 1rem;
+  padding: 0.75rem 1rem 1rem;
   max-width: 600px;
   width: 100%;
   margin: 0 auto;

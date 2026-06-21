@@ -1,71 +1,126 @@
 .wrapper {
-  padding: 0 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
   max-width: 600px;
   margin: 0 auto;
   width: 100%;
+  padding-bottom: 1.5rem;
 }
 
+/* ── Hero oscuro ── */
 .hero {
-  text-align: center;
-  padding: 1.5rem 0 2rem;
+  background: #2C2A29;
+  padding: 1.5rem 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .logo {
-  width: 120px;
-  height: 120px;
+  width: 82px;
+  height: 82px;
   border-radius: 50%;
   object-fit: cover;
-  margin: 0 auto 1rem;
-  border: 2px solid var(--border-light);
+  border: 2px solid #C9A87C;
   display: block;
 }
 
-.slogan {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  max-width: 400px;
-  margin: 0 auto;
+.heroName {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: #F7F5F0;
+  letter-spacing: 0.01em;
+}
+
+.heroPills {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pill {
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #C9A87C;
+  border: 1px solid rgba(201, 168, 124, 0.35);
+  border-radius: 20px;
+  padding: 0.25rem 0.65rem;
+  font-weight: 600;
+}
+
+/* ── Collage ── */
+.collageWrap {
+  padding: 1.1rem 1rem 0;
+}
+
+.collageLabel {
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--capitan-wood);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.collageLabel::before,
+.collageLabel::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #C9A87C;
+  opacity: 0.4;
 }
 
 .collage {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 6px;
 }
 
 .collageMain {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: 0.75rem;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .collageSub {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 6px;
 }
 
 .collageLink {
   position: relative;
-  border-radius: 14px;
+  border-radius: 10px;
   overflow: hidden;
   display: block;
   cursor: pointer;
   text-decoration: none;
+  height: 100%;
+}
+
+.collageMain .collageLink {
+  height: 100%;
 }
 
 .collageVideo {
   width: 100%;
-  height: 240px;
+  height: 100%;
+  min-height: 200px;
   object-fit: cover;
   display: block;
 }
 
 .collagePhoto {
   width: 100%;
-  height: 240px;
+  height: 100%;
+  min-height: 64px;
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
@@ -78,7 +133,7 @@
 .collageOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.22);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,78 +146,112 @@
 }
 
 .playIcon {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   color: #fff;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .expandIcon {
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   color: #fff;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
-.section {
-  padding: 0.5rem 0;
-}
-
-.sectionTitle {
-  font-family: var(--font-heading);
-  font-size: 1.6rem;
-  color: var(--text-primary);
+/* ── Ornamento compartido ── */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 0.75rem;
 }
 
-.description {
-  color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-.divider {
+.ornLine {
+  flex: 1;
   height: 1px;
-  background-color: var(--border-light);
-  margin: 1.75rem 0;
+  background: #C9A87C;
+  opacity: 0.4;
 }
 
-.infoList {
+.ornDiamond {
+  width: 6px;
+  height: 6px;
+  background: var(--capitan-wood);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.ornLabel {
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--capitan-wood);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ── Secciones ── */
+.section {
+  padding: 1.1rem 1rem 0;
+}
+
+/* ── About ── */
+.aboutText {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-style: italic;
+  border-left: 2px solid #C9A87C;
+  padding-left: 0.85rem;
+  margin-left: 0.1rem;
+}
+
+/* ── Info cards ── */
+.infoCards {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
 }
 
-.infoItem {
+.infoCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 0.65rem 0.85rem;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.75rem;
+  text-decoration: none;
+  transition: border-color 0.2s ease;
 }
 
-.icon {
-  width: 20px;
-  height: 20px;
+a.infoCard:hover {
+  border-color: var(--capitan-wood);
+}
+
+.infoCardIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(160, 82, 45, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   color: var(--capitan-wood);
-  margin-top: 2px;
 }
 
-.infoText {
+.infoCardText p {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0 0 1px;
+}
+
+.infoCardText span {
+  font-size: 0.7rem;
   color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
-
-.mapContainer {
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid var(--border-light);
-}
-
-.map {
-  width: 100%;
-  height: 240px;
-  border: 0;
-  display: block;
 }

@@ -1,97 +1,184 @@
 .wrapper {
-  padding: 2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
   max-width: 600px;
   margin: 0 auto;
   width: 100%;
-  display: flex;
-  flex-direction: column;
   min-height: calc(100vh - 64px);
 }
 
+/* ── Hero oscuro ── */
+.hero {
+  background: #2C2A29;
+  padding: 1.25rem 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.heroImg {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.heroName {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: #F7F5F0;
+  letter-spacing: 0.01em;
+}
+
+.heroPills {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pill {
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #C9A87C;
+  border: 1px solid rgba(201, 168, 124, 0.35);
+  border-radius: 20px;
+  padding: 0.25rem 0.65rem;
+  font-weight: 600;
+}
+
+/* ── Sección ── */
 .section {
   flex: 1;
-  text-align: center;
-  padding-top: 2rem;
+  padding: 1.1rem 1rem 0;
 }
 
-.image {
-  width: 100%;
-  max-height: 260px;
-  object-fit: cover;
-  border-radius: 16px;
-  margin-bottom: 1.5rem;
-  display: block;
-}
-
-.title {
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-}
-
-.description {
-  color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-.links {
+/* ── Ornamento compartido ── */
+.ornament {
   display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.ornLine {
+  flex: 1;
+  height: 1px;
+  background: #C9A87C;
+  opacity: 0.4;
+}
+
+.ornDiamond {
+  width: 6px;
+  height: 6px;
+  background: var(--capitan-wood);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.ornLabel {
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--capitan-wood);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ── Descripción ── */
+.description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-style: italic;
+  border-left: 2px solid #C9A87C;
+  padding-left: 0.85rem;
+  margin-left: 0.1rem;
+  margin-bottom: 1.25rem;
+}
+
+/* ── Tarjetas de redes ── */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.card {
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.card:active {
+  transform: scale(0.98);
+}
+
+.facebook { background: #1877F2; }
+.whatsapp { background: #25D366; }
+
+.iconWrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.facebook {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: #1877F2;
-  color: #FFFFFF;
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.facebook:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-}
-
-.whatsapp {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: #25D366;
-  color: #FFFFFF;
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.whatsapp:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
+  flex-shrink: 0;
 }
 
 .socialIcon {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
+  fill: #fff;
 }
 
+.cardText {
+  flex: 1;
+}
+
+.cardText p {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 2px;
+  line-height: 1.2;
+}
+
+.cardText span {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.arrow {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1;
+}
+
+/* ── Footer ── */
 .footer {
+  border-top: 1px solid var(--border-light);
+  padding: 1rem 1rem 1.25rem;
   text-align: center;
-  padding: 2rem 0 1rem;
+}
+
+.footer p {
+  font-size: 0.7rem;
   color: var(--text-secondary);
-  font-size: 0.85rem;
 }

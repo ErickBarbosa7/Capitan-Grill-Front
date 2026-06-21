@@ -19,8 +19,10 @@ export default function MenuTab() {
 
   return (
     <div className={styles.wrapper}>
+
+      {/* Hero oscuro con logo */}
       <header className={styles.hero}>
-        <button className={styles.langToggle} onClick={toggleLang}>
+        <button className={styles.langToggle} onClick={toggleLang} aria-label="Cambiar idioma">
           <span className={`${styles.lang} ${i18n.language === 'es' ? styles.activeLang : ''}`}>ES</span>
           <span className={styles.separator}>/</span>
           <span className={`${styles.lang} ${i18n.language === 'en' ? styles.activeLang : ''}`}>EN</span>
@@ -28,6 +30,7 @@ export default function MenuTab() {
         <img src={logo} alt="Capitán Grill" className={styles.logo} />
       </header>
 
+      {/* Chipbar sticky */}
       <nav className={styles.chipBar}>
         <h2 className={styles.menuTitle}>{t('menu.title')}</h2>
         <div className={styles.chips}>
@@ -48,6 +51,7 @@ export default function MenuTab() {
           <CategorySection key={activeCategory.id} category={activeCategory} />
         )}
       </main>
+
     </div>
   );
 }
