@@ -1,115 +1,217 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MapPin, MessageCircle, X } from 'lucide-react';
+import { MapPin, MessageCircle, X, ChevronLeft, ChevronRight } from 'lucide-react';
+
 import logo from '../../assets/logo.png';
 import lugarImg from '../../assets/Lugar.jpg';
-import lugar2 from '../../assets/lugar2.jpg';
 import lugar3 from '../../assets/lugar3.jpg';
 import lugarVideo from '../../assets/IMG_6038.MOV';
+
 import styles from './InfoTab.module.css';
+
+const mediaItems = [
+  { type: 'video', src: lugarVideo, alt: 'Video del lugar' },
+  { type: 'image', src: lugarImg, alt: 'Capitán Grill 1' },
+  { type: 'image', src: lugar3, alt: 'Capitán Grill 2' },
+];
 
 export default function InfoTab() {
   const { t } = useTranslation();
-  // Estado para controlar qué recurso multimedia se muestra en el Lightbox
-  const [lightboxMedia, setLightboxMedia] = useState(null); // { type: 'image' | 'video', src: string }
+
+  const [currentIndex, setCurrentIndex] = useState(null);
+
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (currentIndex === null) return;
+
+      if (e.key === 'Escape') {
+        handleClose();
+      }
+
+      if (e.key === 'ArrowLeft') {
+        handlePrev();
+      }
+
+      if (e.key === 'ArrowRight') {
+        handleNext();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentIndex]);
+
+  useEffect(() => {
+    if (currentIndex !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [currentIndex]);
+
+  const handleOpen = (index) => {
+    setCurrentIndex(index);
+  };
+
+  const handleClose = () => {
+    setCurrentIndex(null);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) =>
+      prev === 0 ? mediaItems.length - 1 : prev - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) =>
+      prev === mediaItems.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current;
+
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+
+    touchStartX.current = 0;
+    touchEndX.current = 0;
+  };
+
+  const renderThumbnails = () => {
+    return (
+      <div className={styles.collage}>
+        <div className={styles.collageMain}>
+          <div
+            className={styles.collageLink}
+            onClick={() => handleOpen(0)}
+            role="button"
+            tabIndex={0}
+          >
+            <video
+              className={styles.collageVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source src={lugarVideo} type="video/quicktime" />
+              <source src={lugarVideo} type="video/mp4" />
+            </video>
+
+            <span className={styles.collageOverlay}>
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className={styles.playIcon}
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <div className={styles.collageSub}>
+          {mediaItems.slice(1).map((item, idx) => (
+            <div
+              key={idx}
+              className={styles.collageLink}
+              onClick={() => handleOpen(idx + 1)}
+              role="button"
+              tabIndex={0}
+            >
+              <img
+                src={item.src}
+                alt={item.alt}
+                className={styles.collagePhoto}
+              />
+
+              <span className={styles.collageOverlay}>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className={styles.expandIcon}
+                >
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg>
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className={styles.wrapper}>
-
-      {/* ── Hero oscuro ── */}
       <header className={styles.hero}>
         <img src={logo} alt="Capitán Grill" className={styles.logo} />
+
         <p className={styles.heroName}>Capitán Grill</p>
+
         <div className={styles.heroPills}>
           <span className={styles.pill}>Meat Boutique</span>
           <span className={styles.pill}>El Sabor del Norte</span>
         </div>
       </header>
 
-      {/* ── Collage ── */}
       <div className={styles.collageWrap}>
-        <p className={styles.collageLabel}>{t('info.ourPlace', 'Nuestro Lugar')}</p>
-        <div className={styles.collage}>
-          <div className={styles.collageMain}>
-            <div 
-              className={styles.collageLink} 
-              onClick={() => setLightboxMedia({ type: 'video', src: lugarVideo })}
-              role="button"
-              tabIndex={0}
-            >
-              <video className={styles.collageVideo} autoPlay muted loop playsInline>
-                <source src={lugarVideo} type="video/quicktime" />
-                <source src={lugarVideo} type="video/mp4" />
-              </video>
-              <span className={styles.collageOverlay}>
-                <svg viewBox="0 0 24 24" fill="currentColor" className={styles.playIcon}>
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </span>
-            </div>
-          </div>
-          <div className={styles.collageSub}>
-            <div 
-              className={styles.collageLink} 
-              onClick={() => setLightboxMedia({ type: 'image', src: lugarImg })}
-              role="button"
-              tabIndex={0}
-            >
-              <img src={lugarImg} alt="Capitán Grill" className={styles.collagePhoto} />
-              <span className={styles.collageOverlay}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={styles.expandIcon}>
-                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                </svg>
-              </span>
-            </div>
-            <div 
-              className={styles.collageLink} 
-              onClick={() => setLightboxMedia({ type: 'image', src: lugar2 })}
-              role="button"
-              tabIndex={0}
-            >
-              <img src={lugar2} alt="Capitán Grill" className={styles.collagePhoto} />
-              <span className={styles.collageOverlay}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={styles.expandIcon}>
-                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                </svg>
-              </span>
-            </div>
-            <div 
-              className={styles.collageLink} 
-              onClick={() => setLightboxMedia({ type: 'image', src: lugar3 })}
-              role="button"
-              tabIndex={0}
-            >
-              <img src={lugar3} alt="Capitán Grill" className={styles.collagePhoto} />
-              <span className={styles.collageOverlay}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={styles.expandIcon}>
-                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                </svg>
-              </span>
-            </div>
-          </div>
-        </div>
+        <p className={styles.collageLabel}>
+          {t('info.ourPlace', 'Nuestro Lugar')}
+        </p>
+
+        {renderThumbnails()}
       </div>
 
-      {/* ── Nuestra Historia ── */}
       <section className={styles.section}>
         <div className={styles.ornament}>
           <div className={styles.ornLine} />
           <div className={styles.ornDiamond} />
-          <span className={styles.ornLabel}>{t('about.title')}</span>
+          <span className={styles.ornLabel}>
+            {t('about.title')}
+          </span>
           <div className={styles.ornDiamond} />
           <div className={styles.ornLine} />
         </div>
-        <p className={styles.aboutText}>{t('about.description')}</p>
+
+        <p className={styles.aboutText}>
+          {t('about.description')}
+        </p>
       </section>
 
-      {/* ── Ubicación ── */}
       <section className={styles.section}>
         <div className={styles.ornament}>
           <div className={styles.ornLine} />
           <div className={styles.ornDiamond} />
-          <span className={styles.ornLabel}>{t('location.title')}</span>
+          <span className={styles.ornLabel}>
+            {t('location.title')}
+          </span>
           <div className={styles.ornDiamond} />
           <div className={styles.ornLine} />
         </div>
@@ -119,53 +221,115 @@ export default function InfoTab() {
             <div className={styles.infoCardIcon}>
               <MapPin size={16} />
             </div>
+
             <div className={styles.infoCardText}>
               <p>{t('location.address')}</p>
               <span>San Miguel de Allende, Gto.</span>
             </div>
           </div>
 
-          <a href="https://wa.me/524151583036?text=Hola!%20Quisiera%20informes" target="_blank" rel="noopener noreferrer" className={styles.infoCard}>
+          <a
+            href="https://wa.me/524151583036?text=Hola!%20Quisiera%20informes"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.infoCard}
+          >
             <div className={styles.infoCardIcon}>
               <MessageCircle size={16} />
             </div>
+
             <div className={styles.infoCardText}>
               <p>WhatsApp</p>
-              <span>{t('location.tapToChat', 'Escríbenos directo')}</span>
+              <span>
+                {t('location.tapToChat', 'Escríbenos directo')}
+              </span>
             </div>
           </a>
         </div>
       </section>
 
-      {/* ── Visor Lightbox (Pantalla Completa) ── */}
-      {lightboxMedia && (
-        <div className={styles.lightboxOverlay} onClick={() => setLightboxMedia(null)}>
-          <button className={styles.closeButton} onClick={() => setLightboxMedia(null)} aria-label="Cerrar">
+      {currentIndex !== null && (
+        <div
+          className={styles.lightboxOverlay}
+          onClick={handleClose}
+        >
+          <button
+            className={styles.closeButton}
+            onClick={handleClose}
+            aria-label="Cerrar"
+          >
             <X size={26} color="#F7F5F0" />
           </button>
-          
-          {lightboxMedia.type === 'video' ? (
-            <video 
-              className={styles.lightboxMedia} 
-              controls 
-              autoPlay 
-              playsInline 
-              onClick={(e) => e.stopPropagation()}
-            >
-              <source src={lightboxMedia.src} type="video/quicktime" />
-              <source src={lightboxMedia.src} type="video/mp4" />
-            </video>
-          ) : (
-            <img 
-              src={lightboxMedia.src} 
-              className={styles.lightboxMedia} 
-              alt="Vista ampliada"
-              onClick={(e) => e.stopPropagation()} 
-            />
-          )}
+
+          <button
+            className={`${styles.navButton} ${styles.navButtonLeft}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              handlePrev();
+            }}
+          >
+            <ChevronLeft size={32} color="#F7F5F0" />
+          </button>
+
+          <button
+            className={`${styles.navButton} ${styles.navButtonRight}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleNext();
+            }}
+          >
+            <ChevronRight size={32} color="#F7F5F0" />
+          </button>
+
+          <div
+            className={styles.lightboxContent}
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            {mediaItems[currentIndex].type === 'video' ? (
+              <video
+                className={styles.lightboxMedia}
+                controls
+                autoPlay
+                playsInline
+                key={currentIndex}
+              >
+                <source
+                  src={mediaItems[currentIndex].src}
+                  type="video/quicktime"
+                />
+                <source
+                  src={mediaItems[currentIndex].src}
+                  type="video/mp4"
+                />
+              </video>
+            ) : (
+              <img
+                src={mediaItems[currentIndex].src}
+                alt={mediaItems[currentIndex].alt}
+                className={styles.lightboxMedia}
+              />
+            )}
+          </div>
+
+          <div className={styles.paginationDots}>
+            {mediaItems.map((_, idx) => (
+              <span
+                key={idx}
+                className={`${styles.dot} ${
+                  idx === currentIndex ? styles.dotActive : ''
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentIndex(idx);
+                }}
+              />
+            ))}
+          </div>
         </div>
       )}
-
     </div>
   );
 }
