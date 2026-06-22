@@ -1,0 +1,202 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-primary, #F7F5F0);
+}
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  width: 260px; /* Un poco más ancho para dar respiro editorial */
+  background-color: #1A1918; /* Carbón profundo, más elegante que el gris oscuro */
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ─── BRAND (LOGO Y TÍTULO) ─── */
+.sidebarBrand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2.5rem 1.5rem 2rem; /* Más espacio en la parte superior */
+}
+
+.sidebarLogoImg {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(201, 168, 124, 0.3); /* Borde sutil dorado */
+}
+
+.sidebarBrandText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sidebarTitle {
+  font-family: var(--font-serif, 'Playfair Display');
+  font-size: 1.3rem;
+  font-style: italic; /* El toque editorial clave */
+  font-weight: 600;
+  color: #F7F5F0;
+  line-height: 1.1;
+  margin-bottom: 0.2rem;
+}
+
+.sidebarSubtitle {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #8A8680; /* Gris cálido apagado */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ─── NAVEGACIÓN ─── */
+.sidebarNav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem; /* Padding horizontal para que la píldora no toque los bordes */
+  gap: 0.4rem;
+}
+
+.sidebarLink {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 12px; /* Diseño tipo píldora */
+  color: #8A8680;
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.sidebarLink:hover {
+  color: #F7F5F0;
+  background-color: rgba(247, 245, 240, 0.05);
+}
+
+.sidebarLinkActive {
+  color: #C9A87C; /* Texto dorado */
+  background-color: rgba(201, 168, 124, 0.12); /* Fondo píldora dorado sutil */
+  font-weight: 600;
+}
+
+.sidebarLinkIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* El color del ícono hereda el color del texto (dorado si activo, gris si inactivo) */
+  color: inherit; 
+}
+
+/* ─── FOOTER (CERRAR SESIÓN) ─── */
+.sidebarFooter {
+  padding: 1.5rem 1rem;
+  margin-top: auto;
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 1rem;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  color: #8A8680;
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logoutBtn:hover {
+  color: #E85D5D;
+  background-color: rgba(232, 93, 93, 0.1);
+}
+
+/* ─── MAIN CONTENT ─── */
+.main {
+  flex: 1;
+  padding: 2.5rem 3rem; /* Respiración para el panel central */
+  min-width: 0;
+}
+
+/* ─── RESPONSIVE (MÓVIL) ─── */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: sticky;
+    bottom: 0; /* Mover barra al fondo en móviles suele ser mejor UX */
+    top: auto;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
+    z-index: 50;
+  }
+
+  .sidebarBrand {
+    display: none; /* Ocultamos la marca en móvil para dar espacio a los iconos */
+  }
+
+  .sidebarNav {
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+  }
+
+  .sidebarLink {
+    padding: 0.75rem;
+    justify-content: center;
+    width: auto;
+    border-radius: 50%; /* Iconos circulares en móvil */
+  }
+
+  .sidebarLinkLabel {
+    display: none;
+  }
+
+  .sidebarFooter {
+    padding: 0;
+    margin: 0;
+  }
+
+  .logoutBtn {
+    padding: 0.75rem;
+    width: auto;
+    border-radius: 50%;
+  }
+
+  .logoutBtn span {
+    display: none;
+  }
+
+  .main {
+    padding: 1.5rem;
+    padding-bottom: 6rem; /* Espacio para la barra inferior en móvil */
+  }
+}

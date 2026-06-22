@@ -10,16 +10,14 @@ export default function CategorySection({ category }) {
   return (
     <section className={styles.section}>
 
-      {/* Ornamento separador con nombre de categoría */}
       <div className={styles.catHeader}>
         <div className={styles.line} />
         <div className={styles.diamond} />
-        <span className={styles.catLabel}>{t(`menu.categories.${category.id}`)}</span>
+        <span className={styles.catLabel}>{category.nombre}</span>
         <div className={styles.diamond} />
         <div className={styles.line} />
       </div>
 
-      {/* Banner "incluye tortillas y salsa" solo en cortes */}
       {isCortes && (
         <div className={styles.includesBanner}>
           <Utensils size={14} className={styles.includesIcon} />

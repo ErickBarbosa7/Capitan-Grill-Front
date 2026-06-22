@@ -1,48 +1,77 @@
-.nav {
+/* ── Contenedor para mantener el centrado en pantallas grandes ── */
+.navContainer {
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
   z-index: 100;
-  background-color: var(--bg-card);
+  pointer-events: none; /* Permite clics fuera de los 600px */
+}
+
+/* ── Barra de Navegación ── */
+.nav {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 600px; /* Consistencia con el resto de la app */
+  background-color: var(--bg-card, #FFFFFF);
   border-top: 1px solid var(--border-light);
   display: flex;
   justify-content: space-around;
-  padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
+  padding: 0.4rem 0 calc(0.4rem + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 20px rgba(44, 42, 41, 0.04); /* Sombra suave */
 }
 
+/* ── Botón individual ── */
 .tab {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.2rem;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.4rem 0;
+  padding: 0.25rem 0;
   color: var(--text-secondary);
-  transition: color 0.2s ease;
+  -webkit-tap-highlight-color: transparent; /* Quita el destello azul en móviles */
 }
 
+/* ── Contenedor del ícono (Para el efecto Pill) ── */
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 32px;
+  border-radius: 16px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab:active .iconWrapper {
+  transform: scale(0.9); /* Micro-interacción al tocar */
+}
+
+/* ── Estados Activos ── */
 .tab.active {
   color: var(--capitan-wood);
 }
 
-.icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.tab.active .iconWrapper {
+  background-color: rgba(160, 82, 45, 0.12); /* 12% de --capitan-wood */
+  color: var(--capitan-wood);
 }
 
-.icon svg {
-  width: 22px;
-  height: 22px;
-}
-
+/* ── Etiqueta de texto ── */
 .label {
   font-family: var(--font-body);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 500;
   letter-spacing: 0.02em;
+  transition: font-weight 0.2s ease;
+}
+
+.tab.active .label {
+  font-weight: 700;
 }

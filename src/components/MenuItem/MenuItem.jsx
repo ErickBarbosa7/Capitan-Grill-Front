@@ -7,8 +7,8 @@ export default function MenuItem({ item }) {
   return (
     <div className={`${styles.row} ${!item.disponible ? styles.soldOut : ''}`}>
       <div className={styles.left}>
-        <p className={styles.name}>{t(`menu.items.${item.id}.name`)}</p>
-        <p className={styles.desc}>{t(`menu.items.${item.id}.desc`)}</p>
+        <p className={styles.name}>{item.nombre}</p>
+        <p className={styles.desc}>{item.descripcion}</p>
         {!item.disponible && (
           <span className={styles.badge}>{t('menu.soldOut')}</span>
         )}

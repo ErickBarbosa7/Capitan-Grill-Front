@@ -17,17 +17,22 @@ export default function BottomNav({ activeTab, onTabChange }) {
   ];
 
   return (
-    <nav className={styles.nav}>
-      {tabs.map((tab) => (
-        <button
-          key={tab.id}
-          className={`${styles.tab} ${activeTab === tab.id ? styles.active : ''}`}
-          onClick={() => onTabChange(tab.id)}
-        >
-          <span className={styles.icon}>{icons[tab.id]}</span>
-          <span className={styles.label}>{tab.label}</span>
-        </button>
-      ))}
-    </nav>
+    <div className={styles.navContainer}>
+      <nav className={styles.nav}>
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            className={`${styles.tab} ${activeTab === tab.id ? styles.active : ''}`}
+            onClick={() => onTabChange(tab.id)}
+            aria-label={tab.label}
+          >
+            <div className={styles.iconWrapper}>
+              {icons[tab.id]}
+            </div>
+            <span className={styles.label}>{tab.label}</span>
+          </button>
+        ))}
+      </nav>
+    </div>
   );
 }

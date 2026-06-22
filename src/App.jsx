@@ -1,27 +1,33 @@
-import { useState } from 'react';
-import BottomNav from './components/BottomNav/BottomNav';
-import MenuTab from './components/MenuTab/MenuTab';
-import InfoTab from './components/InfoTab/InfoTab';
-import SocialTab from './components/SocialTab/SocialTab.jsx';
-import styles from './App.module.css';
-
-const TABS = {
-  menu: MenuTab,
-  info: InfoTab,
-  social: SocialTab,
-};
+import { BrowserRouter } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { AuthProvider } from './contexts/AuthContext'
+import AppRoutes from './router'
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('menu');
-
-  const ActiveComponent = TABS[activeTab];
-
   return (
-    <div className={styles.app}>
-      <div className={styles.content}>
-        <ActiveComponent />
-      </div>
-      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
-    </div>
-  );
+    <AuthProvider>
+      <BrowserRouter>
+        <AppRoutes />
+        <ToastContainer
+          position="top-right"
+          autoClose={2500}
+          hideProgressBar
+          closeOnClick
+          pauseOnFocusLoss={false}
+          pauseOnHover
+          theme="dark"
+          style={{ '--toastify-color-success': '#C9A87C' }}
+          toastStyle={{
+            borderRadius: 12,
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '0.85rem',
+            background: '#2C2A29',
+            color: '#F7F5F0',
+            border: '1px solid #C9A87C',
+          }}
+        />
+      </BrowserRouter>
+    </AuthProvider>
+  )
 }

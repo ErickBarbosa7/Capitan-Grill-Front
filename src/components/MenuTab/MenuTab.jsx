@@ -1,14 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMenu } from '../../hooks/useMenu';
+import Loading from '../Loading';
 import CategorySection from '../CategorySection/CategorySection';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo/logo.png';
 import styles from './MenuTab.module.css';
 
 export default function MenuTab() {
   const { t, i18n } = useTranslation();
-  const { categories } = useMenu();
-  const [activeCategoryId, setActiveCategoryId] = useState(categories[0]?.id);
+  const { categories, loading, refetch } = useMenu();
+  const [activeCategoryId, setActiveCategoryId] = useState();
+
+  useEffect(() => {
+    if (categories.length > 0 && !activeCategoryId) {
+      setActiveCategoryId(categories[0].id);
+    }
+  }, [categories, activeCategoryId]);
+
+  useEffect(() => {
+    const channel = new BroadcastChannel('capitan_menu');
+    channel.onmessage = () => refetch();
+    return () => channel.close();
+  }, [refetch]);
+
+  if (loading) return <Loading />
 
   const activeCategory = categories.find((c) => c.id === activeCategoryId);
 

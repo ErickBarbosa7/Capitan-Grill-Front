@@ -2,10 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MapPin, MessageCircle, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
-import logo from '../../assets/logo.png';
-import lugarImg from '../../assets/Lugar.jpg';
-import lugar3 from '../../assets/lugar3.jpg';
-import lugarVideo from '../../assets/IMG_6038.MOV';
+import logo from '../../assets/logo/logo.png';
+import lugarImg from '../../assets/img/Lugar.jpg';
+import lugar3 from '../../assets/img/lugar3.jpg';
+import lugarVideo from '../../assets/img/IMG_6038.MOV';
 
 import styles from './InfoTab.module.css';
 
@@ -88,14 +88,17 @@ export default function InfoTab() {
   };
 
   const handleTouchStart = (e) => {
+    if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
     touchStartX.current = e.touches[0].clientX;
   };
 
   const handleTouchMove = (e) => {
+    if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
     touchEndX.current = e.touches[0].clientX;
   };
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (e) => {
+    if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
     const diff = touchStartX.current - touchEndX.current;
 
     if (Math.abs(diff) > 50) {
@@ -307,6 +310,7 @@ export default function InfoTab() {
                 controls
                 autoPlay
                 playsInline
+                onClick={(e) => e.stopPropagation()}
               >
                 <source
                   src={mediaItems[currentIndex].src}
