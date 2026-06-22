@@ -2,13 +2,16 @@ import { BrowserRouter } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { AuthProvider } from './contexts/AuthContext'
+import { MenuProvider } from './contexts/MenuContext'
 import AppRoutes from './router'
 
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <AppRoutes />
+        <MenuProvider>
+          <AppRoutes />
+        </MenuProvider>
         <ToastContainer
           position="top-right"
           autoClose={2500}

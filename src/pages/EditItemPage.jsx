@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
-import { useMenu } from '../hooks/useMenu'
+import { useMenuContext } from '../contexts/MenuContext'
 import Loading from '../components/Loading'
 import CategoryDropdown from '../components/admin/CategoryDropdown'
 import { Sparkles, Camera, ArrowLeft, Loader } from 'lucide-react'
@@ -26,7 +26,7 @@ export default function EditItemPage() {
   const { code } = useParams()
   const navigate = useNavigate()
   const { i18n } = useTranslation()
-  const { categories, loading, createItem, updateItem, createCategory, updateCategory, deleteCategory } = useMenu()
+  const { categories, loading, createItem, updateItem, createCategory, updateCategory, deleteCategory } = useMenuContext()
 
   const isNew = !code
 

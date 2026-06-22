@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useMenu } from '../hooks/useMenu';
+import { useMenuContext } from '../contexts/MenuContext';
 import { useAuth } from '../contexts/AuthContext';
 import Loading from '../components/Loading';
 import { getActivity } from '../services/menuService';
@@ -34,7 +34,7 @@ const ACTIVITY_ICONS = {
 
 export default function Dashboard() {
   const { t } = useTranslation();
-  const { categories, loading } = useMenu();
+  const { categories, loading } = useMenuContext();
   const navigate = useNavigate();
   const { user } = useAuth();
 

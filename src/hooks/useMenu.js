@@ -35,11 +35,6 @@ export function useMenu() {
       setRawCategories(categories)
       setRawItems(items)
       saveCache({ categories, items })
-      try {
-        const bc = new BroadcastChannel('capitan_menu')
-        bc.postMessage('menu_updated')
-        bc.close()
-      } catch {}
     } catch (err) {
       const cached = loadCache()
       if (cached) {
@@ -61,6 +56,14 @@ export function useMenu() {
     }
     fetchData()
   }, [fetchData])
+
+  const notifyUpdate = useCallback(() => {
+    try {
+      const bc = new BroadcastChannel('capitan_menu')
+      bc.postMessage('menu_updated')
+      bc.close()
+    } catch {}
+  }, [])
 
   const itemMap = useMemo(() => {
     const map = {}
@@ -98,7 +101,7 @@ export function useMenu() {
 
   const createItem = useCallback(async (formData) => {
     const categoryId = categoryMap[formData.categoriaId]
-    await menuService.createMenuItem({
+    const res = await menuService.createMenuItem({
       categoryId,
       code: formData.id,
       nameEs: formData.nombre,
@@ -109,14 +112,20 @@ export function useMenu() {
       isAvailable: formData.disponible,
       images: formData.images || [],
     })
-    await fetchData()
-  }, [categoryMap, fetchData])
+    const newItem = res.item
+    setRawItems(prev => {
+      const next = [...prev, newItem]
+      saveCache({ categories: rawCategories, items: next })
+      return next
+    })
+    notifyUpdate()
+  }, [categoryMap, rawCategories, notifyUpdate])
 
   const updateItem = useCallback(async (code, formData) => {
     const backendId = itemMap[code]
     if (!backendId) throw new Error(`Item ${code} not found`)
     const categoryId = categoryMap[formData.categoriaId]
-    await menuService.updateMenuItem(backendId, {
+    const res = await menuService.updateMenuItem(backendId, {
       categoryId,
       code: formData.id,
       nameEs: formData.nombre,
@@ -127,75 +136,132 @@ export function useMenu() {
       isAvailable: formData.disponible,
       images: formData.images || [],
     })
-    await fetchData()
-  }, [itemMap, categoryMap, fetchData])
+    const updated = res.item
+    setRawItems(prev => {
+      const next = prev.map(item => item.id === updated.id ? { ...item, ...updated } : item)
+      saveCache({ categories: rawCategories, items: next })
+      return next
+    })
+    notifyUpdate()
+  }, [itemMap, categoryMap, rawCategories, notifyUpdate])
 
   const deleteItem = useCallback(async (code) => {
     const backendId = itemMap[code]
     if (!backendId) throw new Error(`Item ${code} not found`)
-    await menuService.deleteMenuItem(backendId)
-    await fetchData()
-  }, [itemMap, fetchData])
+    const res = await menuService.deleteMenuItem(backendId)
+    const updated = res.item
+    setRawItems(prev => {
+      const next = prev.map(item => item.id === updated.id ? { ...item, ...updated } : item)
+      saveCache({ categories: rawCategories, items: next })
+      return next
+    })
+    notifyUpdate()
+  }, [itemMap, rawCategories, notifyUpdate])
 
   const toggleAvailability = useCallback(async (code) => {
     const backendId = itemMap[code]
     if (!backendId) throw new Error(`Item ${code} not found`)
     const item = rawItems.find((i) => i.code === code)
-    await menuService.toggleMenuItem(backendId, !item?.isAvailable)
-    await fetchData()
-  }, [itemMap, rawItems, fetchData])
+    const res = await menuService.toggleMenuItem(backendId, !item?.isAvailable)
+    const updated = res.item
+    setRawItems(prev => {
+      const next = prev.map(i => i.id === updated.id ? { ...i, ...updated } : i)
+      saveCache({ categories: rawCategories, items: next })
+      return next
+    })
+    notifyUpdate()
+  }, [itemMap, rawItems, rawCategories, notifyUpdate])
 
   const restoreItem = useCallback(async (code) => {
     const backendId = itemMap[code]
     if (!backendId) throw new Error(`Item ${code} not found`)
-    await menuService.restoreMenuItem(backendId)
-    await fetchData()
-  }, [itemMap, fetchData])
+    const res = await menuService.restoreMenuItem(backendId)
+    const updated = res.item
+    setRawItems(prev => {
+      const next = prev.map(item => item.id === updated.id ? { ...item, ...updated } : item)
+      saveCache({ categories: rawCategories, items: next })
+      return next
+    })
+    notifyUpdate()
+  }, [itemMap, rawCategories, notifyUpdate])
 
   const hardDeleteItem = useCallback(async (code) => {
     const backendId = itemMap[code]
     if (!backendId) throw new Error(`Item ${code} not found`)
     await menuService.hardDeleteMenuItem(backendId)
-    await fetchData()
-  }, [itemMap, fetchData])
+    setRawItems(prev => {
+      const next = prev.filter(item => item.id !== backendId)
+      saveCache({ categories: rawCategories, items: next })
+      return next
+    })
+    notifyUpdate()
+  }, [itemMap, rawCategories, notifyUpdate])
 
   const createCategory = useCallback(async (data) => {
     const res = await menuService.createCategory(data)
-    await fetchData()
+    const newCategory = res.category
+    setRawCategories(prev => {
+      const next = [...prev, newCategory]
+      saveCache({ categories: next, items: rawItems })
+      return next
+    })
+    notifyUpdate()
     return res
-  }, [fetchData])
+  }, [rawItems, notifyUpdate])
 
   const updateCategory = useCallback(async (slug, data) => {
     const backendId = categoryMap[slug]
     if (!backendId) throw new Error(`Category ${slug} not found`)
     const res = await menuService.updateCategory(backendId, data)
-    await fetchData()
+    const updated = res.category
+    setRawCategories(prev => {
+      const next = prev.map(c => c.id === updated.id ? { ...c, ...updated } : c)
+      saveCache({ categories: next, items: rawItems })
+      return next
+    })
+    notifyUpdate()
     return res
-  }, [categoryMap, fetchData])
+  }, [categoryMap, rawItems, notifyUpdate])
 
   const deleteCategory = useCallback(async (slug) => {
     const backendId = categoryMap[slug]
     if (!backendId) throw new Error(`Category ${slug} not found`)
     const res = await menuService.deleteCategory(backendId)
-    await fetchData()
+    const updated = res.category
+    setRawCategories(prev => {
+      const next = prev.map(c => c.id === updated.id ? { ...c, ...updated } : c)
+      saveCache({ categories: next, items: rawItems })
+      return next
+    })
+    notifyUpdate()
     return res
-  }, [categoryMap, fetchData])
+  }, [categoryMap, rawItems, notifyUpdate])
 
   const hardDeleteCategory = useCallback(async (slug) => {
     const backendId = categoryMap[slug]
     if (!backendId) throw new Error(`Category ${slug} not found`)
-    const res = await menuService.hardDeleteCategory(backendId)
-    await fetchData()
-    return res
-  }, [categoryMap, fetchData])
+    await menuService.hardDeleteCategory(backendId)
+    setRawCategories(prev => {
+      const next = prev.filter(c => c.id !== backendId)
+      saveCache({ categories: next, items: rawItems })
+      return next
+    })
+    notifyUpdate()
+  }, [categoryMap, rawItems, notifyUpdate])
 
   const restoreCategory = useCallback(async (slug) => {
     const backendId = categoryMap[slug]
     if (!backendId) throw new Error(`Category ${slug} not found`)
     const res = await menuService.restoreCategory(backendId)
-    await fetchData()
+    const updated = res.category
+    setRawCategories(prev => {
+      const next = prev.map(c => c.id === updated.id ? { ...c, ...updated } : c)
+      saveCache({ categories: next, items: rawItems })
+      return next
+    })
+    notifyUpdate()
     return res
-  }, [categoryMap, fetchData])
+  }, [categoryMap, rawItems, notifyUpdate])
 
   return {
     categories,
@@ -213,5 +279,6 @@ export function useMenu() {
     hardDeleteCategory,
     restoreCategory,
     refetch: fetchData,
+    notifyUpdate,
   }
 }

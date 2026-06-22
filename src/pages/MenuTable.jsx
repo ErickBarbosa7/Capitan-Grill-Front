@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { useMenu } from '../hooks/useMenu'
+import { useMenuContext } from '../contexts/MenuContext'
 import Loading from '../components/Loading'
 import CategoryDropdown from '../components/admin/CategoryDropdown'
 import { Pencil, Trash2, Plus, Search, Eye, EyeOff, RotateCcw, XCircle, LayoutGrid, Table2, Camera } from 'lucide-react'
@@ -9,7 +9,7 @@ import styles from './MenuTable.module.css'
 
 export default function MenuTable() {
   const navigate = useNavigate()
-  const { categories, loading, deleteItem, toggleAvailability, restoreItem, hardDeleteItem } = useMenu()
+  const { categories, loading, deleteItem, toggleAvailability, restoreItem, hardDeleteItem } = useMenuContext()
 
   const [deleting, setDeleting] = useState(null)
   const [saving, setSaving] = useState(false)

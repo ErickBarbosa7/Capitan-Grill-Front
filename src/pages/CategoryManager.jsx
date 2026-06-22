@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { useMenu } from '../hooks/useMenu'
+import { useMenuContext } from '../contexts/MenuContext'
 import Loading from '../components/Loading'
 import { Plus, Pencil, Trash2, RotateCcw, Check, X, ArrowLeft } from 'lucide-react'
 import styles from './CategoryManager.module.css'
 
 export default function CategoryManager() {
   const navigate = useNavigate()
-  const { categories, loading, createCategory, updateCategory, deleteCategory, hardDeleteCategory, restoreCategory } = useMenu()
+  const { categories, loading, createCategory, updateCategory, deleteCategory, hardDeleteCategory, restoreCategory } = useMenuContext()
   const [newName, setNewName] = useState('')
   const [editingId, setEditingId] = useState(null)
   const [editName, setEditName] = useState('')

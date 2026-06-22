@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useMenu } from '../../hooks/useMenu';
-import Loading from '../Loading';
+import { useMenuContext } from '../../contexts/MenuContext';
+import MenuSkeleton from '../MenuSkeleton/MenuSkeleton';
 import CategorySection from '../CategorySection/CategorySection';
 import logo from '../../assets/logo/logo.png';
 import styles from './MenuTab.module.css';
 
 export default function MenuTab() {
   const { t, i18n } = useTranslation();
-  const { categories, loading, refetch } = useMenu();
+  const { categories, loading, refetch } = useMenuContext();
   const [activeCategoryId, setActiveCategoryId] = useState();
 
   useEffect(() => {
@@ -19,11 +19,18 @@ export default function MenuTab() {
 
   useEffect(() => {
     const channel = new BroadcastChannel('capitan_menu');
-    channel.onmessage = () => refetch();
+    let lastRefetch = 0;
+    channel.onmessage = () => {
+      const now = Date.now();
+      if (now - lastRefetch > 2000) {
+        lastRefetch = now;
+        refetch();
+      }
+    };
     return () => channel.close();
   }, [refetch]);
 
-  if (loading) return <Loading />
+  if (loading) return <MenuSkeleton />
 
   const activeCategory = categories.find((c) => c.id === activeCategoryId);
 
