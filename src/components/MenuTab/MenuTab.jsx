@@ -71,7 +71,7 @@ export default function MenuTab() {
               className={`${styles.chip} ${activeCategoryId === cat.id ? styles.activeChip : ''}`}
               onClick={() => setActiveCategoryId(cat.id)}
             >
-              {t(`menu.categories.${cat.id}`)}
+              {cat.nombre}
             </button>
           ))}
         </div>

@@ -77,12 +77,12 @@ export default function Dashboard() {
       cat.items.map((item) => ({
         name: t(`menu.items.${item.id}.name`, item.nombre),
         precio: item.precio,
-        categoria: t(`menu.categories.${cat.id}`, cat.nombre),
+        categoria: cat.nombre,
       }))
     );
 
     const categoryData = categories.map((cat) => ({
-      name: t(`menu.categories.${cat.id}`, cat.nombre),
+      name: cat.nombre,
       value: cat.items.length,
     }));
 
