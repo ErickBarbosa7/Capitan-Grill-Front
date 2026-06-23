@@ -81,7 +81,7 @@ export default function MenuTab() {
         {/* Banner Promocional del Gancho Comercial */}
         <div className={styles.promoBanner}>
           <h2 className={styles.promoTitle}>
-            Cortes Finos <span className={styles.promoPrice}>$180</span>
+            Cortes Finos <span className={styles.promoPrice}>$190</span>
           </h2>
           <p className={styles.promoSubtitle}>
             {t('menu.includesBanner')} <strong>{t('menu.includesItems')}</strong>
