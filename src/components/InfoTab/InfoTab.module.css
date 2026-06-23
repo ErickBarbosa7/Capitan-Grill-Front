@@ -149,6 +149,115 @@
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
+/* ── Carrusel de Cortes ── */
+.cutsSection {
+  padding: 1.5rem 0 0;
+}
+
+.cutsCarouselWrap {
+  position: relative;
+  padding: 0 1rem;
+}
+
+.cutsCarousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 2.5rem;
+}
+
+.cutsCarousel::-webkit-scrollbar {
+  display: none;
+}
+
+.cutCard {
+  flex: 0 0 75%;
+  scroll-snap-align: start;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.cutImage {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.cutsArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.45);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cutsArrow:hover {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.cutsArrowLeft {
+  left: 0.5rem;
+}
+
+.cutsArrowRight {
+  right: 0.5rem;
+}
+
+.cutsDots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  position: absolute;
+  bottom: 0.25rem;
+  left: 0;
+  right: 0;
+}
+
+.cutDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(247, 245, 240, 0.3);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cutDot:hover {
+  background: rgba(247, 245, 240, 0.6);
+}
+
+.cutDotActive {
+  background: #C9A87C;
+  transform: scale(1.3);
+}
+
+@media (min-width: 640px) {
+  .cutCard {
+    flex: 0 0 45%;
+  }
+  .cutImage {
+    height: 280px;
+  }
+}
+
 /* ── Ornamento compartido ── */
 .ornament {
   display: flex;

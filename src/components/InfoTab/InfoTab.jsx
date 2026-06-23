@@ -7,12 +7,30 @@ import lugarImg from '../../assets/img/Lugar.jpg';
 import lugar3 from '../../assets/img/lugar3.jpg';
 import lugarVideo from '../../assets/img/IMG_6038.MOV';
 
+import img1 from '../../assets/img/1.jpeg';
+import img2 from '../../assets/img/2.jpeg';
+import img3 from '../../assets/img/3.jpeg';
+import img4 from '../../assets/img/4.jpeg';
+import img5 from '../../assets/img/5.jpeg';
+import imgP2 from '../../assets/img/p2.jpeg';
+import imgChistorra from '../../assets/img/chistorra.jpeg';
+
 import styles from './InfoTab.module.css';
 
 const mediaItems = [
   { type: 'video', src: lugarVideo, alt: 'Video del lugar' },
   { type: 'image', src: lugarImg, alt: 'Capitán Grill 1' },
   { type: 'image', src: lugar3, alt: 'Capitán Grill 2' },
+];
+
+const cutItems = [
+  { src: img1 },
+  { src: img2 },
+  { src: img3 },
+  { src: img4 },
+  { src: img5 },
+  { src: imgP2 },
+  { src: imgChistorra },
 ];
 
 export default function InfoTab() {
@@ -23,6 +41,7 @@ export default function InfoTab() {
 
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const touchMoved = useRef(false);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -89,16 +108,23 @@ export default function InfoTab() {
 
   const handleTouchStart = (e) => {
     if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
+    touchMoved.current = false;
     touchStartX.current = e.touches[0].clientX;
   };
 
   const handleTouchMove = (e) => {
     if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
+    touchMoved.current = true;
     touchEndX.current = e.touches[0].clientX;
   };
 
   const handleTouchEnd = (e) => {
     if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
+    if (!touchMoved.current) {
+      touchStartX.current = 0;
+      touchEndX.current = 0;
+      return;
+    }
     const diff = touchStartX.current - touchEndX.current;
 
     if (Math.abs(diff) > 50) {
@@ -111,6 +137,27 @@ export default function InfoTab() {
 
     touchStartX.current = 0;
     touchEndX.current = 0;
+  };
+
+  const [activeCutIndex, setActiveCutIndex] = useState(0);
+  const carouselRef = useRef(null);
+
+  const handleCutScroll = () => {
+    if (!carouselRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+    const maxScroll = scrollWidth - clientWidth;
+    if (maxScroll <= 0) { setActiveCutIndex(0); return; }
+    const index = Math.round((scrollLeft / maxScroll) * (cutItems.length - 1));
+    setActiveCutIndex(Math.min(index, cutItems.length - 1));
+  };
+
+  const scrollToCut = (index) => {
+    if (!carouselRef.current) return;
+    const { scrollWidth, clientWidth } = carouselRef.current;
+    const maxScroll = scrollWidth - clientWidth;
+    if (maxScroll <= 0) return;
+    const targetLeft = (index / (cutItems.length - 1)) * maxScroll;
+    carouselRef.current.scrollTo({ left: targetLeft, behavior: 'smooth' });
   };
 
   const renderThumbnails = () => {
@@ -199,6 +246,71 @@ export default function InfoTab() {
 
         {renderThumbnails()}
       </div>
+
+      <section className={styles.cutsSection}>
+        <div className={styles.ornament}>
+          <div className={styles.ornLine} />
+          <div className={styles.ornDiamond} />
+          <span className={styles.ornLabel}>
+            {t('info.cuts.title', 'Nuestros Cortes')}
+          </span>
+          <div className={styles.ornDiamond} />
+          <div className={styles.ornLine} />
+        </div>
+
+        <div className={styles.cutsCarouselWrap}>
+          <div
+            ref={carouselRef}
+            className={styles.cutsCarousel}
+            onScroll={handleCutScroll}
+          >
+            {cutItems.map((item, idx) => (
+              <div key={idx} className={styles.cutCard}>
+                <img
+                  src={item.src}
+                  alt={`Corte ${idx + 1}`}
+                  className={styles.cutImage}
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+
+          {cutItems.length > 1 && (
+            <>
+              {activeCutIndex > 0 && (
+                <button
+                  className={`${styles.cutsArrow} ${styles.cutsArrowLeft}`}
+                  onClick={() => scrollToCut(activeCutIndex - 1)}
+                  aria-label="Anterior"
+                >
+                  <ChevronLeft size={24} color="#F7F5F0" />
+                </button>
+              )}
+              {activeCutIndex < cutItems.length - 1 && (
+                <button
+                  className={`${styles.cutsArrow} ${styles.cutsArrowRight}`}
+                  onClick={() => scrollToCut(activeCutIndex + 1)}
+                  aria-label="Siguiente"
+                >
+                  <ChevronRight size={24} color="#F7F5F0" />
+                </button>
+              )}
+
+              <div className={styles.cutsDots}>
+                {cutItems.map((_, idx) => (
+                  <button
+                    key={idx}
+                    className={`${styles.cutDot} ${idx === activeCutIndex ? styles.cutDotActive : ''}`}
+                    onClick={() => scrollToCut(idx)}
+                    aria-label={`Ir al corte ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      </section>
 
       <section className={styles.section}>
         <div className={styles.ornament}>

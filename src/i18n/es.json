@@ -46,7 +46,10 @@
     "tapToChat": "Escríbenos directo"
   },
   "info": {
-    "ourPlace": "Nuestro Lugar"
+    "ourPlace": "Nuestro Lugar",
+    "cuts": {
+      "title": "Nuestros Cortes"
+    }
   },
   "social": {
     "title": "Síguenos",

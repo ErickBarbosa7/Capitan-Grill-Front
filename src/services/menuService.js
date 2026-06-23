@@ -57,3 +57,7 @@ export function restoreCategory(id) {
 export function getActivity() {
   return api.get('/activity')
 }
+
+export function generateDescription(data) {
+  return api.post('/ai/describe', data)
+}

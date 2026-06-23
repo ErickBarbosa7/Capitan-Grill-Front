@@ -46,7 +46,10 @@
     "tapToChat": "Write to us directly"
   },
   "info": {
-    "ourPlace": "Our Place"
+    "ourPlace": "Our Place",
+    "cuts": {
+      "title": "Our Cuts"
+    }
   },
   "social": {
     "title": "Follow Us",

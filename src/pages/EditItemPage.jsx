@@ -1,11 +1,11 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { useTranslation } from 'react-i18next'
 import { useMenuContext } from '../contexts/MenuContext'
 import Loading from '../components/Loading'
 import CategoryDropdown from '../components/admin/CategoryDropdown'
 import { Sparkles, Camera, ArrowLeft, Loader } from 'lucide-react'
+import { generateDescription } from '../services/menuService'
 import styles from './EditItemPage.module.css'
 
 function generateCode(categories) {
@@ -25,7 +25,6 @@ function generateCode(categories) {
 export default function EditItemPage() {
   const { code } = useParams()
   const navigate = useNavigate()
-  const { i18n } = useTranslation()
   const { categories, loading, createItem, updateItem, createCategory, updateCategory, deleteCategory } = useMenuContext()
 
   const isNew = !code
@@ -46,9 +45,10 @@ export default function EditItemPage() {
     return generateCode(categories)
   }, [categories, isNew])
 
-  const [lang, setLang] = useState(i18n.language?.startsWith('en') ? 'en' : 'es')
-  const [nombre, setNombre] = useState('')
-  const [descripcion, setDescripcion] = useState('')
+  const [nombreEs, setNombreEs] = useState('')
+  const [nombreEn, setNombreEn] = useState('')
+  const [descripcionEs, setDescripcionEs] = useState('')
+  const [descripcionEn, setDescripcionEn] = useState('')
   const [categoriaId, setCategoriaId] = useState('')
   const [precio, setPrecio] = useState(0)
   const [disponible, setDisponible] = useState(true)
@@ -56,12 +56,17 @@ export default function EditItemPage() {
   const [uploading, setUploading] = useState(false)
   const [imageUrl, setImageUrl] = useState('')
   const [errors, setErrors] = useState({})
+  const [aiLoading, setAiLoading] = useState(false)
   const fileRef = useRef(null)
 
   const validate = (field, value) => {
     if (field === 'nombre') {
       if (!value.trim()) return 'El nombre es obligatorio'
       if (value.trim().length < 2) return 'El nombre debe tener al menos 2 caracteres'
+    }
+    if (field === 'nombreEn') {
+      if (!value.trim()) return 'Name is required'
+      if (value.trim().length < 2) return 'Name must be at least 2 characters'
     }
     if (field === 'precio') {
       const num = Number(value)
@@ -74,7 +79,7 @@ export default function EditItemPage() {
   }
 
   const handleBlur = (field) => {
-    const currentValue = field === 'nombre' ? nombre : field === 'precio' ? precio : categoriaId
+    const currentValue = field === 'nombre' ? nombreEs : field === 'nombreEn' ? nombreEn : field === 'precio' ? precio : categoriaId
     const err = validate(field, currentValue)
     setErrors(prev => ({ ...prev, [field]: err }))
   }
@@ -83,15 +88,19 @@ export default function EditItemPage() {
 
   useEffect(() => {
     if (isNew) {
-      setNombre('')
-      setDescripcion('')
+      setNombreEs('')
+      setNombreEn('')
+      setDescripcionEs('')
+      setDescripcionEn('')
       setCategoriaId(firstCatId)
       setPrecio(0)
       setDisponible(true)
       setImageUrl('')
     } else if (item) {
-      setNombre(item.nombre)
-      setDescripcion(item.descripcion || '')
+      setNombreEs(item.nombreEs || item.nombre)
+      setNombreEn(item.nombreEn || item.nombre)
+      setDescripcionEs(item.descripcionEs || '')
+      setDescripcionEn(item.descripcionEn || '')
       setCategoriaId(item.categoriaId)
       setPrecio(item.precio)
       setDisponible(item.disponible)
@@ -117,15 +126,40 @@ export default function EditItemPage() {
   }
 
   const hasErrors = useMemo(() => {
-    const eNombre = validate('nombre', nombre)
+    const eNombre = validate('nombre', nombreEs)
     const ePrecio = validate('precio', precio)
     const eCat = validate('categoriaId', categoriaId)
     return !!(eNombre || ePrecio || eCat)
-  }, [nombre, precio, categoriaId])
+  }, [nombreEs, precio, categoriaId])
+
+  const handleAiImprove = async () => {
+    if (!nombreEs.trim()) {
+      return toast.warn('Escribe al menos el nombre en español')
+    }
+    setAiLoading(true)
+    try {
+      const cat = categories.find(c => c.id === categoriaId)
+      const res = await generateDescription({
+        nombreEs,
+        nombreEn,
+        descripcionEs,
+        categoriaNombreEs: cat?.nombre || '',
+        categoriaNombreEn: cat?.nombreEn || '',
+      })
+      if (res.nombreEn) setNombreEn(res.nombreEn)
+      if (res.descripcionEs) setDescripcionEs(res.descripcionEs)
+      if (res.descripcionEn) setDescripcionEn(res.descripcionEn)
+      toast.success('Contenido generado con IA')
+    } catch (err) {
+      toast.error(err.message || 'Error al generar con IA')
+    } finally {
+      setAiLoading(false)
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const eNombre = validate('nombre', nombre)
+    const eNombre = validate('nombre', nombreEs)
     const ePrecio = validate('precio', precio)
     const eCat = validate('categoriaId', categoriaId)
     setErrors({ nombre: eNombre, precio: ePrecio, categoriaId: eCat })
@@ -136,25 +170,29 @@ export default function EditItemPage() {
       if (isNew) {
         await createItem({
           id: newCode,
-          nombre: nombre.trim(),
-          descripcion: descripcion.trim(),
+          nombreEs: nombreEs.trim(),
+          nombreEn: nombreEn.trim() || nombreEs.trim(),
+          descripcionEs: descripcionEs.trim(),
+          descripcionEn: descripcionEn.trim() || descripcionEs.trim(),
           precio: Number(precio),
           disponible,
           categoriaId,
           images,
         })
-        toast.success('Platillo creado')
+        toast.success('Producto creado')
       } else {
         await updateItem(code, {
           id: code,
-          nombre: nombre.trim(),
-          descripcion: descripcion.trim(),
+          nombreEs: nombreEs.trim(),
+          nombreEn: nombreEn.trim() || nombreEs.trim(),
+          descripcionEs: descripcionEs.trim(),
+          descripcionEn: descripcionEn.trim() || descripcionEs.trim(),
           precio: Number(precio),
           disponible,
           categoriaId,
           images,
         })
-        toast.success('Platillo actualizado')
+        toast.success('Producto actualizado')
       }
       navigate('/admin/menu')
     } catch (err) {
@@ -169,7 +207,7 @@ export default function EditItemPage() {
   if (!isNew && !item) {
     return (
       <div className={styles.page}>
-        <p className={styles.notFound}>Platillo no encontrado</p>
+        <p className={styles.notFound}>Producto no encontrado</p>
         <button className={styles.backBtn} onClick={() => navigate('/admin/menu')}>
           <ArrowLeft size={16} /> Volver al menú
         </button>
@@ -185,56 +223,63 @@ export default function EditItemPage() {
 
       <h1 className={styles.heading}>
         <span className={styles.headingSerif}>
-          {isNew ? 'Agregar producto' : 'Editar platillo'}
+          {isNew ? 'Agregar producto' : 'Editar Producto'}
         </span>
         <span className={styles.headingCode}>{isNew ? newCode : code}</span>
       </h1>
 
       <form className={styles.layout} onSubmit={handleSubmit}>
         <div className={styles.formCol}>
-          <div className={styles.langTabs}>
-            <button
-              type="button"
-              className={`${styles.langTab} ${lang === 'es' ? styles.langTabActive : ''}`}
-              onClick={() => setLang('es')}
-            >
-              Español
-            </button>
-            <button
-              type="button"
-              className={`${styles.langTab} ${lang === 'en' ? styles.langTabActive : ''}`}
-              onClick={() => setLang('en')}
-            >
-              English
-            </button>
+          <div className={styles.fieldRow}>
+            <label className={styles.field}>
+              <span className={styles.fieldLabel}>Nombre (Español)</span>
+              <input
+                className={`${styles.input} ${errors.nombre ? styles.inputError : ''}`}
+                value={nombreEs}
+                onChange={(e) => { setNombreEs(e.target.value); setErrors(prev => ({ ...prev, nombre: '' })) }}
+                onBlur={() => handleBlur('nombre')}
+                placeholder="Ej: Rib Eye"
+                autoFocus
+              />
+              {errors.nombre && <span className={styles.fieldError}>{errors.nombre}</span>}
+            </label>
+            <label className={styles.field}>
+              <span className={styles.fieldLabel}>Name (English)</span>
+              <input
+                className={`${styles.input} ${errors.nombreEn ? styles.inputError : ''}`}
+                value={nombreEn}
+                onChange={(e) => { setNombreEn(e.target.value); setErrors(prev => ({ ...prev, nombreEn: '' })) }}
+                onBlur={() => handleBlur('nombreEn')}
+                placeholder="E.g.: Rib Eye"
+              />
+              {errors.nombreEn && <span className={styles.fieldError}>{errors.nombreEn}</span>}
+            </label>
           </div>
 
-          <p className={styles.langHint}>
-            {lang === 'es'
-              ? (isNew ? 'Completa la información en español' : 'Edita la información en español')
-              : (isNew ? 'Fill in the information in English' : 'Edit the information in English')}
-          </p>
-
           <label className={styles.field}>
-            <span className={styles.fieldLabel}>Nombre del platillo</span>
-            <input
-              className={`${styles.input} ${errors.nombre ? styles.inputError : ''}`}
-              value={nombre}
-              onChange={(e) => { setNombre(e.target.value); setErrors(prev => ({ ...prev, nombre: '' })) }}
-              onBlur={() => handleBlur('nombre')}
-              placeholder={lang === 'es' ? 'Ej: Rib Eye' : 'E.g.: Rib Eye'}
-              autoFocus
-            />
-            {errors.nombre && <span className={styles.fieldError}>{errors.nombre}</span>}
-          </label>
-
-          <label className={styles.field}>
-            <span className={styles.fieldLabel}>Descripción corta</span>
+            <span className={styles.fieldLabel}>Descripción (Español)</span>
             <textarea
               className={styles.textarea}
-              value={descripcion}
-              onChange={(e) => setDescripcion(e.target.value)}
-              placeholder={lang === 'es' ? 'Describe el platillo…' : 'Describe the dish…'}
+              value={descripcionEs}
+              onChange={(e) => setDescripcionEs(e.target.value)}
+              placeholder="Describe el producto"
+              rows={4}
+            />
+          </label>
+
+          <button type="button" className={styles.aiButtonInline} onClick={handleAiImprove} disabled={aiLoading}>
+            {aiLoading ? <Loader size={16} className={styles.spin} /> : <Sparkles size={16} />}
+            {aiLoading ? 'Generando…' : 'Generar con IA'}
+            <span className={styles.aiBadge}>Crea o mejora nombre y descripciones</span>
+          </button>
+
+          <label className={styles.field}>
+            <span className={styles.fieldLabel}>Description (English)</span>
+            <textarea
+              className={styles.textarea}
+              value={descripcionEn}
+              onChange={(e) => setDescripcionEn(e.target.value)}
+              placeholder="Describe the dish…"
               rows={4}
             />
           </label>
@@ -298,7 +343,7 @@ export default function EditItemPage() {
             ) : (
               <div className={styles.imagePlaceholder}>
                 <Camera size={32} />
-                <span className={styles.imageHint}>Foto del platillo</span>
+                <span className={styles.imageHint}>Foto del producto</span>
               </div>
             )}
             <input
@@ -327,14 +372,6 @@ export default function EditItemPage() {
               </button>
             )}
           </div>
-
-          <button type="button" className={styles.aiCard}>
-            <Sparkles size={18} />
-            <div className={styles.aiText}>
-              <span className={styles.aiTitle}>Mejorar con IA</span>
-              <span className={styles.aiDesc}>Genera descripciones automáticamente</span>
-            </div>
-          </button>
         </div>
       </form>
     </div>

@@ -99,7 +99,7 @@ export default function Dashboard() {
         <div className={styles.quickActions}>
           <button onClick={() => navigate('/admin/menu/nuevo')} className={`${styles.actionBtn} ${styles.primaryBtn}`}>
             <Plus size={18} />
-            <span>Agregar platillo</span>
+            <span>Agregar producto</span>
           </button>
           
           <button onClick={() => navigate('/admin/categorias')} className={styles.actionBtn}>
