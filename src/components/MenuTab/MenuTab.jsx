@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useMenuContext } from '../../contexts/MenuContext';
 import MenuSkeleton from '../MenuSkeleton/MenuSkeleton';
 import CategorySection from '../CategorySection/CategorySection';
+import { incrementMenuView } from '../../services/menuService';
 import logo from '../../assets/logo/logo.png';
 import styles from './MenuTab.module.css';
 
@@ -16,6 +17,14 @@ export default function MenuTab() {
       setActiveCategoryId(categories[0].id);
     }
   }, [categories, activeCategoryId]);
+
+  useEffect(() => {
+    const counted = sessionStorage.getItem('capitan_menu_viewed');
+    if (!counted) {
+      incrementMenuView().catch(() => {});
+      sessionStorage.setItem('capitan_menu_viewed', '1');
+    }
+  }, []);
 
   useEffect(() => {
     const channel = new BroadcastChannel('capitan_menu');

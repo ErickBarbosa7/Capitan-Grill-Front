@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useMenuContext } from '../contexts/MenuContext';
 import { useAuth } from '../contexts/AuthContext';
 import Loading from '../components/Loading';
-import { getActivity } from '../services/menuService';
-import { Plus, FolderPlus, ExternalLink, Pencil, EyeOff, Trash2, RotateCcw } from 'lucide-react';
+import { getActivity, getMenuViews } from '../services/menuService';
+import { Plus, FolderPlus, ExternalLink, Pencil, EyeOff, Trash2, RotateCcw, Eye } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import styles from './Dashboard.module.css';
 
@@ -40,7 +40,14 @@ export default function Dashboard() {
 
   const [greeting, setGreeting] = useState('');
   const [activityData, setActivityData] = useState([]);
+  const [menuViews, setMenuViews] = useState(0);
   
+  useEffect(() => {
+    getMenuViews()
+      .then(res => setMenuViews(res.count))
+      .catch(() => {});
+  }, []);
+
   useEffect(() => {
     const hour = new Date().getHours();
     if (hour < 12) setGreeting('Buenos días');
@@ -129,6 +136,13 @@ export default function Dashboard() {
             {stats.agotados}
           </p>
           <p className={styles.cardLabel}>Platillos agotados</p>
+        </div>
+        <div className={styles.card}>
+          <p className={styles.cardValue}>{menuViews}</p>
+          <p className={styles.cardLabel}>
+            <Eye size={14} style={{ marginRight: 4, verticalAlign: -2 }} />
+            Visitas al menú
+          </p>
         </div>
       </div>
 

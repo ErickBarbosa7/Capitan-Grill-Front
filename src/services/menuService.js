@@ -61,3 +61,11 @@ export function getActivity() {
 export function generateDescription(data) {
   return api.post('/ai/describe', data)
 }
+
+export function getMenuViews() {
+  return api.get('/stats/menu-views')
+}
+
+export function incrementMenuView() {
+  return api.post('/stats/menu-view')
+}
