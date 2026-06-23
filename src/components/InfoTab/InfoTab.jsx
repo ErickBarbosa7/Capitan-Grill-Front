@@ -12,7 +12,6 @@ import img2 from '../../assets/img/2.jpeg';
 import img3 from '../../assets/img/3.jpeg';
 import img4 from '../../assets/img/4.jpeg';
 import img5 from '../../assets/img/5.jpeg';
-import imgChistorra from '../../assets/img/chistorra.jpeg';
 
 import styles from './InfoTab.module.css';
 
@@ -28,7 +27,6 @@ const cutItems = [
   { src: img3 },
   { src: img4 },
   { src: img5 },
-  { src: imgChistorra },
 ];
 
 export default function InfoTab() {
