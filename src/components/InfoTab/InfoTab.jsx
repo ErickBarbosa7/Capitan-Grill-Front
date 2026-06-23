@@ -12,7 +12,6 @@ import img2 from '../../assets/img/2.jpeg';
 import img3 from '../../assets/img/3.jpeg';
 import img4 from '../../assets/img/4.jpeg';
 import img5 from '../../assets/img/5.jpeg';
-import imgP2 from '../../assets/img/p2.jpeg';
 import imgChistorra from '../../assets/img/chistorra.jpeg';
 
 import styles from './InfoTab.module.css';
