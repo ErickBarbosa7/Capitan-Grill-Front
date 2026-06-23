@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import p2 from '../../assets/img/lugar3.jpg';
+import p2 from '../../assets/img/Lugar.jpg';
 import styles from './SocialTab.module.css';
 
 const FACEBOOK_URL = 'https://www.facebook.com/people/Capitangrill/100064038762789/';
