@@ -29,7 +29,6 @@ const cutItems = [
   { src: img3 },
   { src: img4 },
   { src: img5 },
-  { src: imgP2 },
   { src: imgChistorra },
 ];
 
