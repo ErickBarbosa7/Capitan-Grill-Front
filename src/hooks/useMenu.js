@@ -83,6 +83,8 @@ export function useMenu() {
       id: cat.slug,
       backendId: cat.id,
       nombre: lang.startsWith('en') ? cat.nameEn : cat.nameEs,
+      nombreEs: cat.nameEs,
+      nombreEn: cat.nameEn,
       isActive: cat.isActive,
       items: rawItems
         .filter((item) => item.categoryId === cat.id)

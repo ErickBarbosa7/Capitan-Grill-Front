@@ -14,9 +14,13 @@ export default function CategoryDropdown({
 }) {
   const [open, setOpen] = useState(false)
   const [adding, setAdding] = useState(false)
-  const [newName, setNewName] = useState('')
+  const [newNameEs, setNewNameEs] = useState('')
+  const [newNameEn, setNewNameEn] = useState('')
+  const [newLang, setNewLang] = useState('es')
   const [editingId, setEditingId] = useState(null)
-  const [editName, setEditName] = useState('')
+  const [editNameEs, setEditNameEs] = useState('')
+  const [editNameEn, setEditNameEn] = useState('')
+  const [editLang, setEditLang] = useState('es')
   const ref = useRef(null)
 
   useEffect(() => {
@@ -31,22 +35,24 @@ export default function CategoryDropdown({
 
   const handleAdd = async (e) => {
     if (e?.preventDefault) e.preventDefault()
-    if (!newName.trim()) return
+    if (!newNameEs.trim()) return
     try {
-      await onCreate({ nameEs: newName.trim(), nameEn: newName.trim() })
-      setNewName('')
+      await onCreate({ nameEs: newNameEs.trim(), nameEn: newNameEn.trim() || newNameEs.trim() })
+      setNewNameEs('')
+      setNewNameEn('')
       setAdding(false)
     } catch {}
   }
 
   const handleRename = async (slug) => {
-    if (!editName.trim()) return
+    if (!editNameEs.trim()) return
     const cat = categories.find((c) => c.id === slug)
     if (!cat) return
     try {
-      await onUpdate(cat.id, { nameEs: editName.trim(), nameEn: editName.trim() })
+      await onUpdate(cat.id, { nameEs: editNameEs.trim(), nameEn: editNameEn.trim() || editNameEs.trim() })
       setEditingId(null)
-      setEditName('')
+      setEditNameEs('')
+      setEditNameEn('')
     } catch {}
   }
 
@@ -56,6 +62,13 @@ export default function CategoryDropdown({
     try {
       await onDelete(cat.id)
     } catch {}
+  }
+
+  const startEditing = (cat) => {
+    setEditingId(cat.id)
+    setEditNameEs(cat.nombreEs || cat.nombre)
+    setEditNameEn(cat.nombreEn || cat.nombre)
+    setEditLang('es')
   }
 
   return (
@@ -77,20 +90,39 @@ export default function CategoryDropdown({
             <div key={cat.id} className={styles.item}>
               {editingId === cat.id ? (
                 <div className={styles.editRow}>
+                  <div className={styles.langTabs}>
+                    <button
+                      type="button"
+                      className={`${styles.langTab} ${editLang === 'es' ? styles.langTabActive : ''}`}
+                      onClick={() => setEditLang('es')}
+                    >
+                      ES
+                    </button>
+                    <button
+                      type="button"
+                      className={`${styles.langTab} ${editLang === 'en' ? styles.langTabActive : ''}`}
+                      onClick={() => setEditLang('en')}
+                    >
+                      EN
+                    </button>
+                  </div>
                   <input
                     className={styles.editInput}
-                    value={editName}
-                    onChange={(e) => setEditName(e.target.value)}
+                    value={editLang === 'es' ? editNameEs : editNameEn}
+                    onChange={(e) => {
+                      if (editLang === 'es') setEditNameEs(e.target.value)
+                      else setEditNameEn(e.target.value)
+                    }}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') { e.preventDefault(); handleRename(cat.id) }
-                      if (e.key === 'Escape') { setEditingId(null); setEditName('') }
+                      if (e.key === 'Escape') { setEditingId(null); setEditNameEs(''); setEditNameEn('') }
                     }}
                     autoFocus
                   />
                   <button className={styles.iconBtn} onClick={() => handleRename(cat.id)}>
                     <Check size={14} />
                   </button>
-                  <button className={styles.iconBtn} onClick={() => { setEditingId(null); setEditName('') }}>
+                  <button className={styles.iconBtn} onClick={() => { setEditingId(null); setEditNameEs(''); setEditNameEn('') }}>
                     <X size={14} />
                   </button>
                 </div>
@@ -119,7 +151,7 @@ export default function CategoryDropdown({
                       <button
                         type="button"
                         className={styles.iconBtn}
-                        onClick={() => { setEditingId(cat.id); setEditName(cat.nombre) }}
+                        onClick={() => startEditing(cat)}
                         title="Renombrar"
                       >
                         <Pencil size={13} />
@@ -141,21 +173,40 @@ export default function CategoryDropdown({
 
           {adding ? (
             <div className={styles.addRow}>
+              <div className={styles.langTabs}>
+                <button
+                  type="button"
+                  className={`${styles.langTab} ${newLang === 'es' ? styles.langTabActive : ''}`}
+                  onClick={() => setNewLang('es')}
+                >
+                  ES
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.langTab} ${newLang === 'en' ? styles.langTabActive : ''}`}
+                  onClick={() => setNewLang('en')}
+                >
+                  EN
+                </button>
+              </div>
               <input
                 className={styles.editInput}
-                value={newName}
-                onChange={(e) => setNewName(e.target.value)}
-                placeholder="Nombre de la categoría"
+                value={newLang === 'es' ? newNameEs : newNameEn}
+                onChange={(e) => {
+                  if (newLang === 'es') setNewNameEs(e.target.value)
+                  else setNewNameEn(e.target.value)
+                }}
+                placeholder={newLang === 'es' ? 'Nombre (Español)' : 'Name (English)'}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') { e.preventDefault(); handleAdd() }
-                  if (e.key === 'Escape') { setAdding(false); setNewName('') }
+                  if (e.key === 'Escape') { setAdding(false); setNewNameEs(''); setNewNameEn('') }
                 }}
                 autoFocus
               />
               <button className={styles.iconBtn} onClick={handleAdd}>
                 <Check size={14} />
               </button>
-              <button className={styles.iconBtn} onClick={() => { setAdding(false); setNewName('') }}>
+              <button className={styles.iconBtn} onClick={() => { setAdding(false); setNewNameEs(''); setNewNameEn('') }}>
                 <X size={14} />
               </button>
             </div>

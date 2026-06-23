@@ -145,6 +145,36 @@
   width: 100%;
 }
 
+.langTabs {
+  display: flex;
+  gap: 1px;
+  flex-shrink: 0;
+}
+
+.langTab {
+  padding: 0.25rem 0.4rem;
+  background: none;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.langTab:hover {
+  border-color: #C9A87C;
+  color: #C9A87C;
+}
+
+.langTabActive {
+  background: #C9A87C;
+  border-color: #C9A87C;
+  color: #fff;
+}
+
 .editInput {
   flex: 1;
   padding: 0.4rem 0.5rem;

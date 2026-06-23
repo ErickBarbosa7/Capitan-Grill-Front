@@ -17,7 +17,7 @@
     "includesBanner": "Todos los cortes incluyen",
     "includesItems": "tortillas y salsa",
     "categories": {
-      "cortes-finos": "Cortes Finos",
+      "cortes": "Cortes",
       "extras": "Extras",
       "bebidas": "Bebidas"
     },
