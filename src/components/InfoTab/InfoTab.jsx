@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MapPin, MessageCircle, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import LocationSection from '../LocationSection/LocationSection';
 
 import logo from '../../assets/logo/logo.png';
 import lugarImg from '../../assets/img/Lugar.jpg';
@@ -324,48 +325,36 @@ export default function InfoTab() {
         </p>
       </section>
 
-      <section className={styles.section}>
+      <div className={styles.section}>
+        <LocationSection />
+      </div>
+
+      <div className={styles.section}>
         <div className={styles.ornament}>
           <div className={styles.ornLine} />
           <div className={styles.ornDiamond} />
-          <span className={styles.ornLabel}>
-            {t('location.title')}
-          </span>
+          <span className={styles.ornLabel}>WhatsApp</span>
           <div className={styles.ornDiamond} />
           <div className={styles.ornLine} />
         </div>
 
-        <div className={styles.infoCards}>
-          <div className={styles.infoCard}>
-            <div className={styles.infoCardIcon}>
-              <MapPin size={16} />
-            </div>
-
-            <div className={styles.infoCardText}>
-              <p>{t('location.address')}</p>
-              <span>San Miguel de Allende, Gto.</span>
-            </div>
+        <a
+          href="https://wa.me/524151583036?text=Hola!%20Quisiera%20informes"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.infoCard}
+        >
+          <div className={styles.infoCardIcon}>
+            <MessageCircle size={16} />
           </div>
-
-          <a
-            href="https://wa.me/524151583036?text=Hola!%20Quisiera%20informes"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.infoCard}
-          >
-            <div className={styles.infoCardIcon}>
-              <MessageCircle size={16} />
-            </div>
-
-            <div className={styles.infoCardText}>
-              <p>WhatsApp</p>
-              <span>
-                {t('location.tapToChat', 'Escríbenos directo')}
-              </span>
-            </div>
-          </a>
-        </div>
-      </section>
+          <div className={styles.infoCardText}>
+            <p>WhatsApp</p>
+            <span>
+              {t('location.tapToChat', 'Escríbenos directo')}
+            </span>
+          </div>
+        </a>
+      </div>
 
       {currentIndex !== null && (
         <div

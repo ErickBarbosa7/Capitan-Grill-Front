@@ -40,10 +40,12 @@
   },
   "location": {
     "title": "Ubicación",
-    "address": "37880  Carretera a  Atotonilco  Km 2, San Miguel de Allende, Gto.",
+    "address": "Carretera a Atotonilco Km 2, 37880 San Miguel de Allende, Gto.",
     "phone": "+52 415-158-3036",
     "hours": "Lun - Dom: 6:00 PM - 11:00 PM",
-    "tapToChat": "Escríbenos directo"
+    "tapToChat": "Escríbenos por WhatsApp",
+    "getDirectionsMaps": "Abrir en Google Maps",
+    "getDirectionsWaze": "Abrir en Waze"
   },
   "info": {
     "ourPlace": "Nuestro Lugar",
