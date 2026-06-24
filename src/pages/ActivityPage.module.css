@@ -1,0 +1,190 @@
+.page {
+  max-width: 800px;
+}
+
+/* ─── BOTÓN VOLVER ─── */
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #8A8680;
+  cursor: pointer;
+  padding: 0.3rem 0;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s;
+}
+
+.backBtn:hover {
+  color: #C9A87C;
+}
+
+/* ─── ENCABEZADO ─── */
+.headingLabel {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #C9A87C;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.heading {
+  font-family: var(--font-serif, 'Playfair Display');
+  font-size: 3rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--text-primary, #2C2A29);
+  margin: 0 0 2rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-light, #E6E2D8);
+}
+
+/* ─── EMPTY STATE ─── */
+.empty {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.9rem;
+  color: #8A8680;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+/* ─── TIMELINE ─── */
+.list {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Línea vertical conectora */
+.list::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 20px;
+  bottom: 20px;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border-light, #E6E2D8) 10%, var(--border-light, #E6E2D8) 90%, transparent);
+}
+
+/* ─── ITEM ─── */
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1rem 0 1rem 0;
+  position: relative;
+  transition: opacity 0.2s;
+}
+
+.item:not(:last-child) {
+  border-bottom: 1px solid rgba(230, 226, 216, 0.5);
+}
+
+.item:hover {
+  opacity: 0.85;
+}
+
+/* ─── ÍCONO (punto del timeline) ─── */
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  border: 2px solid var(--bg-primary, #F7F5F0);
+}
+
+.icon_edit   { background: rgba(201, 168, 124, 0.15); color: #C9A87C; }
+.icon_add    { background: rgba(58, 90, 64, 0.12); color: #3A5A40; }
+.icon_hide   { background: rgba(44, 42, 41, 0.07); color: #8A8680; }
+.icon_show   { background: rgba(44, 42, 41, 0.07); color: #8A8680; }
+.icon_delete { background: rgba(220, 38, 38, 0.1); color: #DC2626; }
+.icon_restore{ background: rgba(58, 90, 64, 0.12); color: #3A5A40; }
+
+/* ─── CONTENIDO DEL ITEM ─── */
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-top: 0.6rem;
+}
+
+.text {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.88rem;
+  color: #8A8680;
+  line-height: 1.4;
+}
+
+.target {
+  font-family: var(--font-serif, 'Playfair Display');
+  font-style: italic;
+  font-weight: 600;
+  color: var(--text-primary, #2C2A29);
+  font-size: 0.98rem;
+}
+
+/* ─── TIEMPO ─── */
+.time {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #B0ABA5;
+  white-space: nowrap;
+  padding-top: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  .list::before {
+    display: none;
+  }
+
+  .heading {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .item {
+    gap: 0.85rem;
+    padding: 0.75rem 0;
+  }
+
+  .icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .body {
+    padding-top: 0.4rem;
+  }
+
+  .text {
+    font-size: 0.82rem;
+  }
+
+  .target {
+    font-size: 0.9rem;
+  }
+
+  .time {
+    font-size: 0.65rem;
+    padding-top: 0.5rem;
+  }
+}

@@ -1,55 +1,448 @@
+import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MapPin, Phone } from 'lucide-react';
-import logo from '../../assets/logo.png';
+import { MapPin, MessageCircle, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import LocationSection from '../LocationSection/LocationSection';
+
+import logo from '../../assets/logo/logo.png';
+import lugarImg from '../../assets/img/Lugar.jpg';
+import lugar3 from '../../assets/img/lugar3.jpg';
+import lugarVideo from '../../assets/img/IMG_6038.MOV';
+
+import img1 from '../../assets/img/1.jpeg';
+import img2 from '../../assets/img/2.jpeg';
+import img3 from '../../assets/img/3.jpeg';
+import img4 from '../../assets/img/4.jpeg';
+import img5 from '../../assets/img/5.jpeg';
+
 import styles from './InfoTab.module.css';
+
+const mediaItems = [
+  { type: 'video', src: lugarVideo, alt: 'Video del lugar' },
+  { type: 'image', src: lugarImg, alt: 'Capitán Grill 1' },
+  { type: 'image', src: lugar3, alt: 'Capitán Grill 2' },
+];
+
+const cutItems = [
+  { src: img1 },
+  { src: img2 },
+  { src: img3 },
+  { src: img4 },
+  { src: img5 },
+];
 
 export default function InfoTab() {
   const { t } = useTranslation();
 
-  const mapSrc =
-    'https://maps.google.com/maps?q=37880+Santuario+de+atotonilco,+37880+San+Miguel+de+Allende,+Gto.&output=embed';
+  const [currentIndex, setCurrentIndex] = useState(null);
+  const videoRef = useRef(null);
+
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const touchMoved = useRef(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (currentIndex === null) return;
+
+      if (e.key === 'Escape') {
+        handleClose();
+      }
+
+      if (e.key === 'ArrowLeft' && currentIndex > 0) {
+        handlePrev();
+      }
+
+      if (e.key === 'ArrowRight' && currentIndex < mediaItems.length - 1) {
+        handleNext();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentIndex]);
+
+  useEffect(() => {
+    if (currentIndex !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [currentIndex]);
+
+  useEffect(() => {
+    if (currentIndex === null) return;
+
+    const item = mediaItems[currentIndex];
+    if (item.type === 'video' && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    } else if (videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [currentIndex]);
+
+  const handleOpen = (index) => {
+    setCurrentIndex(index);
+  };
+
+  const handleClose = () => {
+    setCurrentIndex(null);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => prev - 1);
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => prev + 1);
+  };
+
+  const handleTouchStart = (e) => {
+    if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
+    touchMoved.current = false;
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
+    touchMoved.current = true;
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
+    if (!touchMoved.current) {
+      touchStartX.current = 0;
+      touchEndX.current = 0;
+      return;
+    }
+    const diff = touchStartX.current - touchEndX.current;
+
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && currentIndex < mediaItems.length - 1) {
+        handleNext();
+      } else if (diff < 0 && currentIndex > 0) {
+        handlePrev();
+      }
+    }
+
+    touchStartX.current = 0;
+    touchEndX.current = 0;
+  };
+
+  const [activeCutIndex, setActiveCutIndex] = useState(0);
+  const carouselRef = useRef(null);
+
+  const handleCutScroll = () => {
+    if (!carouselRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+    const maxScroll = scrollWidth - clientWidth;
+    if (maxScroll <= 0) { setActiveCutIndex(0); return; }
+    const index = Math.round((scrollLeft / maxScroll) * (cutItems.length - 1));
+    setActiveCutIndex(Math.min(index, cutItems.length - 1));
+  };
+
+  const scrollToCut = (index) => {
+    if (!carouselRef.current) return;
+    const { scrollWidth, clientWidth } = carouselRef.current;
+    const maxScroll = scrollWidth - clientWidth;
+    if (maxScroll <= 0) return;
+    const targetLeft = (index / (cutItems.length - 1)) * maxScroll;
+    carouselRef.current.scrollTo({ left: targetLeft, behavior: 'smooth' });
+  };
+
+  const renderThumbnails = () => {
+    return (
+      <div className={styles.collage}>
+        <div className={styles.collageMain}>
+          <div
+            className={styles.collageLink}
+            onClick={() => handleOpen(0)}
+            role="button"
+            tabIndex={0}
+          >
+            <video
+              className={styles.collageVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source src={lugarVideo} type="video/quicktime" />
+              <source src={lugarVideo} type="video/mp4" />
+            </video>
+
+            <span className={styles.collageOverlay}>
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className={styles.playIcon}
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <div className={styles.collageSub}>
+          {mediaItems.slice(1).map((item, idx) => (
+            <div
+              key={idx}
+              className={styles.collageLink}
+              onClick={() => handleOpen(idx + 1)}
+              role="button"
+              tabIndex={0}
+            >
+              <img
+                src={item.src}
+                alt={item.alt}
+                className={styles.collagePhoto}
+              />
+
+              <span className={styles.collageOverlay}>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className={styles.expandIcon}
+                >
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg>
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.hero}>
+      <header className={styles.hero}>
         <img src={logo} alt="Capitán Grill" className={styles.logo} />
-        <p className={styles.slogan}>{t('header.subtitle')}</p>
+
+        <p className={styles.heroName}>Capitán Grill</p>
+
+        <div className={styles.heroPills}>
+          <span className={styles.pill}>Meat Boutique</span>
+          <span className={styles.pill}>El Sabor del Norte</span>
+        </div>
+      </header>
+
+      <div className={styles.collageWrap}>
+        <p className={styles.collageLabel}>
+          {t('info.ourPlace', 'Nuestro Lugar')}
+        </p>
+
+        {renderThumbnails()}
       </div>
 
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>{t('about.title')}</h2>
-        <p className={styles.description}>{t('about.description')}</p>
-      </section>
-
-      <div className={styles.divider} />
-
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>{t('location.title')}</h2>
-
-        <div className={styles.infoList}>
-          <div className={styles.infoItem}>
-            <MapPin size={20} className={styles.icon} />
-            <p className={styles.infoText}>{t('location.address')}</p>
-          </div>
-
-          <div className={styles.infoItem}>
-            <Phone size={20} className={styles.icon} />
-            <a href="tel:+524151583036" className={styles.infoText}>{t('location.phone')}</a>
-          </div>
-
+      <section className={styles.cutsSection}>
+        <div className={styles.ornament}>
+          <div className={styles.ornLine} />
+          <div className={styles.ornDiamond} />
+          <span className={styles.ornLabel}>
+            {t('info.cuts.title', 'Nuestros Cortes')}
+          </span>
+          <div className={styles.ornDiamond} />
+          <div className={styles.ornLine} />
         </div>
 
-        <div className={styles.mapContainer}>
-          <iframe
-            title="Ubicación Capitán Grill"
-            src={mapSrc}
-            className={styles.map}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+        <div className={styles.cutsCarouselWrap}>
+          <div
+            ref={carouselRef}
+            className={styles.cutsCarousel}
+            onScroll={handleCutScroll}
+          >
+            {cutItems.map((item, idx) => (
+              <div key={idx} className={styles.cutCard}>
+                <img
+                  src={item.src}
+                  alt={`Corte ${idx + 1}`}
+                  className={styles.cutImage}
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+
+          {cutItems.length > 1 && (
+            <>
+              {activeCutIndex > 0 && (
+                <button
+                  className={`${styles.cutsArrow} ${styles.cutsArrowLeft}`}
+                  onClick={() => scrollToCut(activeCutIndex - 1)}
+                  aria-label="Anterior"
+                >
+                  <ChevronLeft size={24} color="#F7F5F0" />
+                </button>
+              )}
+              {activeCutIndex < cutItems.length - 1 && (
+                <button
+                  className={`${styles.cutsArrow} ${styles.cutsArrowRight}`}
+                  onClick={() => scrollToCut(activeCutIndex + 1)}
+                  aria-label="Siguiente"
+                >
+                  <ChevronRight size={24} color="#F7F5F0" />
+                </button>
+              )}
+
+              <div className={styles.cutsDots}>
+                {cutItems.map((_, idx) => (
+                  <button
+                    key={idx}
+                    className={`${styles.cutDot} ${idx === activeCutIndex ? styles.cutDotActive : ''}`}
+                    onClick={() => scrollToCut(idx)}
+                    aria-label={`Ir al corte ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
+
+      <section className={styles.section}>
+        <div className={styles.ornament}>
+          <div className={styles.ornLine} />
+          <div className={styles.ornDiamond} />
+          <span className={styles.ornLabel}>
+            {t('about.title')}
+          </span>
+          <div className={styles.ornDiamond} />
+          <div className={styles.ornLine} />
+        </div>
+
+        <p className={styles.aboutText}>
+          {t('about.description')}
+        </p>
+      </section>
+
+      <div className={styles.section}>
+        <LocationSection />
+      </div>
+
+      <div className={styles.section}>
+        <div className={styles.ornament}>
+          <div className={styles.ornLine} />
+          <div className={styles.ornDiamond} />
+          <span className={styles.ornLabel}>WhatsApp</span>
+          <div className={styles.ornDiamond} />
+          <div className={styles.ornLine} />
+        </div>
+
+        <a
+          href="https://wa.me/524151583036?text=Hola!%20Quisiera%20informes"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.infoCard}
+        >
+          <div className={styles.infoCardIcon}>
+            <MessageCircle size={16} />
+          </div>
+          <div className={styles.infoCardText}>
+            <p>WhatsApp</p>
+            <span>
+              {t('location.tapToChat', 'Escríbenos directo')}
+            </span>
+          </div>
+        </a>
+      </div>
+
+      {currentIndex !== null && (
+        <div
+          className={styles.lightboxOverlay}
+          onClick={handleClose}
+        >
+          <button
+            className={styles.closeButton}
+            onClick={handleClose}
+            aria-label="Cerrar"
+          >
+            <X size={26} color="#F7F5F0" />
+          </button>
+
+          {currentIndex > 0 && (
+            <button
+              className={`${styles.navButton} ${styles.navButtonLeft}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrev();
+              }}
+            >
+              <ChevronLeft size={32} color="#F7F5F0" />
+            </button>
+          )}
+
+          {currentIndex < mediaItems.length - 1 && (
+            <button
+              className={`${styles.navButton} ${styles.navButtonRight}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNext();
+              }}
+            >
+              <ChevronRight size={32} color="#F7F5F0" />
+            </button>
+          )}
+
+          <div
+            className={styles.lightboxContent}
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            {mediaItems[currentIndex].type === 'video' ? (
+              <video
+                ref={videoRef}
+                className={styles.lightboxMedia}
+                controls
+                autoPlay
+                playsInline
+                onClick={(e) => e.stopPropagation()}
+              >
+                <source
+                  src={mediaItems[currentIndex].src}
+                  type="video/quicktime"
+                />
+                <source
+                  src={mediaItems[currentIndex].src}
+                  type="video/mp4"
+                />
+              </video>
+            ) : (
+              <img
+                src={mediaItems[currentIndex].src}
+                alt={mediaItems[currentIndex].alt}
+                className={styles.lightboxMedia}
+              />
+            )}
+          </div>
+
+          <div className={styles.paginationDots}>
+            {mediaItems.map((_, idx) => (
+              <span
+                key={idx}
+                className={`${styles.dot} ${
+                  idx === currentIndex ? styles.dotActive : ''
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentIndex(idx);
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

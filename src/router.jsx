@@ -3,7 +3,7 @@ import CustomerLayout from './layouts/CustomerLayout'
 import AdminLayout from './layouts/AdminLayout'
 import ProtectedRoute from './components/admin/ProtectedRoute'
 
-import CustomerLanding from './pages/CustomerLanding'
+import LandingPage from './pages/LandingPage'
 import MenuTab from './components/MenuTab/MenuTab'
 import InfoTab from './components/InfoTab/InfoTab'
 import SocialTab from './components/SocialTab/SocialTab'
@@ -18,7 +18,7 @@ import ActivityPage from './pages/ActivityPage'
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<CustomerLanding />} />
+      <Route path="/" element={<LandingPage />} />
 
       <Route element={<CustomerLayout />}>
         <Route path="menu" element={<MenuTab />} />

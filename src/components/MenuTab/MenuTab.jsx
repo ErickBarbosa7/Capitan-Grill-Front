@@ -1,31 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useMenu } from '../../hooks/useMenu';
+import { useMenuContext } from '../../contexts/MenuContext';
+import MenuSkeleton from '../MenuSkeleton/MenuSkeleton';
 import CategorySection from '../CategorySection/CategorySection';
-import logo from '../../assets/logo.png';
+import { incrementMenuView } from '../../services/menuService';
+import logo from '../../assets/logo/logo.png';
 import styles from './MenuTab.module.css';
 
-export default function MenuTab({ wide }) {
+export default function MenuTab() {
   const { t, i18n } = useTranslation();
-<<<<<<< Updated upstream
-  const { categories } = useMenu();
-  const [activeCategoryId, setActiveCategoryId] = useState(categories[0]?.id);
-=======
   const { categories, loading, refetch } = useMenuContext();
   const [activeCategoryId, setActiveCategoryId] = useState();
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
 
   useEffect(() => {
     if (categories.length > 0 && !activeCategoryId) {
       setActiveCategoryId(categories[0].id);
     }
   }, [categories, activeCategoryId]);
-
-  useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 1024);
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
 
   useEffect(() => {
     const counted = sessionStorage.getItem('capitan_menu_viewed');
@@ -49,7 +40,6 @@ export default function MenuTab({ wide }) {
   }, [refetch]);
 
   if (loading) return <MenuSkeleton />
->>>>>>> Stashed changes
 
   const activeCategory = categories.find((c) => c.id === activeCategoryId);
 
@@ -59,15 +49,11 @@ export default function MenuTab({ wide }) {
   };
 
   return (
-<<<<<<< Updated upstream
     <div className={styles.wrapper}>
-=======
-    <div className={`${styles.wrapper} ${wide ? styles.wide : ''}`}>
 
       {/* Hero oscuro con logo */}
->>>>>>> Stashed changes
       <header className={styles.hero}>
-        <button className={styles.langToggle} onClick={toggleLang}>
+        <button className={styles.langToggle} onClick={toggleLang} aria-label="Cambiar idioma">
           <span className={`${styles.lang} ${i18n.language === 'es' ? styles.activeLang : ''}`}>ES</span>
           <span className={styles.separator}>/</span>
           <span className={`${styles.lang} ${i18n.language === 'en' ? styles.activeLang : ''}`}>EN</span>
@@ -75,6 +61,7 @@ export default function MenuTab({ wide }) {
         <img src={logo} alt="Capitán Grill" className={styles.logo} />
       </header>
 
+      {/* Chipbar sticky */}
       <nav className={styles.chipBar}>
         <h2 className={styles.menuTitle}>{t('menu.title')}</h2>
         <div className={styles.chips}>
@@ -82,25 +69,15 @@ export default function MenuTab({ wide }) {
             <button
               key={cat.id}
               className={`${styles.chip} ${activeCategoryId === cat.id ? styles.activeChip : ''}`}
-              onClick={() => {
-                setActiveCategoryId(cat.id);
-                if (isDesktop) {
-                  document.getElementById(`menu-cat-${cat.id}`)?.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
+              onClick={() => setActiveCategoryId(cat.id)}
             >
-              {t(`menu.categories.${cat.id}`)}
+              {cat.nombre}
             </button>
           ))}
         </div>
       </nav>
 
       <main className={styles.main}>
-<<<<<<< Updated upstream
-        {activeCategory && (
-          <CategorySection key={activeCategory.id} category={activeCategory} />
-        )}
-=======
         {/* Banner Promocional del Gancho Comercial */}
         <div className={styles.promoBanner}>
           <h2 className={styles.promoTitle}>
@@ -111,18 +88,12 @@ export default function MenuTab({ wide }) {
           </p>
         </div>
 
-        {/* Categorías: en desktop todas visibles, en mobile solo la activa */}
-        {isDesktop
-          ? categories.map((cat) => (
-              <div key={cat.id} id={`menu-cat-${cat.id}`}>
-                <CategorySection category={cat} />
-              </div>
-            ))
-          : activeCategory && (
-              <CategorySection key={activeCategory.id} category={activeCategory} />
-            )}
->>>>>>> Stashed changes
+        {/* Categoría Activa */}
+        {activeCategory && (
+          <CategorySection key={activeCategory.id} category={activeCategory} />
+        )}
       </main>
+
     </div>
   );
 }

@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next';
+import p2 from '../../assets/img/Lugar.jpg';
 import styles from './SocialTab.module.css';
 
 const FACEBOOK_URL = 'https://www.facebook.com/people/Capitangrill/100064038762789/';
 const WHATSAPP_URL = 'https://wa.me/524151583036?text=Hola!%20Quisiera%20informes';
+const INSTAGRAM_URL = 'https://www.instagram.com/capitan_grill.sma2026';
 
 function FacebookIcon() {
   return (
@@ -20,37 +22,90 @@ function WhatsAppIcon() {
   );
 }
 
+function InstagramIcon() {
+  return (
+    <svg className={styles.socialIcon} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+    </svg>
+  );
+}
+
 export default function SocialTab() {
   const { t } = useTranslation();
   const year = new Date().getFullYear();
 
   return (
     <div className={styles.wrapper}>
-      <section className={styles.section}>
-        <h2 className={styles.title}>{t('social.title')}</h2>
-        <p className={styles.description}>
-          {t('social.description')}
-        </p>
 
-        <div className={styles.links}>
+      {/* ── Hero oscuro con foto ── */}
+      <header className={styles.hero}>
+        <img src={p2} alt="Capitán Grill" className={styles.heroImg} />
+        <p className={styles.heroName}>{t('social.title')}</p>
+        <div className={styles.heroPills}>
+          <span className={styles.pill}>Capitán Grill</span>
+          <span className={styles.pill}>El Sabor del Norte</span>
+        </div>
+      </header>
+
+      {/* ── Cuerpo ── */}
+      <section className={styles.section}>
+        <div className={styles.ornament}>
+          <div className={styles.ornLine} />
+          <div className={styles.ornDiamond} />
+          <span className={styles.ornLabel}>{t('social.networksLabel', 'Redes Sociales')}</span>
+          <div className={styles.ornDiamond} />
+          <div className={styles.ornLine} />
+        </div>
+
+        <p className={styles.description}>{t('social.description')}</p>
+
+        <div className={styles.cards}>
           <a
             href={FACEBOOK_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.facebook}
+            className={`${styles.card} ${styles.facebook}`}
           >
-            <FacebookIcon />
-            Facebook
+            <div className={styles.iconWrap}>
+              <FacebookIcon />
+            </div>
+            <div className={styles.cardText}>
+              <p>Facebook</p>
+              <span>Capitangrill · {t('social.follow', 'Síguenos')}</span>
+            </div>
+            <span className={styles.arrow}>›</span>
           </a>
 
           <a
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.whatsapp}
+            className={`${styles.card} ${styles.whatsapp}`}
           >
-            <WhatsAppIcon />
-            WhatsApp
+            <div className={styles.iconWrap}>
+              <WhatsAppIcon />
+            </div>
+            <div className={styles.cardText}>
+              <p>WhatsApp</p>
+              <span>{t('social.writeUs', 'Escríbenos directo')}</span>
+            </div>
+            <span className={styles.arrow}>›</span>
+          </a>
+
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${styles.card} ${styles.instagram}`}
+          >
+            <div className={styles.iconWrap}>
+              <InstagramIcon />
+            </div>
+            <div className={styles.cardText}>
+              <p>Instagram</p>
+              <span>@capitan_grill.sma2026</span>
+            </div>
+            <span className={styles.arrow}>›</span>
           </a>
         </div>
       </section>
@@ -58,6 +113,7 @@ export default function SocialTab() {
       <footer className={styles.footer}>
         <p>&copy; {year} Capitán Grill. {t('footer.rights')}</p>
       </footer>
+
     </div>
   );
 }
