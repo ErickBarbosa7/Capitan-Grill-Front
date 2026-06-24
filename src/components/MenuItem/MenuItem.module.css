@@ -1,12 +1,18 @@
 .card {
   display: flex;
   flex-direction: column;
+<<<<<<< Updated upstream
   background: var(--bg-card);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
   border: 1px solid var(--border-light);
   transition: transform 0.2s ease;
+=======
+  padding: 0.7rem 0;
+  border-bottom: 1px dashed var(--border-light);
+  gap: 0.15rem;
+>>>>>>> Stashed changes
 }
 
 .card:active {
@@ -18,6 +24,7 @@
   filter: grayscale(80%);
 }
 
+<<<<<<< Updated upstream
 .imagePlaceholder {
   width: 100%;
   height: 200px; /* Altura generosa para la foto del platillo */
@@ -39,10 +46,17 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+=======
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+>>>>>>> Stashed changes
   gap: 1rem;
 }
 
 .name {
+<<<<<<< Updated upstream
   font-size: 1.25rem;
   color: var(--text-primary);
   line-height: 1.2;
@@ -59,6 +73,31 @@
   color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.4;
+=======
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.price {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.desc {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+  margin: 0;
+  max-width: 85%;
+>>>>>>> Stashed changes
 }
 
 .badge {
@@ -68,7 +107,13 @@
   text-transform: uppercase;
   background: var(--text-secondary);
   color: #fff;
+<<<<<<< Updated upstream
   padding: 0.25rem 0.6rem;
   border-radius: 6px;
   margin-top: 0.25rem;
 }
+=======
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+>>>>>>> Stashed changes

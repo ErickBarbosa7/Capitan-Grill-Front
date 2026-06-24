@@ -1,0 +1,319 @@
+/* ─── MOBILE FIRST (default) ─── */
+.mobileView {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+}
+
+.content {
+  flex: 1;
+  padding-bottom: calc(64px + env(safe-area-inset-bottom));
+}
+
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.tab.active {
+  color: var(--capitan-wood);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.desktopView {
+  display: none;
+}
+
+/* ─── DESKTOP (≥ 1024px) ─── */
+@media (min-width: 1024px) {
+  .mobileView {
+    display: none;
+  }
+
+  .desktopView {
+    display: grid;
+    grid-template-columns: 36vw 64vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ─── LEFT PANEL ─── */
+  .leftPanel {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .leftPanelBg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+    mix-blend-mode: overlay;
+  }
+
+  .leftPanelOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      160deg,
+      rgba(26, 25, 24, 0.92) 0%,
+      rgba(26, 25, 24, 0.75) 50%,
+      rgba(26, 25, 24, 0.95) 100%
+    );
+  }
+
+  .leftPanelContent {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 2.5rem 3rem 2rem;
+    color: var(--cream-text);
+  }
+
+  /* ─── TOP BAR ─── */
+  .topBar {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--cream-text);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  /* ─── HERO SECTION ─── */
+  .heroSection {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+
+  .pillBadge {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 0.35rem 1rem;
+    background: rgba(26, 25, 24, 0.5);
+    border: 1px solid rgba(201, 168, 124, 0.3);
+    border-radius: 50px;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--cream-text);
+    letter-spacing: 0.06em;
+    margin-bottom: 1.25rem;
+  }
+
+  .heroTitle {
+    font-family: var(--font-serif);
+    font-size: 4.5rem;
+    font-weight: 700;
+    font-style: italic;
+    margin: 0;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+
+  .heroGold {
+    color: var(--gold);
+  }
+
+  .heroCream {
+    color: var(--cream-text);
+  }
+
+  .heroDesc {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: rgba(247, 245, 240, 0.45);
+    margin: 1.25rem 0 0;
+    line-height: 1.6;
+    max-width: 80%;
+  }
+
+  .heroActions {
+    display: flex;
+    gap: 0.85rem;
+    margin-top: 2rem;
+  }
+
+  .btnPrimary {
+    padding: 0.75rem 1.6rem;
+    background: var(--gold);
+    color: var(--dark-bg);
+    border: none;
+    border-radius: 50px;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .btnPrimary:hover {
+    background: #B8945E;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201, 168, 124, 0.2);
+  }
+
+  .btnSecondary {
+    padding: 0.75rem 1.6rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(247, 245, 240, 0.12);
+    border-radius: 50px;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--cream-text);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .btnSecondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(201, 168, 124, 0.3);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  /* ─── FEATURE CARDS ─── */
+  .featureCards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem;
+    flex-shrink: 0;
+    margin-top: 1.5rem;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(201, 168, 124, 0.15);
+    border-radius: 16px;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    border-color: rgba(201, 168, 124, 0.35);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-3px);
+  }
+
+  .cardIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    margin-bottom: 0.65rem;
+  }
+
+  .cardTitle {
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--cream-text);
+    margin: 0 0 0.4rem;
+    line-height: 1.2;
+  }
+
+  .cardText {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    color: rgba(247, 245, 240, 0.4);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* ─── SOCIAL FOOTER ─── */
+  .leftSocial {
+    display: flex;
+    justify-content: center;
+    gap: 0.85rem;
+    flex-shrink: 0;
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .socialBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(247, 245, 240, 0.1);
+    color: rgba(247, 245, 240, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .socialBtn:hover {
+    background: var(--dark-bg);
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 168, 124, 0.12);
+  }
+
+  /* ─── RIGHT PANEL ─── */
+  .rightPanel {
+    overflow-y: auto;
+    background: var(--bg-primary);
+  }
+
+  .rightInner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+  }
+}

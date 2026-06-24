@@ -53,8 +53,15 @@
   position: sticky;
   top: 0;
   z-index: 10;
+<<<<<<< Updated upstream
   background-color: var(--bg-primary);
   padding: 1rem 1rem 0.75rem;
+=======
+  background-color: rgba(247, 245, 240, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.85rem 1rem 0.75rem;
+>>>>>>> Stashed changes
   border-bottom: 1px solid var(--border-light);
 }
 
@@ -119,3 +126,71 @@
   width: 100%;
   margin: 0 auto;
 }
+<<<<<<< Updated upstream
+=======
+
+/* ── Banner Promocional ── */
+.promoBanner {
+  background-color: var(--capitan-wood);
+  color: var(--bg-primary);
+  padding: 1.25rem 1rem;
+  margin-bottom: 1.5rem; /* Separación del menú de categorías */
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(160, 82, 45, 0.2);
+}
+
+.promoTitle {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin: 0 0 0.25rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.promoPrice {
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: #C9A87C;
+}
+
+.promoSubtitle {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* ── Wide mode (used in CustomerLanding desktop) ── */
+@media (min-width: 1024px) {
+  .wide .main {
+    max-width: 1000px;
+    padding: 1.5rem 2rem 3rem;
+  }
+
+  .wide .hero {
+    padding: 1.5rem 1rem 1.25rem;
+  }
+
+  .wide .chipBar {
+    padding: 1rem 1.5rem 0.85rem;
+  }
+
+  .wide .chips {
+    gap: 0.75rem;
+  }
+
+  .wide .chip {
+    flex: 0 1 auto;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.85rem;
+  }
+
+  .wide .promoBanner {
+    padding: 1.5rem 2rem;
+  }
+}
+>>>>>>> Stashed changes
