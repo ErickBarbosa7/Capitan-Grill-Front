@@ -114,8 +114,6 @@
   transform: translateY(-1px);
 }
 
-.externalIcon { opacity: 0.5; }
-
 /* ─── FRANJA INFERIOR: teléfono y horario ─── */
 .infoStrip {
   display: flex;

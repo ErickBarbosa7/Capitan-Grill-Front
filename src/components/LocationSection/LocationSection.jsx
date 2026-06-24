@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { MapPin, Navigation, ExternalLink, Phone, Clock, Car } from 'lucide-react';
+import { MapPin, Navigation, Phone, Clock, Car } from 'lucide-react';
 import styles from './LocationSection.module.css';
 
 export default function LocationSection() {
@@ -39,12 +39,10 @@ export default function LocationSection() {
             <a href={mapsRedirectUrl} target="_blank" rel="noopener noreferrer" className={styles.btnMaps}>
               <Navigation size={14} />
               {t('location.getDirectionsMaps')}
-              <ExternalLink size={11} className={styles.externalIcon} />
             </a>
             <a href={wazeRedirectUrl} target="_blank" rel="noopener noreferrer" className={styles.btnWaze}>
               <Car size={14} />
               {t('location.getDirectionsWaze')}
-              <ExternalLink size={11} className={styles.externalIcon} />
             </a>
           </div>
         </div>
