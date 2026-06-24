@@ -12,26 +12,8 @@ export default function LocationSection() {
 
   return (
     <section className={styles.locationContainer}>
-      <h3 className={styles.sectionTitle}>
-        <MapPin className={styles.titleIcon} size={22} />
-        {t('location.title')}
-      </h3>
 
-      <p className={styles.addressText}>
-        {t('location.address')}
-      </p>
-
-      <div className={styles.infoGrid}>
-        <a href="tel:+524151583036" className={styles.infoItem}>
-          <Phone size={18} className={styles.infoIcon} />
-          <span>{t('location.phone')}</span>
-        </a>
-        <div className={styles.infoItem}>
-          <Clock size={18} className={styles.infoIcon} />
-          <span>{t('location.hours')}</span>
-        </div>
-      </div>
-
+      {/* MAPA FULL-BLEED */}
       <div className={styles.mapWrapper}>
         <iframe
           src={mapsEmbedUrl}
@@ -41,30 +23,51 @@ export default function LocationSection() {
           referrerPolicy="strict-origin-when-cross-origin"
           title="Capitán Grill Mapa"
         />
+        {/* Degradado sobre el mapa */}
+        <div className={styles.mapOverlay} />
+
+        {/* Info encima del degradado */}
+        <div className={styles.mapInfo}>
+          <div className={styles.mapInfoLeft}>
+            <h3 className={styles.locationName}>Capitán Grill</h3>
+            <p className={styles.addressText}>
+              <MapPin size={12} />
+              {t('location.address')}
+            </p>
+          </div>
+          <div className={styles.navBtns}>
+            <a href={mapsRedirectUrl} target="_blank" rel="noopener noreferrer" className={styles.btnMaps}>
+              <Navigation size={14} />
+              {t('location.getDirectionsMaps')}
+              <ExternalLink size={11} className={styles.externalIcon} />
+            </a>
+            <a href={wazeRedirectUrl} target="_blank" rel="noopener noreferrer" className={styles.btnWaze}>
+              <Car size={14} />
+              {t('location.getDirectionsWaze')}
+              <ExternalLink size={11} className={styles.externalIcon} />
+            </a>
+          </div>
+        </div>
       </div>
 
-      <div className={styles.actionsGroup}>
-        <a
-          href={mapsRedirectUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.btnMaps}
-        >
-          <Navigation size={16} />
-          {t('location.getDirectionsMaps')}
-          <ExternalLink size={12} className={styles.externalIcon} />
+      {/* FRANJA INFERIOR: teléfono y horario */}
+      <div className={styles.infoStrip}>
+        <a href="tel:+524151583036" className={styles.infoItem}>
+          <Phone size={16} className={styles.infoIcon} />
+          <span className={styles.infoText}>
+            <span className={styles.infoLabel}>Teléfono</span>
+            {t('location.phone')}
+          </span>
         </a>
-        <a
-          href={wazeRedirectUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.btnWaze}
-        >
-          <Car size={16} />
-          {t('location.getDirectionsWaze')}
-          <ExternalLink size={12} className={styles.externalIcon} />
-        </a>
+        <div className={styles.infoItem}>
+          <Clock size={16} className={styles.infoIcon} />
+          <span className={styles.infoText}>
+            <span className={styles.infoLabel}>Horario</span>
+            {t('location.hours')}
+          </span>
+        </div>
       </div>
+
     </section>
   );
 }

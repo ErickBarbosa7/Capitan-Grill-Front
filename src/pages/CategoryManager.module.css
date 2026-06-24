@@ -291,3 +291,36 @@
   background: #991B1B;
   border-color: #991B1B;
 }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .headingSerif {
+    font-size: 1.8rem;
+  }
+
+  .createForm {
+    flex-direction: column;
+  }
+
+  .row {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .rowInfo {
+    gap: 0.5rem;
+  }
+
+  .rowSlug {
+    font-size: 0.65rem;
+  }
+
+  .editRow {
+    gap: 0.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 0 0.25rem;
+  }
+}

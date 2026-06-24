@@ -2,16 +2,16 @@ import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getActivity } from '../services/menuService'
 import Loading from '../components/Loading'
-import { ArrowLeft, Plus, Pencil, EyeOff, Trash2, RotateCcw } from 'lucide-react'
+import { ArrowLeft, Plus, Pencil, EyeOff, Eye, Trash2, RotateCcw } from 'lucide-react'
 import styles from './ActivityPage.module.css'
 
 const ACTIVITY_ICONS = {
-  add: <Plus size={16} />,
-  edit: <Pencil size={16} />,
-  hide: <EyeOff size={16} />,
-  show: <EyeOff size={16} />,
-  delete: <Trash2 size={16} />,
-  restore: <RotateCcw size={16} />,
+  add:     <Plus size={15} />,
+  edit:    <Pencil size={15} />,
+  hide:    <EyeOff size={15} />,
+  show:    <Eye size={15} />,
+  delete:  <Trash2 size={15} />,
+  restore: <RotateCcw size={15} />,
 }
 
 function formatFullTime(iso) {
@@ -41,16 +41,15 @@ export default function ActivityPage() {
     setLoading(false)
   }, [])
 
-  useEffect(() => {
-    fetchActivity()
-  }, [fetchActivity])
+  useEffect(() => { fetchActivity() }, [fetchActivity])
 
   return (
     <div className={styles.page}>
       <button className={styles.backBtn} onClick={() => navigate('/admin')}>
-        <ArrowLeft size={20} /> Inicio
+        <ArrowLeft size={16} /> Inicio
       </button>
 
+      <span className={styles.headingLabel}>Historial</span>
       <h1 className={styles.heading}>Todos los movimientos</h1>
 
       {loading ? (
@@ -62,11 +61,13 @@ export default function ActivityPage() {
           {activityData.map((entry) => (
             <div key={entry.id} className={styles.item}>
               <div className={`${styles.icon} ${styles[`icon_${entry.type}`]}`}>
-                {ACTIVITY_ICONS[entry.type] || <Pencil size={16} />}
+                {ACTIVITY_ICONS[entry.type] || <Pencil size={15} />}
               </div>
-              <div className={styles.text}>
-                <span className={styles.action}>{entry.action}</span>
-                <span className={styles.target}> {entry.target}</span>
+              <div className={styles.body}>
+                <span className={styles.text}>
+                  {entry.action}
+                  <span className={styles.target}> {entry.target}</span>
+                </span>
               </div>
               <div className={styles.time}>{formatFullTime(entry.time)}</div>
             </div>

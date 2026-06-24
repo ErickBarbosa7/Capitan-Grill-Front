@@ -200,3 +200,10 @@
     padding-bottom: 6rem; /* Espacio para la barra inferior en móvil */
   }
 }
+
+@media (max-width: 480px) {
+  .main {
+    padding: 1rem;
+    padding-bottom: 6rem;
+  }
+}

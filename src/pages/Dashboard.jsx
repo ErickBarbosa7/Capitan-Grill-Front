@@ -91,16 +91,26 @@ export default function Dashboard() {
 
   const userName = user?.name || 'Erick';
 
+  // Fecha formateada en español
+  const today = new Date();
+  const dateLabel = today.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+  const dateFormatted = dateLabel.charAt(0).toUpperCase() + dateLabel.slice(1);
+
   if (loading) return <Loading />
 
   return (
     <div className={styles.page}>
       
-      {/* ─── ENCABEZADO PERSONALIZADO Y ACCIONES RÁPIDAS ─── */}
+      {/* ─── ENCABEZADO EDITORIAL ─── */}
       <header className={styles.headerSection}>
         <div className={styles.greetingBox}>
-          <span className={styles.preHeading}>{greeting}, {userName}</span>
-          <h1 className={styles.heading}>¿Qué hacemos hoy?</h1>
+          <span className={styles.dateLabel}>{dateFormatted}</span>
+          <h1 className={styles.heading}>
+            {greeting}, <span className={styles.headingName}>{userName}</span>
+          </h1>
+          <p className={styles.headingSub}>
+            Tu menú se vio <strong>{menuViews}</strong> veces ayer. Aquí está el resumen.
+          </p>
         </div>
 
         <div className={styles.quickActions}>
