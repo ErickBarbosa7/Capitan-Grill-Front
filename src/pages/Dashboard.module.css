@@ -2,57 +2,16 @@
   max-width: 1000px;
 }
 
-/* ─── TARJETAS DE MÉTRICAS (KPIs) ─── */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.25rem;
-  margin-bottom: 2.5rem;
-}
-
-.card {
-  background: #FFFFFF;
-  border: 1px solid var(--border-light, #E6E2D8);
-  border-radius: 16px;
-  padding: 1.5rem 1.75rem;
-  text-align: left;
-}
-
-.cardValue {
-  font-family: var(--font-heading, 'Bricolage Grotesque');
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: var(--text-primary, #2C2A29);
-  margin-bottom: 0.4rem;
-  line-height: 1;
-}
-
-.cardValueRed {
-  color: #DC2626;
-  font-weight: 600;
-}
-
-.cardLabel {
-  font-family: var(--font-body, 'Inter');
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #8A8680;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
+/* ─── ENCABEZADO ─── */
 .headerSection {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
   flex-wrap: wrap;
   gap: 1.5rem;
   border-bottom: 1px solid var(--border-light, #E6E2D8);
-  padding-bottom: 2.5rem;
+  padding-bottom: 2rem;
 }
 
 .greetingBox {
@@ -93,7 +52,7 @@
   margin: 0;
 }
 
-/* ─── BOTONERA (QUICK ACTIONS) ─── */
+/* ─── QUICK ACTIONS ─── */
 .quickActions {
   display: flex;
   gap: 0.85rem;
@@ -107,7 +66,7 @@
   padding: 0.75rem 1.25rem;
   background: transparent;
   border: 1px solid rgba(44, 42, 41, 0.15);
-  border-radius: 50px; /* Diseño Píldora */
+  border-radius: 50px;
   font-family: var(--font-body, 'Inter');
   font-size: 0.85rem;
   font-weight: 500;
@@ -122,7 +81,6 @@
   color: #A0522D;
 }
 
-/* Botón Destacado (Agregar Platillo) */
 .primaryBtn {
   background: #1A1918;
   border-color: #1A1918;
@@ -132,72 +90,253 @@
 .primaryBtn:hover {
   background: #2C2A29;
   border-color: #2C2A29;
-  color: #C9A87C; /* El icono y texto se vuelven dorados al hacer hover */
+  color: #C9A87C;
 }
 
-/* ─── CONTENEDORES DE GRÁFICOS ─── */
+/* ─── FILA 1: KPIs ─── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light, #E6E2D8);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+}
+
+.cardContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1rem;
+  height: 100%;
+}
+
+.cardLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1;
+}
+
+.cardLabel {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8A8680;
+  margin: 0;
+}
+
+.cardValue {
+  font-family: var(--font-heading, 'Bricolage Grotesque');
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary, #2C2A29);
+  margin: 0.1rem 0;
+  line-height: 1;
+}
+
+.cardValueRed {
+  color: #DC2626;
+}
+
+.cardTrend {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.72rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.cardBarWrap {
+  width: 6px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.cardBar {
+  width: 100%;
+  border-radius: 3px;
+  min-height: 4px;
+  transition: height 0.4s ease;
+}
+
+/* ─── FILA 2: GRÁFICOS ─── */
 .charts {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
 }
 
 .chartCard {
-  background: #FFFFFF; /* Fondo puramente blanco para resaltar sobre el crema */
+  background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.04);
   border-radius: 16px;
-  padding: 1.5rem 1.5rem 0.5rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02); /* Sombra extremadamente suave */
+  padding: 1.25rem 1.25rem 0.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+}
+
+.chartHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 .chartTitle {
   font-family: var(--font-body, 'Inter');
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-primary, #2C2A29);
-  margin-bottom: 1.5rem;
+  margin: 0;
 }
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 800px) {
-  .headerSection {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .heading {
-    font-size: 2.2rem;
-  }
-
-  .charts {
-    grid-template-columns: 1fr;
-  }
+.chartBadge {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  background: rgba(201, 168, 124, 0.1);
+  color: #C9A87C;
 }
 
-@media (max-width: 480px) {
-  .cards {
-    grid-template-columns: 1fr 1fr;
-  }
+/* ─── TASA DE DISPONIBILIDAD ─── */
+.rateCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  text-align: center;
 }
 
-/* ─── ACTIVIDAD RECIENTE (ÚLTIMOS MOVIMIENTOS) ─── */
+.rateValue {
+  font-family: var(--font-heading, 'Bricolage Grotesque');
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--text-primary, #2C2A29);
+  margin: 0;
+  line-height: 1;
+}
+
+.rateSub {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.85rem;
+  color: #8A8680;
+  margin: 0.5rem 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rateBar {
+  width: 100%;
+  max-width: 200px;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.rateBarFill {
+  height: 100%;
+  border-radius: 4px;
+  background: #3A5A40;
+  transition: width 0.5s ease;
+}
+
+.rateTrend {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.78rem;
+  color: #3A5A40;
+  margin: 0.75rem 0 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+}
+
+.rateActions {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.rateBtnOutline {
+  flex: 1;
+  padding: 0.5rem 0.8rem;
+  background: transparent;
+  border: 1px solid rgba(44, 42, 41, 0.15);
+  border-radius: 50px;
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-primary, #2C2A29);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rateBtnOutline:hover {
+  border-color: #C9A87C;
+  color: #A0522D;
+}
+
+.rateBtnPrimary {
+  flex: 1;
+  padding: 0.5rem 0.8rem;
+  background: #1A1918;
+  border: 1px solid #1A1918;
+  border-radius: 50px;
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #F7F5F0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rateBtnPrimary:hover {
+  background: #2C2A29;
+  color: #C9A87C;
+}
+
+/* ─── FILA 3: TABLA + DESGLOSE ─── */
+.bottomGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
 .activitySection {
-  margin-top: 3.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 
 .activityHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .sectionHeading {
   font-family: var(--font-serif, 'Playfair Display');
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   font-style: italic;
   font-weight: 600;
   color: var(--text-primary, #2C2A29);
@@ -208,13 +347,13 @@
 .seeAllBtn {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
+  gap: 0.3rem;
+  padding: 0.4rem 0.85rem;
   background: transparent;
   border: 1px solid rgba(44, 42, 41, 0.15);
   border-radius: 50px;
   font-family: var(--font-body, 'Inter');
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--text-primary, #2C2A29);
   cursor: pointer;
@@ -227,32 +366,32 @@
   color: #A0522D;
 }
 
-.activityList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-}
-
-.activityItem {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  padding: 1rem 1.25rem;
+.activityTable {
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.04);
-  border-radius: 16px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.015);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 14px;
+  overflow: hidden;
 }
 
-.activityItem:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+.activityRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  transition: background 0.15s;
+}
+
+.activityRow:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.activityRow:hover {
+  background: rgba(201, 168, 124, 0.03);
 }
 
 .activityIcon {
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -260,17 +399,17 @@
   flex-shrink: 0;
 }
 
-/* Colores condicionales según el tipo de movimiento */
-.icon_edit { background: rgba(201, 168, 124, 0.12); color: #C9A87C; } /* Dorado */
-.icon_add { background: rgba(58, 90, 64, 0.1); color: #3A5A40; } /* Verde */
-.icon_hide { background: rgba(44, 42, 41, 0.06); color: #8A8680; } /* Gris */
-.icon_delete { background: rgba(220, 38, 38, 0.08); color: #DC2626; } /* Rojo */
+.icon_edit { background: rgba(201, 168, 124, 0.12); color: #C9A87C; }
+.icon_add { background: rgba(58, 90, 64, 0.1); color: #3A5A40; }
+.icon_hide { background: rgba(44, 42, 41, 0.06); color: #8A8680; }
+.icon_delete { background: rgba(220, 38, 38, 0.08); color: #DC2626; }
 
 .activityText {
   flex: 1;
   font-family: var(--font-body, 'Inter');
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #5E5A56;
+  min-width: 0;
 }
 
 .activityTarget {
@@ -278,38 +417,142 @@
   font-style: italic;
   font-weight: 700;
   color: var(--text-primary, #2C2A29);
-  font-size: 1rem;
+  font-size: 0.92rem;
 }
 
 .activityTime {
   font-family: var(--font-body, 'Inter');
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 500;
   color: #8A8680;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .emptyActivity {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-secondary);
   text-align: center;
   padding: 2rem 1rem;
 }
 
-/* Responsive ajustes */
-@media (max-width: 600px) {
-  .activityItem {
-    padding: 1rem;
-    gap: 1rem;
-    flex-wrap: wrap; /* Permite que la hora pase abajo en pantallas muy pequeñas */
+/* ─── DESGLOSE POR CATEGORÍA ─── */
+.breakdownSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.breakdownList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.breakdownItem {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.breakdownTop {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.6rem;
+}
+
+.breakdownIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.breakdownCat {
+  font-family: var(--font-serif, 'Playfair Display');
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--text-primary, #2C2A29);
+  flex: 1;
+}
+
+.breakdownCount {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary, #2C2A29);
+}
+
+.breakdownBar {
+  position: relative;
+  height: 22px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.breakdownBarFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.breakdownPct {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .charts {
+    grid-template-columns: 1fr;
+  }
+
+  .bottomGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .headerSection {
+    flex-direction: column;
+    align-items: flex-start;
   }
   
-  .activityTime {
-    width: 100%;
-    text-align: right;
-    margin-top: -0.5rem;
+  .heading {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .cardValue {
+    font-size: 1.6rem;
   }
 }

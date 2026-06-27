@@ -1,60 +1,14 @@
-.layout {
-  min-height: 100vh;
+/* ─── LAYOUT MÓVIL CON TABS ─── */
+/* Este layout solo se usa en móvil. Desktop va directo a CustomerLanding. */
+
+.mobileView {
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-primary);
+  background: var(--bg-primary);
 }
 
 .content {
   flex: 1;
-  padding-bottom: calc(64px + env(safe-area-inset-bottom));
-}
-
-.nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background-color: var(--bg-card);
-  border-top: 1px solid var(--border-light);
-  display: flex;
-  justify-content: space-around;
-  padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
-}
-
-.tab {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.4rem 0;
-  color: var(--text-secondary);
-  transition: color 0.2s ease;
-}
-
-.tab.active {
-  color: var(--capitan-wood);
-}
-
-.icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.icon svg {
-  width: 22px;
-  height: 22px;
-}
-
-.label {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  padding-bottom: calc(60px + env(safe-area-inset-bottom));
 }

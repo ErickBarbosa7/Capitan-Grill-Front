@@ -1,12 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import CustomerLayout from './layouts/CustomerLayout'
 import AdminLayout from './layouts/AdminLayout'
 import ProtectedRoute from './components/admin/ProtectedRoute'
 
-import LandingPage from './pages/LandingPage'
-import MenuTab from './components/MenuTab/MenuTab'
-import InfoTab from './components/InfoTab/InfoTab'
-import SocialTab from './components/SocialTab/SocialTab'
+import CustomerLanding from './pages/CustomerLanding'
 
 import LoginPage from './pages/LoginPage'
 import Dashboard from './pages/Dashboard'
@@ -18,13 +14,7 @@ import ActivityPage from './pages/ActivityPage'
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
-
-      <Route element={<CustomerLayout />}>
-        <Route path="menu" element={<MenuTab />} />
-        <Route path="info" element={<InfoTab />} />
-        <Route path="social" element={<SocialTab />} />
-      </Route>
+      <Route path="/" element={<CustomerLanding />} />
 
       <Route path="login" element={<LoginPage />} />
 
@@ -40,10 +30,7 @@ export default function AppRoutes() {
         <Route path="menu" element={<MenuTable />} />
         <Route path="menu/nuevo" element={<EditItemPage />} />
         <Route path="menu/editar/:code" element={<EditItemPage />} />
-        <Route
-          path="inventory"
-          element={<h1>Inventario — Próximamente</h1>}
-        />
+        <Route path="inventory" element={<h1>Inventario — Próximamente</h1>} />
         <Route path="categorias" element={<CategoryManager />} />
         <Route path="actividad" element={<ActivityPage />} />
       </Route>

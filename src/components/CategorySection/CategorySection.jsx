@@ -1,39 +1,22 @@
 import { useTranslation } from 'react-i18next';
-import { Utensils } from 'lucide-react';
 import MenuItem from '../MenuItem/MenuItem';
 import styles from './CategorySection.module.css';
 
 export default function CategorySection({ category }) {
-  const { t } = useTranslation();
-  const isCortes = category.id === 'cortes-finos';
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+  const catName = lang === 'en' ? (category.nombreEn || category.nombre) : (category.nombreEs || category.nombre);
 
   return (
-    <section className={styles.section}>
-
+    <section className={styles.section} id={`menu-cat-${category.id}`}>
       <div className={styles.catHeader}>
-        <div className={styles.line} />
-        <div className={styles.diamond} />
-        <span className={styles.catLabel}>{category.nombre}</span>
-        <div className={styles.diamond} />
-        <div className={styles.line} />
+        <span className={styles.catLabel}>{catName}</span>
       </div>
-
-      {isCortes && (
-        <div className={styles.includesBanner}>
-          <Utensils size={14} className={styles.includesIcon} />
-          <span className={styles.includesText}>
-            {t('menu.includesBanner', 'Todos los cortes incluyen')}{' '}
-            <strong>{t('menu.includesItems', 'tortillas y salsa')}</strong>
-          </span>
-        </div>
-      )}
-
       <div className={styles.items}>
-        {category.items.map((item) => (
+        {category.items.filter(i => i.disponible !== false).map((item) => (
           <MenuItem key={item.id} item={item} />
         ))}
       </div>
-
     </section>
   );
 }

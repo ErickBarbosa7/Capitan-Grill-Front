@@ -3,18 +3,19 @@ import styles from './MenuItem.module.css';
 
 export default function MenuItem({ item }) {
   const { t } = useTranslation();
+  const name = item.nombreEs || item.nombre;
+  const desc = item.descripcionEs || item.descripcion;
 
   return (
     <div className={`${styles.row} ${!item.disponible ? styles.soldOut : ''}`}>
-      <div className={styles.left}>
-        <p className={styles.name}>{item.nombre}</p>
-        <p className={styles.desc}>{item.descripcion}</p>
-        {!item.disponible && (
-          <span className={styles.badge}>{t('menu.soldOut')}</span>
-        )}
+      <div className={styles.topRow}>
+        <p className={styles.name}>{name}</p>
+        <span className={styles.price}>${item.precio.toFixed(0)}</span>
       </div>
-      <div className={styles.dots} aria-hidden="true" />
-      <span className={styles.price}>${item.precio.toFixed(0)}</span>
+      {desc && <p className={styles.desc}>{desc}</p>}
+      {!item.disponible && (
+        <span className={styles.badge}>{t('menu.soldOut')}</span>
+      )}
     </div>
   );
 }

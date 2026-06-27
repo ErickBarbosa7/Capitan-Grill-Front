@@ -1,99 +1,77 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useMenuContext } from '../../contexts/MenuContext';
-import MenuSkeleton from '../MenuSkeleton/MenuSkeleton';
+import { useMenu } from '../../hooks/useMenu';
 import CategorySection from '../CategorySection/CategorySection';
-import { incrementMenuView } from '../../services/menuService';
-import logo from '../../assets/logo/logo.png';
 import styles from './MenuTab.module.css';
 
 export default function MenuTab() {
   const { t, i18n } = useTranslation();
-  const { categories, loading, refetch } = useMenuContext();
-  const [activeCategoryId, setActiveCategoryId] = useState();
+  const { categories } = useMenu();
+  const [activeCategoryId, setActiveCategoryId] = useState(null);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
 
   useEffect(() => {
     if (categories.length > 0 && !activeCategoryId) {
-      setActiveCategoryId(categories[0].id);
+      setActiveCategoryId(categories[0]?.id);
     }
   }, [categories, activeCategoryId]);
 
   useEffect(() => {
-    const counted = sessionStorage.getItem('capitan_menu_viewed');
-    if (!counted) {
-      incrementMenuView().catch(() => {});
-      sessionStorage.setItem('capitan_menu_viewed', '1');
-    }
+    const check = () => setIsDesktop(window.innerWidth >= 1024);
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
   }, []);
-
-  useEffect(() => {
-    const channel = new BroadcastChannel('capitan_menu');
-    let lastRefetch = 0;
-    channel.onmessage = () => {
-      const now = Date.now();
-      if (now - lastRefetch > 2000) {
-        lastRefetch = now;
-        refetch();
-      }
-    };
-    return () => channel.close();
-  }, [refetch]);
-
-  if (loading) return <MenuSkeleton />
 
   const activeCategory = categories.find((c) => c.id === activeCategoryId);
 
   const toggleLang = () => {
-    const next = i18n.language === 'es' ? 'en' : 'es';
-    i18n.changeLanguage(next);
+    i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
+  };
+
+  const scrollToCategory = (catId) => {
+    setActiveCategoryId(catId);
+    if (isDesktop) {
+      document.getElementById(`menu-cat-${catId}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   return (
     <div className={styles.wrapper}>
-
-      {/* Hero oscuro con logo */}
       <header className={styles.hero}>
-        <button className={styles.langToggle} onClick={toggleLang} aria-label="Cambiar idioma">
+        <button className={styles.langToggle} onClick={toggleLang}>
           <span className={`${styles.lang} ${i18n.language === 'es' ? styles.activeLang : ''}`}>ES</span>
           <span className={styles.separator}>/</span>
           <span className={`${styles.lang} ${i18n.language === 'en' ? styles.activeLang : ''}`}>EN</span>
         </button>
-        <img src={logo} alt="Capitán Grill" className={styles.logo} />
+        <h1 className={styles.heroName}>Capitán Grill</h1>
+        <span className={styles.heroEyebrow}>Meat Boutique</span>
       </header>
 
-      {/* Chipbar sticky */}
       <nav className={styles.chipBar}>
         <h2 className={styles.menuTitle}>{t('menu.title')}</h2>
         <div className={styles.chips}>
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              className={`${styles.chip} ${activeCategoryId === cat.id ? styles.activeChip : ''}`}
-              onClick={() => setActiveCategoryId(cat.id)}
-            >
-              {cat.nombre}
-            </button>
-          ))}
+          {categories.map((cat) => {
+            const lang = i18n.language;
+            const catName = lang === 'en' ? (cat.nombreEn || cat.nombre) : (cat.nombreEs || cat.nombre);
+            return (
+              <button
+                key={cat.id}
+                className={`${styles.chip} ${activeCategoryId === cat.id ? styles.activeChip : ''}`}
+                onClick={() => scrollToCategory(cat.id)}
+              >
+                {catName}
+              </button>
+            );
+          })}
         </div>
       </nav>
 
       <main className={styles.main}>
-        {/* Banner Promocional del Gancho Comercial */}
-        <div className={styles.promoBanner}>
-          <h2 className={styles.promoTitle}>
-            {categories.find(c => c.id === 'cortes')?.nombre || 'Cortes'} <span className={styles.promoPrice}>$190</span>
-          </h2>
-          <p className={styles.promoSubtitle}>
-            {t('menu.includesBanner')} <strong>{t('menu.includesItems')}</strong>
-          </p>
-        </div>
-
-        {/* Categoría Activa */}
-        {activeCategory && (
-          <CategorySection key={activeCategory.id} category={activeCategory} />
-        )}
+        {isDesktop
+          ? categories.map((cat) => <CategorySection key={cat.id} category={cat} />)
+          : activeCategory && <CategorySection key={activeCategory.id} category={activeCategory} />
+        }
       </main>
-
     </div>
   );
 }

@@ -574,6 +574,119 @@
   cursor: not-allowed;
 }
 
+/* ─── MODAL DE DETALLE ─── */
+.detailCard {
+  background: #FFFFFF;
+  border-radius: 20px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.detailClose {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.detailClose:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.detailImageWrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.detailImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.detailImagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: #F0EDE6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8A8680;
+}
+
+.detailBody {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.detailTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.detailName {
+  font-family: var(--font-serif, 'Playfair Display');
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--text-primary, #2C2A29);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.detailDesc {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.88rem;
+  color: #6B7280;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.detailMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+}
+
+.detailPrice {
+  font-family: var(--font-body, 'Inter');
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary, #2C2A29);
+  white-space: nowrap;
+}
+
+.detailActions {
+  display: flex;
+  gap: 0.65rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-light, #E6E2D8);
+}
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 768px) {
   .header {

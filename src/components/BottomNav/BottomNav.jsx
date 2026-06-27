@@ -3,9 +3,9 @@ import { Menu, Info, Share2 } from 'lucide-react';
 import styles from './BottomNav.module.css';
 
 const icons = {
-  menu: <Menu size={22} />,
-  info: <Info size={22} />,
-  social: <Share2 size={22} />,
+  menu: <Menu size={20} />,
+  info: <Info size={20} />,
+  social: <Share2 size={20} />,
 };
 
 export default function BottomNav({ activeTab, onTabChange }) {
@@ -30,6 +30,7 @@ export default function BottomNav({ activeTab, onTabChange }) {
               {icons[tab.id]}
             </div>
             <span className={styles.label}>{tab.label}</span>
+            {activeTab === tab.id && <span className={styles.dot} />}
           </button>
         ))}
       </nav>

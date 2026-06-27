@@ -1,68 +1,76 @@
+/* ─── FILA DE PLATILLO ─── */
 .row {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding: 0.7rem 0;
-  border-bottom: 1px dashed var(--border-light);
-  gap: 0.5rem;
+  flex-direction: column;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-light);
+  gap: 0.25rem;
+  transition: opacity 0.2s;
 }
 
 .row:last-child {
   border-bottom: none;
 }
 
-.soldOut {
-  opacity: 0.5;
-  filter: grayscale(60%);
-}
-
-.left {
-  flex: 1;
-  min-width: 0;
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
 }
 
 .name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
   color: var(--text-primary);
-  line-height: 1.2;
-  margin: 0 0 0.15rem;
-}
-
-.desc {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-  line-height: 1.35;
+  line-height: 1.25;
   margin: 0;
 }
 
-.dots {
-  flex: 0 0 20px;
-  border-bottom: 2px dotted #C9A87C;
-  opacity: 0.45;
-  margin-bottom: 7px;
-  align-self: flex-end;
+.price {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.price {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--capitan-green);
-  white-space: nowrap;
-  align-self: flex-start;
-  padding-top: 1px;
+.desc {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin: 0;
+  max-width: 88%;
+}
+
+.soldOut {
+  opacity: 0.4;
 }
 
 .badge {
-  display: inline-block;
-  margin-top: 0.3rem;
+  align-self: flex-start;
+  font-family: var(--font-body);
   font-size: 0.65rem;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 600;
   letter-spacing: 0.06em;
-  background: var(--text-secondary);
-  color: #fff;
-  padding: 0.2rem 0.5rem;
+  text-transform: uppercase;
+  background: var(--border-light);
+  color: var(--text-secondary);
+  padding: 0.2rem 0.55rem;
   border-radius: 4px;
+  margin-top: 0.15rem;
+}
+
+/* ─── DESKTOP: sin cambios visuales extra, el layout lo maneja CategorySection ─── */
+@media (min-width: 1024px) {
+  .row {
+    padding: 0.85rem 0;
+  }
+
+  .name {
+    font-size: 1rem;
+  }
 }

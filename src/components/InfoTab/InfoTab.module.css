@@ -4,58 +4,79 @@
   max-width: 600px;
   margin: 0 auto;
   width: 100%;
-  padding-bottom: 1.5rem;
+  padding-bottom: 5.5rem;
 }
 
-/* ── Hero oscuro ── */
+/* ── Hero header (como MenuTab) ── */
 .hero {
-  background: #2C2A29;
-  padding: 1.5rem 1rem 1.25rem;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
-}
-
-.logo {
-  width: 82px;
-  height: 82px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #C9A87C;
-  display: block;
+  justify-content: center;
+  height: 120px;
+  max-height: 120px;
+  background: #1A1918;
+  gap: 0.2rem;
 }
 
 .heroName {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-serif, 'Playfair Display');
   font-size: 1.3rem;
+  font-weight: 600;
+  font-style: italic;
   color: #F7F5F0;
   letter-spacing: 0.01em;
+  margin: 0;
+  line-height: 1.2;
 }
 
-.heroPills {
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.pill {
+.heroEyebrow {
+  font-family: var(--font-body);
   font-size: 0.6rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #C9A87C;
-  border: 1px solid rgba(201, 168, 124, 0.35);
-  border-radius: 20px;
-  padding: 0.25rem 0.65rem;
   font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
+
+.langToggle {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: transparent;
+  border: 1px solid rgba(247, 245, 240, 0.2);
+  padding: 0.3rem 0.65rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: rgba(247, 245, 240, 0.6);
+  transition: border-color 0.2s;
+}
+
+.langToggle:hover {
+  border-color: var(--gold);
+}
+
+.lang { transition: color 0.2s; }
+
+.activeLang {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.separator { color: rgba(247, 245, 240, 0.3); }
 
 .collageWrap {
   padding: 1.1rem 1rem 0;
 }
 
 .collageLabel {
+  font-family: var(--font-heading);
   font-size: 0.55rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -282,6 +303,7 @@
 }
 
 .ornLabel {
+  font-family: var(--font-heading);
   font-size: 0.55rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;

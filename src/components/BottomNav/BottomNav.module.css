@@ -7,20 +7,20 @@
   display: flex;
   justify-content: center;
   z-index: 100;
-  pointer-events: none; /* Permite clics fuera de los 600px */
+  pointer-events: none;
 }
 
 /* ── Barra de Navegación ── */
 .nav {
   pointer-events: auto;
   width: 100%;
-  max-width: 600px; /* Consistencia con el resto de la app */
-  background-color: var(--bg-card, #FFFFFF);
-  border-top: 1px solid var(--border-light);
+  max-width: 600px;
+  background: #FFFFFF;
+  border-top: 1px solid rgba(201, 168, 124, 0.2);
   display: flex;
   justify-content: space-around;
-  padding: 0.4rem 0 calc(0.4rem + env(safe-area-inset-bottom));
-  box-shadow: 0 -4px 20px rgba(44, 42, 41, 0.04); /* Sombra suave */
+  padding: 0.35rem 0 calc(0.35rem + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 20px rgba(44, 42, 41, 0.04);
 }
 
 /* ── Botón individual ── */
@@ -29,49 +29,44 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.15rem;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0.25rem 0;
   color: var(--text-secondary);
-  -webkit-tap-highlight-color: transparent; /* Quita el destello azul en móviles */
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* ── Contenedor del ícono (Para el efecto Pill) ── */
+/* ── Contenedor del ícono ── */
 .iconWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 32px;
-  border-radius: 16px;
+  width: 44px;
+  height: 28px;
+  border-radius: 14px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tab:active .iconWrapper {
-  transform: scale(0.9); /* Micro-interacción al tocar */
+  transform: scale(0.9);
 }
 
-/* ── Estados Activos ── */
-.tab.active {
-  color: var(--capitan-wood);
+/* ── Indicador de tab activa (puntito dorado) ── */
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
 }
 
-.tab.active .iconWrapper {
-  background-color: rgba(160, 82, 45, 0.12); /* 12% de --capitan-wood */
-  color: var(--capitan-wood);
-}
-
-/* ── Etiqueta de texto ── */
+/* ── Etiqueta de texto (siempre el mismo color) ── */
 .label {
   font-family: var(--font-body);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  transition: font-weight 0.2s ease;
-}
-
-.tab.active .label {
-  font-weight: 700;
+  color: var(--text-secondary);
 }

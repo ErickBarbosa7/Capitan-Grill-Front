@@ -4,58 +4,94 @@
   background-color: var(--bg-primary, #F7F5F0);
 }
 
-/* ─── SIDEBAR ─── */
+/* ═══════════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════════ */
 .sidebar {
-  width: 260px; /* Un poco más ancho para dar respiro editorial */
-  background-color: #1A1918; /* Carbón profundo, más elegante que el gris oscuro */
+  width: 248px;
+  background: #141312;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   position: sticky;
   top: 0;
   height: 100vh;
-  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  /* Separador derecho sutilísimo */
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.04);
 }
 
-/* ─── BRAND (LOGO Y TÍTULO) ─── */
+/* ─── BRAND ─── */
 .sidebarBrand {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 2.5rem 1.5rem 2rem; /* Más espacio en la parte superior */
+  gap: 0.85rem;
+  padding: 1.75rem 1.5rem 1.5rem;
+  flex-shrink: 0;
 }
 
 .sidebarLogoImg {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
   object-fit: cover;
-  border: 1px solid rgba(201, 168, 124, 0.3); /* Borde sutil dorado */
+  border: 1px solid rgba(201, 168, 124, 0.25);
+  flex-shrink: 0;
 }
 
 .sidebarBrandText {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 0.1rem;
+  min-width: 0;
 }
 
 .sidebarTitle {
   font-family: var(--font-serif, 'Playfair Display');
-  font-size: 1.3rem;
-  font-style: italic; /* El toque editorial clave */
+  font-size: 1.05rem;
+  font-style: italic;
   font-weight: 600;
   color: #F7F5F0;
   line-height: 1.1;
-  margin-bottom: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sidebarSubtitle {
   font-family: var(--font-body, 'Inter');
-  font-size: 0.65rem;
+  font-size: 0.58rem;
   font-weight: 600;
-  color: #8A8680; /* Gris cálido apagado */
-  letter-spacing: 0.15em;
+  color: rgba(138, 134, 128, 0.6);
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ─── DIVISOR ─── */
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 0 1.5rem;
+  flex-shrink: 0;
+}
+
+/* ─── SECCIÓN NAV ─── */
+.navSection {
+  padding: 1.25rem 0.875rem 0.5rem;
+  flex-shrink: 0;
+}
+
+.navSectionLabel {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: rgba(138, 134, 128, 0.45);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0 0.625rem;
+  display: block;
+  margin-bottom: 0.4rem;
 }
 
 /* ─── NAVEGACIÓN ─── */
@@ -63,147 +99,218 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 0 1rem; /* Padding horizontal para que la píldora no toque los bordes */
-  gap: 0.4rem;
+  padding: 0 0.875rem;
+  gap: 0.2rem;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
+
+.sidebarNav::-webkit-scrollbar { display: none; }
 
 .sidebarLink {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.8rem 1rem;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
   background: transparent;
   border: none;
-  border-radius: 12px; /* Diseño tipo píldora */
-  color: #8A8680;
+  border-radius: 10px;
+  color: rgba(138, 134, 128, 0.8);
   font-family: var(--font-body, 'Inter');
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.15s, background 0.15s;
   text-align: left;
   width: 100%;
+  position: relative;
 }
 
 .sidebarLink:hover {
-  color: #F7F5F0;
-  background-color: rgba(247, 245, 240, 0.05);
+  color: rgba(247, 245, 240, 0.85);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .sidebarLinkActive {
-  color: #C9A87C; /* Texto dorado */
-  background-color: rgba(201, 168, 124, 0.12); /* Fondo píldora dorado sutil */
+  color: #F7F5F0;
+  background: rgba(201, 168, 124, 0.13);
   font-weight: 600;
+}
+
+.sidebarLinkActive:hover {
+  background: rgba(201, 168, 124, 0.17);
 }
 
 .sidebarLinkIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* El color del ícono hereda el color del texto (dorado si activo, gris si inactivo) */
-  color: inherit; 
+  color: inherit;
+  flex-shrink: 0;
+  width: 18px;
 }
 
-/* ─── FOOTER (CERRAR SESIÓN) ─── */
+.sidebarLinkActive .sidebarLinkIcon {
+  color: var(--gold, #C9A87C);
+}
+
+.sidebarLinkLabel {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Indicador activo — línea dorada izquierda */
+.sidebarLinkActive::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 25%;
+  height: 50%;
+  width: 2px;
+  background: var(--gold, #C9A87C);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Badge (ej: "IA") */
+.linkBadge {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: var(--gold, #C9A87C);
+  color: #1A1918;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* ─── FOOTER ─── */
 .sidebarFooter {
-  padding: 1.5rem 1rem;
-  margin-top: auto;
+  padding: 0.875rem;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Link "Ver menú público" */
+.viewPublicBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: rgba(138, 134, 128, 0.65);
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+  text-align: left;
+  width: 100%;
+  text-decoration: none;
+}
+
+.viewPublicBtn:hover {
+  color: rgba(247, 245, 240, 0.7);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .logoutBtn {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.8rem 1rem;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
   width: 100%;
   background: transparent;
   border: none;
-  border-radius: 12px;
-  color: #8A8680;
+  border-radius: 10px;
+  color: rgba(138, 134, 128, 0.65);
   font-family: var(--font-body, 'Inter');
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.15s, background 0.15s;
 }
 
 .logoutBtn:hover {
   color: #E85D5D;
-  background-color: rgba(232, 93, 93, 0.1);
+  background: rgba(232, 93, 93, 0.08);
 }
 
-/* ─── MAIN CONTENT ─── */
+/* ═══════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════ */
 .main {
   flex: 1;
-  padding: 2.5rem 3rem; /* Respiración para el panel central */
+  padding: 2.5rem 3rem;
   min-width: 0;
+  overflow-y: auto;
 }
 
-/* ─── RESPONSIVE (MÓVIL) ─── */
+/* ═══════════════════════════════════════
+   RESPONSIVE MÓVIL
+═══════════════════════════════════════ */
 @media (max-width: 768px) {
-  .layout {
-    flex-direction: column;
-  }
+  .layout { flex-direction: column; }
 
   .sidebar {
     width: 100%;
     height: auto;
-    position: sticky;
-    bottom: 0; /* Mover barra al fondo en móviles suele ser mejor UX */
+    position: fixed;
+    bottom: 0;
     top: auto;
+    left: 0;
+    right: 0;
     flex-direction: row;
     align-items: center;
-    padding: 0.5rem 1rem;
-    gap: 0.5rem;
-    z-index: 50;
+    padding: 0.4rem 0.5rem calc(0.4rem + env(safe-area-inset-bottom));
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.05);
+    z-index: 100;
   }
 
-  .sidebarBrand {
-    display: none; /* Ocultamos la marca en móvil para dar espacio a los iconos */
-  }
+  .sidebarBrand,
+  .divider,
+  .navSection,
+  .viewPublicBtn,
+  .sidebarFooter { display: none; }
 
   .sidebarNav {
     flex: 1;
     flex-direction: row;
     justify-content: space-around;
     padding: 0;
+    gap: 0;
+    overflow: visible;
   }
 
   .sidebarLink {
-    padding: 0.75rem;
+    flex-direction: column;
     justify-content: center;
+    gap: 0.25rem;
+    padding: 0.5rem;
     width: auto;
-    border-radius: 50%; /* Iconos circulares en móvil */
+    flex: 1;
+    border-radius: 10px;
+    font-size: 0.6rem;
   }
 
-  .sidebarLinkLabel {
-    display: none;
+  .sidebarLinkActive::before { display: none; }
+
+  .sidebarLinkActive {
+    background: rgba(201, 168, 124, 0.12);
   }
 
-  .sidebarFooter {
-    padding: 0;
-    margin: 0;
-  }
-
-  .logoutBtn {
-    padding: 0.75rem;
-    width: auto;
-    border-radius: 50%;
-  }
-
-  .logoutBtn span {
-    display: none;
-  }
+  .sidebarLinkLabel { font-size: 0.6rem; }
+  .linkBadge { display: none; }
 
   .main {
-    padding: 1.5rem;
-    padding-bottom: 6rem; /* Espacio para la barra inferior en móvil */
-  }
-}
-
-@media (max-width: 480px) {
-  .main {
-    padding: 1rem;
-    padding-bottom: 6rem;
+    padding: 1.25rem;
+    padding-bottom: calc(70px + env(safe-area-inset-bottom));
   }
 }

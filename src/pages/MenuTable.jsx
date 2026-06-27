@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { useMenuContext } from '../contexts/MenuContext'
 import Loading from '../components/Loading'
 import CategoryDropdown from '../components/admin/CategoryDropdown'
-import { Pencil, Trash2, Plus, Search, Eye, EyeOff, RotateCcw, XCircle, LayoutGrid, Table2, Camera } from 'lucide-react'
+import { Pencil, Trash2, Plus, Search, Eye, EyeOff, RotateCcw, XCircle, LayoutGrid, Table2, Camera, X } from 'lucide-react'
 import styles from './MenuTable.module.css'
 
 export default function MenuTable() {
@@ -12,6 +12,7 @@ export default function MenuTable() {
   const { categories, loading, deleteItem, toggleAvailability, restoreItem, hardDeleteItem } = useMenuContext()
 
   const [deleting, setDeleting] = useState(null)
+  const [detailItem, setDetailItem] = useState(null)
   const [saving, setSaving] = useState(false)
   const [search, setSearch] = useState('')
   const [filterCat, setFilterCat] = useState('')
@@ -206,7 +207,7 @@ export default function MenuTable() {
                     : `${styles.tr} ${styles.trDisabled}`
                 const thumb = item.images?.[0]?.url
                 return (
-                  <tr key={item.id} className={rowClass}>
+                  <tr key={item.id} className={rowClass} onClick={() => setDetailItem(item)} style={{ cursor: 'pointer' }}>
                     <td className={styles.td}>
                       {thumb ? (
                         <img src={thumb} alt="" className={styles.thumb} />
@@ -242,7 +243,7 @@ export default function MenuTable() {
                         </span>
                       )}
                     </td>
-                    <td className={styles.td}>
+                    <td className={styles.td} onClick={(e) => e.stopPropagation()}>
                       <div className={styles.actions}>
                         {isDeleted ? (
                           <>
@@ -306,7 +307,7 @@ export default function MenuTable() {
                 : `${styles.card} ${styles.cardDisabled}`
             const thumb = item.images?.[0]?.url
             return (
-              <div key={item.id} className={cardClass}>
+              <div key={item.id} className={cardClass} onClick={() => setDetailItem(item)} style={{ cursor: 'pointer' }}>
                 {thumb ? (
                   <img src={thumb} alt="" className={styles.cardImage} />
                 ) : (
@@ -332,7 +333,7 @@ export default function MenuTable() {
                       {item.disponible ? 'VISIBLE' : 'OCULTO'}
                     </span>
                   )}
-                  <div className={styles.cardActions}>
+                  <div className={styles.cardActions} onClick={(e) => e.stopPropagation()}>
                     {isDeleted ? (
                       <>
                         <button
@@ -404,6 +405,67 @@ export default function MenuTable() {
               >
                 {saving ? 'Eliminando...' : (deleting.hard ? 'Eliminar permanentemente' : 'Eliminar')}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {detailItem && (
+        <div className={styles.overlay} onClick={() => setDetailItem(null)}>
+          <div className={styles.detailCard} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.detailClose} onClick={() => setDetailItem(null)}>
+              <X size={20} />
+            </button>
+
+            <div className={styles.detailImageWrap}>
+              {detailItem.images?.[0]?.url ? (
+                <img src={detailItem.images[0].url} alt="" className={styles.detailImage} />
+              ) : (
+                <div className={styles.detailImagePlaceholder}>
+                  <Camera size={36} />
+                </div>
+              )}
+            </div>
+
+            <div className={styles.detailBody}>
+              <div className={styles.detailTop}>
+                <span className={styles.cellId}>{detailItem.id}</span>
+                {detailItem.isActive === false ? (
+                  <span className={`${styles.statusPill} ${styles.statusDeleted}`}>ELIMINADO</span>
+                ) : (
+                  <span className={`${styles.statusPill} ${detailItem.disponible ? styles.statusVisible : styles.statusHidden}`}>
+                    <span className={styles.statusDot}>●</span>
+                    {detailItem.disponible ? 'VISIBLE' : 'OCULTO'}
+                  </span>
+                )}
+              </div>
+
+              <h2 className={styles.detailName}>{detailItem.nombre}</h2>
+
+              {detailItem.descripcion && (
+                <p className={styles.detailDesc}>{detailItem.descripcion}</p>
+              )}
+
+              <div className={styles.detailMeta}>
+                <span className={styles.categoryBadge}>{detailItem.categoriaName}</span>
+                <span className={styles.detailPrice}>${detailItem.precio} MXN</span>
+              </div>
+
+              <div className={styles.detailActions}>
+                <button
+                  className={styles.addBtn}
+                  onClick={() => {
+                    setDetailItem(null)
+                    navigate(`/admin/menu/editar/${detailItem.id}`)
+                  }}
+                >
+                  <Pencil size={16} />
+                  Editar producto
+                </button>
+                <button className={styles.cancelBtn} onClick={() => setDetailItem(null)}>
+                  Cerrar
+                </button>
+              </div>
             </div>
           </div>
         </div>
