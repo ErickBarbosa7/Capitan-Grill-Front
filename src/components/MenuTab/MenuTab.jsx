@@ -44,7 +44,7 @@ export default function MenuTab() {
           <span className={`${styles.lang} ${i18n.language === 'en' ? styles.activeLang : ''}`}>EN</span>
         </button>
         <h1 className={styles.heroName}>Capitán Grill</h1>
-        <span className={styles.heroEyebrow}>Meat Boutique</span>
+        <span className={styles.heroEyebrow}>{t('header.subtitle')}</span>
       </header>
 
       <nav className={styles.chipBar}>

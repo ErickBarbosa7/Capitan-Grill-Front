@@ -1,7 +1,7 @@
 {
   "header": {
     "title": "Capitán Grill",
-    "subtitle": "Cortes de carne"
+    "subtitle": "Meat Boutique"
   },
   "hero": {
     "cta": "Ver Menú"
@@ -42,13 +42,19 @@
     "title": "Ubicación",
     "address": "Carretera a Atotonilco Km 2, 37880 San Miguel de Allende, Gto.",
     "phone": "+52 415-158-3036",
+    "phoneLabel": "Teléfono",
     "hours": "Lun - Dom: 6:00 PM - 11:00 PM",
+    "hoursLabel": "Horario",
     "tapToChat": "Escríbenos por WhatsApp",
     "getDirectionsMaps": "Abrir en Maps",
     "getDirectionsWaze": "Abrir en Waze"
   },
   "info": {
     "ourPlace": "Nuestro Lugar",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "close": "Cerrar",
+    "goTo": "Ir al corte {{number}}",
     "cuts": {
       "title": "Nuestros Cortes"
     }
@@ -58,7 +64,9 @@
     "description": "Visítanos en Facebook y escríbenos por WhatsApp para ver fotos, promociones y novedades de Capitán Grill.",
     "networksLabel": "Redes Sociales",
     "follow": "Síguenos",
-    "writeUs": "Escríbenos directo"
+    "writeUs": "Escríbenos directo",
+    "reserveWhatsApp": "Reservar por WhatsApp",
+    "followInstagram": "Síguenos en Instagram"
   },
   "footer": {
     "rights": "Todos los derechos reservados."

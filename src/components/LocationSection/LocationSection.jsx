@@ -53,14 +53,14 @@ export default function LocationSection() {
         <a href="tel:+524151583036" className={styles.infoItem}>
           <Phone size={16} className={styles.infoIcon} />
           <span className={styles.infoText}>
-            <span className={styles.infoLabel}>Teléfono</span>
+            <span className={styles.infoLabel}>{t('location.phoneLabel')}</span>
             {t('location.phone')}
           </span>
         </a>
         <div className={styles.infoItem}>
           <Clock size={16} className={styles.infoIcon} />
           <span className={styles.infoText}>
-            <span className={styles.infoLabel}>Horario</span>
+            <span className={styles.infoLabel}>{t('location.hoursLabel')}</span>
             {t('location.hours')}
           </span>
         </div>

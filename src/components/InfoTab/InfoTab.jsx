@@ -264,7 +264,7 @@ export default function InfoTab() {
           <span className={`${styles.lang} ${i18n.language === 'en' ? styles.activeLang : ''}`}>EN</span>
         </button>
         <h1 className={styles.heroName}>Capitán Grill</h1>
-        <span className={styles.heroEyebrow}>Meat Boutique</span>
+        <span className={styles.heroEyebrow}>{t('header.subtitle')}</span>
       </header>
 
       {/* ── Collage: Nuestro Lugar ── */}
@@ -328,7 +328,7 @@ export default function InfoTab() {
                 <button
                   className={`${styles.cutsArrow} ${styles.cutsArrowLeft}`}
                   onClick={() => scrollToCut(activeCutIndex - 1)}
-                  aria-label="Anterior"
+                  aria-label={t('info.prev', 'Anterior')}
                 >
                   <ChevronLeft size={24} color="#F7F5F0" />
                 </button>
@@ -337,7 +337,7 @@ export default function InfoTab() {
                 <button
                   className={`${styles.cutsArrow} ${styles.cutsArrowRight}`}
                   onClick={() => scrollToCut(activeCutIndex + 1)}
-                  aria-label="Siguiente"
+                  aria-label={t('info.next', 'Siguiente')}
                 >
                   <ChevronRight size={24} color="#F7F5F0" />
                 </button>
@@ -349,7 +349,7 @@ export default function InfoTab() {
                     key={idx}
                     className={`${styles.cutDot} ${idx === activeCutIndex ? styles.cutDotActive : ''}`}
                     onClick={() => scrollToCut(idx)}
-                    aria-label={`Ir al corte ${idx + 1}`}
+                    aria-label={t('info.goTo', 'Ir al corte {{number}}', { number: idx + 1 })}
                   />
                 ))}
               </div>
@@ -363,7 +363,7 @@ export default function InfoTab() {
         <LocationSection />
 
         <div className={cc.contactSocial} style={{ marginTop: '1rem', marginBottom: '0.75rem' }}>
-          <span className={cc.contactSocialLabel}>Síguenos</span>
+          <span className={cc.contactSocialLabel}>{t('social.title')}</span>
           <div className={cc.contactSocialBtns}>
             <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="Facebook"><FbIcon /></a>
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="Instagram"><IgIcon /></a>
@@ -397,7 +397,7 @@ export default function InfoTab() {
           <button
             className={styles.closeButton}
             onClick={handleClose}
-            aria-label="Cerrar"
+            aria-label={t('info.close', 'Cerrar')}
           >
             <X size={26} color="#F7F5F0" />
           </button>

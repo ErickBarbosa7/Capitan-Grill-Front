@@ -102,7 +102,7 @@ export default function SocialTab() {
             className={`${cc.contactBtn} ${cc.contactBtnWa}`}
           >
             <WhatsAppIcon />
-            Reservar por WhatsApp
+            {t('social.reserveWhatsApp')}
             <ExternalLink size={12} style={{ opacity: 0.6 }} />
           </a>
           <a
@@ -112,7 +112,7 @@ export default function SocialTab() {
             className={cc.contactBtn}
           >
             <InstagramIcon />
-            Síguenos en Instagram
+            {t('social.followInstagram')}
             <ExternalLink size={12} style={{ opacity: 0.6 }} />
           </a>
         </div>

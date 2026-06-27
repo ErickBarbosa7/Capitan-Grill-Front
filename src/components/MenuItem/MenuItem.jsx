@@ -2,9 +2,10 @@ import { useTranslation } from 'react-i18next';
 import styles from './MenuItem.module.css';
 
 export default function MenuItem({ item }) {
-  const { t } = useTranslation();
-  const name = item.nombreEs || item.nombre;
-  const desc = item.descripcionEs || item.descripcion;
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+  const name = lang === 'en' ? (item.nombreEn || item.nombre) : (item.nombreEs || item.nombre);
+  const desc = lang === 'en' ? (item.descripcionEn || item.descripcion) : (item.descripcionEs || item.descripcion);
 
   return (
     <div className={`${styles.row} ${!item.disponible ? styles.soldOut : ''}`}>
