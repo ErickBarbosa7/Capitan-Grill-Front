@@ -1,5 +1,5 @@
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
-import { BarChart3, ClipboardList, History, LogOut, ExternalLink, FolderOpen, Sparkles } from 'lucide-react'
+import { BarChart3, ClipboardList, History, LogOut, ExternalLink, FolderOpen, Sparkles, Receipt, User } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 import logoImg from '../assets/logo/logo.png'
 import styles from './AdminLayout.module.css'
@@ -9,6 +9,8 @@ const links = [
   { to: '/admin/menu',      icon: <ClipboardList size={17} />, label: 'Mi Menú' },
   { to: '/admin/categorias',icon: <FolderOpen size={17} />,   label: 'Categorías' },
   { to: '/admin/actividad', icon: <History size={17} />,       label: 'Movimientos' },
+  { to: '/admin/gastos',    icon: <Receipt size={17} />,       label: 'Gastos' },
+  { to: '/admin/perfil',    icon: <User size={17} />,         label: 'Perfil' },
 ]
 
 export default function AdminLayout() {

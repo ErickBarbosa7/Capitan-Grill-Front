@@ -36,8 +36,13 @@ export function AuthProvider({ children }) {
 
   const isAdmin = user?.role === 'admin'
 
+  const setUserData = useCallback((userData) => {
+    localStorage.setItem('capitan_admin', JSON.stringify(userData))
+    setUser(userData)
+  }, [])
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAdmin, error }}>
+    <AuthContext.Provider value={{ user, login, logout, isAdmin, error, setUser: setUserData }}>
       {children}
     </AuthContext.Provider>
   )

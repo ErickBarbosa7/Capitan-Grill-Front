@@ -10,6 +10,8 @@ import MenuTable from './pages/MenuTable'
 import EditItemPage from './pages/EditItemPage'
 import CategoryManager from './pages/CategoryManager'
 import ActivityPage from './pages/ActivityPage'
+import ExpensesPage from './pages/ExpensesPage'
+import ProfilePage from './pages/ProfilePage'
 
 export default function AppRoutes() {
   return (
@@ -33,6 +35,8 @@ export default function AppRoutes() {
         <Route path="inventory" element={<h1>Inventario — Próximamente</h1>} />
         <Route path="categorias" element={<CategoryManager />} />
         <Route path="actividad" element={<ActivityPage />} />
+        <Route path="gastos" element={<ExpensesPage />} />
+        <Route path="perfil" element={<ProfilePage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

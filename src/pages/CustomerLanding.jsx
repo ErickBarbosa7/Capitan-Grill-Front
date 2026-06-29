@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { UtensilsCrossed, MapPin, Phone, Clock, ChevronDown, ExternalLink } from 'lucide-react';
-import cc from '../styles/contact-cards.module.css';
 import MenuTab from '../components/MenuTab/MenuTab';
 import InfoTab from '../components/InfoTab/InfoTab';
 import SocialTab from '../components/SocialTab/SocialTab';
 import BottomNav from '../components/BottomNav/BottomNav';
+import ExperienceCard from '../components/ExperienceCard/ExperienceCard';
 import styles from './CustomerLanding.module.css';
 
 /* ─ URLs externas ─ */
@@ -61,212 +61,243 @@ export default function CustomerLanding() {
       ══════════════════════════════════════ */}
       <div className={styles.desktopContent}>
 
-        {/* ── NAVBAR ── */}
-        <nav className={`${styles.navbar} ${scrolled ? styles.navbarSolid : ''}`}>
-          <div className={styles.navInner}>
-            <button className={styles.navLogo} onClick={() => scrollTo('hero')}>
-              Capitán Grill
-            </button>
+      {/* ══════════════════════════════════════
+          NAVBAR — transparente → sólido al scroll
+      ══════════════════════════════════════ */}
+      <nav className={`${styles.navbar} ${scrolled ? styles.navbarSolid : ''}`}>
+        <div className={styles.navInner}>
+          {/* Logo / marca */}
+          <button className={styles.navLogo} onClick={() => scrollTo('hero')}>
+            Capitán Grill
+          </button>
 
-            <div className={styles.navLinks}>
-              <button className={styles.navLink} onClick={() => scrollTo('menu')}>Menú</button>
-              <button className={styles.navLink} onClick={() => scrollTo('concepto')}>Concepto</button>
-              <button className={styles.navLink} onClick={() => scrollTo('ubicacion')}>Ubicación</button>
+          {/* Links desktop */}
+          <div className={styles.navLinks}>
+            <button className={styles.navLink} onClick={() => scrollTo('menu')}>Menú</button>
+            <button className={styles.navLink} onClick={() => scrollTo('concepto')}>Experiencia</button>
+            <button className={styles.navLink} onClick={() => scrollTo('ubicacion')}>Ubicación</button>
+          </div>
+
+          {/* CTA reservar */}
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.navCta}>
+            Reservar
+          </a>
+
+          {/* Hamburger mobile */}
+          <button
+            className={styles.burger}
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label="Abrir menú"
+          >
+            <span className={`${styles.burgerLine} ${menuOpen ? styles.burgerOpen1 : ''}`} />
+            <span className={`${styles.burgerLine} ${menuOpen ? styles.burgerOpen2 : ''}`} />
+            <span className={`${styles.burgerLine} ${menuOpen ? styles.burgerOpen3 : ''}`} />
+          </button>
+        </div>
+
+        {/* Menú mobile desplegable */}
+        <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
+          <button className={styles.mobileLink} onClick={() => scrollTo('menu')}>Menú</button>
+          <button className={styles.mobileLink} onClick={() => scrollTo('concepto')}>Experiencia</button>
+          <button className={styles.mobileLink} onClick={() => scrollTo('ubicacion')}>Ubicación</button>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.mobileCta}>
+            Reservar por WhatsApp
+          </a>
+        </div>
+      </nav>
+
+
+      {/* ══════════════════════════════════════
+          SECCIÓN 1 — HERO
+      ══════════════════════════════════════ */}
+      <section id="hero" ref={heroRef} className={styles.hero}>
+        {/* Fondo imagen */}
+        <div className={styles.heroBg} />
+        <div className={styles.heroOverlay} />
+
+        <div className={styles.heroContent}>
+          <div className={styles.heroText}>
+            <span className={styles.heroEyebrow}>Meat Boutique · San Miguel de Allende</span>
+            <h1 className={styles.heroTitle}>
+              Capitán<br />
+              <span className={styles.heroTitleGold}>Grill</span>
+            </h1>
+            <p className={styles.heroDesc}>
+              Cortes finos a la parrilla en un entorno rústico.<br />
+              El sabor del norte, directo al fuego.
+            </p>
+            <div className={styles.heroActions}>
+              <button className={styles.btnPrimary} onClick={() => scrollTo('menu')}>
+                <UtensilsCrossed size={17} />
+                Ver Menú Digital
+              </button>
+              <button className={styles.btnGhost} onClick={() => scrollTo('concepto')}>
+                Nuestra Experiencia
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll hint */}
+        <button className={styles.scrollHint} onClick={() => scrollTo('menu')}>
+          <ChevronDown size={20} />
+        </button>
+      </section>
+
+
+      {/* ══════════════════════════════════════
+          SECCIÓN 2 — MENÚ DIGITAL
+      ══════════════════════════════════════ */}
+      <section id="menu" className={styles.menuSection}>
+        <div className={styles.sectionHeader}>
+          <span className={styles.sectionEyebrow}>Nuestra Carta</span>
+          <h2 className={styles.sectionTitle}>Menú Digital</h2>
+          <p className={styles.sectionDesc}>
+            Todos nuestros cortes, entradas y bebidas, siempre actualizados.
+          </p>
+        </div>
+        <div className={styles.menuCard}>
+          <MenuTab />
+        </div>
+      </section>
+
+
+      {/* ══════════════════════════════════════
+          SECCIÓN 3 — EXPERIENCIA
+      ══════════════════════════════════════ */}
+      <section id="concepto" className={styles.experienceSection}>
+        <div className={styles.experienceInner}>
+          <div className={styles.experienceHeader}>
+            <span className={styles.sectionEyebrowLight}>{t('experience.eyebrow')}</span>
+            <h2 className={styles.experienceTitle}>
+              No es solo un menú,<br />
+              <span className={styles.experienceTitleGold}>es la experiencia completa</span>
+            </h2>
+          </div>
+          <div className={styles.experienceGrid}>
+            {t('experience.cards', { returnObjects: true }).map((card, i) => (
+              <ExperienceCard
+                key={i}
+                number={`0${i + 1}`}
+                title={card.title}
+                description={card.description}
+                detail={card.detail}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* ══════════════════════════════════════
+          SECCIÓN 4 — UBICACIÓN, HORARIOS Y CONTACTO
+      ══════════════════════════════════════ */}
+      <section id="ubicacion" className={styles.locationSection}>
+        <div className={styles.locationInner}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionEyebrow}>Encuéntranos</span>
+            <h2 className={styles.sectionTitle}>Ubicación & Contacto</h2>
+          </div>
+
+          <div className={styles.locationGrid}>
+            {/* Mapa */}
+            <div className={styles.mapWrap}>
+              <iframe
+                src={MAPS_EMBED}
+                className={styles.mapIframe}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                title="Capitán Grill en Google Maps"
+              />
+              <div className={styles.mapOverlay} />
+              <div className={styles.mapBadge}>
+                <MapPin size={14} />
+                Capitán Grill
+              </div>
             </div>
 
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.navCta}>
-              Reservar
-            </a>
+            {/* Info cards */}
+            <div className={styles.contactStack}>
+              {/* Horarios */}
+              <div className={styles.contactCard}>
+                <div className={styles.contactIcon}><Clock size={18} /></div>
+                <div className={styles.contactBody}>
+                  <span className={styles.contactLabel}>Horario</span>
+                  <span className={styles.contactValue}>{t('location.hours')}</span>
+                </div>
+              </div>
 
-            <button
-              className={styles.burger}
-              onClick={() => setMenuOpen(o => !o)}
-              aria-label="Abrir menú"
-            >
-              <span className={`${styles.burgerLine} ${menuOpen ? styles.burgerOpen1 : ''}`} />
-              <span className={`${styles.burgerLine} ${menuOpen ? styles.burgerOpen2 : ''}`} />
-              <span className={`${styles.burgerLine} ${menuOpen ? styles.burgerOpen3 : ''}`} />
-            </button>
-          </div>
+              {/* Dirección */}
+              <div className={styles.contactCard}>
+                <div className={styles.contactIcon}><MapPin size={18} /></div>
+                <div className={styles.contactBody}>
+                  <span className={styles.contactLabel}>Dirección</span>
+                  <span className={styles.contactValue}>{t('location.address')}</span>
+                </div>
+              </div>
 
-          <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
-            <button className={styles.mobileLink} onClick={() => scrollTo('menu')}>Menú</button>
-            <button className={styles.mobileLink} onClick={() => scrollTo('concepto')}>Concepto</button>
-            <button className={styles.mobileLink} onClick={() => scrollTo('ubicacion')}>Ubicación</button>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.mobileCta}>
-              Reservar por WhatsApp
-            </a>
-          </div>
-        </nav>
+              {/* Teléfono */}
+              <a href="tel:+524151583036" className={`${styles.contactCard} ${styles.contactCardLink}`}>
+                <div className={styles.contactIcon}><Phone size={18} /></div>
+                <div className={styles.contactBody}>
+                  <span className={styles.contactLabel}>Teléfono</span>
+                  <span className={styles.contactValue}>{t('location.phone')}</span>
+                </div>
+              </a>
 
-        {/* ── HERO ── */}
-        <section id="hero" ref={heroRef} className={styles.hero}>
-          <div className={styles.heroBg} />
-          <div className={styles.heroOverlay} />
+              {/* Botones de acción */}
+              <div className={styles.contactActions}>
+                <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className={styles.contactBtn}>
+                  <MapPin size={15} />
+                  Cómo llegar
+                  <ExternalLink size={12} style={{ opacity: 0.5 }} />
+                </a>
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={`${styles.contactBtn} ${styles.contactBtnWa}`}>
+                  <WaIcon />
+                  Reservar por WhatsApp
+                </a>
+              </div>
 
-          <div className={styles.heroContent}>
-            <div className={styles.heroText}>
-              <span className={styles.heroEyebrow}>Meat Boutique · San Miguel de Allende</span>
-              <h1 className={styles.heroTitle}>
-                Capitán<br />
-                <span className={styles.heroTitleGold}>Grill</span>
-              </h1>
-              <p className={styles.heroDesc}>
-                Cortes finos a la parrilla en un entorno rústico.<br />
-                El sabor del norte, directo al fuego.
-              </p>
-              <div className={styles.heroActions}>
-                <button className={styles.btnPrimary} onClick={() => scrollTo('menu')}>
-                  <UtensilsCrossed size={17} />
-                  Ver Menú Digital
-                </button>
-                <button className={styles.btnGhost} onClick={() => scrollTo('concepto')}>
-                  Nuestra Historia
-                </button>
+              {/* Redes sociales */}
+              <div className={styles.contactSocial}>
+                <span className={styles.contactSocialLabel}>Síguenos</span>
+                <div className={styles.contactSocialBtns}>
+                  <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className={styles.socialIcon} title="Facebook"><FbIcon /></a>
+                  <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={styles.socialIcon} title="Instagram"><IgIcon /></a>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.socialIcon} title="WhatsApp"><WaIcon /></a>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <button className={styles.scrollHint} onClick={() => scrollTo('menu')}>
-            <ChevronDown size={20} />
-          </button>
-        </section>
 
-        {/* ── MENÚ DIGITAL ── */}
-        <section id="menu" className={styles.menuSection}>
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionEyebrow}>Nuestra Carta</span>
-            <h2 className={styles.sectionTitle}>Menú Digital</h2>
-            <p className={styles.sectionDesc}>
-              Todos nuestros cortes, entradas y bebidas, siempre actualizados.
+      {/* ══════════════════════════════════════
+          SECCIÓN 5 — FOOTER
+      ══════════════════════════════════════ */}
+      <footer className={styles.footer}>
+        <div className={styles.footerInner}>
+          <div className={styles.footerLeft}>
+            <span className={styles.footerBrand}>Capitán Grill</span>
+            <span className={styles.footerSub}>Meat Boutique · San Miguel de Allende</span>
+          </div>
+          <div className={styles.footerLinks}>
+            <button className={styles.footerLink} onClick={() => scrollTo('menu')}>Menú</button>
+            <button className={styles.footerLink} onClick={() => scrollTo('concepto')}>Experiencia</button>
+            <button className={styles.footerLink} onClick={() => scrollTo('ubicacion')}>Ubicación</button>
+          </div>
+          <div className={styles.footerRight}>
+            <p className={styles.footerCopy}>
+              © {new Date().getFullYear()} Capitán Grill. {t('footer.rights')}
+            </p>
+            <p className={styles.footerDev}>
+              Desarrollado por <a href="https://innovandohorizontes.com" target="_blank" rel="noopener noreferrer">Innovando Horizontes</a>
             </p>
           </div>
-          <div className={styles.menuCard}>
-            <MenuTab />
-          </div>
-        </section>
-
-        {/* ── CONCEPTO / NOSOTROS ── */}
-        <section id="concepto" className={styles.conceptSection}>
-          <div className={styles.conceptInner}>
-            <div className={styles.conceptText}>
-              <span className={styles.sectionEyebrowLight}>Nuestra Historia</span>
-              <h2 className={styles.conceptTitle}>
-                Donde el fuego<br />
-                <span className={styles.conceptTitleGold}>es el protagonista</span>
-              </h2>
-              <p className={styles.conceptDesc}>
-                Capitán Grill nació de una pasión simple: hacer de cada corte una experiencia memorable. 
-                Seleccionamos piezas premium directamente del campo, las tratamos con respeto y las llevamos 
-                al fuego con técnica y tradición norteña.
-              </p>
-              <p className={styles.conceptDesc}>
-                Nuestro ambiente rústico no es casualidad — es el escenario perfecto para que el sabor 
-                auténtico tome el centro. Sin artificios, sin pretensiones: solo carne, fuego y 
-                la satisfacción de una parrilla bien ejecutada.
-              </p>
-              <p className={styles.conceptDesc}>
-                Ubicados a pie de carretera en San Miguel de Allende, somos el destino de quienes 
-                entienden que comer bien es un acto de cultura.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* ── UBICACIÓN ── */}
-        <section id="ubicacion" className={styles.locationSection}>
-          <div className={styles.locationInner}>
-            <div className={styles.sectionHeader}>
-              <span className={styles.sectionEyebrow}>Encuéntranos</span>
-              <h2 className={styles.sectionTitle}>Ubicación & Contacto</h2>
-            </div>
-
-            <div className={styles.locationGrid}>
-              <div className={styles.mapWrap}>
-                <iframe
-                  src={MAPS_EMBED}
-                  className={styles.mapIframe}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  title="Capitán Grill en Google Maps"
-                />
-                <div className={styles.mapOverlay} />
-                <div className={styles.mapBadge}>
-                  <MapPin size={14} />
-                  Capitán Grill
-                </div>
-              </div>
-
-              <div className={styles.contactStack}>
-                <div className={cc.contactCard}>
-                  <div className={cc.contactIcon}><Clock size={18} /></div>
-                  <div className={cc.contactBody}>
-                    <span className={cc.contactLabel}>Horario</span>
-                    <span className={cc.contactValue}>{t('location.hours')}</span>
-                  </div>
-                </div>
-
-                <div className={cc.contactCard}>
-                  <div className={cc.contactIcon}><MapPin size={18} /></div>
-                  <div className={cc.contactBody}>
-                    <span className={cc.contactLabel}>Dirección</span>
-                    <span className={cc.contactValue}>{t('location.address')}</span>
-                  </div>
-                </div>
-
-                <a href="tel:+524151583036" className={cc.contactCard}>
-                  <div className={cc.contactIcon}><Phone size={18} /></div>
-                  <div className={cc.contactBody}>
-                    <span className={cc.contactLabel}>Teléfono</span>
-                    <span className={cc.contactValue}>{t('location.phone')}</span>
-                  </div>
-                </a>
-
-                <div className={cc.contactActions}>
-                  <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className={cc.contactBtn}>
-                    <MapPin size={15} />
-                    Cómo llegar
-                    <ExternalLink size={12} style={{ opacity: 0.5 }} />
-                  </a>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={`${cc.contactBtn} ${cc.contactBtnWa}`}>
-                    <WaIcon />
-                    Reservar por WhatsApp
-                  </a>
-                </div>
-
-                <div className={cc.contactSocial}>
-                  <span className={cc.contactSocialLabel}>Síguenos</span>
-                  <div className={cc.contactSocialBtns}>
-                    <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="Facebook"><FbIcon /></a>
-                    <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="Instagram"><IgIcon /></a>
-                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="WhatsApp"><WaIcon /></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── FOOTER ── */}
-        <footer className={styles.footer}>
-          <div className={styles.footerInner}>
-            <div className={styles.footerLeft}>
-              <span className={styles.footerBrand}>Capitán Grill</span>
-              <span className={styles.footerSub}>Meat Boutique · San Miguel de Allende</span>
-            </div>
-            <div className={styles.footerLinks}>
-              <button className={styles.footerLink} onClick={() => scrollTo('menu')}>Menú</button>
-              <button className={styles.footerLink} onClick={() => scrollTo('concepto')}>Concepto</button>
-              <button className={styles.footerLink} onClick={() => scrollTo('ubicacion')}>Ubicación</button>
-            </div>
-            <div className={styles.footerRight}>
-              <p className={styles.footerCopy}>
-                © {new Date().getFullYear()} Capitán Grill. {t('footer.rights')}
-              </p>
-            </div>
-          </div>
-        </footer>
+        </div>
+      </footer>
 
       </div>
     </div>

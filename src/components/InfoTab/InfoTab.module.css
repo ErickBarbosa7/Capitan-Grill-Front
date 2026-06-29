@@ -18,6 +18,7 @@
   max-height: 120px;
   background: #1A1918;
   gap: 0.2rem;
+  padding: 0 1.25rem;
 }
 
 .heroName {
@@ -27,7 +28,7 @@
   font-style: italic;
   color: #F7F5F0;
   letter-spacing: 0.01em;
-  margin: 0;
+  margin: 0 0 0.4rem;
   line-height: 1.2;
 }
 
@@ -317,15 +318,36 @@
   padding: 1.1rem 1rem 0;
 }
 
-/* ── About ── */
-.aboutText {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  font-style: italic;
-  border-left: 2px solid #C9A87C;
-  padding-left: 0.85rem;
-  margin-left: 0.1rem;
+/* ── Section label ── */
+.sectionLabel {
+  font-family: var(--font-heading);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--capitan-wood);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.65rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sectionLabel::before,
+.sectionLabel::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #C9A87C;
+  opacity: 0.4;
+}
+
+/* ── Tarjetas de experiencia (mobile) ── */
+.experienceCards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 /* ── Info cards ── */
@@ -346,6 +368,7 @@
   gap: 0.75rem;
   text-decoration: none;
   transition: border-color 0.2s ease;
+  margin-top: 0.75rem;
 }
 
 a.infoCard:hover {

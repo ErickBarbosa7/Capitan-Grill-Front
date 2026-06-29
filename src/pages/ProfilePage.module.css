@@ -1,0 +1,158 @@
+.page {
+  max-width: 640px;
+}
+
+.heading {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem;
+}
+
+.subheading {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0 0 2rem;
+}
+
+.error {
+  font-family: var(--font-body);
+  color: #DC2626;
+  padding: 2rem 0;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #C9A87C;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  background: rgba(201, 168, 124, 0.06);
+  border-radius: 10px;
+}
+
+.fieldIcon {
+  display: flex;
+  align-items: center;
+  color: #C9A87C;
+  flex-shrink: 0;
+}
+
+.fieldContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.fieldLabel {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.fieldValue {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.editIconBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.editIconBtn:hover {
+  color: #C9A87C;
+  border-color: #C9A87C;
+}
+
+.editRow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.editInput {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #C9A87C;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: #fff;
+  outline: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.saveBtn, .cancelBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.saveBtn { color: #3A5A40; }
+.saveBtn:hover { border-color: #3A5A40; background: rgba(58, 90, 64, 0.06); }
+.saveBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.cancelBtn { color: #DC2626; }
+.cancelBtn:hover { border-color: #DC2626; background: rgba(220, 38, 38, 0.06); }

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MessageCircle, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import LocationSection from '../LocationSection/LocationSection';
+import ExperienceCard from '../ExperienceCard/ExperienceCard';
 import cc from '../../styles/contact-cards.module.css';
 
 import lugarImg from '../../assets/img/Lugar.jpg';
@@ -264,7 +265,7 @@ export default function InfoTab() {
           <span className={`${styles.lang} ${i18n.language === 'en' ? styles.activeLang : ''}`}>EN</span>
         </button>
         <h1 className={styles.heroName}>Capitán Grill</h1>
-        <span className={styles.heroEyebrow}>Meat Boutique</span>
+        <p className={styles.collageLabel}>{t('header.subtitle')}</p>
       </header>
 
       {/* ── Collage: Nuestro Lugar ── */}
@@ -275,34 +276,28 @@ export default function InfoTab() {
         {renderThumbnails()}
       </div>
 
-      {/* ── Nuestra Historia ── */}
+      {/* ── Nuestra Experiencia ── */}
       <section className={styles.section}>
-        <div className={styles.ornament}>
-          <div className={styles.ornLine} />
-          <div className={styles.ornDiamond} />
-          <span className={styles.ornLabel}>
-            {t('about.title')}
-          </span>
-          <div className={styles.ornDiamond} />
-          <div className={styles.ornLine} />
-        </div>
+        <p className={styles.sectionLabel}>{t('experience.eyebrow')}</p>
 
-        <p className={styles.aboutText}>
-          {t('about.description')}
-        </p>
+        <div className={styles.experienceCards}>
+          {t('experience.cards', { returnObjects: true }).map((card, i) => (
+            <ExperienceCard
+              key={i}
+              number={`0${i + 1}`}
+              title={card.title}
+              description={card.description}
+              detail={card.detail}
+            />
+          ))}
+        </div>
       </section>
 
       {/* ── Nuestros Cortes ── */}
       <section className={styles.cutsSection}>
-        <div className={styles.ornament}>
-          <div className={styles.ornLine} />
-          <div className={styles.ornDiamond} />
-          <span className={styles.ornLabel}>
-            {t('info.cuts.title', 'Nuestros Cortes')}
-          </span>
-          <div className={styles.ornDiamond} />
-          <div className={styles.ornLine} />
-        </div>
+        <p className={styles.collageLabel}>
+          {t('info.cuts.title', 'Nuestros Cortes')}
+        </p>
 
         <div className={styles.cutsCarouselWrap}>
           <div
@@ -361,15 +356,6 @@ export default function InfoTab() {
       {/* ── Ubicación & Contacto ── */}
       <div className={styles.section}>
         <LocationSection />
-
-        <div className={cc.contactSocial} style={{ marginTop: '1rem', marginBottom: '0.75rem' }}>
-          <span className={cc.contactSocialLabel}>Síguenos</span>
-          <div className={cc.contactSocialBtns}>
-            <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="Facebook"><FbIcon /></a>
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="Instagram"><IgIcon /></a>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="WhatsApp"><WaIcon /></a>
-          </div>
-        </div>
 
         <a
           href={WHATSAPP_URL}

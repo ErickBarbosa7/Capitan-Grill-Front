@@ -1,7 +1,7 @@
 {
   "header": {
     "title": "Capitán Grill",
-    "subtitle": "Meat cuts"
+"subtitle": "Fine cuts from Monterrey, the taste of the North, quality and flavor guaranteed."
   },
   "hero": {
     "cta": "View Menu"
@@ -14,24 +14,52 @@
   "menu": {
     "title": "Menu",
     "soldOut": "Sold out",
-    "includesBanner": "All cuts include",
-    "includesItems": "tortillas & salsa",
     "categories": {
-      "cortes": "Steaks",
+      "cortes-finos": "Fine Cuts",
       "extras": "Extras",
       "bebidas": "Drinks"
     },
     "items": {
-      "c01": { "name": "Rib Eye", "desc": "Juicy cut with perfect marbling and intense flavor." },
-      "c02": { "name": "New York", "desc": "Ideal balance between tenderness and firm texture." },
-      "c03": { "name": "T-Bone", "desc": "Cut with dual texture: filet tenderness and New York flavor." },
-      "c04": { "name": "Top Sirloin", "desc": "Lean cut, tender with excellent flavor." },
-      "c05": { "name": "Arrachera", "desc": "Traditional cut, tender and very tasty." },
-      "c06": { "name": "Costillitas", "desc": "Juicy bites with all the barbecue flavor." },
-      "c07": { "name": "Prime Rib", "desc": "Tender, juicy cut with deep flavor." },
-      "e01": { "name": "Guacamole", "desc": "Fresh avocado prepared on the spot." },
-      "b01": { "name": "Beer", "desc": "Victoria, Corona, Modelo. Small cold can, ready to accompany your cuts." },
-      "b02": { "name": "Soda", "desc": "Coca-Cola. Refreshing drink ideal to complement your meal." }
+      "c01": {
+        "name": "Rib Eye",
+        "desc": "Juicy cut with perfect marbling and intense flavor."
+      },
+      "c02": {
+        "name": "New York",
+        "desc": "Ideal balance between tenderness and firm texture."
+      },
+      "c03": {
+        "name": "T-Bone",
+        "desc": "Cut with dual texture: filet tenderness and New York flavor."
+      },
+      "c04": {
+        "name": "Top Sirloin",
+        "desc": "Lean cut, tender with excellent flavor."
+      },
+      "c05": {
+        "name": "Arrachera",
+        "desc": "Traditional cut, tender and very tasty."
+      },
+      "c06": {
+        "name": "Costillitas",
+        "desc": "Juicy bites with all the barbecue flavor."
+      },
+      "c07": {
+        "name": "Prime Rib",
+        "desc": "Tender, juicy cut with deep flavor."
+      },
+      "e01": {
+        "name": "Guacamole",
+        "desc": "Fresh avocado prepared on the spot."
+      },
+      "b01": {
+        "name": "Beer",
+        "desc": "Victoria, Corona, Modelo. Small cold can, ready to accompany your cuts."
+      },
+      "b02": {
+        "name": "Soda",
+        "desc": "Coca-Cola. Refreshing drink ideal to complement your meal."
+      }
     }
   },
   "about": {
@@ -40,27 +68,55 @@
   },
   "location": {
     "title": "Location",
-    "address": "37880  Carretera a  Atotonilco  Km 2, San Miguel de Allende, Gto.",
+    "address": "37880 Santuario de Atotonilco, San Miguel de Allende, Gto.",
     "phone": "+52 415-158-3036",
     "hours": "Mon - Sun: 6:00 PM - 11:00 PM",
-    "tapToChat": "Write to us directly",
-    "getDirectionsMaps": "Open in Maps",
-    "getDirectionsWaze": "Open in Waze"
+"tapToChat": "Write us directly",
+    "getDirectionsMaps": "Google Maps",
+    "getDirectionsWaze": "Waze",
+    "phoneLabel": "Phone",
+    "hoursLabel": "Hours"
   },
   "info": {
     "ourPlace": "Our Place",
     "cuts": {
       "title": "Our Cuts"
-    }
+    },
+    "close": "Close",
+    "prev": "Previous",
+    "next": "Next",
+    "goTo": "Go to cut {{number}}"
   },
   "social": {
     "title": "Follow Us",
-    "description": "Visit us on Facebook and write to us on WhatsApp for photos, promotions and news from Capitán Grill.",
-    "networksLabel": "Social Media",
-    "follow": "Follow us",
-    "writeUs": "Write to us directly"
+"description": "Visit us on Facebook to see photos, promotions and news from Capitán Grill.",
+    "reserveWhatsApp": "Reserve via WhatsApp",
+    "followInstagram": "Follow on Instagram",
+    "writeUs": "Write us directly",
+    "follow": "Follow Us"
   },
   "footer": {
     "rights": "All rights reserved."
+  },
+  "experience": {
+    "eyebrow": "Our Experience",
+    "title": "You don't read a menu.\nYou choose your cut.",
+    "cards": [
+      {
+        "title": "The Board Comes to You",
+        "description": "We don't hand you a menu. We bring the cuts to your table. See the marbling, feel the weight, and choose the exact piece and gram you want to eat.",
+        "detail": "From the ranch to your eyes — no middlemen."
+      },
+      {
+        "title": "To the Fire. Right Now.",
+        "description": "What you choose goes straight to the coals. No frozen pieces, no unnecessary waiting. The fire works when you decide, cooked to exactly the doneness you ask for.",
+        "detail": "Exact doneness, always to order."
+      },
+      {
+        "title": "The Boutique",
+        "description": "Hosting a backyard cookout? We bring the same standard to your grill. Choose your cuts, we vacuum-seal them, and they're ready to be the star of your own carne asada.",
+        "detail": "Capitán Grill quality, on your own grill."
+      }
+    ]
   }
 }

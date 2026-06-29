@@ -1,0 +1,105 @@
+/* ─── CARD ─── */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(201, 168, 124, 0.12);
+  border-radius: 20px;
+  transition: border-color 0.25s, background 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: rgba(201, 168, 124, 0.28);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+/* Acento sutil en la esquina superior izquierda */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold, #C9A87C), transparent);
+  border-radius: 0 2px 2px 0;
+}
+
+/* ─── NÚMERO ─── */
+.number {
+  font-family: var(--font-serif, 'Playfair Display');
+  font-size: 3.5rem;
+  font-style: italic;
+  font-weight: 600;
+  color: rgba(201, 168, 124, 0.18);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  user-select: none;
+  transition: color 0.25s;
+}
+
+.card:hover .number {
+  color: rgba(201, 168, 124, 0.3);
+}
+
+/* ─── CUERPO ─── */
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.title {
+  font-family: var(--font-heading, 'Bricolage Grotesque');
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.desc {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.82rem;
+  opacity: 0.6;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.detail {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gold, #C9A87C);
+  opacity: 0.8;
+  letter-spacing: 0.02em;
+  margin: 0.25rem 0 0;
+}
+
+/* ─── MOBILE ─── */
+@media (max-width: 1023px) {
+  .card {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 14px;
+  }
+
+  .card::before { display: none; }
+
+  .number {
+    font-size: 2.2rem;
+    flex-shrink: 0;
+    width: 2.5rem;
+    padding-top: 0.1rem;
+  }
+
+  .title { font-size: 0.95rem; }
+  .desc  { font-size: 0.78rem; }
+}
