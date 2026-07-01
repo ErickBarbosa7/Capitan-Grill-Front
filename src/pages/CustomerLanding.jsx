@@ -1,14 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { MessageCircle, Menu, X, MapPin, Phone, Clock, PlayCircle, Flame, Wine, TreePine, Martini } from 'lucide-react';
-import LocationSection from '../components/LocationSection/LocationSection';
-import cc from '../styles/contact-cards.module.css';
+import { MessageCircle, PlayCircle, ChevronLeft, ChevronRight } from 'lucide-react';
+import TopBar from '../components/TopBar/TopBar';
 import styles from './CustomerLanding.module.css';
+
+import cutImg1 from '../assets/img/1.jpeg';
+import cutImg2 from '../assets/img/2.jpeg';
+import cutImg3 from '../assets/img/3.jpeg';
+import cortesVideo from '../assets/videos/cortes.MOV';
 
 const WHATSAPP_URL = 'https://wa.me/524152826863?text=Hola!%20Quisiera%20informes';
 const FACEBOOK_URL = 'https://www.facebook.com/people/Capitangrill/100064038762789/';
 const INSTAGRAM_URL = 'https://www.instagram.com/capitan_grill.sma2026';
+const MAPS_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.7508261920125!2d-100.7948010023266!3d21.020145436889177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842b4fa8be9fef63%3A0x3dbe1b39bd01f9c6!2sCapitan%20Grill!5e0!3m2!1sen!2smx!4v1782318110505!5m2!1sen!2smx';
 
 function FbIcon() {
   return (
@@ -34,69 +39,40 @@ function WaIcon() {
   );
 }
 
-const offerIcons = [Flame, Wine];
-const spaceIcons = [TreePine, Martini];
+const cutImages = [cutImg1, cutImg2, cutImg3];
 
 export default function CustomerLanding() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const goTo = (path) => navigate(path);
 
-  const toggleLang = () => {
-    i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
+  const steps = t('howItWorks.steps', { returnObjects: true });
+  const cutItems = t('featuredCuts.items', { returnObjects: true });
+
+  const [activeCut, setActiveCut] = useState(0);
+  const carouselRef = useRef(null);
+
+  const handleCutScroll = () => {
+    if (!carouselRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+    const maxScroll = scrollWidth - clientWidth;
+    if (maxScroll <= 0) { setActiveCut(0); return; }
+    const index = Math.round((scrollLeft / maxScroll) * (cutItems.length - 1));
+    setActiveCut(Math.min(index, cutItems.length - 1));
   };
 
-  const goTo = (path) => {
-    setMenuOpen(false);
-    navigate(path);
+  const scrollToCut = (index) => {
+    if (!carouselRef.current) return;
+    const { scrollWidth, clientWidth } = carouselRef.current;
+    const maxScroll = scrollWidth - clientWidth;
+    if (maxScroll <= 0) return;
+    const targetLeft = (index / (cutItems.length - 1)) * maxScroll;
+    carouselRef.current.scrollTo({ left: targetLeft, behavior: 'smooth' });
   };
-
-  useEffect(() => {
-    if (!menuOpen) return;
-    const handleKey = (e) => { if (e.key === 'Escape') setMenuOpen(false); };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [menuOpen]);
-
-  const navItems = [
-    { path: '/menu', label: 'Menú' },
-    { path: '/lugar', label: 'Lugar' },
-    { path: '/contacto', label: 'Contáctanos' },
-    { path: '/blog', label: 'Blog' },
-  ];
-
-  const offerItems = t('offer.items', { returnObjects: true });
-  const spaceItems = t('spaces.items', { returnObjects: true });
 
   return (
     <div className={styles.page}>
-
-      <header className={styles.topBar}>
-        <button className={styles.burger} onClick={() => setMenuOpen(o => !o)} aria-label="Menú">
-          {menuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-        <span className={styles.topBarLogo}>Capitán Grill</span>
-        <div className={styles.topBarRight}>
-          <button className={styles.langToggle} onClick={toggleLang} aria-label="Cambiar idioma">
-            <span className={`${styles.lang} ${i18n.language === 'es' ? styles.langActive : ''}`}>ES</span>
-            <span className={styles.langSep}>/</span>
-            <span className={`${styles.lang} ${i18n.language === 'en' ? styles.langActive : ''}`}>EN</span>
-          </button>
-          <a href={WHATSAPP_URL} className={styles.topBarWa} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-            <MessageCircle size={18} />
-          </a>
-        </div>
-      </header>
-
-      <div className={`${styles.hamburgerOverlay} ${menuOpen ? styles.overlayVisible : ''}`} onClick={() => setMenuOpen(false)} />
-
-      <nav className={`${styles.hamburgerMenu} ${menuOpen ? styles.hamburgerOpen : ''}`}>
-        {navItems.map((item) => (
-          <button key={item.path} className={styles.hamburgerItem} onClick={() => goTo(item.path)}>
-            {item.label}
-          </button>
-        ))}
-      </nav>
+      <TopBar />
 
       <section className={styles.hero}>
         <div className={styles.heroBg} />
@@ -119,114 +95,163 @@ export default function CustomerLanding() {
                 Reservar
               </a>
             </div>
+            <p className={styles.heroHours}>Miércoles a Domingo 12pm - 9pm</p>
           </div>
         </div>
       </section>
 
+      {/* CONTENEDOR ESTRECHO */}
       <div className={styles.content}>
-
-        <section className={styles.section}>
-          <h2 className={styles.sectionEyebrow}>Información</h2>
-          <div className={styles.infoGrid}>
-            <div className={styles.infoCard}>
-              <div className={styles.infoIcon}><MapPin size={18} /></div>
-              <div className={styles.infoBody}>
-                <span className={styles.infoLabel}>Dirección</span>
-                <span className={styles.infoValue}>{t('location.address')}</span>
-              </div>
-            </div>
-            <a href={`tel:${t('location.phone')}`} className={styles.infoCard} style={{ textDecoration: 'none' }}>
-              <div className={styles.infoIcon}><Phone size={18} /></div>
-              <div className={styles.infoBody}>
-                <span className={styles.infoLabel}>Teléfono</span>
-                <span className={styles.infoValue}>{t('location.phone')}</span>
-              </div>
-            </a>
-            <div className={styles.infoCard}>
-              <div className={styles.infoIcon}><Clock size={18} /></div>
-              <div className={styles.infoBody}>
-                <span className={styles.infoLabel}>Horario</span>
-                <span className={styles.infoValue}>{t('location.hours')}</span>
-              </div>
-            </div>
-          </div>
-        </section>
 
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>{t('history.title')}</h2>
           <p className={styles.sectionText}>{t('history.description')}</p>
         </section>
+      </div>
 
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>{t('offer.title')}</h2>
-          <div className={styles.cardGrid}>
-            {offerItems.map((item, i) => {
-              const Icon = offerIcons[i];
-              return (
-                <div key={i} className={styles.featureCard}>
-                  <div className={styles.featureIcon}><Icon size={20} /></div>
-                  <h3 className={styles.featureTitle}>{item.title}</h3>
-                  <p className={styles.featureDesc}>{item.desc}</p>
+      {/* CÓMO FUNCIONA */}
+      <div className={styles.stepsSection}>
+        <div className={styles.stepsInner}>
+          <div className={styles.steps}>
+            {steps.map((step, i) => (
+              <div key={i} className={styles.stepItem}>
+                <span className={styles.stepNum}>0{i + 1}</span>
+                <div className={styles.stepBody}>
+                  <h3 className={styles.stepTitle}>{step.title}</h3>
+                  <p className={styles.stepDesc}>{step.desc}</p>
                 </div>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>{t('spaces.title')}</h2>
-          <div className={styles.cardGrid}>
-            {spaceItems.map((item, i) => {
-              const Icon = spaceIcons[i];
-              return (
-                <div key={i} className={styles.featureCard}>
-                  <div className={styles.featureIcon}><Icon size={20} /></div>
-                  <h3 className={styles.featureTitle}>{item.title}</h3>
-                  <p className={styles.featureDesc}>{item.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className={styles.section}>
-          <h2 className={styles.sectionEyebrow}>Cómo llegar</h2>
-          <div className={styles.videoPlaceholder}>
-            <PlayCircle size={40} />
-            <span>Video de cómo llegar</span>
-          </div>
-        </section>
-
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Ubicación & Contacto</h2>
-          <LocationSection />
-          <div className={styles.socialWrap}>
-            <div className={cc.contactSocial} style={{ justifyContent: 'center' }}>
-              <span className={cc.contactSocialLabel}>Síguenos</span>
-              <div className={cc.contactSocialBtns}>
-                <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="Facebook"><FbIcon /></a>
-                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="Instagram"><IgIcon /></a>
-                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="WhatsApp"><WaIcon /></a>
               </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CORTES DESTACADOS */}
+      <section className={styles.fullSection}>
+        <div className={styles.fullInner}>
+          <h2 className={styles.sectionTitle}>{t('featuredCuts.title')}</h2>
+          <div className={styles.cutsCarouselWrap}>
+            <div ref={carouselRef} className={styles.cutsCarousel} onScroll={handleCutScroll}>
+              {cutItems.map((item, i) => (
+                <div key={i} className={styles.cutSlide}>
+                  {i === 1 ? (
+                    <video
+                      src={cortesVideo}
+                      className={`${styles.cutSlideImage} ${styles.cutSlideVideo}`}
+                      muted
+                      loop
+                      playsInline
+                      autoPlay
+                    />
+                  ) : (
+                    <img src={cutImages[i]} alt={item.name} className={styles.cutSlideImage} />
+                  )}
+                </div>
+              ))}
+            </div>
+            {cutItems.length > 1 && (
+              <>
+                {activeCut > 0 && (
+                  <button className={`${styles.cutsArrow} ${styles.cutsArrowLeft}`} onClick={() => scrollToCut(activeCut - 1)} aria-label="Anterior">
+                    <ChevronLeft size={24} />
+                  </button>
+                )}
+                {activeCut < cutItems.length - 1 && (
+                  <button className={`${styles.cutsArrow} ${styles.cutsArrowRight}`} onClick={() => scrollToCut(activeCut + 1)} aria-label="Siguiente">
+                    <ChevronRight size={24} />
+                  </button>
+                )}
+                <div className={styles.cutsDots}>
+                  {cutItems.map((_, idx) => (
+                    <button key={idx} className={`${styles.cutDot} ${idx === activeCut ? styles.cutDotActive : ''}`} onClick={() => scrollToCut(idx)} aria-label={`Ir al corte ${idx + 1}`} />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* CÓMO LLEGAR */}
+      <div className={styles.locationContainerWide}>
+        <section className={styles.locationGrid}>
+          <div className={styles.locationTextColumn}>
+            <h2 className={styles.locationHeading}>Cómo llegar</h2>
+            <p className={styles.locationSubtext}>
+              Estamos sobre la Carretera a Atotonilco, a unos minutos del centro de San Miguel. Sigue estas indicaciones en video para llegar sin contratiempos, ya sea en coche o taxi.
+            </p>
+          </div>
+          <div className={styles.locationMapColumn}>
+            <div className={styles.videoPlaceholder}>
+              <PlayCircle size={48} />
+              <span>Video de cómo llegar</span>
             </div>
           </div>
         </section>
+      </div>
 
+      {/* UBICACIÓN */}
+      <div className={styles.locationContainerWide}>
+        <section className={styles.locationGrid}>
+          <div className={styles.locationTextColumn}>
+            <h2 className={styles.locationHeading}>
+              Visítanos rumbo a Atotonilco
+            </h2>
+            <p className={styles.locationSubtext}>
+              Un espacio campestre pensado para disfrutar del mejor corte de carne con amigos y familia. Nos encontramos en la <strong>Carretera a Atotonilco Km2</strong>, a tan solo unos minutos de San Miguel de Allende.
+            </p>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.locationButton}>
+              Contáctanos
+            </a>
+          </div>
+
+          <div className={styles.locationMapColumn}>
+            <iframe
+              src={MAPS_EMBED_URL}
+              className={styles.mapIframe}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Mapa de Capitán Grill"
+            />
+          </div>
+        </section>
       </div>
 
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <span className={styles.footerBrand}>Capitán Grill</span>
+
+          <div className={styles.footerDivider} />
+
           <div className={styles.footerLinks}>
             <button className={styles.footerLink} onClick={() => goTo('/menu')}>Menú</button>
-            <button className={styles.footerLink} onClick={() => goTo('/lugar')}>Lugar</button>
+            <button className={styles.footerLink} onClick={() => goTo('/lugar')}>Nuestro Lugar</button>
             <button className={styles.footerLink} onClick={() => goTo('/contacto')}>Contacto</button>
             <button className={styles.footerLink} onClick={() => goTo('/blog')}>Blog</button>
           </div>
+
+          <div className={styles.footerDivider} />
+
+          <div className={styles.footerSocial}>
+            <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className={styles.footerSocialIcon} title="Facebook"><FbIcon /></a>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={styles.footerSocialIcon} title="Instagram"><IgIcon /></a>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.footerSocialIcon} title="WhatsApp"><WaIcon /></a>
+          </div>
+
+          <div className={styles.footerDivider} />
+
+          <div className={styles.footerInfo}>
+            <span>{t('location.address')}</span>
+            <span className={styles.footerDot}>·</span>
+            <span>{t('location.phone')}</span>
+            <span className={styles.footerDot}>·</span>
+            <span>{t('location.hours')}</span>
+          </div>
+
           <p className={styles.footerCopy}>&copy; {new Date().getFullYear()} Capitán Grill. {t('footer.rights')}</p>
         </div>
       </footer>
-
     </div>
   );
 }

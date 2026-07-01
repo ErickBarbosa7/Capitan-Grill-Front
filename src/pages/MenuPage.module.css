@@ -3,110 +3,24 @@
   min-height: 100dvh;
 }
 
-.topBar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 200;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1rem;
-  background: rgba(247, 245, 240, 0.9);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-light);
-}
-
-.topBarLeft {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.backBtn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  transition: background 0.15s;
-}
-
-.backBtn:hover {
-  background: rgba(44, 42, 41, 0.06);
-}
-
-.topBarLogo {
-  font-family: var(--font-heading);
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-}
-
-.topBarRight {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.langToggle {
-  background: transparent;
-  border: 1px solid var(--border-light);
-  padding: 0.25rem 0.65rem;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  transition: border-color 0.2s;
-  min-height: 32px;
-}
-
-.langToggle:hover {
-  border-color: var(--gold);
-}
-
-.lang {
-  transition: color 0.2s;
-}
-
-.langActive {
-  color: var(--gold);
-}
-
-.langSep {
-  color: var(--border-light);
-}
-
-.topBarWa {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  border: 1px solid var(--border-light);
-  color: #25D366;
-  transition: border-color 0.2s;
-}
-
-.topBarWa:hover {
-  border-color: #25D366;
-}
-
 .main {
-  padding-top: 48px;
+  padding-top: 52px;
+}
+
+.headingWrap {
+  padding: 1.5rem 1.25rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.02em;
 }

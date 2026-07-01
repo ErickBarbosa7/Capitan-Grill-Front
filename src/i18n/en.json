@@ -91,18 +91,20 @@
     "title": "Our Story",
     "description": "At Capitán Grill we transform premium cuts into unforgettable experiences. Field grill, tradition and flavor in every bite. Every cut is chosen on the spot, hand-selected, and cooked right over the coals, exactly how you like it."
   },
-  "offer": {
-    "title": "Our Offer",
-    "items": [
-      { "title": "Fine Cuts", "desc": "Rib Eye, New York, T-Bone, Arrachera, Costillitas, and Prime Rib. All prepared to order over the coals, at the exact doneness you choose." },
-      { "title": "Drinks", "desc": "Beer, wine, and soft drinks to pair with every cut. Ice cold and ready to serve." }
+  "howItWorks": {
+    "title": "How It Works",
+    "steps": [
+      { "title": "Choose Your Cut", "desc": "See the raw piece, feel it, and pick the exact gram you want to eat." },
+      { "title": "To the Grill or to Go", "desc": "We cook it right on the coals, or you take it home ready for your own grill." },
+      { "title": "Enjoy the Experience", "desc": "Every bite is unique. Pair your cut with the drink of your choice." }
     ]
   },
-  "spaces": {
-    "title": "Our Spaces",
+  "featuredCuts": {
+    "title": "The Captain's Favorites",
     "items": [
-      { "title": "Terrace", "desc": "Enjoy the fire and open air in a relaxed atmosphere. Perfect for dinners with friends or an intimate evening." },
-      { "title": "Bar", "desc": "A cozy space where meat and drinks meet. Ideal for after-dinner drinks and great conversation." }
+      { "name": "Rib Eye", "desc": "Intense marbling and deep flavor. The connoisseur's choice." },
+      { "name": "Tomahawk", "desc": "Impressive and juicy. Perfect for sharing at the center of the table." },
+      { "name": "New York", "desc": "Lean cut with character. Ideal for those who seek pure flavor." }
     ]
   },
   "social": {

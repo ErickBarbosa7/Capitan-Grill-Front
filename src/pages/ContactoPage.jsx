@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { PlayCircle, ArrowLeft } from 'lucide-react';
+import { PlayCircle } from 'lucide-react';
+import TopBar from '../components/TopBar/TopBar';
 import LocationSection from '../components/LocationSection/LocationSection';
 import cc from '../styles/contact-cards.module.css';
 import styles from './ContactoPage.module.css';
@@ -35,16 +35,10 @@ function WaIcon() {
 
 export default function ContactoPage() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   return (
     <div className={styles.page}>
-      <header className={styles.topBar}>
-        <button className={styles.backBtn} onClick={() => navigate('/')} aria-label="Regresar">
-          <ArrowLeft size={18} />
-        </button>
-        <span className={styles.topBarTitle}>Capitán Grill</span>
-      </header>
+      <TopBar />
       <div className={styles.sectionHeader}>
         <span className={styles.sectionEyebrow}>Encuéntranos</span>
         <h1 className={styles.sectionTitle}>Ubicación & Contacto</h1>

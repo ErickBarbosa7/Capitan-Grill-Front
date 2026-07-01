@@ -91,18 +91,20 @@
     "title": "Nuestra Historia",
     "description": "En Capitán Grill transformamos cortes premium en experiencias inolvidables. Parrilla de campo, tradición y sabor en cada bocado. Cada corte se elige al momento, se ve y se prepara justo como tú lo pides, directo sobre las brasas."
   },
-  "offer": {
-    "title": "Nuestra Oferta",
-    "items": [
-      { "title": "Cortes Finos", "desc": "Rib Eye, New York, T-Bone, Arrachera, Costillitas y Prime Rib. Todos preparados al momento sobre brasas, al término exacto que elijas." },
-      { "title": "Bebidas", "desc": "Cervezas, vinos y refrescos para acompañar cada corte. Todo bien frío y listo para servir." }
+  "howItWorks": {
+    "title": "Cómo Funciona",
+    "steps": [
+      { "title": "Elige tu Corte", "desc": "Ves la pieza cruda, la tocas y eliges el gramaje exacto que quieres comer." },
+      { "title": "A la Parrilla o a Casa", "desc": "Te lo preparamos al momento sobre las brasas o lo llevas listo para tu propia parrilla." },
+      { "title": "Disfruta la Experiencia", "desc": "Cada bocado es único. Acompaña tu corte con la bebida de tu preferencia." }
     ]
   },
-  "spaces": {
-    "title": "Nuestros Espacios",
+  "featuredCuts": {
+    "title": "Los Favoritos del Capitán",
     "items": [
-      { "title": "Terraza", "desc": "Disfruta del fuego y el aire libre en un ambiente relajado. Ideal para cenas con amigos o una velada íntima." },
-      { "title": "Barra", "desc": "Un espacio acogedor donde la carne y los tragos se encuentran. Perfecto para after-dinner drinks y buena conversación." }
+      { "name": "Rib Eye", "desc": "Marmoleo intenso y sabor profundo. El favorito de los conocedores." },
+      { "name": "Tomahawk", "desc": "Imponente y jugoso. Perfecto para compartir en el centro de la mesa." },
+      { "name": "New York", "desc": "Corte magro con carácter. Ideal para los que buscan sabor puro." }
     ]
   },
   "social": {

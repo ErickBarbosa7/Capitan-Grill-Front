@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { X, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import lugarImg from '../assets/img/Lugar.jpg';
 import lugar3 from '../assets/img/lugar3.jpg';
@@ -29,9 +28,10 @@ const cutItems = [
   { src: img5 },
 ];
 
+import TopBar from '../components/TopBar/TopBar';
+
 export default function LugarPage() {
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
 
   const [currentIndex, setCurrentIndex] = useState(null);
   const videoRef = useRef(null);
@@ -118,15 +118,11 @@ export default function LugarPage() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.topBar}>
-        <button className={styles.backBtn} onClick={() => navigate('/')} aria-label="Regresar">
-          <ArrowLeft size={18} />
-        </button>
-        <span className={styles.topBarTitle}>Capitán Grill</span>
-      </header>
+      <TopBar />
+      <div className={styles.headingWrap}>
+        <h1 className={styles.heading}>Nuestro Lugar</h1>
+      </div>
       <div className={styles.content}>
-        <h2 className={styles.sectionLabel}>{t('info.ourPlace', 'Nuestro Lugar')}</h2>
-
         <div className={styles.collage}>
           <div className={styles.collageMain}>
             <div className={styles.collageLink} onClick={() => handleOpen(0)} role="button" tabIndex={0}>
@@ -157,7 +153,7 @@ export default function LugarPage() {
       </div>
 
       <section className={styles.cutsSection}>
-        <h2 className={styles.sectionLabel}>{t('info.cuts.title', 'Nuestros Cortes')}</h2>
+        <h2 className={styles.sectionHeading}>Nuestros Cortes</h2>
         <div className={styles.cutsCarouselWrap}>
           <div ref={carouselRef} className={styles.cutsCarousel} onScroll={handleCutScroll}>
             {cutItems.map((item, idx) => (
