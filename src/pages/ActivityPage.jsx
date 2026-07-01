@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { getActivity } from '../services/menuService'
 import Loading from '../components/Loading'
 import { ArrowLeft, Plus, Pencil, EyeOff, Eye, Trash2, RotateCcw } from 'lucide-react'
@@ -37,7 +38,9 @@ export default function ActivityPage() {
     try {
       const data = await getActivity()
       setActivityData(data)
-    } catch {}
+    } catch {
+      toast.error('Error al cargar movimientos')
+    }
     setLoading(false)
   }, [])
 

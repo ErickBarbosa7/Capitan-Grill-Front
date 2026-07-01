@@ -1,43 +1,30 @@
-/* ─── SECCIÓN DE CATEGORÍA ─── */
 .section {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
-/* ─── ENCABEZADO DE CATEGORÍA ─── */
 .catHeader {
-  margin-bottom: 0.25rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid var(--text-primary);
-}
-
-.catLabel {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin: 0 0 0.75rem;
   line-height: 1;
 }
 
-/* ─── LISTA DE ITEMS ─── */
 .items {
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
-/* ─── DESKTOP ─── */
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .section {
-    margin-bottom: 3rem;
-  }
-
-  .catLabel {
-    font-size: 1.8rem;
+    margin-bottom: 2rem;
   }
 
   .items {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0 3rem;
+    gap: 16px;
   }
 }

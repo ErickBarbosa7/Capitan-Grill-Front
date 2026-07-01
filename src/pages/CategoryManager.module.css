@@ -292,6 +292,30 @@
   border-color: #991B1B;
 }
 
+.deleteBtn {
+  padding: 0.5rem 1.3rem;
+  background: #DC2626;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  background: #991B1B;
+}
+
+.empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 768px) {
   .headingSerif {

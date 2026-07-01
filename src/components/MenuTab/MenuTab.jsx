@@ -5,10 +5,10 @@ import CategorySection from '../CategorySection/CategorySection';
 import styles from './MenuTab.module.css';
 
 export default function MenuTab() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const { categories } = useMenu();
   const [activeCategoryId, setActiveCategoryId] = useState(null);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
 
   useEffect(() => {
     if (categories.length > 0 && !activeCategoryId) {
@@ -17,16 +17,12 @@ export default function MenuTab() {
   }, [categories, activeCategoryId]);
 
   useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 1024);
+    const check = () => setIsDesktop(window.innerWidth >= 768);
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
 
   const activeCategory = categories.find((c) => c.id === activeCategoryId);
-
-  const toggleLang = () => {
-    i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
-  };
 
   const scrollToCategory = (catId) => {
     setActiveCategoryId(catId);
@@ -37,18 +33,7 @@ export default function MenuTab() {
 
   return (
     <div className={styles.wrapper}>
-      <header className={styles.hero}>
-        <button className={styles.langToggle} onClick={toggleLang}>
-          <span className={`${styles.lang} ${i18n.language === 'es' ? styles.activeLang : ''}`}>ES</span>
-          <span className={styles.separator}>/</span>
-          <span className={`${styles.lang} ${i18n.language === 'en' ? styles.activeLang : ''}`}>EN</span>
-        </button>
-        <h1 className={styles.heroName}>Capitán Grill</h1>
-        <span className={styles.heroEyebrow}>Meat Boutique</span>
-      </header>
-
       <nav className={styles.chipBar}>
-        <h2 className={styles.menuTitle}>{t('menu.title')}</h2>
         <div className={styles.chips}>
           {categories.map((cat) => {
             const lang = i18n.language;

@@ -18,7 +18,7 @@ import img5 from '../../assets/img/5.jpeg';
 import styles from './InfoTab.module.css';
 
 const FACEBOOK_URL = 'https://www.facebook.com/people/Capitangrill/100064038762789/';
-const WHATSAPP_URL = 'https://wa.me/524151583036?text=Hola!%20Quisiera%20informes';
+const WHATSAPP_URL = 'https://wa.me/524152826863?text=Hola!%20Quisiera%20informes';
 const INSTAGRAM_URL = 'https://www.instagram.com/capitan_grill.sma2026';
 function FbIcon() {
   return (

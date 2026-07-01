@@ -46,10 +46,12 @@ export default function CategoryManager() {
     }
   }
 
-  const handleDelete = async (slug, nombre) => {
+  const handleDelete = async () => {
+    if (!deleting) return
     try {
-      await deleteCategory(slug)
-      toast.success(`Categoría "${nombre}" eliminada`)
+      await deleteCategory(deleting.slug)
+      toast.success(`Categoría "${deleting.nombre}" eliminada`)
+      setDeleting(null)
     } catch (err) {
       toast.error(err.message || 'Error al eliminar')
     }
@@ -72,6 +74,15 @@ export default function CategoryManager() {
       setDeleting(null)
     } catch (err) {
       toast.error(err.message || 'Error al eliminar')
+    }
+  }
+
+  const handleConfirmDelete = async () => {
+    if (!deleting) return
+    if (deleting.hard) {
+      await handleHardDelete()
+    } else {
+      await handleDelete()
     }
   }
 
@@ -102,6 +113,9 @@ export default function CategoryManager() {
         </button>
       </form>
 
+      {categories.length === 0 ? (
+        <p className={styles.empty}>No hay categorías aún. Crea la primera.</p>
+      ) : (
       <div className={styles.list}>
         {categories.map((cat) => (
           <div key={cat.id} className={`${styles.row} ${!cat.isActive ? styles.rowDeleted : ''}`}>
@@ -144,7 +158,7 @@ export default function CategoryManager() {
                       </button>
                       <button
                         className={`${styles.actionBtn} ${styles.actionDanger}`}
-                        onClick={() => handleDelete(cat.id, cat.nombre)}
+                        onClick={() => setDeleting({ slug: cat.id, nombre: cat.nombre, hard: false })}
                         title="Eliminar"
                       >
                         <Trash2 size={15} />
@@ -161,7 +175,7 @@ export default function CategoryManager() {
                       </button>
                       <button
                         className={`${styles.actionBtn} ${styles.actionDanger}`}
-                        onClick={() => setDeleting({ slug: cat.id, nombre: cat.nombre })}
+                        onClick={() => setDeleting({ slug: cat.id, nombre: cat.nombre, hard: true })}
                         title="Eliminar permanentemente"
                       >
                         <Trash2 size={15} />
@@ -174,19 +188,24 @@ export default function CategoryManager() {
           </div>
         ))}
       </div>
+      )}
 
       {deleting && (
         <div className={styles.overlay} onClick={() => setDeleting(null)}>
           <div className={styles.confirmCard} onClick={(e) => e.stopPropagation()}>
-            <p className={`${styles.confirmText} ${styles.confirmDanger}`}>
-              ¿Eliminar permanentemente <strong>{deleting.nombre}</strong>? Esta acción no se puede deshacer.
+            <p className={`${styles.confirmText} ${deleting.hard ? styles.confirmDanger : ''}`}>
+              {deleting.hard ? (
+                <>¿Eliminar permanentemente <strong>{deleting.nombre}</strong>? Esta acción no se puede deshacer.</>
+              ) : (
+                <>¿Eliminar <strong>{deleting.nombre}</strong>? Los platillos en esta categoría quedarán sin categoría.</>
+              )}
             </p>
             <div className={styles.confirmActions}>
               <button className={styles.cancelBtn} onClick={() => setDeleting(null)}>
                 Cancelar
               </button>
-              <button className={styles.hardDeleteBtn} onClick={handleHardDelete}>
-                Eliminar permanentemente
+              <button className={deleting.hard ? styles.hardDeleteBtn : styles.deleteBtn} onClick={handleConfirmDelete}>
+                {deleting.hard ? 'Eliminar permanentemente' : 'Eliminar'}
               </button>
             </div>
           </div>

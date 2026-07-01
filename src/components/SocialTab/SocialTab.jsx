@@ -4,7 +4,7 @@ import cc from '../../styles/contact-cards.module.css';
 import styles from './SocialTab.module.css';
 
 const FACEBOOK_URL = 'https://www.facebook.com/people/Capitangrill/100064038762789/';
-const WHATSAPP_URL = 'https://wa.me/524151583036?text=Hola!%20Quisiera%20informes';
+const WHATSAPP_URL = 'https://wa.me/524152826863?text=Hola!%20Quisiera%20informes';
 const INSTAGRAM_URL = 'https://www.instagram.com/capitan_grill.sma2026';
 
 function FacebookIcon() {

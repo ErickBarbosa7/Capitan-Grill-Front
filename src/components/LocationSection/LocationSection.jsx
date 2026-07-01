@@ -11,9 +11,8 @@ export default function LocationSection() {
   const wazeRedirectUrl = 'https://waze.com/ul?q=Capitan+Grill+San+Miguel+de+Allende';
 
   return (
-    <section className={styles.locationContainer}>
+    <div className={styles.locationContainer}>
 
-      {/* MAPA FULL-BLEED */}
       <div className={styles.mapWrapper}>
         <iframe
           src={mapsEmbedUrl}
@@ -23,10 +22,8 @@ export default function LocationSection() {
           referrerPolicy="strict-origin-when-cross-origin"
           title="Capitán Grill Mapa"
         />
-        {/* Degradado sobre el mapa */}
         <div className={styles.mapOverlay} />
 
-        {/* Info encima del degradado */}
         <div className={styles.mapInfo}>
           <div className={styles.mapInfoLeft}>
             <h3 className={styles.locationName}>Capitán Grill</h3>
@@ -48,24 +45,27 @@ export default function LocationSection() {
         </div>
       </div>
 
-      {/* FRANJA INFERIOR: teléfono y horario */}
       <div className={styles.infoStrip}>
-        <a href="tel:+524151583036" className={styles.infoItem}>
-          <Phone size={16} className={styles.infoIcon} />
+        <a href="tel:+524152826863" className={styles.infoItem}>
+          <div className={styles.infoIcon}>
+            <Phone size={16} />
+          </div>
           <span className={styles.infoText}>
-            <span className={styles.infoLabel}>Teléfono</span>
-            {t('location.phone')}
+            <span className={styles.infoLabel}>{t('location.phoneLabel', 'Teléfono')}</span>
+            <span className={styles.infoValue}>{t('location.phone')}</span>
           </span>
         </a>
         <div className={styles.infoItem}>
-          <Clock size={16} className={styles.infoIcon} />
+          <div className={styles.infoIcon}>
+            <Clock size={16} />
+          </div>
           <span className={styles.infoText}>
-            <span className={styles.infoLabel}>Horario</span>
-            {t('location.hours')}
+            <span className={styles.infoLabel}>{t('location.hoursLabel', 'Horario')}</span>
+            <span className={styles.infoValue}>{t('location.hours')}</span>
           </span>
         </div>
       </div>
 
-    </section>
+    </div>
   );
 }

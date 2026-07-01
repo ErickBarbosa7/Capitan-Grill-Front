@@ -44,7 +44,7 @@ export default function ExpensesPage() {
 
   const openCreateExpense = () => {
     setEditingExpense(null)
-    setExpenseForm({ person: user?.name || '', description: '', amount: '', date: todayStr(), categoryId: categories[0]?.id?.toString() || '' })
+    setExpenseForm({ person: user?.name || '', description: '', amount: '', date: todayStr(), categoryId: categories[0]?.id?.toString() || '', userEmail: user?.email || '' })
     setShowExpenseModal(true)
   }
 
@@ -97,18 +97,33 @@ export default function ExpensesPage() {
   }
 
   const handleCreateCategory = async (data) => {
-    await createExpenseCategory({ name: data.nameEs })
-    fetchData()
+    try {
+      await createExpenseCategory({ name: data.nameEs })
+      toast.success('Categoría creada')
+      fetchData()
+    } catch (err) {
+      toast.error(err.message || 'Error al crear categoría')
+    }
   }
 
   const handleUpdateCategory = async (id, data) => {
-    await updateExpenseCategory(id, { name: data.nameEs })
-    fetchData()
+    try {
+      await updateExpenseCategory(id, { name: data.nameEs })
+      toast.success('Categoría actualizada')
+      fetchData()
+    } catch (err) {
+      toast.error(err.message || 'Error al actualizar categoría')
+    }
   }
 
   const handleDeleteCategory = async (id) => {
-    await deleteExpenseCategory(id)
-    fetchData()
+    try {
+      await deleteExpenseCategory(id)
+      toast.success('Categoría eliminada')
+      fetchData()
+    } catch (err) {
+      toast.error(err.message || 'Error al eliminar categoría')
+    }
   }
 
   const formatAmount = (amount) => {
@@ -160,17 +175,23 @@ export default function ExpensesPage() {
               {expenses.map((exp) => (
                 <tr key={exp.id}>
                   <td className={styles.cellDate}>{formatDate(exp.date)}</td>
-                  <td>{exp.person}</td>
+                  <td title={exp.userEmail || ''}>{exp.person}</td>
                   <td><span className={styles.categoryBadge}>{exp.category?.name}</span></td>
                   <td className={styles.cellDesc}>{exp.description}</td>
                   <td className={styles.cellAmount}>{formatAmount(exp.amount)}</td>
                   <td className={styles.cellActions}>
-                    <button className={styles.actionBtn} onClick={() => openEditExpense(exp)} title="Editar">
-                      <Pencil size={14} />
-                    </button>
-                    <button className={`${styles.actionBtn} ${styles.actionDanger}`} onClick={() => setDeleteConfirm(exp)} title="Eliminar">
-                      <Trash2 size={14} />
-                    </button>
+                    {exp.userEmail && exp.userEmail !== user?.email ? (
+                      <span className={styles.lockedBadge} title="Registrado por otro usuario">—</span>
+                    ) : (
+                      <>
+                        <button className={styles.actionBtn} onClick={() => openEditExpense(exp)} title="Editar">
+                          <Pencil size={14} />
+                        </button>
+                        <button className={`${styles.actionBtn} ${styles.actionDanger}`} onClick={() => setDeleteConfirm(exp)} title="Eliminar">
+                          <Trash2 size={14} />
+                        </button>
+                      </>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -198,14 +219,15 @@ export default function ExpensesPage() {
                 </div>
                 <div className={styles.formField}>
                   <label className={styles.formLabel}>Categoría</label>
-                  <CategoryDropdown
-                    categories={dropdownCategories}
-                    value={expenseForm.categoryId}
-                    onChange={(id) => setExpenseForm({ ...expenseForm, categoryId: id })}
-                    onCreate={handleCreateCategory}
-                    onUpdate={handleUpdateCategory}
-                    onDelete={handleDeleteCategory}
-                  />
+                    <CategoryDropdown
+                      translation={false}
+                      categories={dropdownCategories}
+                      value={expenseForm.categoryId}
+                      onChange={(id) => setExpenseForm({ ...expenseForm, categoryId: id })}
+                      onCreate={handleCreateCategory}
+                      onUpdate={handleUpdateCategory}
+                      onDelete={handleDeleteCategory}
+                    />
                 </div>
               </div>
               <div className={styles.formField}>

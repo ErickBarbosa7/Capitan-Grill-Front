@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { useMenuContext } from '../contexts/MenuContext';
 import { useAuth } from '../contexts/AuthContext';
 import Loading from '../components/Loading';
@@ -52,7 +53,7 @@ export default function Dashboard() {
   useEffect(() => {
     getMenuViews()
       .then(res => setMenuViews(res.count))
-      .catch(() => {});
+      .catch(() => toast.error('Error al cargar visitas'));
   }, []);
 
   useEffect(() => {
@@ -66,7 +67,9 @@ export default function Dashboard() {
     try {
       const data = await getActivity()
       setActivityData(data)
-    } catch {}
+    } catch {
+      toast.error('Error al cargar actividad')
+    }
   }, [])
 
   useEffect(() => {

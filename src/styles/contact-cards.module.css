@@ -1,13 +1,12 @@
-/* ── Shared contact card styles (mobile + desktop) ── */
-
 .contactCard {
   display: flex;
   align-items: center;
   gap: 1rem;
   background: var(--bg-card);
   border: 1px solid var(--border-light);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-card);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -18,13 +17,13 @@ a.contactCard {
 
 a.contactCard:hover {
   border-color: var(--gold);
-  box-shadow: 0 2px 12px rgba(201, 168, 124, 0.1);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .contactIcon {
   width: 40px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 12px;
   background: rgba(201, 168, 124, 0.1);
   display: flex;
   align-items: center;
@@ -45,7 +44,7 @@ a.contactCard:hover {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
 .contactValue {
@@ -67,7 +66,7 @@ a.contactCard:hover {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
+  padding: 0.9rem 1.25rem;
   border-radius: 12px;
   font-family: var(--font-body);
   font-size: 0.85rem;
@@ -77,6 +76,7 @@ a.contactCard:hover {
   color: var(--text-primary);
   background: var(--bg-card);
   transition: all 0.2s;
+  min-height: 48px;
 }
 
 .contactBtn:hover {
@@ -110,7 +110,7 @@ a.contactCard:hover {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   flex-shrink: 0;
 }
 
@@ -120,12 +120,12 @@ a.contactCard:hover {
 }
 
 .socialIcon {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   background: var(--bg-card);
   border: 1px solid var(--border-light);
-  color: var(--text-secondary);
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   justify-content: center;

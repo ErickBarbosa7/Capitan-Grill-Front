@@ -1,15 +1,15 @@
-/* ─── FILA DE PLATILLO ─── */
-.row {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border-light);
-  gap: 0.25rem;
-  transition: opacity 0.2s;
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.row:last-child {
-  border-bottom: none;
+.card:active {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .topRow {
@@ -31,8 +31,8 @@
 .price {
   font-family: var(--font-body);
   font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: 700;
+  color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -42,32 +42,30 @@
   font-size: 0.78rem;
   color: var(--text-secondary);
   line-height: 1.45;
-  margin: 0;
-  max-width: 88%;
+  margin: 0.35rem 0 0;
 }
 
 .soldOut {
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .badge {
   align-self: flex-start;
   font-family: var(--font-body);
-  font-size: 0.65rem;
-  font-weight: 600;
+  font-size: 0.6rem;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  background: var(--border-light);
-  color: var(--text-secondary);
-  padding: 0.2rem 0.55rem;
-  border-radius: 4px;
-  margin-top: 0.15rem;
+  background: rgba(58, 90, 64, 0.12);
+  color: var(--green);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+  margin-top: 0.5rem;
 }
 
-/* ─── DESKTOP: sin cambios visuales extra, el layout lo maneja CategorySection ─── */
-@media (min-width: 1024px) {
-  .row {
-    padding: 0.85rem 0;
+@media (min-width: 768px) {
+  .card {
+    padding: 20px;
   }
 
   .name {

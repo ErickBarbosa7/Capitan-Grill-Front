@@ -3,6 +3,10 @@ import AdminLayout from './layouts/AdminLayout'
 import ProtectedRoute from './components/admin/ProtectedRoute'
 
 import CustomerLanding from './pages/CustomerLanding'
+import MenuPage from './pages/MenuPage'
+import LugarPage from './pages/LugarPage'
+import ContactoPage from './pages/ContactoPage'
+import BlogPage from './pages/BlogPage'
 
 import LoginPage from './pages/LoginPage'
 import Dashboard from './pages/Dashboard'
@@ -12,11 +16,16 @@ import CategoryManager from './pages/CategoryManager'
 import ActivityPage from './pages/ActivityPage'
 import ExpensesPage from './pages/ExpensesPage'
 import ProfilePage from './pages/ProfilePage'
+import UsersPage from './pages/UsersPage'
 
 export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<CustomerLanding />} />
+      <Route path="menu" element={<MenuPage />} />
+      <Route path="lugar" element={<LugarPage />} />
+      <Route path="contacto" element={<ContactoPage />} />
+      <Route path="blog" element={<BlogPage />} />
 
       <Route path="login" element={<LoginPage />} />
 
@@ -37,6 +46,7 @@ export default function AppRoutes() {
         <Route path="actividad" element={<ActivityPage />} />
         <Route path="gastos" element={<ExpensesPage />} />
         <Route path="perfil" element={<ProfilePage />} />
+        <Route path="usuarios" element={<UsersPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

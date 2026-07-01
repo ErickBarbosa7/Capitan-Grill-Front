@@ -69,8 +69,8 @@
   "location": {
     "title": "Ubicación",
     "address": "37880 Santuario de Atotonilco, San Miguel de Allende, Gto.",
-    "phone": "+52 415-158-3036",
-    "hours": "Lun - Dom: 6:00 PM - 11:00 PM",
+    "phone": "+52 415-282-6863",
+    "hours": "Miércoles a Domingo 12-9 pm",
 "tapToChat": "Escríbenos directo",
     "getDirectionsMaps": "Google Maps",
     "getDirectionsWaze": "Waze",
@@ -86,6 +86,24 @@
     "prev": "Anterior",
     "next": "Siguiente",
     "goTo": "Ir al corte {{number}}"
+  },
+  "history": {
+    "title": "Nuestra Historia",
+    "description": "En Capitán Grill transformamos cortes premium en experiencias inolvidables. Parrilla de campo, tradición y sabor en cada bocado. Cada corte se elige al momento, se ve y se prepara justo como tú lo pides, directo sobre las brasas."
+  },
+  "offer": {
+    "title": "Nuestra Oferta",
+    "items": [
+      { "title": "Cortes Finos", "desc": "Rib Eye, New York, T-Bone, Arrachera, Costillitas y Prime Rib. Todos preparados al momento sobre brasas, al término exacto que elijas." },
+      { "title": "Bebidas", "desc": "Cervezas, vinos y refrescos para acompañar cada corte. Todo bien frío y listo para servir." }
+    ]
+  },
+  "spaces": {
+    "title": "Nuestros Espacios",
+    "items": [
+      { "title": "Terraza", "desc": "Disfruta del fuego y el aire libre en un ambiente relajado. Ideal para cenas con amigos o una velada íntima." },
+      { "title": "Barra", "desc": "Un espacio acogedor donde la carne y los tragos se encuentran. Perfecto para after-dinner drinks y buena conversación." }
+    ]
   },
   "social": {
     "title": "Síguenos",
