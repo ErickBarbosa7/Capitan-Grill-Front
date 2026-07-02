@@ -99,6 +99,20 @@
       { "title": "Enjoy the Experience", "desc": "Every bite is unique. Pair your cut with the drink of your choice." }
     ]
   },
+  "offer": {
+    "title": "Our Offer",
+    "items": [
+      { "title": "Charcoal Grilled Cuts", "desc": "Each piece hits the grill the moment you order. No rush, cooked exactly to your preferred doneness." },
+      { "title": "Perfect Pairing", "desc": "Pair your cut with craft beer, red wine, or a house cocktail. Ask our team for today's recommendation." }
+    ]
+  },
+  "spaces": {
+    "title": "Our Spaces",
+    "items": [
+      { "title": "Outdoor Terrace", "desc": "Enjoy our terrace with an open view, perfect for a dinner under the stars or a meal with friends." },
+      { "title": "Drink Bar", "desc": "A comfortable, relaxed space where you can wait for your cut with a glass of wine or your favorite beer." }
+    ]
+  },
   "featuredCuts": {
     "title": "The Captain's Favorites",
     "items": [

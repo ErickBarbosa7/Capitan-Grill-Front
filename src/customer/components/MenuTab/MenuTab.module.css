@@ -1,0 +1,94 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── CHIP BAR — más pegada al top bar (52px) ─── */
+.chipBar {
+  position: sticky;
+  top: 52px;
+  z-index: 50;
+  background: rgba(247, 245, 240, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light, #E6E2D8);
+  padding: 0.55rem 1rem;
+}
+
+.chips {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.chips::-webkit-scrollbar { display: none; }
+
+.chip {
+  background: transparent;
+  border: 1px solid rgba(44, 42, 41, 0.15);
+  color: var(--text-secondary, #5E5A56);
+  padding: 0.4rem 1rem;
+  /* Recto en lugar de píldora — más rústico */
+  border-radius: 6px;
+  font-family: var(--font-body, 'Inter');
+  font-weight: 500;
+  font-size: 0.78rem;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-height: 36px;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  letter-spacing: 0.01em;
+}
+
+.chip:hover {
+  border-color: var(--gold, #C9A87C);
+  color: var(--text-primary, #2C2A29);
+}
+
+/* Activo: oscuro con fondo carbón — no dorado */
+.activeChip {
+  background: var(--text-primary, #2C2A29);
+  color: #F7F5F0;
+  border-color: var(--text-primary, #2C2A29);
+}
+
+.activeChip:hover {
+  background: var(--text-primary, #2C2A29);
+  color: #F7F5F0;
+}
+
+/* ─── MAIN ─── */
+.main {
+  padding: 1.5rem 1rem 2.5rem;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .main {
+    max-width: none;
+    padding: 2rem 2rem 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .chipBar {
+    padding: 0.7rem 2.5rem;
+  }
+
+  .chips {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .main {
+    max-width: 1100px;
+    padding: 2.5rem 2rem 3rem;
+  }
+}

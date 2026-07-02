@@ -474,6 +474,47 @@
   border-top: 1px solid var(--border-light);
 }
 
+.contactSocial {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.contactSocialLabel {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.contactSocialBtns {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.socialIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.socialIconFb { background: #1877F2; }
+.socialIconIg { background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF); }
+.socialIconWa { background: #25D366; }
+
+.socialIcon:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
 /* ═══════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════ */

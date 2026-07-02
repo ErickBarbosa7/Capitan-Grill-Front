@@ -1,0 +1,55 @@
+.section {
+  margin-bottom: 2.25rem;
+}
+
+/* Encabezado de categoría — como en una carta impresa */
+.catHeader {
+  font-family: var(--font-serif, 'Playfair Display');
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--text-primary, #2C2A29);
+  margin: 0 0 0;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.5rem;
+  /* Línea inferior delgada en lugar del color dorado */
+  border-bottom: 1px solid var(--border-light, #E6E2D8);
+  margin-bottom: 0;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  /* Sin gap — los separadores son internos de cada item */
+}
+
+@media (min-width: 768px) {
+  .section {
+    margin-bottom: 2.75rem;
+  }
+
+  .catHeader {
+    font-size: 1.5rem;
+  }
+
+  .items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    margin-bottom: 3.5rem;
+  }
+
+  .catHeader {
+    font-size: 1.7rem;
+  }
+
+  .items {
+    column-gap: 2.5rem;
+  }
+}

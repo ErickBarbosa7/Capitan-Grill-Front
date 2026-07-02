@@ -99,6 +99,20 @@
       { "title": "Disfruta la Experiencia", "desc": "Cada bocado es único. Acompaña tu corte con la bebida de tu preferencia." }
     ]
   },
+  "offer": {
+    "title": "Nuestra Oferta",
+    "items": [
+      { "title": "Cortes al Carbón", "desc": "Cada pieza se asigna a la parrilla justo cuando la pides. Sin prisas, con el término exacto que prefieres." },
+      { "title": "Maridaje Perfecto", "desc": "Acompaña tu corte con cerveza artesanal, vino tinto o un cóctel de la casa. Pregunta a nuestro equipo por la recomendación del día." }
+    ]
+  },
+  "spaces": {
+    "title": "Nuestros Espacios",
+    "items": [
+      { "title": "Terraza al Aire Libre", "desc": "Disfruta de nuestra terraza con vista abierta, ideal para una cena bajo las estrellas o una comida con amigos." },
+      { "title": "Barra de Bebidas", "desc": "Un espacio cómodo y relajado donde puedes esperar tu corte con una copa de vino o tu cerveza favorita." }
+    ]
+  },
   "featuredCuts": {
     "title": "Los Favoritos del Capitán",
     "items": [
