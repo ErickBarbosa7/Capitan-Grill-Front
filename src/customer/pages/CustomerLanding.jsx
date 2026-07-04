@@ -22,16 +22,6 @@ const MAPS_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37
 const MAPS_REDIRECT_URL = 'https://www.google.com/maps/search/?api=1&query=21.020359,-100.793347';
 const WAZE_REDIRECT_URL = 'https://www.waze.com/ul?ll=21.020359,-100.793347&navigate=yes';
 
-// Se eliminaron las captions (descripciones)
-const favoriteItems = [
-  { type: 'video', src: cortesVideo, tag: 'En vivo' },
-  { type: 'image', src: corte1, tag: 'Al peso' },
-  { type: 'video', src: cortesVideo, tag: 'Marmoleo' },
-  { type: 'image', src: corte3, tag: 'Término' },
-  { type: 'image', src: corte4, tag: 'Reposo' },
-  { type: 'image', src: corte5, tag: 'A la mesa' },
-];
-
 function FbIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
@@ -56,7 +46,8 @@ function WaIcon() {
   );
 }
 
-function FavoritesGallery() {
+function FavoritesGallery({ items }) {
+  const { t } = useTranslation();
   const [active, setActive] = useState(0);
   const trackRef = useRef(null);
 
@@ -65,8 +56,8 @@ function FavoritesGallery() {
     const { scrollLeft, scrollWidth, clientWidth } = trackRef.current;
     const maxScroll = scrollWidth - clientWidth;
     if (maxScroll <= 0) { setActive(0); return; }
-    const idx = Math.round((scrollLeft / maxScroll) * (favoriteItems.length - 1));
-    setActive(Math.min(idx, favoriteItems.length - 1));
+    const idx = Math.round((scrollLeft / maxScroll) * (items.length - 1));
+    setActive(Math.min(idx, items.length - 1));
   };
 
   const scrollToIndex = (idx) => {
@@ -74,21 +65,21 @@ function FavoritesGallery() {
     const { scrollWidth, clientWidth } = trackRef.current;
     const maxScroll = scrollWidth - clientWidth;
     if (maxScroll <= 0) return;
-    const targetLeft = (idx / (favoriteItems.length - 1)) * maxScroll;
+    const targetLeft = (idx / (items.length - 1)) * maxScroll;
     trackRef.current.scrollTo({ left: targetLeft, behavior: 'smooth' });
   };
 
   return (
     <div className={styles.favGallery}>
       <div ref={trackRef} className={styles.favTrack} onScroll={handleScroll}>
-        {favoriteItems.map((item, idx) => (
+        {items.map((item, idx) => (
           <article key={idx} className={styles.favCard}>
             {/* Como quitamos favCardInfo, la imagen ocupa el 100% de la altura de favCard */}
             <div className={styles.favImageWrapperFull}>
               {item.type === 'video' ? (
                 <video src={item.src} className={styles.favMedia} autoPlay muted loop playsInline />
               ) : (
-                <img src={item.src} alt={`Favorito ${idx + 1}`} className={styles.favMedia} loading="lazy" />
+                <img src={item.src} alt={t('aria.goTo', { number: idx + 1 })} className={styles.favMedia} loading="lazy" />
               )}
               {/* Etiqueta opcional flotante */}
               {item.tag && <span className={styles.favTag}>{item.tag}</span>}
@@ -98,23 +89,23 @@ function FavoritesGallery() {
       </div>
 
       {active > 0 && (
-        <button className={`${styles.favArrow} ${styles.favArrowLeft}`} onClick={() => scrollToIndex(active - 1)} aria-label="Anterior">
+        <button className={`${styles.favArrow} ${styles.favArrowLeft}`} onClick={() => scrollToIndex(active - 1)} aria-label={t('aria.previous')}>
           <ChevronLeft size={20} />
         </button>
       )}
-      {active < favoriteItems.length - 1 && (
-        <button className={`${styles.favArrow} ${styles.favArrowRight}`} onClick={() => scrollToIndex(active + 1)} aria-label="Siguiente">
+      {active < items.length - 1 && (
+        <button className={`${styles.favArrow} ${styles.favArrowRight}`} onClick={() => scrollToIndex(active + 1)} aria-label={t('aria.next')}>
           <ChevronRight size={20} />
         </button>
       )}
 
       <div className={styles.favDots}>
-        {favoriteItems.map((_, idx) => (
+        {items.map((_, idx) => (
           <button
             key={idx}
             className={`${styles.favDot} ${idx === active ? styles.favDotActive : ''}`}
             onClick={() => scrollToIndex(idx)}
-            aria-label={`Ir al elemento ${idx + 1}`}
+            aria-label={t('aria.goTo', { number: idx + 1 })}
           />
         ))}
       </div>
@@ -145,10 +136,19 @@ export default function CustomerLanding() {
   }, [menuOpen]);
 
   const navItems = [
-    { path: '/inicio', label: 'Inicio' },
-    { path: '/menu', label: 'Menú' },
-    { path: '/lugar', label: 'Nuestro Lugar' },
-    { path: '/contacto', label: 'Contáctanos' },
+    { path: '/inicio', label: t('nav.home') },
+    { path: '/menu', label: t('nav.menu') },
+    { path: '/lugar', label: t('nav.place') },
+    { path: '/contacto', label: t('nav.contact') },
+  ];
+
+  const favoriteItems = [
+    { type: 'video', src: cortesVideo, tag: t('landing.favorites.tags.0') },
+    { type: 'image', src: corte1, tag: t('landing.favorites.tags.1') },
+    { type: 'video', src: cortesVideo, tag: t('landing.favorites.tags.2') },
+    { type: 'image', src: corte3, tag: t('landing.favorites.tags.3') },
+    { type: 'image', src: corte4, tag: t('landing.favorites.tags.4') },
+    { type: 'image', src: corte5, tag: t('landing.favorites.tags.5') },
   ];
 
   return (
@@ -156,7 +156,7 @@ export default function CustomerLanding() {
 
       <header className={styles.topBar}>
         <div className={styles.topBarLeft}>
-          <button className={styles.burger} onClick={() => setMenuOpen(o => !o)} aria-label="Menú">
+          <button className={styles.burger} onClick={() => setMenuOpen(o => !o)} aria-label={t('aria.menu')}>
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
           <nav className={styles.desktopNav}>
@@ -169,7 +169,7 @@ export default function CustomerLanding() {
         </div>
         <span className={styles.topBarLogo}>Capitán Grill</span>
         <div className={styles.topBarRight}>
-          <button className={styles.langToggle} onClick={toggleLang} aria-label="Cambiar idioma">
+          <button className={styles.langToggle} onClick={toggleLang} aria-label={t('aria.langToggle')}>
             <span className={`${styles.lang} ${i18n.language === 'es' ? styles.langActive : ''}`}>ES</span>
             <span className={styles.langSep}>/</span>
             <span className={`${styles.lang} ${i18n.language === 'en' ? styles.langActive : ''}`}>EN</span>
@@ -201,15 +201,15 @@ export default function CustomerLanding() {
               <span className={styles.heroTitleAccent}>Grill</span>
             </h1>
             <p className={styles.heroDesc}>
-              En Capitán Grill, el corte lo eliges tú. Ves la pieza cruda, la tocas, y en minutos está en la parrilla. ¿Prefieres disfrutarlo aquí con nosotros o llevarlo a casa? Tú decides: te lo preparamos al momento para comer en el lugar, o lo llevas listo para tu propia parrilla.
+              {t('landing.hero.desc')}
             </p>
             <div className={styles.heroActions}>
               <button className={styles.btnPrimary} onClick={() => goTo('/menu')}>
-                Ver Menú Digital
+                {t('landing.hero.viewMenu')}
               </button>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.btnSecondary}>
                 <MessageCircle size={18} />
-                Reservar
+                {t('landing.hero.reserve')}
               </a>
             </div>
           </div>
@@ -220,8 +220,8 @@ export default function CustomerLanding() {
       <section className={styles.placeSection}>
         <div className={styles.placeInner}>
           <div className={styles.placeMeta}>
-            <span className={styles.sectionEyebrow}>San Miguel de Allende</span>
-            <h2 className={styles.sectionTitle}>Nuestro Lugar</h2>
+            <span className={styles.sectionEyebrow}>{t('landing.place.eyebrow')}</span>
+            <h2 className={styles.sectionTitle}>{t('landing.place.title')}</h2>
           </div>
           <div className={styles.bentoGrid}>
             <div className={`${styles.gridCell} ${styles.mainCell}`}>
@@ -230,12 +230,12 @@ export default function CustomerLanding() {
               </div>
             </div>
             <div className={`${styles.gridCell} ${styles.textCell}`}>
-              <h3 className={styles.textCellTitle}>Una Atmósfera Única</h3>
+              <h3 className={styles.textCellTitle}>{t('landing.place.cardTitle')}</h3>
               <p className={styles.textCellDesc}>
-                Diseñamos cada espacio para ofrecerte una experiencia sofisticada, cálida y confortable. El rincón perfecto para disfrutar de la alta cocina.
+                {t('landing.place.cardDesc')}
               </p>
               <button className={styles.btnLink} onClick={() => goTo('/lugar')}>
-                Ver galería completa
+                {t('landing.place.viewGallery')}
               </button>
             </div>
             <div className={styles.gridCell}>
@@ -251,13 +251,12 @@ export default function CustomerLanding() {
       <section className={styles.favSection}>
         <div className={styles.favInner}>
           
-          {/* NUEVO ENCABEZADO DE SECCIÓN PARA EL CARRUSEL */}
           <div className={styles.favHeaderRow}>
-            <span className={styles.sectionEyebrow}>Del fuego a tu mesa</span>
-            <h2 className={styles.sectionTitle}>Los Favoritos del Capitán</h2>
+            <span className={styles.sectionEyebrow}>{t('landing.favorites.eyebrow')}</span>
+            <h2 className={styles.sectionTitle}>{t('landing.favorites.title')}</h2>
           </div>
           
-          <FavoritesGallery />
+          <FavoritesGallery items={favoriteItems} />
         </div>
       </section>
 
@@ -266,9 +265,9 @@ export default function CustomerLanding() {
         <div className={styles.wideInner}>
           <div className={styles.locationLayout}>
             <div className={styles.locationTextCol}>
-              <h2 className={styles.locationHeading}>Visítanos rumbo a Atotonilco</h2>
+              <h2 className={styles.locationHeading}>{t('landing.location.title')}</h2>
               <p className={styles.locationDesc}>
-                Así es como se ve un corte en su máxima expresión. Ven a Capitán Grill y elige tu pieza al momento. La tabla llega a tu mesa, ves el marmoleo, la tocas y decides. En minutos está en la parrilla. Así de simple, así de bueno.
+                {t('landing.location.desc')}
               </p>
               <div className={styles.locationActions}>
                 <a href={MAPS_REDIRECT_URL} target="_blank" rel="noopener noreferrer" className={styles.btnMaps}>
@@ -279,7 +278,7 @@ export default function CustomerLanding() {
                 </a>
               </div>
               <div className={cc.contactSocial} style={{ justifyContent: 'flex-start', marginTop: '1.5rem' }}>
-                <span className={cc.contactSocialLabel}>Síguenos</span>
+                <span className={cc.contactSocialLabel}>{t('social.follow')}</span>
                 <div className={cc.contactSocialBtns}>
                   <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className={`${cc.socialIcon} ${cc.socialIconFb}`} title="Facebook"><FbIcon /></a>
                   <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={`${cc.socialIcon} ${cc.socialIconIg}`} title="Instagram"><IgIcon /></a>
@@ -308,17 +307,17 @@ export default function CustomerLanding() {
             <div className={styles.videoCol}>
               <div className={styles.videoPlaceholder}>
                 <MessageCircle size={40} />
-                <span>Video de cómo llegar</span>
+                <span>{t('landing.directions.videoPlaceholder')}</span>
               </div>
             </div>
             <div className={styles.locationTextCol}>
-              <h2 className={styles.locationHeading}>Cómo llegar</h2>
+              <h2 className={styles.locationHeading}>{t('landing.directions.title')}</h2>
               <p className={styles.locationDesc}>
-                Estamos sobre la carretera a Atotonilco, a solo 10 minutos del centro de San Miguel de Allende. Sigue el video para llegar sin contratiempos.
+                {t('landing.directions.desc')}
               </p>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.btnPrimary} style={{ background: 'var(--gold)', color: 'var(--text-primary)' }}>
                 <MessageCircle size={18} />
-                Reservar
+                {t('landing.directions.reserve')}
               </a>
             </div>
           </div>
@@ -332,7 +331,7 @@ export default function CustomerLanding() {
           <div className={styles.footerBrandCol}>
             <span className={styles.footerBrand}>Capitán Grill</span>
             <p className={styles.footerTagline}>
-              Cortes elegidos por ti, cocinados al momento en San Miguel de Allende.
+              {t('landing.footer.tagline')}
             </p>
             <div className={styles.footerSocial}>
               <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className={styles.footerSocialIcon}><FbIcon /></a>
@@ -342,17 +341,17 @@ export default function CustomerLanding() {
           </div>
 
           <div className={styles.footerCol}>
-            <span className={styles.footerColTitle}>Explorar</span>
-            <button className={styles.footerLink} onClick={() => goTo('/menu')}>Menú</button>
-            <button className={styles.footerLink} onClick={() => goTo('/lugar')}>Nuestro Lugar</button>
-            <button className={styles.footerLink} onClick={() => goTo('/contacto')}>Contáctanos</button>
+            <span className={styles.footerColTitle}>{t('landing.footer.explore')}</span>
+            <button className={styles.footerLink} onClick={() => goTo('/menu')}>{t('nav.menu')}</button>
+            <button className={styles.footerLink} onClick={() => goTo('/lugar')}>{t('nav.place')}</button>
+            <button className={styles.footerLink} onClick={() => goTo('/contacto')}>{t('nav.contact')}</button>
           </div>
 
           <div className={styles.footerCol}>
-            <span className={styles.footerColTitle}>Visítanos</span>
+            <span className={styles.footerColTitle}>{t('landing.footer.visitUs')}</span>
             <a href={MAPS_REDIRECT_URL} target="_blank" rel="noopener noreferrer" className={styles.footerInfoRow}>
               <MapPin size={15} />
-              Rumbo a Atotonilco, San Miguel de Allende
+              {t('landing.footer.address')}
             </a>
             <span className={styles.footerInfoRow}>
               <Clock size={15} />
@@ -360,7 +359,7 @@ export default function CustomerLanding() {
             </span>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.footerInfoRow}>
               <MessageCircle size={15} />
-              Reservar por WhatsApp
+              {t('landing.footer.reserveWhatsApp')}
             </a>
           </div>
 

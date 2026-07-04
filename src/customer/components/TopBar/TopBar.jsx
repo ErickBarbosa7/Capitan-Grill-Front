@@ -6,16 +6,8 @@ import tb from './TopBar.module.css';
 
 const WHATSAPP_URL = 'https://wa.me/524152826863?text=Hola!%20Quisiera%20informes';
 
-const navItems = [
-  { path: '/inicio', label: 'Inicio' },
-  { path: '/menu', label: 'Menú' },
-  { path: '/lugar', label: 'Nuestro Lugar' },
-  { path: '/contacto', label: 'Contáctanos' },
-
-];
-
 export default function TopBar() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,6 +21,13 @@ export default function TopBar() {
     navigate(path);
   };
 
+  const navItems = [
+    { path: '/inicio', label: t('nav.home') },
+    { path: '/menu', label: t('nav.menu') },
+    { path: '/lugar', label: t('nav.place') },
+    { path: '/contacto', label: t('nav.contact') },
+  ];
+
   useEffect(() => {
     if (!menuOpen) return;
     const handleKey = (e) => { if (e.key === 'Escape') setMenuOpen(false); };
@@ -40,7 +39,7 @@ export default function TopBar() {
     <>
       <header className={tb.topBar}>
         <div className={tb.left}>
-          <button className={tb.burger} onClick={() => setMenuOpen(o => !o)} aria-label="Menú">
+          <button className={tb.burger} onClick={() => setMenuOpen(o => !o)} aria-label={t('aria.menu')}>
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
           <nav className={tb.desktopNav}>
@@ -53,7 +52,7 @@ export default function TopBar() {
         </div>
         <span className={tb.logo}>Capitán Grill</span>
         <div className={tb.right}>
-          <button className={tb.langToggle} onClick={toggleLang} aria-label="Cambiar idioma">
+          <button className={tb.langToggle} onClick={toggleLang} aria-label={t('aria.langToggle')}>
             <span className={`${tb.lang} ${i18n.language === 'es' ? tb.langActive : ''}`}>ES</span>
             <span className={tb.langSep}>/</span>
             <span className={`${tb.lang} ${i18n.language === 'en' ? tb.langActive : ''}`}>EN</span>

@@ -7,9 +7,21 @@
     "cta": "View Menu"
   },
   "nav": {
+    "home": "Home",
     "menu": "Menu",
     "info": "Info",
+    "place": "Our Place",
+    "contact": "Contact Us",
     "social": "Follow Us"
+  },
+  "aria": {
+    "menu": "Menu",
+    "langToggle": "Change language",
+    "previous": "Previous",
+    "next": "Next",
+    "goTo": "Go to item {{number}}",
+    "goToImage": "Go to image {{number}}",
+    "close": "Close"
   },
   "menu": {
     "title": "Menu",
@@ -61,6 +73,88 @@
         "desc": "Coca-Cola. Refreshing drink ideal to complement your meal."
       }
     }
+  },
+  "landing": {
+    "hero": {
+      "desc": "At Capitán Grill, you choose the cut. You see the raw piece, touch it, and in minutes it's on the grill. Prefer to enjoy it here with us or take it home? You decide: we prepare it for you to eat on-site, or take it ready for your own grill.",
+      "viewMenu": "View Digital Menu",
+      "reserve": "Reserve"
+    },
+    "place": {
+      "eyebrow": "San Miguel de Allende",
+      "title": "Our Place",
+      "cardTitle": "A Unique Atmosphere",
+      "cardDesc": "We designed every space to offer you a sophisticated, warm, and comfortable experience. The perfect spot to enjoy fine dining.",
+      "viewGallery": "View full gallery"
+    },
+    "favorites": {
+      "eyebrow": "From the fire to your table",
+      "title": "The Captain's Favorites",
+      "tags": ["Live", "By weight", "Marbling", "Doneness", "Resting", "At the table"]
+    },
+    "location": {
+      "title": "Visit us on the way to Atotonilco",
+      "desc": "This is what a cut looks like at its finest. Come to Capitán Grill and choose your piece on the spot. The board comes to your table, you see the marbling, touch it, and decide. In minutes it's on the grill. Simple, and that good."
+    },
+    "directions": {
+      "title": "How to get here",
+      "desc": "We are on the road to Atotonilco, just 10 minutes from downtown San Miguel de Allende. Follow the video to arrive without trouble.",
+      "videoPlaceholder": "Video on how to get here",
+      "reserve": "Reserve"
+    },
+    "footer": {
+      "tagline": "Cuts chosen by you, cooked on the spot in San Miguel de Allende.",
+      "explore": "Explore",
+      "visitUs": "Visit Us",
+      "address": "Road to Atotonilco, San Miguel de Allende",
+      "reserveWhatsApp": "Reserve via WhatsApp"
+    }
+  },
+  "menuPage": {
+    "eyebrow": "The Selection",
+    "titleBefore": "Our",
+    "titleAccent": "Menu",
+    "lead": "Explore our variety of prime cuts, artisan sides, and prepared drinks to complement your experience to the fullest."
+  },
+  "lugarPage": {
+    "eyebrow": "The Space",
+    "titleBefore": "Our",
+    "titleAccent": "Place",
+    "lead": "A rustic countryside space where nature, flavor, and tradition come together to create unforgettable moments. Discover our atmosphere before booking your table.",
+    "bento": {
+      "tag": "In video",
+      "eyebrow": "Our Atmosphere",
+      "title": "The tranquility of the countryside",
+      "text": "Surrounded by nature and with a rustic style, our space is designed for you to enjoy good food, special moments, and the warmth of a countryside atmosphere."
+    },
+    "cuts": {
+      "eyebrow": "The Selection",
+      "title": "The Experience"
+    },
+    "cutItems": [
+      { "name": "Prime Quality", "note": "Rigorous selection for your table" },
+      { "name": "Perfect Marbling", "note": "Unmatched texture and juiciness" },
+      { "name": "Exactly Right", "note": "We master the art of the grill" },
+      { "name": "From the Fire to Your Table", "note": "The authentic countryside flavor" },
+      { "name": "Guaranteed Freshness", "note": "You choose your piece on the spot" }
+    ]
+  },
+  "contacto": {
+    "eyebrow": "Find Us",
+    "titleBefore": "Location &",
+    "titleAccent": "Contact",
+    "lead": "We are ready to welcome you. Use the map to get to our space or contact us directly for reservations and questions.",
+    "videoText": "How to get here",
+    "social": {
+      "eyebrow": "Direct Attention",
+      "title": "Ready to reserve?",
+      "desc": "Write us on WhatsApp to secure your table or follow us on social media to stay updated."
+    }
+  },
+  "blog": {
+    "eyebrow": "Blog",
+    "title": "Coming Soon",
+    "text": "We are preparing content about cuts, grilling, and the Capitán Grill experience. Very soon!"
   },
   "about": {
     "title": "Our Story",

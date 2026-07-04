@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { X, ChevronLeft, ChevronRight, Play, Maximize2 } from 'lucide-react';
 import lugarImg from '../../assets/img/Lugar.jpg';
 import lugar3 from '../../assets/img/lugar3.jpg';
@@ -7,7 +8,7 @@ import img1 from '../../assets/img/1.jpeg';
 import img2 from '../../assets/img/3.jpeg';
 import img3 from '../../assets/img/5.jpeg';
 import img4 from '../../assets/img/6.jpg';
-import img5 from '../../assets/videos/cortes.MOV'; // Tu video
+import img5 from '../../assets/videos/cortes.MOV';
 
 import styles from './LugarPage.module.css';
 import TopBar from '../components/TopBar/TopBar';
@@ -18,16 +19,17 @@ const mediaItems = [
   { type: 'image', src: lugar3, alt: 'Capitán Grill 2' },
 ];
 
-// REEMPLAZO: Agregamos la propiedad "type" para diferenciar entre fotos y videos
-const cutItems = [
-  { type: 'image', src: img1, name: 'Calidad Prime', note: 'Selección rigurosa para tu mesa' },
-  { type: 'image', src: img2, name: 'Marmoleo Perfecto', note: 'Textura y jugosidad inigualable' },
-  { type: 'image', src: img3, name: 'Al Punto Exacto', note: 'Dominamos el arte de la parrilla' },
-  { type: 'image', src: img4, name: 'Del Fuego a tu Mesa', note: 'El auténtico sazón campestre' },
-  { type: 'video', src: img5, name: 'Frescura Garantizada', note: 'Eliges tu pieza al momento' }, // Aquí va tu video
-];
-
 export default function LugarPage() {
+  const { t } = useTranslation();
+
+  const cutItems = [
+    { type: 'image', src: img1, name: t('lugarPage.cutItems.0.name'), note: t('lugarPage.cutItems.0.note') },
+    { type: 'image', src: img2, name: t('lugarPage.cutItems.1.name'), note: t('lugarPage.cutItems.1.note') },
+    { type: 'image', src: img3, name: t('lugarPage.cutItems.2.name'), note: t('lugarPage.cutItems.2.note') },
+    { type: 'image', src: img4, name: t('lugarPage.cutItems.3.name'), note: t('lugarPage.cutItems.3.note') },
+    { type: 'video', src: img5, name: t('lugarPage.cutItems.4.name'), note: t('lugarPage.cutItems.4.note') },
+  ];
+
   const [currentIndex, setCurrentIndex] = useState(null);
   const videoRef = useRef(null);
   const touchStartX = useRef(0);
@@ -113,16 +115,13 @@ export default function LugarPage() {
 
       <main className={styles.content}>
 
-        {/* ENCABEZADO */}
         <header className={styles.pageHeader}>
-          <span className={styles.eyebrow}>El espacio</span>
+          <span className={styles.eyebrow}>{t('lugarPage.eyebrow')}</span>
           <h1 className={styles.pageTitle}>
-            Nuestro <span className={styles.pageTitleAccent}>Lugar</span>
+            {t('lugarPage.titleBefore')} <span className={styles.pageTitleAccent}>{t('lugarPage.titleAccent')}</span>
           </h1>
           <p className={styles.pageLead}>
-            Un espacio rústico y campestre donde la naturaleza, el sabor y la tradición se
-            unen para crear momentos inolvidables. Descubre nuestro ambiente antes de
-            reservar tu mesa.
+            {t('lugarPage.lead')}
           </p>
         </header>
 
@@ -143,16 +142,14 @@ export default function LugarPage() {
                 <Play size={18} fill="currentColor" />
               </span>
             </div>
-            <div className={styles.bentoTag}>En video</div>
+            <div className={styles.bentoTag}>{t('lugarPage.bento.tag')}</div>
           </div>
 
           <div className={`${styles.bentoCell} ${styles.bentoStory}`}>
-            <span className={styles.bentoStoryEyebrow}>Nuestro ambiente</span>
-            <h3 className={styles.bentoStoryTitle}>La tranquilidad del campo</h3>
+            <span className={styles.bentoStoryEyebrow}>{t('lugarPage.bento.eyebrow')}</span>
+            <h3 className={styles.bentoStoryTitle}>{t('lugarPage.bento.title')}</h3>
             <p className={styles.bentoStoryText}>
-              Rodeado de naturaleza y con un estilo rústico, nuestro espacio está diseñado
-              para que disfrutes de buena comida, momentos especiales y la calidez de un
-              ambiente campestre.
+              {t('lugarPage.bento.text')}
             </p>
           </div>
 
@@ -168,11 +165,10 @@ export default function LugarPage() {
           ))}
         </section>
 
-        {/* LA EXPERIENCIA DE NUESTROS CORTES */}
         <section className={styles.cutsSection}>
           <div className={styles.sectionHeadRow}>
-            <span className={styles.eyebrow}>La selección</span>
-            <h2 className={styles.sectionTitle}>La Experiencia</h2>
+            <span className={styles.eyebrow}>{t('lugarPage.cuts.eyebrow')}</span>
+            <h2 className={styles.sectionTitle}>{t('lugarPage.cuts.title')}</h2>
           </div>
 
           <div className={styles.carouselContainer}>
@@ -211,12 +207,12 @@ export default function LugarPage() {
             {cutItems.length > 1 && (
               <>
                 {activeCutIndex > 0 && (
-                  <button className={`${styles.cutsArrow} ${styles.cutsArrowLeft}`} onClick={() => scrollToCut(activeCutIndex - 1)} aria-label="Anterior">
+                  <button className={`${styles.cutsArrow} ${styles.cutsArrowLeft}`} onClick={() => scrollToCut(activeCutIndex - 1)} aria-label={t('aria.previous')}>
                     <ChevronLeft size={20} />
                   </button>
                 )}
                 {activeCutIndex < cutItems.length - 1 && (
-                  <button className={`${styles.cutsArrow} ${styles.cutsArrowRight}`} onClick={() => scrollToCut(activeCutIndex + 1)} aria-label="Siguiente">
+                  <button className={`${styles.cutsArrow} ${styles.cutsArrowRight}`} onClick={() => scrollToCut(activeCutIndex + 1)} aria-label={t('aria.next')}>
                     <ChevronRight size={20} />
                   </button>
                 )}
@@ -226,7 +222,7 @@ export default function LugarPage() {
                       key={idx}
                       className={`${styles.cutDot} ${idx === activeCutIndex ? styles.cutDotActive : ''}`}
                       onClick={() => scrollToCut(idx)}
-                      aria-label={`Ir a la imagen ${idx + 1}`}
+                      aria-label={t('aria.goToImage', { number: idx + 1 })}
                     />
                   ))}
                 </div>
@@ -239,7 +235,7 @@ export default function LugarPage() {
       {/* LIGHTBOX */}
       {currentIndex !== null && (
         <div className={styles.lightboxOverlay} onClick={handleClose}>
-          <button className={styles.closeButton} onClick={handleClose} aria-label="Cerrar">
+          <button className={styles.closeButton} onClick={handleClose} aria-label={t('aria.close')}>
             <X size={22} />
           </button>
 

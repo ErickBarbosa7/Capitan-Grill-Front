@@ -7,9 +7,21 @@
     "cta": "Ver Menú"
   },
   "nav": {
+    "home": "Inicio",
     "menu": "Menú",
     "info": "Info",
+    "place": "Nuestro Lugar",
+    "contact": "Contáctanos",
     "social": "Síguenos"
+  },
+  "aria": {
+    "menu": "Menú",
+    "langToggle": "Cambiar idioma",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "goTo": "Ir al elemento {{number}}",
+    "goToImage": "Ir a la imagen {{number}}",
+    "close": "Cerrar"
   },
   "menu": {
     "title": "Menú",
@@ -61,6 +73,88 @@
         "desc": "Coca-Cola. Bebida refrescante ideal para complementar tu comida."
       }
     }
+  },
+  "landing": {
+    "hero": {
+      "desc": "En Capitán Grill, el corte lo eliges tú. Ves la pieza cruda, la tocas, y en minutos está en la parrilla. ¿Prefieres disfrutarlo aquí con nosotros o llevarlo a casa? Tú decides: te lo preparamos al momento para comer en el lugar, o lo llevas listo para tu propia parrilla.",
+      "viewMenu": "Ver Menú Digital",
+      "reserve": "Reservar"
+    },
+    "place": {
+      "eyebrow": "San Miguel de Allende",
+      "title": "Nuestro Lugar",
+      "cardTitle": "Una Atmósfera Única",
+      "cardDesc": "Diseñamos cada espacio para ofrecerte una experiencia sofisticada, cálida y confortable. El rincón perfecto para disfrutar de la alta cocina.",
+      "viewGallery": "Ver galería completa"
+    },
+    "favorites": {
+      "eyebrow": "Del fuego a tu mesa",
+      "title": "Los Favoritos del Capitán",
+      "tags": ["En vivo", "Al peso", "Marmoleo", "Término", "Reposo", "A la mesa"]
+    },
+    "location": {
+      "title": "Visítanos rumbo a Atotonilco",
+      "desc": "Así es como se ve un corte en su máxima expresión. Ven a Capitán Grill y elige tu pieza al momento. La tabla llega a tu mesa, ves el marmoleo, la tocas y decides. En minutos está en la parrilla. Así de simple, así de bueno."
+    },
+    "directions": {
+      "title": "Cómo llegar",
+      "desc": "Estamos sobre la carretera a Atotonilco, a solo 10 minutos del centro de San Miguel de Allende. Sigue el video para llegar sin contratiempos.",
+      "videoPlaceholder": "Video de cómo llegar",
+      "reserve": "Reservar"
+    },
+    "footer": {
+      "tagline": "Cortes elegidos por ti, cocinados al momento en San Miguel de Allende.",
+      "explore": "Explorar",
+      "visitUs": "Visítanos",
+      "address": "Rumbo a Atotonilco, San Miguel de Allende",
+      "reserveWhatsApp": "Reservar por WhatsApp"
+    }
+  },
+  "menuPage": {
+    "eyebrow": "La Selección",
+    "titleBefore": "Nuestro",
+    "titleAccent": "Menú",
+    "lead": "Explora nuestra variedad de cortes de primera, guarniciones artesanales y bebidas preparadas para complementar tu experiencia al máximo."
+  },
+  "lugarPage": {
+    "eyebrow": "El espacio",
+    "titleBefore": "Nuestro",
+    "titleAccent": "Lugar",
+    "lead": "Un espacio rústico y campestre donde la naturaleza, el sabor y la tradición se unen para crear momentos inolvidables. Descubre nuestro ambiente antes de reservar tu mesa.",
+    "bento": {
+      "tag": "En video",
+      "eyebrow": "Nuestro ambiente",
+      "title": "La tranquilidad del campo",
+      "text": "Rodeado de naturaleza y con un estilo rústico, nuestro espacio está diseñado para que disfrutes de buena comida, momentos especiales y la calidez de un ambiente campestre."
+    },
+    "cuts": {
+      "eyebrow": "La selección",
+      "title": "La Experiencia"
+    },
+    "cutItems": [
+      { "name": "Calidad Prime", "note": "Selección rigurosa para tu mesa" },
+      { "name": "Marmoleo Perfecto", "note": "Textura y jugosidad inigualable" },
+      { "name": "Al Punto Exacto", "note": "Dominamos el arte de la parrilla" },
+      { "name": "Del Fuego a tu Mesa", "note": "El auténtico sazón campestre" },
+      { "name": "Frescura Garantizada", "note": "Eliges tu pieza al momento" }
+    ]
+  },
+  "contacto": {
+    "eyebrow": "Encuéntranos",
+    "titleBefore": "Ubicación &",
+    "titleAccent": "Contacto",
+    "lead": "Estamos listos para recibirte. Utiliza el mapa para llegar a nuestro espacio o comunícate directamente con nosotros para reservas y dudas.",
+    "videoText": "Cómo llegar",
+    "social": {
+      "eyebrow": "Atención Directa",
+      "title": "¿Listo para reservar?",
+      "desc": "Escríbenos por WhatsApp para asegurar tu mesa o síguenos en redes para conocer nuestras novedades."
+    }
+  },
+  "blog": {
+    "eyebrow": "Blog",
+    "title": "Próximamente",
+    "text": "Estamos preparando contenido sobre cortes, parrilla y la experiencia Capitán Grill. ¡Muy pronto!"
   },
   "about": {
     "title": "Nuestra Historia",

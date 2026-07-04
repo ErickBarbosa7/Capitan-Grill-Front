@@ -42,12 +42,12 @@ export default function ContactoPage() {
       
       <main className={styles.content}>
         <header className={styles.pageHeader}>
-          <span className={styles.eyebrow}>Encuéntranos</span>
+          <span className={styles.eyebrow}>{t('contacto.eyebrow')}</span>
           <h1 className={styles.pageTitle}>
-            Ubicación & <span className={styles.pageTitleAccent}>Contacto</span>
+            {t('contacto.titleBefore')} <span className={styles.pageTitleAccent}>{t('contacto.titleAccent')}</span>
           </h1>
           <p className={styles.pageLead}>
-            Estamos listos para recibirte. Utiliza el mapa para llegar a nuestro espacio o comunícate directamente con nosotros para reservas y dudas.
+            {t('contacto.lead')}
           </p>
         </header>
 
@@ -76,16 +76,16 @@ export default function ContactoPage() {
               <span className={styles.playBadge}>
                 <Play size={20} fill="currentColor" />
               </span>
-              <span className={styles.videoText}>Cómo llegar</span>
+              <span className={styles.videoText}>{t('contacto.videoText')}</span>
             </div>
           </div>
 
           {/* CELDA 2: Tarjeta Social & WhatsApp */}
           <div className={`${styles.bentoCell} ${styles.contactCell}`}>
-            <span className={styles.bentoStoryEyebrow}>Atención Directa</span>
-            <h3 className={styles.bentoStoryTitle}>¿Listo para reservar?</h3>
+            <span className={styles.bentoStoryEyebrow}>{t('contacto.social.eyebrow')}</span>
+            <h3 className={styles.bentoStoryTitle}>{t('contacto.social.title')}</h3>
             <p className={styles.bentoStoryText}>
-              Escríbenos por WhatsApp para asegurar tu mesa o síguenos en redes para conocer nuestras novedades.
+              {t('contacto.social.desc')}
             </p>
 
             <div className={styles.actionsWrapper}>
