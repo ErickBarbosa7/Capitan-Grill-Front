@@ -1,38 +1,160 @@
 {
   "header": {
     "title": "Capitán Grill",
-    "subtitle": "Meat Boutique"
+"subtitle": "Cortes finos desde Monterrey, el sabor del Norte calidad y sabor garantizado."
   },
   "hero": {
     "cta": "Ver Menú"
   },
   "nav": {
+    "home": "Inicio",
     "menu": "Menú",
     "info": "Info",
+    "place": "Nuestro Lugar",
+    "contact": "Contáctanos",
     "social": "Síguenos"
+  },
+  "aria": {
+    "menu": "Menú",
+    "langToggle": "Cambiar idioma",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "goTo": "Ir al elemento {{number}}",
+    "goToImage": "Ir a la imagen {{number}}",
+    "close": "Cerrar"
   },
   "menu": {
     "title": "Menú",
     "soldOut": "Agotado",
-    "includesBanner": "Todos los cortes incluyen",
-    "includesItems": "tortillas y salsa",
     "categories": {
-      "cortes": "Cortes",
+      "cortes-finos": "Cortes Finos",
       "extras": "Extras",
       "bebidas": "Bebidas"
     },
     "items": {
-      "c01": { "name": "Rib Eye", "desc": "Corte jugoso con marmoleo perfecto y sabor intenso." },
-      "c02": { "name": "New York", "desc": "Equilibrio ideal entre suavidad y textura firme." },
-      "c03": { "name": "T-Bone", "desc": "Corte con doble textura: suavidad del filete y sabor del New York." },
-      "c04": { "name": "Top Sirloin", "desc": "Corte magro, suave y con excelente sabor." },
-      "c05": { "name": "Arrachera", "desc": "Corte tradicional, suave y muy sabroso." },
-      "c06": { "name": "Costillitas", "desc": "Bites jugosos con todo el sabor del asado." },
-      "c07": { "name": "Prime Rib", "desc": "Corte suave, jugoso y de sabor profundo." },
-      "e01": { "name": "Guacamole", "desc": "Aguacate fresco preparado al momento." },
-      "b01": { "name": "Cerveza", "desc": "Victoria, Corona, Modelo. En lata pequeña, fría y lista para acompañar tus cortes." },
-      "b02": { "name": "Refresco", "desc": "Coca-Cola. Bebida refrescante ideal para complementar tu comida." }
+      "c01": {
+        "name": "Rib Eye",
+        "desc": "Corte jugoso con marmoleo perfecto y sabor intenso."
+      },
+      "c02": {
+        "name": "New York",
+        "desc": "Equilibrio ideal entre suavidad y textura firme."
+      },
+      "c03": {
+        "name": "T-Bone",
+        "desc": "Corte con doble textura: suavidad del filete y sabor del New York."
+      },
+      "c04": {
+        "name": "Top Sirloin",
+        "desc": "Corte magro, suave y con excelente sabor."
+      },
+      "c05": {
+        "name": "Arrachera",
+        "desc": "Corte tradicional, suave y muy sabroso."
+      },
+      "c06": {
+        "name": "Costillitas",
+        "desc": "Bites jugosos con todo el sabor del asado."
+      },
+      "c07": {
+        "name": "Prime Rib",
+        "desc": "Corte suave, jugoso y de sabor profundo."
+      },
+      "e01": {
+        "name": "Guacamole",
+        "desc": "Aguacate fresco preparado al momento."
+      },
+      "b01": {
+        "name": "Cerveza",
+        "desc": "Victoria, Corona, Modelo. En lata pequeña, fría y lista para acompañar tus cortes."
+      },
+      "b02": {
+        "name": "Refresco",
+        "desc": "Coca-Cola. Bebida refrescante ideal para complementar tu comida."
+      }
     }
+  },
+  "landing": {
+    "hero": {
+      "desc": "En Capitán Grill, el corte lo eliges tú. Ves la pieza cruda, la tocas, y en minutos está en la parrilla. ¿Prefieres disfrutarlo aquí con nosotros o llevarlo a casa? Tú decides: te lo preparamos al momento para comer en el lugar, o lo llevas listo para tu propia parrilla.",
+      "viewMenu": "Ver Menú Digital",
+      "reserve": "Reservar"
+    },
+    "place": {
+      "eyebrow": "San Miguel de Allende",
+      "title": "Nuestro Lugar",
+      "cardTitle": "Una Atmósfera Única",
+      "cardDesc": "Diseñamos cada espacio para ofrecerte una experiencia sofisticada, cálida y confortable. El rincón perfecto para disfrutar de la alta cocina.",
+      "viewGallery": "Ver galería completa"
+    },
+    "favorites": {
+      "eyebrow": "Del fuego a tu mesa",
+      "title": "Los Favoritos del Capitán",
+      "tags": ["En vivo", "Al peso", "Marmoleo", "Término", "Reposo", "A la mesa"]
+    },
+    "location": {
+      "title": "Visítanos rumbo a Atotonilco",
+      "desc": "Así es como se ve un corte en su máxima expresión. Ven a Capitán Grill y elige tu pieza al momento. La tabla llega a tu mesa, ves el marmoleo, la tocas y decides. En minutos está en la parrilla. Así de simple, así de bueno."
+    },
+    "directions": {
+      "title": "Cómo llegar",
+      "desc": "Estamos sobre la carretera a Atotonilco, a solo 10 minutos del centro de San Miguel de Allende. Sigue el video para llegar sin contratiempos.",
+      "videoPlaceholder": "Video de cómo llegar",
+      "reserve": "Reservar"
+    },
+    "footer": {
+      "tagline": "Cortes elegidos por ti, cocinados al momento en San Miguel de Allende.",
+      "explore": "Explorar",
+      "visitUs": "Visítanos",
+      "address": "Rumbo a Atotonilco, San Miguel de Allende",
+      "reserveWhatsApp": "Reservar por WhatsApp"
+    }
+  },
+  "menuPage": {
+    "eyebrow": "La Selección",
+    "titleBefore": "Nuestro",
+    "titleAccent": "Menú",
+    "lead": "Explora nuestra variedad de cortes de primera, guarniciones artesanales y bebidas preparadas para complementar tu experiencia al máximo."
+  },
+  "lugarPage": {
+    "eyebrow": "El espacio",
+    "titleBefore": "Nuestro",
+    "titleAccent": "Lugar",
+    "lead": "Un espacio rústico y campestre donde la naturaleza, el sabor y la tradición se unen para crear momentos inolvidables. Descubre nuestro ambiente antes de reservar tu mesa.",
+    "bento": {
+      "tag": "En video",
+      "eyebrow": "Nuestro ambiente",
+      "title": "La tranquilidad del campo",
+      "text": "Rodeado de naturaleza y con un estilo rústico, nuestro espacio está diseñado para que disfrutes de buena comida, momentos especiales y la calidez de un ambiente campestre."
+    },
+    "cuts": {
+      "eyebrow": "La selección",
+      "title": "La Experiencia"
+    },
+    "cutItems": [
+      { "name": "Calidad Prime", "note": "Selección rigurosa para tu mesa" },
+      { "name": "Marmoleo Perfecto", "note": "Textura y jugosidad inigualable" },
+      { "name": "Al Punto Exacto", "note": "Dominamos el arte de la parrilla" },
+      { "name": "Del Fuego a tu Mesa", "note": "El auténtico sazón campestre" },
+      { "name": "Frescura Garantizada", "note": "Eliges tu pieza al momento" }
+    ]
+  },
+  "contacto": {
+    "eyebrow": "Encuéntranos",
+    "titleBefore": "Ubicación &",
+    "titleAccent": "Contacto",
+    "lead": "Estamos listos para recibirte. Utiliza el mapa para llegar a nuestro espacio o comunícate directamente con nosotros para reservas y dudas.",
+    "videoText": "Cómo llegar",
+    "social": {
+      "eyebrow": "Atención Directa",
+      "title": "¿Listo para reservar?",
+      "desc": "Escríbenos por WhatsApp para asegurar tu mesa o síguenos en redes para conocer nuestras novedades."
+    }
+  },
+  "blog": {
+    "eyebrow": "Blog",
+    "title": "Próximamente",
+    "text": "Estamos preparando contenido sobre cortes, parrilla y la experiencia Capitán Grill. ¡Muy pronto!"
   },
   "about": {
     "title": "Nuestra Historia",
@@ -40,14 +162,14 @@
   },
   "location": {
     "title": "Ubicación",
-    "address": "Carretera a Atotonilco Km 2, 37880 San Miguel de Allende, Gto.",
-    "phone": "+52 415-158-3036",
+    "address": "37880 Santuario de Atotonilco, San Miguel de Allende, Gto.",
+    "phone": "+52 415-282-6863",
+    "hours": "Miércoles a Domingo 12-9 pm",
+"tapToChat": "Escríbenos directo",
+    "getDirectionsMaps": "Google Maps",
+    "getDirectionsWaze": "Waze",
     "phoneLabel": "Teléfono",
-    "hours": "Lun - Dom: 6:00 PM - 11:00 PM",
-    "hoursLabel": "Horario",
-    "tapToChat": "Escríbenos por WhatsApp",
-    "getDirectionsMaps": "Abrir en Maps",
-    "getDirectionsWaze": "Abrir en Waze"
+    "hoursLabel": "Horario"
   },
   "info": {
     "ourPlace": "Nuestro Lugar",
@@ -57,18 +179,76 @@
     "goTo": "Ir al corte {{number}}",
     "cuts": {
       "title": "Nuestros Cortes"
-    }
+    },
+    "close": "Cerrar",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "goTo": "Ir al corte {{number}}"
+  },
+  "history": {
+    "title": "Nuestra Historia",
+    "description": "En Capitán Grill transformamos cortes premium en experiencias inolvidables. Parrilla de campo, tradición y sabor en cada bocado. Cada corte se elige al momento, se ve y se prepara justo como tú lo pides, directo sobre las brasas."
+  },
+  "howItWorks": {
+    "title": "Cómo Funciona",
+    "steps": [
+      { "title": "Elige tu Corte", "desc": "Ves la pieza cruda, la tocas y eliges el gramaje exacto que quieres comer." },
+      { "title": "A la Parrilla o a Casa", "desc": "Te lo preparamos al momento sobre las brasas o lo llevas listo para tu propia parrilla." },
+      { "title": "Disfruta la Experiencia", "desc": "Cada bocado es único. Acompaña tu corte con la bebida de tu preferencia." }
+    ]
+  },
+  "offer": {
+    "title": "Nuestra Oferta",
+    "items": [
+      { "title": "Cortes al Carbón", "desc": "Cada pieza se asigna a la parrilla justo cuando la pides. Sin prisas, con el término exacto que prefieres." },
+      { "title": "Maridaje Perfecto", "desc": "Acompaña tu corte con cerveza artesanal, vino tinto o un cóctel de la casa. Pregunta a nuestro equipo por la recomendación del día." }
+    ]
+  },
+  "spaces": {
+    "title": "Nuestros Espacios",
+    "items": [
+      { "title": "Terraza al Aire Libre", "desc": "Disfruta de nuestra terraza con vista abierta, ideal para una cena bajo las estrellas o una comida con amigos." },
+      { "title": "Barra de Bebidas", "desc": "Un espacio cómodo y relajado donde puedes esperar tu corte con una copa de vino o tu cerveza favorita." }
+    ]
+  },
+  "featuredCuts": {
+    "title": "Los Favoritos del Capitán",
+    "items": [
+      { "name": "Rib Eye", "desc": "Marmoleo intenso y sabor profundo. El favorito de los conocedores." },
+      { "name": "Tomahawk", "desc": "Imponente y jugoso. Perfecto para compartir en el centro de la mesa." },
+      { "name": "New York", "desc": "Corte magro con carácter. Ideal para los que buscan sabor puro." }
+    ]
   },
   "social": {
     "title": "Síguenos",
-    "description": "Visítanos en Facebook y escríbenos por WhatsApp para ver fotos, promociones y novedades de Capitán Grill.",
-    "networksLabel": "Redes Sociales",
-    "follow": "Síguenos",
-    "writeUs": "Escríbenos directo",
+"description": "Visítanos en Facebook para ver fotos, promociones y novedades de Capitán Grill.",
     "reserveWhatsApp": "Reservar por WhatsApp",
-    "followInstagram": "Síguenos en Instagram"
+    "followInstagram": "Seguir en Instagram",
+    "writeUs": "Escríbenos directo",
+    "follow": "Síguenos"
   },
   "footer": {
     "rights": "Todos los derechos reservados."
+  },
+  "experience": {
+    "eyebrow": "Nuestra Experiencia",
+    "title": "No lees un menú.\nEliges tu corte.",
+    "cards": [
+      {
+        "title": "La Tabla Llega a Ti",
+        "description": "No te traemos una carta. Te traemos los cortes. La tabla llega a tu mesa con las piezas del día para que veas el marmoleo, toques la carne y elijas el gramaje exacto que quieres comer.",
+        "detail": "Del rancho a tu vista — sin intermediarios."
+      },
+      {
+        "title": "Al Fuego. Al Instante.",
+        "description": "Lo que eliges va directo a las brasas. Sin congelados, sin tiempos de espera innecesarios. Aquí el fuego trabaja cuando tú decides, al término que tú pides.",
+        "detail": "Término exacto, siempre al momento."
+      },
+      {
+        "title": "La Boutique",
+        "description": "¿Parrillada en casa? Llevamos el mismo estándar a tu mesa. Elige tus cortes, los empacamos al vacío y salen listos para ser los protagonistas de tu carne asada.",
+        "detail": "Calidad Capitán Grill, en tu propia parrilla."
+      }
+    ]
   }
 }

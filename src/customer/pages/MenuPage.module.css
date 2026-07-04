@@ -1,0 +1,96 @@
+/* ═══════════════════════════════════════════
+   PAGE & LAYOUT BASE
+═══════════════════════════════════════════ */
+.page {
+  background: var(--bg-primary);
+  min-height: 100dvh;
+}
+
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+/* ═══════════════════════════════════════════
+   HEADER (Estilo heredado)
+═══════════════════════════════════════════ */
+.pageHeader {
+  max-width: 620px;
+  margin-bottom: 2.5rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-hover);
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.pageTitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  color: var(--text-primary);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.9rem;
+}
+
+.pageTitleAccent {
+  color: var(--gold);
+}
+
+.pageLead {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════
+   WRAPPER DEL MENÚ
+═══════════════════════════════════════════ */
+.menuWrapper {
+  width: 100%;
+  position: relative;
+  /* Aquí puedes agregar animaciones de entrada si lo deseas en un futuro */
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════
+   MEDIA QUERIES (Tablet & Desktop)
+═══════════════════════════════════════════ */
+@media (min-width: 768px) {
+  .content {
+    padding: 3.5rem 2.5rem 5rem;
+  }
+  .pageHeader {
+    margin-bottom: 3.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content {
+    padding: 4.5rem 3rem 6rem;
+  }
+}

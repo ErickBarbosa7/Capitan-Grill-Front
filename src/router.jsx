@@ -1,20 +1,32 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import AdminLayout from './layouts/AdminLayout'
-import ProtectedRoute from './components/admin/ProtectedRoute'
+import AdminLayout from './admin/layouts/AdminLayout'
+import ProtectedRoute from './admin/components/ProtectedRoute'
 
-import CustomerLanding from './pages/CustomerLanding'
+import CustomerLanding from './customer/pages/CustomerLanding'
+import MenuPage from './customer/pages/MenuPage'
+import LugarPage from './customer/pages/LugarPage'
+import ContactoPage from './customer/pages/ContactoPage'
+import BlogPage from './customer/pages/BlogPage'
 
-import LoginPage from './pages/LoginPage'
-import Dashboard from './pages/Dashboard'
-import MenuTable from './pages/MenuTable'
-import EditItemPage from './pages/EditItemPage'
-import CategoryManager from './pages/CategoryManager'
-import ActivityPage from './pages/ActivityPage'
+import LoginPage from './admin/pages/LoginPage'
+import Dashboard from './admin/pages/Dashboard'
+import MenuTable from './admin/pages/MenuTable'
+import EditItemPage from './admin/pages/EditItemPage'
+import CategoryManager from './admin/pages/CategoryManager'
+import ActivityPage from './admin/pages/ActivityPage'
+import ExpensesPage from './admin/pages/ExpensesPage'
+import ProfilePage from './admin/pages/ProfilePage'
+import UsersPage from './admin/pages/UsersPage'
 
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<CustomerLanding />} />
+      <Route path="/inicio" element={<CustomerLanding />} />
+      <Route path="/" element={<Navigate to="/inicio" replace />} />
+      <Route path="menu" element={<MenuPage />} />
+      <Route path="lugar" element={<LugarPage />} />
+      <Route path="contacto" element={<ContactoPage />} />
+      <Route path="blog" element={<BlogPage />} />
 
       <Route path="login" element={<LoginPage />} />
 
@@ -33,9 +45,12 @@ export default function AppRoutes() {
         <Route path="inventory" element={<h1>Inventario — Próximamente</h1>} />
         <Route path="categorias" element={<CategoryManager />} />
         <Route path="actividad" element={<ActivityPage />} />
+        <Route path="gastos" element={<ExpensesPage />} />
+        <Route path="perfil" element={<ProfilePage />} />
+        <Route path="usuarios" element={<UsersPage />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<Navigate to="/inicio" replace />} />
     </Routes>
   )
 }

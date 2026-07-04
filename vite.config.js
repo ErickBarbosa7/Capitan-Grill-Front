@@ -3,10 +3,13 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ['lottie-react'],
+  },
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000', // <-- Revisa que este puerto coincida con tu backend
+        target: 'http://localhost:3000',
         changeOrigin: true,
       },
     },

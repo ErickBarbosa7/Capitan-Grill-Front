@@ -1,0 +1,403 @@
+.page {
+  max-width: 900px;
+}
+
+/* ─── ENCABEZADO ─── */
+.headingLabel {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--gold, #C9A87C);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.heading {
+  font-family: var(--font-serif, 'Playfair Display');
+  font-size: 2.6rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--text-primary, #2C2A29);
+  margin: 0 0 2rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border-light, #E6E2D8);
+}
+
+.error {
+  font-family: var(--font-body, 'Inter');
+  color: #DC2626;
+  padding: 2rem 0;
+  font-size: 0.9rem;
+}
+
+/* ─── LAYOUT ─── */
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ═══════════════════════════════
+   PANEL IZQUIERDO
+═══════════════════════════════ */
+.identityPanel {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  min-height: 360px;
+}
+
+/* Fondo oscuro base */
+.panelBg {
+  position: absolute;
+  inset: 0;
+  background: #141312;
+}
+
+/* Glow dorado sutil en la esquina superior */
+.panelOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 120% 60% at 50% -10%,
+    rgba(201, 168, 124, 0.12) 0%,
+    transparent 70%
+  );
+}
+
+/* Contenido sobre el fondo */
+.panelContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+  height: 100%;
+}
+
+/* ─── AVATAR ─── */
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(201, 168, 124, 0.12);
+  border: 1.5px solid rgba(201, 168, 124, 0.3);
+  color: var(--gold, #C9A87C);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif, 'Playfair Display');
+  font-size: 1.6rem;
+  font-style: italic;
+  font-weight: 600;
+  margin-bottom: 1.1rem;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+/* ─── IDENTIDAD ─── */
+.identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.5rem;
+}
+
+.identityName {
+  font-family: var(--font-heading, 'Bricolage Grotesque');
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #F7F5F0;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.identityRole {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+}
+
+.roleAdmin {
+  background: rgba(201, 168, 124, 0.15);
+  color: var(--gold, #C9A87C);
+}
+
+.roleEditor {
+  background: rgba(58, 90, 64, 0.2);
+  color: #6AB07A;
+}
+
+.identityEmail {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.72rem;
+  color: rgba(138, 134, 128, 0.55);
+  word-break: break-all;
+  line-height: 1.4;
+  margin-top: 0.1rem;
+}
+
+/* ─── DIVISOR PANEL ─── */
+.panelDivider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 1.25rem 0 1rem;
+}
+
+/* ─── ACCIONES PANEL ─── */
+.panelAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(138, 134, 128, 0.55);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+  margin-bottom: 0.15rem;
+}
+
+.panelAction:hover {
+  color: rgba(247, 245, 240, 0.65);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.panelActionDanger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(138, 134, 128, 0.45);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.panelActionDanger:hover {
+  color: #E85D5D;
+  background: rgba(232, 93, 93, 0.07);
+}
+
+/* ═══════════════════════════════
+   COLUMNA DERECHA
+═══════════════════════════════ */
+.fieldsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ─── SECCIÓN ─── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sectionLabel {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #8A8680;
+  padding-left: 0.25rem;
+}
+
+/* ─── FIELD CARD ─── */
+.fieldCard {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light, #E6E2D8);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* ─── FIELD ROW ─── */
+.field {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  min-height: 72px;
+  transition: background 0.15s;
+}
+
+.field:hover {
+  background: rgba(201, 168, 124, 0.02);
+}
+
+.fieldDivider {
+  height: 1px;
+  background: var(--border-light, #E6E2D8);
+  margin: 0 1.25rem;
+}
+
+.fieldLeft {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.fieldLabel {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8A8680;
+}
+
+.fieldValue {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.92rem;
+  color: var(--text-primary, #2C2A29);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fieldEmpty {
+  color: #B0ABA5;
+  font-style: italic;
+}
+
+.fieldReadIcon {
+  color: #C0BBB5;
+  flex-shrink: 0;
+}
+
+/* ─── PILL DE ROL ─── */
+.rolePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+/* ─── ACTIONS ─── */
+.fieldActions {
+  display: flex;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.actionEdit,
+.actionSave,
+.actionCancel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.actionEdit {
+  border: 1px solid var(--border-light, #E6E2D8);
+  color: #8A8680;
+}
+
+.actionEdit:hover {
+  color: var(--gold, #C9A87C);
+  border-color: rgba(201, 168, 124, 0.4);
+  background: rgba(201, 168, 124, 0.06);
+}
+
+.actionSave {
+  border: 1px solid rgba(58, 90, 64, 0.25);
+  color: #3A5A40;
+}
+
+.actionSave:hover {
+  border-color: #3A5A40;
+  background: rgba(58, 90, 64, 0.07);
+}
+
+.actionSave:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.actionCancel {
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  color: #DC2626;
+}
+
+.actionCancel:hover {
+  border-color: #DC2626;
+  background: rgba(220, 38, 38, 0.06);
+}
+
+/* ─── INPUT EDICIÓN ─── */
+.editRow { width: 100%; }
+
+.editInput {
+  width: 100%;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--gold, #C9A87C);
+  border-radius: 8px;
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.88rem;
+  color: var(--text-primary, #2C2A29);
+  background: #FAFAF8;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(201, 168, 124, 0.1);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .identityPanel {
+    min-height: auto;
+  }
+
+  .panelContent {
+    padding: 1.75rem 1.5rem 1.25rem;
+  }
+
+  .heading {
+    font-size: 2rem;
+  }
+}
