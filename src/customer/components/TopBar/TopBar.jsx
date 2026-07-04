@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, MessageCircle } from 'lucide-react';
 import tb from './TopBar.module.css';
 
@@ -11,12 +11,13 @@ const navItems = [
   { path: '/menu', label: 'Menú' },
   { path: '/lugar', label: 'Nuestro Lugar' },
   { path: '/contacto', label: 'Contáctanos' },
-  { path: '/blog', label: 'Blog' },
+
 ];
 
 export default function TopBar() {
   const { i18n } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleLang = () => {
@@ -38,16 +39,18 @@ export default function TopBar() {
   return (
     <>
       <header className={tb.topBar}>
-        <button className={tb.burger} onClick={() => setMenuOpen(o => !o)} aria-label="Menú">
-          {menuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-        <nav className={tb.desktopNav}>
-          {navItems.map((item) => (
-            <button key={item.path} className={tb.navLink} onClick={() => goTo(item.path)}>
-              {item.label}
-            </button>
-          ))}
-        </nav>
+        <div className={tb.left}>
+          <button className={tb.burger} onClick={() => setMenuOpen(o => !o)} aria-label="Menú">
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+          <nav className={tb.desktopNav}>
+            {navItems.map((item) => (
+              <button key={item.path} className={`${tb.navLink} ${item.path === location.pathname ? tb.navLinkActive : ''}`} onClick={() => goTo(item.path)}>
+                {item.label}
+              </button>
+            ))}
+          </nav>
+        </div>
         <span className={tb.logo}>Capitán Grill</span>
         <div className={tb.right}>
           <button className={tb.langToggle} onClick={toggleLang} aria-label="Cambiar idioma">
@@ -65,7 +68,7 @@ export default function TopBar() {
 
       <nav className={`${tb.menu} ${menuOpen ? tb.menuOpen : ''}`}>
         {navItems.map((item) => (
-          <button key={item.path} className={tb.menuItem} onClick={() => goTo(item.path)}>
+          <button key={item.path} className={`${tb.menuItem} ${item.path === location.pathname ? tb.menuItemActive : ''}`} onClick={() => goTo(item.path)}>
             {item.label}
           </button>
         ))}

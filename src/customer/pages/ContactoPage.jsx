@@ -1,14 +1,14 @@
 import { useTranslation } from 'react-i18next';
-import { PlayCircle } from 'lucide-react';
+import { Play } from 'lucide-react'; 
 import TopBar from '../components/TopBar/TopBar';
 import LocationSection from '../components/LocationSection/LocationSection';
-import cc from '../../styles/contact-cards.module.css';
 import styles from './ContactoPage.module.css';
 
 const FACEBOOK_URL = 'https://www.facebook.com/people/Capitangrill/100064038762789/';
 const WHATSAPP_URL = 'https://wa.me/524152826863?text=Hola!%20Quisiera%20informes';
 const INSTAGRAM_URL = 'https://www.instagram.com/capitan_grill.sma2026';
 
+// Iconos SVG 
 function FbIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
@@ -39,36 +39,74 @@ export default function ContactoPage() {
   return (
     <div className={styles.page}>
       <TopBar />
-      <div className={styles.sectionHeader}>
-        <span className={styles.sectionEyebrow}>Encuéntranos</span>
-        <h1 className={styles.sectionTitle}>Ubicación & Contacto</h1>
-      </div>
+      
+      <main className={styles.content}>
+        <header className={styles.pageHeader}>
+          <span className={styles.eyebrow}>Encuéntranos</span>
+          <h1 className={styles.pageTitle}>
+            Ubicación & <span className={styles.pageTitleAccent}>Contacto</span>
+          </h1>
+          <p className={styles.pageLead}>
+            Estamos listos para recibirte. Utiliza el mapa para llegar a nuestro espacio o comunícate directamente con nosotros para reservas y dudas.
+          </p>
+        </header>
 
-      <LocationSection />
-
-      <div className={styles.videoSection}>
-        <span className={styles.videoLabel}>Cómo llegar</span>
-        <div className={styles.videoPlaceholder}>
-          <PlayCircle size={40} />
-          <span>Video de cómo llegar</span>
+        <div className={styles.locationWrapper}>
+          <LocationSection />
         </div>
-      </div>
 
-      <div className={styles.socialWrap}>
-        <div className={cc.contactSocial}>
-          <span className={cc.contactSocialLabel}>Síguenos</span>
-          <div className={cc.contactSocialBtns}>
-            <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="Facebook"><FbIcon /></a>
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="Instagram"><IgIcon /></a>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={cc.socialIcon} title="WhatsApp"><WaIcon /></a>
+        {/* BENTO GRID: 9:16 VIDEO + SOCIAL */}
+        <section className={styles.bentoGrid}>
+          
+          {/* CELDA 1: Formato Vertical (Reels/TikTok) */}
+          <div className={`${styles.bentoCell} ${styles.videoCell}`}>
+            {/* CUANDO TENGAS EL VIDEO, DESCOMENTA ESTO: */}
+            {/* 
+            <video 
+              src="/ruta-a-tu-video.mp4" 
+              className={styles.realVideo} 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+            /> 
+            */}
+            
+            <div className={styles.videoPlaceholder}>
+              <span className={styles.playBadge}>
+                <Play size={20} fill="currentColor" />
+              </span>
+              <span className={styles.videoText}>Cómo llegar</span>
+            </div>
           </div>
-        </div>
 
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={cc.contactBtn} style={{ marginTop: '0.75rem' }}>
-          <WaIcon />
-          {t('social.reserveWhatsApp', 'Reservar por WhatsApp')}
-        </a>
-      </div>
+          {/* CELDA 2: Tarjeta Social & WhatsApp */}
+          <div className={`${styles.bentoCell} ${styles.contactCell}`}>
+            <span className={styles.bentoStoryEyebrow}>Atención Directa</span>
+            <h3 className={styles.bentoStoryTitle}>¿Listo para reservar?</h3>
+            <p className={styles.bentoStoryText}>
+              Escríbenos por WhatsApp para asegurar tu mesa o síguenos en redes para conocer nuestras novedades.
+            </p>
+
+            <div className={styles.actionsWrapper}>
+              <div className={styles.socialRow}>
+                <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className={styles.socialIcon} title="Facebook">
+                  <FbIcon />
+                </a>
+                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={styles.socialIcon} title="Instagram">
+                  <IgIcon />
+                </a>
+              </div>
+              
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.btnPrimary}>
+                <WaIcon />
+                {t('social.reserveWhatsApp', 'Reservar por WhatsApp')}
+              </a>
+            </div>
+          </div>
+
+        </section>
+      </main>
     </div>
   );
 }
