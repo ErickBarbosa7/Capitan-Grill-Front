@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { Play } from 'lucide-react'; 
+
 import TopBar from '../components/TopBar/TopBar';
 import LocationSection from '../components/LocationSection/LocationSection';
+import ubiVideo from '../../assets/videos/ubi.mov';
 import styles from './ContactoPage.module.css';
 
 const FACEBOOK_URL = 'https://www.facebook.com/people/Capitangrill/100064038762789/';
@@ -60,24 +61,15 @@ export default function ContactoPage() {
           
           {/* CELDA 1: Formato Vertical (Reels/TikTok) */}
           <div className={`${styles.bentoCell} ${styles.videoCell}`}>
-            {/* CUANDO TENGAS EL VIDEO, DESCOMENTA ESTO: */}
-            {/* 
             <video 
-              src="/ruta-a-tu-video.mp4" 
+              src={ubiVideo}
               className={styles.realVideo} 
               autoPlay 
               loop 
               muted 
               playsInline 
-            /> 
-            */}
-            
-            <div className={styles.videoPlaceholder}>
-              <span className={styles.playBadge}>
-                <Play size={20} fill="currentColor" />
-              </span>
-              <span className={styles.videoText}>{t('contacto.videoText')}</span>
-            </div>
+              controls
+            />
           </div>
 
           {/* CELDA 2: Tarjeta Social & WhatsApp */}

@@ -11,6 +11,7 @@ import corte4 from '../../assets/img/4.jpeg';
 import corte5 from '../../assets/img/6.jpg';
 
 import cortesVideo from '../../assets/videos/cortes.MOV';
+import ubiVideo from '../../assets/videos/ubi.mov';
 import cc from '../../styles/contact-cards.module.css';
 import styles from './CustomerLanding.module.css';
 
@@ -305,10 +306,15 @@ export default function CustomerLanding() {
         <div className={styles.wideInner}>
           <div className={`${styles.locationLayout} ${styles.locationLayoutReverse}`}>
             <div className={styles.videoCol}>
-              <div className={styles.videoPlaceholder}>
-                <MessageCircle size={40} />
-                <span>{t('landing.directions.videoPlaceholder')}</span>
-              </div>
+              <video
+                src={ubiVideo}
+                className={styles.videoPlayer}
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+              />
             </div>
             <div className={styles.locationTextCol}>
               <h2 className={styles.locationHeading}>{t('landing.directions.title')}</h2>

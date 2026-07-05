@@ -134,7 +134,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Asegura que llene el contenedor sin deformarse */
+  object-fit: contain;
+  background: var(--bg-primary);
   z-index: 1;
 }
 

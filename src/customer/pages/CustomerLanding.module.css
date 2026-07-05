@@ -608,6 +608,9 @@
   background: rgba(247, 245, 240, 0.1);
   color: var(--gold);
 }
+.locationSectionDark .videoPlayer {
+  border: 1px solid rgba(247, 245, 240, 0.1);
+}
 
 /* ═══════════════════════════════════════════
    WIDE SECTION — contenedor tipo "Visítanos"
@@ -699,6 +702,15 @@
   transition: background 0.2s, color 0.2s;
 }
 .videoPlaceholder:hover { background: var(--border-accent); color: var(--gold); }
+.videoPlayer {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #141312;
+}
 
 /* ═══════════════════════════════════════════
    FOOTER
@@ -901,7 +913,7 @@ a.footerInfoRow:hover { color: var(--gold); }
   .locationDesc { font-size: 1.05rem; }
   .locationMapCol { flex: 1.5; min-height: 500px; }
   .videoCol { flex: 0 0 380px; }
-  .videoPlaceholder { aspect-ratio: 9 / 16; max-height: 500px; }
+  .videoPlayer { max-height: 500px; }
   .footerInner { padding: 4.5rem 4rem 3rem; }
 }
 
