@@ -356,5 +356,23 @@
 @media (max-width: 768px) {
   .header { flex-direction: column; }
   .formRow { flex-direction: column; }
+
+  .tableWrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .table th, .table td { padding: 0.6rem; font-size: 0.8rem; }
+}
+
+@media (max-width: 480px) {
+  .table th, .table td {
+    padding: 0.4rem;
+    font-size: 0.72rem;
+  }
+
+  .actionBtn {
+    width: 28px;
+    height: 28px;
+  }
 }

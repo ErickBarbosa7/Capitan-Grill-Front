@@ -719,3 +719,39 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 1.7rem;
+  }
+
+  .th, .td {
+    padding: 0.6rem 0.6rem;
+  }
+
+  .td {
+    font-size: 0.8rem;
+  }
+
+  .thumb, .thumbPlaceholder {
+    width: 36px;
+    height: 36px;
+  }
+
+  .itemName {
+    font-size: 0.92rem;
+  }
+
+  .actionBtn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .cardBody {
+    padding: 0.75rem;
+  }
+
+  .cardName {
+    font-size: 0.95rem;
+  }
+}
