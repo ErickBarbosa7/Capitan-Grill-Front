@@ -1,8 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Eye, EyeOff } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 import styles from './LoginPage.module.css'
+
+import LottiePackage from 'lottie-react'
+import welcomeAnim from '../../assets/lottie/welcome.json'
+// Importa aquí tu animación grande para el lado izquierdo
+import leftLargeAnim from '../../assets/lottie/people.json' 
+import rightLargeAnim from '../../assets/lottie/people2.json'
+
+
+const Lottie = LottiePackage.default || LottiePackage;
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -13,24 +22,20 @@ export default function LoginPage() {
   const { login, isAdmin } = useAuth()
   const navigate = useNavigate()
 
-  if (isAdmin) {
-    navigate('/admin', { replace: true })
-    return null
-  }
+  useEffect(() => {
+    if (isAdmin) navigate('/admin', { replace: true })
+  }, [isAdmin, navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
-
     if (!email.trim() || !password.trim()) {
       setError('Completa todos los campos')
       return
     }
-
     setLoading(true)
     const ok = await login(email, password)
     setLoading(false)
-
     if (ok) {
       navigate('/admin', { replace: true })
     } else {
@@ -40,50 +45,103 @@ export default function LoginPage() {
 
   return (
     <div className={styles.page}>
-      <form className={styles.card} onSubmit={handleSubmit}>
-        <div className={styles.header}>
-          <div className={styles.logo}>CG</div>
-          <h1 className={styles.title}>Capitán Grill</h1>
-          <p className={styles.subtitle}>Panel de administración</p>
+      {/* Cabecera estilo la imagen */}
+      <header className={styles.header}>
+        <div className={styles.brand}>Capitán Grill</div>
+        <div className={styles.headerActions}>
+          <a href="/" className={styles.link}>Ir al sitio web &rarr;</a>
+        </div>
+      </header>
+
+      {/* Contenedor principal */}
+      <main className={styles.mainArea}>
+        
+        {/* Animación grande a la izquierda */}
+        <div className={styles.leftDecoration}>
+          <Lottie 
+            animationData={leftLargeAnim} 
+            loop={true} 
+            autoplay={true} 
+            style={{ width: '100%', height: '100%' }} 
+          />
         </div>
 
-        {error && <p className={styles.error}>{error}</p>}
-
-        <label className={styles.label}>
-          Email
-          <input
-            className={styles.input}
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoFocus
-          />
-        </label>
-
-        <label className={styles.label}>
-          Contraseña
-          <div className={styles.inputWrap}>
-            <input
-              className={styles.input}
-              type={showPassword ? 'text' : 'password'}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button
-              type="button"
-              className={styles.togglePassword}
-              onClick={() => setShowPassword(s => !s)}
-              tabIndex={-1}
-            >
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
+        {/* Tarjeta central */}
+        <div className={styles.card}>
+          <div className={styles.cardHeader}>
+            <div className={styles.iconSlot}>
+              <Lottie 
+                animationData={welcomeAnim} 
+                loop={true} 
+                autoplay={true} 
+                style={{ width: '100px', height: '100px' }} 
+              />
+            </div>
+            <h1 className={styles.title}>Iniciar Sesión</h1>
+            <p className={styles.subtitle}>
+              Inicia sesión para acceder al<br />
+              panel de administración.
+            </p>
           </div>
-        </label>
 
-        <button className={styles.btn} type="submit" disabled={loading}>
-          {loading ? 'Entrando...' : 'Entrar'}
-        </button>
-      </form>
+          {error && <p className={styles.error}>{error}</p>}
+
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <div className={styles.inputGroup}>
+              <input
+                className={styles.input}
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Ingresa tu Email"
+                autoFocus
+              />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <div className={styles.inputWrap}>
+                <input
+                  className={`${styles.input} ${styles.passwordInput}`}
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Contraseña"
+                />
+                <button
+                  type="button"
+                  className={styles.togglePassword}
+                  onClick={() => setShowPassword(s => !s)}
+                  tabIndex={-1}
+                >
+                  {showPassword ? 'Show' : 'Hide'}
+                </button>
+              </div>
+            </div>
+
+            <div className={styles.helpText}>
+            </div>
+
+            <button className={styles.primaryBtn} type="submit" disabled={loading}>
+              {loading ? <span className={styles.spinner} /> : 'Entrar'}
+            </button>
+          </form>
+        </div>
+
+        {/* Decoración a la derecha (opcional, para equilibrar como en la imagen) */}
+        <div className={styles.rightDecoration}>
+          <Lottie 
+            animationData={rightLargeAnim} 
+            loop={true} 
+            autoplay={true} 
+            style={{ width: '100%', height: '100%' }} 
+          />
+        </div>
+
+      </main>
+
+      <footer className={styles.footer}>
+        Copyright @CapitanGrill {new Date().getFullYear()} | Privacy Policy
+      </footer>
     </div>
   )
 }
