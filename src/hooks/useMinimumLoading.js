@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export function useMinimumLoading(isLoading, delay = 2000) {
+export function useMinimumLoading(isLoading, delay = 250) {
   const [showLoader, setShowLoader] = useState(isLoading)
 
   useEffect(() => {
