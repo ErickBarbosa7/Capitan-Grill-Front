@@ -2,13 +2,15 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useMenuContext } from '../../contexts/MenuContext'
-import Loading from '../../components/Loading'
+import { useMinimumLoading } from '../../hooks/useMinimumLoading'
+import { Loader } from '../../components/Loader'
 import { Plus, Pencil, Trash2, RotateCcw, Check, X, ArrowLeft } from 'lucide-react'
 import styles from './CategoryManager.module.css'
 
 export default function CategoryManager() {
   const navigate = useNavigate()
   const { categories, loading, createCategory, updateCategory, deleteCategory, hardDeleteCategory, restoreCategory } = useMenuContext()
+  const displayLoading = useMinimumLoading(loading)
   const [newName, setNewName] = useState('')
   const [editingId, setEditingId] = useState(null)
   const [editName, setEditName] = useState('')
@@ -86,7 +88,7 @@ export default function CategoryManager() {
     }
   }
 
-  if (loading) return <Loading />
+  if (displayLoading) return <Loader fullScreen={true} size={150} />
 
   return (
     <div className={styles.page}>

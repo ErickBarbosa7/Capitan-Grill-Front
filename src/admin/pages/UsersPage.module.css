@@ -134,6 +134,21 @@
 
 .actionBtn:hover { color: var(--capitan-wood); border-color: var(--capitan-wood); }
 .actionDanger:hover { color: #DC2626; border-color: #DC2626; }
+.actionRestore:hover { color: var(--gold); border-color: var(--gold); }
+
+.togglePassword {
+  display: flex;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.togglePassword:hover {
+  color: var(--capitan-wood);
+}
 
 .lockedBadge {
   display: inline-flex;
@@ -169,7 +184,7 @@
   background: var(--bg-card);
   border-radius: 16px;
   width: 100%;
-  max-width: 480px;
+  max-width: 520px;
 }
 
 .modalHeader {
@@ -217,7 +232,18 @@
 
 .formRow {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
+}
+
+.passwordInputRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.passwordInputRow .formInput {
+  flex: 1;
 }
 
 .formField {

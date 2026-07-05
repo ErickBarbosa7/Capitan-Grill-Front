@@ -2,7 +2,8 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useMenuContext } from '../../contexts/MenuContext'
-import Loading from '../../components/Loading'
+import { useMinimumLoading } from '../../hooks/useMinimumLoading'
+import { Loader as LoadingSpinner } from '../../components/Loader'
 import CategoryDropdown from '../components/CategoryDropdown'
 import { Sparkles, Camera, ArrowLeft, Loader } from 'lucide-react'
 import { generateDescription } from '../../services/menuService'
@@ -22,6 +23,7 @@ export default function EditItemPage() {
   const { code } = useParams()
   const navigate = useNavigate()
   const { categories, loading, createItem, updateItem, createCategory, updateCategory, deleteCategory } = useMenuContext()
+  const displayLoading = useMinimumLoading(loading)
 
   const isNew = !code
   const activeCategories = useMemo(() => categories.filter(c => c.isActive), [categories])
@@ -138,7 +140,7 @@ export default function EditItemPage() {
     } finally { setSaving(false) }
   }
 
-  if (loading) return <Loading />
+  if (displayLoading) return <LoadingSpinner fullScreen={true} size={150} />
 
   if (!isNew && !item) {
     return (

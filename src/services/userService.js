@@ -15,3 +15,7 @@ export function updateUser(id, data) {
 export function removeUser(id) {
   return api.delete(`/users/${id}`)
 }
+
+export function restoreUser(id) {
+  return api.patch(`/users/${id}/restore`)
+}

@@ -60,6 +60,88 @@
 .btnPrimary:hover { background: #B8945E; }
 .btnPrimary:disabled { opacity: 0.5; cursor: not-allowed; }
 
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  background: none;
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.btnSecondary:hover { background: rgba(201, 168, 124, 0.06); border-color: var(--gold); }
+.btnSecondary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── FILTER BAR ── */
+.filterBar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.filterChip {
+  padding: 0.4rem 0.85rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterChip:hover { border-color: var(--gold); color: var(--text-primary); }
+
+.filterChipActive {
+  background: var(--gold);
+  color: #fff;
+  border-color: var(--gold);
+}
+
+.customDates {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dateInput {
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  outline: none;
+}
+
+.dateInput:focus { border-color: var(--gold); }
+
+.totalLabel {
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.totalLabel strong {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+}
+
 /* ── TABLE ── */
 .tableWrap {
   background: #fff;

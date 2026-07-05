@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useMenuContext } from '../../contexts/MenuContext';
 import { useAuth } from '../../contexts/AuthContext';
-import Loading from '../../components/Loading';
+import { useMinimumLoading } from '../../hooks/useMinimumLoading';
+import { Loader } from '../../components/Loader';
 import { useActivity } from '../../hooks/useActivity';
 import { getMenuViews } from '../../services/menuService';
 import { Plus, FolderPlus, ExternalLink, Pencil, EyeOff, Trash2, RotateCcw, Eye, TrendingUp, ChevronRight, CheckCircle } from 'lucide-react';
@@ -44,6 +45,7 @@ const ACTIVITY_ICONS = {
 export default function Dashboard() {
   const { t } = useTranslation();
   const { categories, loading } = useMenuContext();
+  const displayLoading = useMinimumLoading(loading);
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -100,7 +102,7 @@ export default function Dashboard() {
   const dateLabel = today.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
   const dateFormatted = dateLabel.charAt(0).toUpperCase() + dateLabel.slice(1);
 
-  if (loading) return <Loading />
+  if (displayLoading) return <Loader fullScreen={true} size={150} />
 
   return (
     <div className={styles.page}>

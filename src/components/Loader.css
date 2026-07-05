@@ -1,0 +1,24 @@
+/* Loader.css */
+
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Modificador para cuando necesita ocupar toda la pantalla */
+.loader-container.fullscreen {
+  min-height: 100vh;
+  /* Se adapta a tus custom properties si manejas temas dinámicos, 
+     o simplemente se queda transparente si no le pasas un color de fondo */
+  background-color: var(--background-color, transparent);
+  position: relative;
+  z-index: 50; /* Útil para asegurar que flote por encima del contenido */
+}
+
+.lottie-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -12,6 +12,7 @@ export default function CategoryDropdown({
   onRestore,
   readOnly,
   translation = true,
+  placeholder = 'Seleccionar categoría',
 }) {
   const [open, setOpen] = useState(false)
   const [adding, setAdding] = useState(false)
@@ -95,7 +96,7 @@ export default function CategoryDropdown({
         onClick={() => setOpen(!open)}
       >
         <span className={styles.triggerLabel}>
-          {selected ? selected.nombre : 'Seleccionar categoría'}
+          {selected ? selected.nombre : placeholder}
         </span>
         <ChevronDown size={16} className={`${styles.chevron} ${open ? styles.chevronOpen : ''}`} />
       </button>

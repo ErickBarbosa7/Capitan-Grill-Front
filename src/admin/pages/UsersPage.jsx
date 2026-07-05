@@ -1,8 +1,11 @@
 import { useState, useEffect, useCallback } from 'react'
 import { toast } from 'react-toastify'
-import { Plus, Pencil, Trash2, X, Save, Users } from 'lucide-react'
-import { getUsers, createUser, updateUser, removeUser } from '../../services/userService'
+import { Plus, Pencil, Trash2, X, Save, Users, Eye, EyeOff, RotateCcw } from 'lucide-react'
+import { getUsers, createUser, updateUser, removeUser, restoreUser } from '../../services/userService'
 import { useAuth } from '../../contexts/AuthContext'
+import { useMinimumLoading } from '../../hooks/useMinimumLoading'
+import { Loader } from '../../components/Loader'
+import CategoryDropdown from '../components/CategoryDropdown'
 import styles from './UsersPage.module.css'
 
 const roleLabels = { admin: 'Administrador', editor: 'Editor' }
@@ -11,10 +14,12 @@ export default function UsersPage() {
   const { user: currentUser } = useAuth()
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
+  const displayLoading = useMinimumLoading(loading)
 
   const [showModal, setShowModal] = useState(false)
   const [editingUser, setEditingUser] = useState(null)
   const [form, setForm] = useState({ email: '', password: '', name: '', role: 'editor' })
+  const [showPassword, setShowPassword] = useState(false)
   const [saving, setSaving] = useState(false)
 
   const [deleteConfirm, setDeleteConfirm] = useState(null)
@@ -58,11 +63,11 @@ export default function UsersPage() {
 
       if (editingUser) {
         const res = await updateUser(editingUser.id, payload)
-        setUsers(prev => prev.map(u => u.id === editingUser.id ? { ...u, ...res } : u))
+        setUsers(prev => prev.map(u => u.id === editingUser.id ? { ...u, ...res.user } : u))
         toast.success('Usuario actualizado')
       } else {
         const res = await createUser(payload)
-        setUsers(prev => [...prev, res])
+        setUsers(prev => [...prev, res.user])
         toast.success('Usuario creado')
       }
       setShowModal(false)
@@ -88,7 +93,19 @@ export default function UsersPage() {
     }
   }
 
-  if (loading) return <div className={styles.page}><p className={styles.loading}>Cargando...</p></div>
+  const handleRestore = async (id) => {
+    const previous = users
+    setUsers(prev => prev.map(u => u.id === id ? { ...u, isActive: true } : u))
+    try {
+      await restoreUser(id)
+      toast.success('Usuario restaurado')
+    } catch (err) {
+      setUsers(previous)
+      toast.error(err.message || 'Error al restaurar')
+    }
+  }
+
+  if (displayLoading) return <Loader fullScreen={true} size={150} />
 
   return (
     <div className={styles.page}>
@@ -143,7 +160,9 @@ export default function UsersPage() {
                         )}
                       </>
                     ) : (
-                      <span className={styles.lockedBadge}>—</span>
+                      <button className={`${styles.actionBtn} ${styles.actionRestore}`} onClick={() => handleRestore(u.id)} title="Restaurar">
+                        <RotateCcw size={14} />
+                      </button>
                     )}
                   </td>
                 </tr>
@@ -175,15 +194,26 @@ export default function UsersPage() {
                 </div>
                 <div className={styles.formField}>
                   <label className={styles.formLabel}>{editingUser ? 'Nueva contraseña' : 'Contraseña'} *</label>
-                  <input className={styles.formInput} type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder={editingUser ? 'Dejar vacío para mantener' : 'Contraseña'} required={!editingUser} />
+                  <div className={styles.passwordInputRow}>
+                    <input className={styles.formInput} type={showPassword ? 'text' : 'password'} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder={editingUser ? 'Dejar vacío para mantener' : 'Contraseña'} required={!editingUser} />
+                    <button type="button" className={styles.togglePassword} onClick={() => setShowPassword(s => !s)} tabIndex={-1}>
+                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
                 </div>
               </div>
               <div className={styles.formField}>
                 <label className={styles.formLabel}>Rol</label>
-                <select className={styles.formInput} value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })}>
-                  <option value="editor">Editor</option>
-                  <option value="admin">Administrador</option>
-                </select>
+                <CategoryDropdown
+                  categories={[
+                    { id: 'editor', nombre: 'Editor' },
+                    { id: 'admin', nombre: 'Administrador' },
+                  ]}
+                  value={form.role}
+                  onChange={(val) => setForm({ ...form, role: val })}
+                  readOnly
+                  placeholder="Seleccionar rol"
+                />
               </div>
               <div className={styles.formActions}>
                 <button type="button" className={styles.cancelBtn} onClick={() => setShowModal(false)}>Cancelar</button>

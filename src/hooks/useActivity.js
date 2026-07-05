@@ -30,6 +30,7 @@ export function useActivity({ pollInterval = 0 } = {}) {
       lastFetch = now
       setData(result)
     } catch {
+      // Silently fail — cache will remain stale until next successful fetch
     } finally {
       currentPromise = null
       setLoading(false)

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useActivity } from '../../hooks/useActivity'
-import Loading from '../../components/Loading'
+import { useMinimumLoading } from '../../hooks/useMinimumLoading'
+import { Loader } from '../../components/Loader'
 import { ArrowLeft, Plus, Pencil, EyeOff, Eye, Trash2, RotateCcw } from 'lucide-react'
 import styles from './ActivityPage.module.css'
 
@@ -30,6 +31,8 @@ function formatFullTime(iso) {
 export default function ActivityPage() {
   const navigate = useNavigate()
   const { data: activityData, loading } = useActivity()
+  const displayLoading = useMinimumLoading(loading)
+  if (displayLoading) return <Loader fullScreen={true} size={150} />
 
   return (
     <div className={styles.page}>
@@ -40,9 +43,7 @@ export default function ActivityPage() {
       <span className={styles.headingLabel}>Historial</span>
       <h1 className={styles.heading}>Todos los movimientos</h1>
 
-      {loading ? (
-        <Loading />
-      ) : activityData.length === 0 ? (
+      {activityData.length === 0 ? (
         <p className={styles.empty}>Aún no hay movimientos registrados</p>
       ) : (
         <div className={styles.list}>

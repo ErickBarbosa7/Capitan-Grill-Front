@@ -2,7 +2,8 @@ import { useState, useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useMenuContext } from '../../contexts/MenuContext'
-import Loading from '../../components/Loading'
+import { useMinimumLoading } from '../../hooks/useMinimumLoading'
+import { Loader } from '../../components/Loader'
 import CategoryDropdown from '../components/CategoryDropdown'
 import { Pencil, Trash2, Plus, Search, Eye, EyeOff, RotateCcw, XCircle, LayoutGrid, Table2, Camera, X } from 'lucide-react'
 import styles from './MenuTable.module.css'
@@ -10,6 +11,7 @@ import styles from './MenuTable.module.css'
 export default function MenuTable() {
   const navigate = useNavigate()
   const { categories, loading, deleteItem, toggleAvailability, restoreItem, hardDeleteItem } = useMenuContext()
+  const displayLoading = useMinimumLoading(loading)
 
   const [deleting, setDeleting] = useState(null)
   const [detailItem, setDetailItem] = useState(null)
@@ -117,7 +119,7 @@ export default function MenuTable() {
     }
   }, [deleting, hardDeleteItem])
 
-  if (loading) return <Loading />
+  if (displayLoading) return <Loader fullScreen={true} size={150} />
 
   return (
     <div className={styles.page}>
