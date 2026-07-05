@@ -349,12 +349,19 @@
   overflow-y: auto;
 }
 
+/* Botón de salir exclusivo para móvil (oculto en escritorio) */
+.mobileLogoutBtn {
+  display: none;
+}
+
 /* ═══════════════════════════════════════
    RESPONSIVE MÓVIL
 ═══════════════════════════════════════ */
 @media (max-width: 768px) {
   .layout { flex-direction: column; }
-
+  .mobileProfileBtn {
+    display: flex;
+  }
   .sidebar {
     width: 100%;
     height: auto;

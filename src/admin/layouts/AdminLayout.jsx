@@ -21,10 +21,10 @@ const secondaryLinks = [
   { to: '/admin/usuarios',   icon: <Users size={17} />,      label: 'Usuarios' },
 ]
 
-function NavLink({ link, isActive, onClick }) {
+function NavLink({ link, isActive, onClick, className = '' }) {
   return (
     <button
-      className={`${styles.sidebarLink} ${isActive ? styles.sidebarLinkActive : ''}`}
+      className={`${styles.sidebarLink} ${isActive ? styles.sidebarLinkActive : ''} ${className}`}
       onClick={onClick}
     >
       <span className={styles.sidebarLinkIcon}>{link.icon}</span>
@@ -83,6 +83,14 @@ export default function AdminLayout() {
               onClick={() => navigate(link.to)}
             />
           ))}
+          
+          {/* ─── BOTÓN DE PERFIL (SOLO MÓVIL) ─── */}
+          <NavLink
+            link={{ to: '/admin/perfil', icon: <User size={17} />, label: 'Perfil' }}
+            isActive={isActive('/admin/perfil')}
+            onClick={() => navigate('/admin/perfil')}
+            className={styles.mobileProfileBtn}
+          />
         </nav>
 
         {/* ─── NAV SECUNDARIA ─── */}
