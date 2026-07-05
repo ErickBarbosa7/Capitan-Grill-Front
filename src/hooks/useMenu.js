@@ -2,6 +2,9 @@ import { useState, useEffect, useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import * as menuService from '../services/menuService'
 
+let lastFetchTime = 0
+const FETCH_TTL = 5 * 60 * 1000
+
 const CACHE_KEY = 'capitan_menu'
 
 function loadCache() {
@@ -49,12 +52,20 @@ export function useMenu() {
 
   useEffect(() => {
     const cached = loadCache()
+    const now = Date.now()
+
     if (cached) {
       setRawCategories(cached.categories)
       setRawItems(cached.items)
       setLoading(false)
     }
-    fetchData()
+
+    if (now - lastFetchTime > FETCH_TTL) {
+      lastFetchTime = now
+      fetchData()
+    } else {
+      setLoading(false)
+    }
   }, [fetchData])
 
   const notifyUpdate = useCallback(() => {

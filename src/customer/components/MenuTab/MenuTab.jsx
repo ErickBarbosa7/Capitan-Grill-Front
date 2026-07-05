@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useMenu } from '../../../hooks/useMenu';
+import { useMenuContext } from '../../../contexts/MenuContext';
 import CategorySection from '../CategorySection/CategorySection';
 import styles from './MenuTab.module.css';
 
 export default function MenuTab() {
   const { i18n } = useTranslation();
-  const { categories } = useMenu();
+  const { categories } = useMenuContext();
   const [activeCategoryId, setActiveCategoryId] = useState(null);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
 

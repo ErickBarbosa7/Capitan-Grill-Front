@@ -50,21 +50,24 @@ export default function UsersPage() {
       toast.error('Completa todos los campos requeridos')
       return
     }
+    const previous = users
     setSaving(true)
     try {
       const payload = { ...form }
       if (editingUser && !payload.password) delete payload.password
 
       if (editingUser) {
-        await updateUser(editingUser.id, payload)
+        const res = await updateUser(editingUser.id, payload)
+        setUsers(prev => prev.map(u => u.id === editingUser.id ? { ...u, ...res } : u))
         toast.success('Usuario actualizado')
       } else {
-        await createUser(payload)
+        const res = await createUser(payload)
+        setUsers(prev => [...prev, res])
         toast.success('Usuario creado')
       }
       setShowModal(false)
-      fetchUsers()
     } catch (err) {
+      setUsers(previous)
       toast.error(err.message || 'Error al guardar')
     } finally {
       setSaving(false)
@@ -73,12 +76,14 @@ export default function UsersPage() {
 
   const handleRemove = async () => {
     if (!deleteConfirm) return
+    const previous = users
+    setUsers(prev => prev.filter(u => u.id !== deleteConfirm.id))
     try {
       await removeUser(deleteConfirm.id)
       toast.success('Usuario desactivado')
       setDeleteConfirm(null)
-      fetchUsers()
     } catch (err) {
+      setUsers(previous)
       toast.error(err.message || 'Error al desactivar')
     }
   }

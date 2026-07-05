@@ -66,18 +66,21 @@ export default function ExpensesPage() {
       toast.error('Completa todos los campos')
       return
     }
+    const previous = expenses
     setSaving(true)
     try {
       if (editingExpense) {
-        await updateExpense(editingExpense.id, expenseForm)
+        const res = await updateExpense(editingExpense.id, expenseForm)
+        setExpenses(prev => prev.map(exp => exp.id === editingExpense.id ? { ...exp, ...res } : exp))
         toast.success('Gasto actualizado')
       } else {
-        await createExpense(expenseForm)
+        const res = await createExpense(expenseForm)
+        setExpenses(prev => [...prev, res])
         toast.success('Gasto registrado')
       }
       setShowExpenseModal(false)
-      fetchData()
     } catch (err) {
+      setExpenses(previous)
       toast.error(err.message || 'Error al guardar')
     } finally {
       setSaving(false)
@@ -86,42 +89,50 @@ export default function ExpensesPage() {
 
   const handleDeleteExpense = async () => {
     if (!deleteConfirm) return
+    const previous = expenses
+    setExpenses(prev => prev.filter(e => e.id !== deleteConfirm.id))
     try {
       await deleteExpense(deleteConfirm.id)
       toast.success('Gasto eliminado')
       setDeleteConfirm(null)
-      fetchData()
     } catch (err) {
+      setExpenses(previous)
       toast.error(err.message || 'Error al eliminar')
     }
   }
 
   const handleCreateCategory = async (data) => {
+    const previous = categories
     try {
-      await createExpenseCategory({ name: data.nameEs })
+      const res = await createExpenseCategory({ name: data.nameEs })
+      setCategories(prev => [...prev, res])
       toast.success('Categoría creada')
-      fetchData()
     } catch (err) {
+      setCategories(previous)
       toast.error(err.message || 'Error al crear categoría')
     }
   }
 
   const handleUpdateCategory = async (id, data) => {
+    const previous = categories
     try {
-      await updateExpenseCategory(id, { name: data.nameEs })
+      const res = await updateExpenseCategory(id, { name: data.nameEs })
+      setCategories(prev => prev.map(c => c.id === id ? { ...c, ...res } : c))
       toast.success('Categoría actualizada')
-      fetchData()
     } catch (err) {
+      setCategories(previous)
       toast.error(err.message || 'Error al actualizar categoría')
     }
   }
 
   const handleDeleteCategory = async (id) => {
+    const previous = categories
+    setCategories(prev => prev.filter(c => c.id !== id))
     try {
       await deleteExpenseCategory(id)
       toast.success('Categoría eliminada')
-      fetchData()
     } catch (err) {
+      setCategories(previous)
       toast.error(err.message || 'Error al eliminar categoría')
     }
   }

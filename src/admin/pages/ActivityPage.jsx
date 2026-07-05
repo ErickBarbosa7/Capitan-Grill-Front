@@ -1,7 +1,5 @@
-import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import { getActivity } from '../../services/menuService'
+import { useActivity } from '../../hooks/useActivity'
 import Loading from '../../components/Loading'
 import { ArrowLeft, Plus, Pencil, EyeOff, Eye, Trash2, RotateCcw } from 'lucide-react'
 import styles from './ActivityPage.module.css'
@@ -31,20 +29,7 @@ function formatFullTime(iso) {
 
 export default function ActivityPage() {
   const navigate = useNavigate()
-  const [activityData, setActivityData] = useState([])
-  const [loading, setLoading] = useState(true)
-
-  const fetchActivity = useCallback(async () => {
-    try {
-      const data = await getActivity()
-      setActivityData(data)
-    } catch {
-      toast.error('Error al cargar movimientos')
-    }
-    setLoading(false)
-  }, [])
-
-  useEffect(() => { fetchActivity() }, [fetchActivity])
+  const { data: activityData, loading } = useActivity()
 
   return (
     <div className={styles.page}>

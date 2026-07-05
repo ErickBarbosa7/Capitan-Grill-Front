@@ -1,11 +1,12 @@
-import { useMemo, useState, useEffect, useCallback } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useMenuContext } from '../../contexts/MenuContext';
 import { useAuth } from '../../contexts/AuthContext';
 import Loading from '../../components/Loading';
-import { getActivity, getMenuViews } from '../../services/menuService';
+import { useActivity } from '../../hooks/useActivity';
+import { getMenuViews } from '../../services/menuService';
 import { Plus, FolderPlus, ExternalLink, Pencil, EyeOff, Trash2, RotateCcw, Eye, TrendingUp, ChevronRight, CheckCircle } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import styles from './Dashboard.module.css';
@@ -47,8 +48,8 @@ export default function Dashboard() {
   const { user } = useAuth();
 
   const [greeting, setGreeting] = useState('');
-  const [activityData, setActivityData] = useState([]);
   const [menuViews, setMenuViews] = useState(0);
+  const { data: activityData } = useActivity({ pollInterval: 10000 })
   
   useEffect(() => {
     getMenuViews()
@@ -62,21 +63,6 @@ export default function Dashboard() {
     else if (hour < 19) setGreeting('Buenas tardes');
     else setGreeting('Buenas noches');
   }, []);
-
-  const fetchActivity = useCallback(async () => {
-    try {
-      const data = await getActivity()
-      setActivityData(data)
-    } catch {
-      toast.error('Error al cargar actividad')
-    }
-  }, [])
-
-  useEffect(() => {
-    fetchActivity()
-    const interval = setInterval(fetchActivity, 10000)
-    return () => clearInterval(interval)
-  }, [fetchActivity])
 
   const stats = useMemo(() => {
     const totalItems = categories.reduce((sum, cat) => sum + cat.items.length, 0);
