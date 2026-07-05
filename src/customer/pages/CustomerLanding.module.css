@@ -443,6 +443,12 @@
   position: relative;
 }
 
+.favBtnWrap {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 2.5rem;
+}
+
 /* --- Nuevo Header Centrado --- */
 .favHeaderRow {
   padding: 0 1.25rem;

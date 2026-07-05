@@ -77,7 +77,7 @@
   "landing": {
     "hero": {
       "desc": "At Capitán Grill, you choose the cut. You see the raw piece, touch it, and in minutes it's on the grill. Prefer to enjoy it here with us or take it home? You decide: we prepare it for you to eat on-site, or take it ready for your own grill.",
-      "viewMenu": "View Digital Menu",
+      "viewMenu": "View Menu",
       "reserve": "Reserve"
     },
     "place": {
@@ -90,7 +90,8 @@
     "favorites": {
       "eyebrow": "From the fire to your table",
       "title": "The Captain's Favorites",
-      "tags": ["Live", "By weight", "Marbling", "Doneness", "Resting", "At the table"]
+      "tags": ["Live", "By weight", "Marbling", "Doneness", "Resting", "At the table"],
+"viewMenu": "View Menu"
     },
     "location": {
       "title": "Visit us on the way to Atotonilco",

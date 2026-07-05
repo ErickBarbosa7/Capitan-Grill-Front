@@ -2,8 +2,10 @@ import { useTranslation } from 'react-i18next';
 
 import TopBar from '../components/TopBar/TopBar';
 import LocationSection from '../components/LocationSection/LocationSection';
-import ubiVideo from '../../assets/videos/ubi.mov';
 import styles from './ContactoPage.module.css';
+import { optimizeVideoUrl } from '../../utils/cloudinary';
+
+const UBI_VIDEO = optimizeVideoUrl('https://res.cloudinary.com/gn00jygp/video/upload/v1/videos/ubi');
 
 const FACEBOOK_URL = 'https://www.facebook.com/people/Capitangrill/100064038762789/';
 const WHATSAPP_URL = 'https://wa.me/524152826863?text=Hola!%20Quisiera%20informes';
@@ -62,7 +64,7 @@ export default function ContactoPage() {
           {/* CELDA 1: Formato Vertical (Reels/TikTok) */}
           <div className={`${styles.bentoCell} ${styles.videoCell}`}>
             <video 
-              src={ubiVideo}
+              src={UBI_VIDEO}
               className={styles.realVideo} 
               autoPlay 
               loop 

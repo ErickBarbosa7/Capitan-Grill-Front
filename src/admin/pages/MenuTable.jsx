@@ -6,6 +6,7 @@ import { useMinimumLoading } from '../../hooks/useMinimumLoading'
 import { Loader } from '../../components/Loader'
 import CategoryDropdown from '../components/CategoryDropdown'
 import { Pencil, Trash2, Plus, Search, Eye, EyeOff, RotateCcw, XCircle, LayoutGrid, Table2, Camera, X } from 'lucide-react'
+import { optimizeImageUrl } from '../../utils/cloudinary'
 import styles from './MenuTable.module.css'
 
 export default function MenuTable() {
@@ -211,7 +212,7 @@ export default function MenuTable() {
                   <tr key={item.id} className={rowClass} onClick={() => setDetailItem(item)} style={{ cursor: 'pointer' }}>
                     <td className={styles.td}>
                       {thumb ? (
-                        <img src={thumb} alt="" className={styles.thumb} />
+                        <img src={optimizeImageUrl(thumb)} alt="" className={styles.thumb} />
                       ) : (
                         <div className={styles.thumbPlaceholder}>
                           <Camera size={14} />
@@ -310,7 +311,7 @@ export default function MenuTable() {
             return (
               <div key={item.id} className={cardClass} onClick={() => setDetailItem(item)} style={{ cursor: 'pointer' }}>
                 {thumb ? (
-                  <img src={thumb} alt="" className={styles.cardImage} />
+                  <img src={optimizeImageUrl(thumb)} alt="" className={styles.cardImage} />
                 ) : (
                   <div className={styles.cardImagePlaceholder}>
                     <Camera size={28} />
@@ -420,7 +421,7 @@ export default function MenuTable() {
 
             <div className={styles.detailImageWrap}>
               {detailItem.images?.[0]?.url ? (
-                <img src={detailItem.images[0].url} alt="" className={styles.detailImage} />
+                <img src={optimizeImageUrl(detailItem.images[0].url)} alt="" className={styles.detailImage} />
               ) : (
                 <div className={styles.detailImagePlaceholder}>
                   <Camera size={36} />

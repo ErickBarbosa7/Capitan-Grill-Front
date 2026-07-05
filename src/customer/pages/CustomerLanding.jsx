@@ -5,15 +5,17 @@ import { MessageCircle, Menu, X, ChevronLeft, ChevronRight, MapPin, Clock } from
 import lugarImg from '../../assets/img/Lugar.jpg';
 import lugar3Img from '../../assets/img/lugar3.jpg';
 import corte1 from '../../assets/img/1.jpeg';
-import corte2 from '../../assets/img/2.jpeg';
 import corte3 from '../../assets/img/3.jpeg';
 import corte4 from '../../assets/img/4.jpeg';
 import corte5 from '../../assets/img/6.jpg';
+import corte7 from '../../assets/img/7.jpg';
 
-import cortesVideo from '../../assets/videos/cortes.MOV';
-import ubiVideo from '../../assets/videos/ubi.mov';
 import cc from '../../styles/contact-cards.module.css';
 import styles from './CustomerLanding.module.css';
+import { optimizeVideoUrl } from '../../utils/cloudinary';
+
+const CORTES_VIDEO = optimizeVideoUrl('https://res.cloudinary.com/gn00jygp/video/upload/v1/videos/cortes');
+const UBI_VIDEO = optimizeVideoUrl('https://res.cloudinary.com/gn00jygp/video/upload/v1/videos/ubi');
 
 const WHATSAPP_URL = 'https://wa.me/524152826863?text=Hola!%20Quisiera%20informes';
 const FACEBOOK_URL = 'https://www.facebook.com/people/Capitangrill/100064038762789/';
@@ -144,10 +146,10 @@ export default function CustomerLanding() {
   ];
 
   const favoriteItems = [
-    { type: 'video', src: cortesVideo, tag: t('landing.favorites.tags.0') },
+    { type: 'video', src: CORTES_VIDEO, tag: t('landing.favorites.tags.0') },
     { type: 'image', src: corte1, tag: t('landing.favorites.tags.1') },
-    { type: 'video', src: cortesVideo, tag: t('landing.favorites.tags.2') },
-    { type: 'image', src: corte3, tag: t('landing.favorites.tags.3') },
+    { type: 'image', src: corte3, tag: t('landing.favorites.tags.2') },
+    { type: 'image', src: corte7, tag: t('landing.favorites.tags.3') },
     { type: 'image', src: corte4, tag: t('landing.favorites.tags.4') },
     { type: 'image', src: corte5, tag: t('landing.favorites.tags.5') },
   ];
@@ -257,6 +259,11 @@ export default function CustomerLanding() {
             <h2 className={styles.sectionTitle}>{t('landing.favorites.title')}</h2>
           </div>
           
+          <div className={styles.favBtnWrap}>
+            <button className={styles.btnPrimary} onClick={() => goTo('/menu')}>
+              {t('landing.favorites.viewMenu')}
+            </button>
+          </div>
           <FavoritesGallery items={favoriteItems} />
         </div>
       </section>
@@ -307,7 +314,7 @@ export default function CustomerLanding() {
           <div className={`${styles.locationLayout} ${styles.locationLayoutReverse}`}>
             <div className={styles.videoCol}>
               <video
-                src={ubiVideo}
+                src={UBI_VIDEO}
                 className={styles.videoPlayer}
                 autoPlay
                 muted

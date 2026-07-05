@@ -7,7 +7,11 @@ import { Loader as LoadingSpinner } from '../../components/Loader'
 import CategoryDropdown from '../components/CategoryDropdown'
 import { Sparkles, Camera, ArrowLeft, Loader } from 'lucide-react'
 import { generateDescription } from '../../services/menuService'
+import { optimizeImageUrl } from '../../utils/cloudinary'
 import styles from './EditItemPage.module.css'
+
+const CLOUDINARY_CLOUD = 'gn00jygp'
+const CLOUDINARY_PRESET = 'capitan_grill'
 
 function generateCode(categories) {
   const used = new Set()
@@ -50,6 +54,7 @@ export default function EditItemPage() {
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [imageUrl, setImageUrl] = useState('')
+  const [imagePublicId, setImagePublicId] = useState('')
   const [errors, setErrors] = useState({})
   const [aiLoading, setAiLoading] = useState(false)
   const fileRef = useRef(null)
@@ -69,7 +74,7 @@ export default function EditItemPage() {
   useEffect(() => {
     if (isNew) {
       setNombreEs(''); setNombreEn(''); setDescripcionEs(''); setDescripcionEn('')
-      setCategoriaId(firstCatId); setPrecio(0); setDisponible(true); setImageUrl('')
+      setCategoriaId(firstCatId); setPrecio(0); setDisponible(true); setImageUrl(''); setImagePublicId('')
     } else if (item) {
       setNombreEs(item.nombreEs || item.nombre)
       setNombreEn(item.nombreEn || item.nombre)
@@ -80,17 +85,31 @@ export default function EditItemPage() {
       setDisponible(item.disponible)
       const primary = item.images?.find(i => i.isPrimary)
       setImageUrl(primary?.url || item.images?.[0]?.url || '')
+      setImagePublicId(primary?.publicId || item.images?.[0]?.publicId || '')
     }
   }, [item, isNew, firstCatId])
 
-  const handleImageSelect = (e) => {
+  const handleImageSelect = async (e) => {
     const file = e.target.files?.[0]
     if (!file) return
     setUploading(true)
-    const reader = new FileReader()
-    reader.onload = () => { setImageUrl(reader.result); setUploading(false) }
-    reader.onerror = () => { toast.error('Error al leer imagen'); setUploading(false) }
-    reader.readAsDataURL(file)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('upload_preset', CLOUDINARY_PRESET)
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
+        method: 'POST',
+        body: formData,
+      })
+      if (!res.ok) throw new Error('Error al subir imagen')
+      const data = await res.json()
+      setImageUrl(data.secure_url)
+      setImagePublicId(data.public_id)
+    } catch (err) {
+      toast.error(err.message || 'Error al subir imagen')
+    } finally {
+      setUploading(false)
+    }
   }
 
   const hasErrors = useMemo(() => {
@@ -120,7 +139,7 @@ export default function EditItemPage() {
     setErrors({ nombre: eN, precio: eP, categoriaId: eC })
     if (eN || eP || eC) return
     setSaving(true)
-    const images = imageUrl ? [{ url: imageUrl, isPrimary: true }] : []
+    const images = imageUrl ? [{ url: imageUrl, publicId: imagePublicId, isPrimary: true }] : []
     try {
       const payload = {
         nombreEs: nombreEs.trim(), nombreEn: nombreEn.trim() || nombreEs.trim(),
@@ -279,7 +298,7 @@ export default function EditItemPage() {
         <div className={styles.previewCol}>
           <div className={styles.imageCard}>
             {imageUrl
-              ? <img src={imageUrl} alt="Vista previa" className={styles.imagePreview} />
+              ? <img src={optimizeImageUrl(imageUrl)} alt="Vista previa" className={styles.imagePreview} />
               : (
                 <div className={styles.imagePlaceholder}>
                   <Camera size={28} />
@@ -294,7 +313,7 @@ export default function EditItemPage() {
                 {uploading ? 'Subiendo…' : imageUrl ? 'Cambiar foto' : 'Agregar foto'}
               </button>
               {imageUrl && (
-                <button type="button" className={styles.imageRemoveBtn} onClick={() => setImageUrl('')}>
+                <button type="button" className={styles.imageRemoveBtn} onClick={() => { setImageUrl(''); setImagePublicId('') }}>
                   Eliminar foto
                 </button>
               )}

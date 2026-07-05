@@ -3,18 +3,20 @@ import { useTranslation } from 'react-i18next';
 import { X, ChevronLeft, ChevronRight, Play, Maximize2 } from 'lucide-react';
 import lugarImg from '../../assets/img/Lugar.jpg';
 import lugar3 from '../../assets/img/lugar3.jpg';
-import lugarVideo from '../../assets/img/IMG_6038.MOV';
 import img1 from '../../assets/img/1.jpeg';
 import img2 from '../../assets/img/3.jpeg';
 import img3 from '../../assets/img/5.jpeg';
 import img4 from '../../assets/img/6.jpg';
-import img5 from '../../assets/videos/cortes.MOV';
 
 import styles from './LugarPage.module.css';
 import TopBar from '../components/TopBar/TopBar';
+import { optimizeVideoUrl } from '../../utils/cloudinary';
+
+const LUGAR_VIDEO = optimizeVideoUrl('https://res.cloudinary.com/gn00jygp/video/upload/v1/videos/lugar');
+const CORTES_VIDEO = optimizeVideoUrl('https://res.cloudinary.com/gn00jygp/video/upload/v1/videos/cortes');
 
 const mediaItems = [
-  { type: 'video', src: lugarVideo, alt: 'Video del lugar' },
+  { type: 'video', src: LUGAR_VIDEO, alt: 'Video del lugar' },
   { type: 'image', src: lugarImg, alt: 'Capitán Grill 1' },
   { type: 'image', src: lugar3, alt: 'Capitán Grill 2' },
 ];
@@ -27,7 +29,7 @@ export default function LugarPage() {
     { type: 'image', src: img2, name: t('lugarPage.cutItems.1.name'), note: t('lugarPage.cutItems.1.note') },
     { type: 'image', src: img3, name: t('lugarPage.cutItems.2.name'), note: t('lugarPage.cutItems.2.note') },
     { type: 'image', src: img4, name: t('lugarPage.cutItems.3.name'), note: t('lugarPage.cutItems.3.note') },
-    { type: 'video', src: img5, name: t('lugarPage.cutItems.4.name'), note: t('lugarPage.cutItems.4.note') },
+    { type: 'video', src: CORTES_VIDEO, name: t('lugarPage.cutItems.4.name'), note: t('lugarPage.cutItems.4.note') },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(null);
@@ -259,10 +261,7 @@ export default function LugarPage() {
             onTouchEnd={handleTouchEnd}
           >
             {mediaItems[currentIndex].type === 'video' ? (
-              <video ref={videoRef} className={styles.lightboxMedia} controls autoPlay playsInline onClick={(e) => e.stopPropagation()}>
-                <source src={mediaItems[currentIndex].src} type="video/quicktime" />
-                <source src={mediaItems[currentIndex].src} type="video/mp4" />
-              </video>
+              <video ref={videoRef} src={mediaItems[currentIndex].src} className={styles.lightboxMedia} controls autoPlay playsInline onClick={(e) => e.stopPropagation()} />
             ) : (
               <img src={mediaItems[currentIndex].src} alt={mediaItems[currentIndex].alt} className={styles.lightboxMedia} />
             )}
