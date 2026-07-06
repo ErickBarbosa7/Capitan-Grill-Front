@@ -349,8 +349,193 @@
   overflow-y: auto;
 }
 
-/* Botón de salir exclusivo para móvil (oculto en escritorio) */
-.mobileLogoutBtn {
+/* ═══════════════════════════════════════
+   MOBILE TOP BAR
+═══════════════════════════════════════ */
+.mobileTopBar {
+  display: none;
+}
+
+.mobileTopBarTitle {
+  font-family: var(--font-serif, 'Playfair Display');
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #F7F5F0;
+}
+
+.mobileAvatarBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(201, 168, 124, 0.18);
+  border: 1px solid rgba(201, 168, 124, 0.3);
+  color: var(--gold, #C9A87C);
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════
+   DROPDOWN OVERLAY
+═══════════════════════════════════════ */
+.dropdownOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: transparent;
+}
+
+/* ═══════════════════════════════════════
+   PROFILE DROPDOWN
+═══════════════════════════════════════ */
+.profileDropdown {
+  position: fixed;
+  top: 56px;
+  right: 0.75rem;
+  background: #1C1B1A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 0.5rem;
+  min-width: 190px;
+  z-index: 201;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.pdHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0.65rem;
+}
+
+.pdAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(201, 168, 124, 0.18);
+  border: 1px solid rgba(201, 168, 124, 0.3);
+  color: var(--gold, #C9A87C);
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pdInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  min-width: 0;
+}
+
+.pdName {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(247, 245, 240, 0.85);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pdRole {
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.62rem;
+  color: rgba(138, 134, 128, 0.55);
+}
+
+.pdItem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.6rem 0.65rem;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: rgba(247, 245, 240, 0.7);
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+}
+
+.pdItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(247, 245, 240, 0.9);
+}
+
+.pdDivider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 0.25rem 0.65rem;
+}
+
+/* ═══════════════════════════════════════
+   MORE POPOVER
+═══════════════════════════════════════ */
+.morePopover {
+  position: fixed;
+  bottom: calc(68px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1C1B1A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 0.5rem;
+  min-width: 200px;
+  z-index: 201;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.mpItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: rgba(247, 245, 240, 0.75);
+  font-family: var(--font-body, 'Inter');
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+}
+
+.mpItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(247, 245, 240, 0.9);
+}
+
+.mpItemActive {
+  color: var(--gold, #C9A87C);
+  background: rgba(201, 168, 124, 0.1);
+}
+
+.mpIcon {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+/* ─── Botón "Más" solo visible en mobile ─── */
+.mobileMoreBtn {
   display: none;
 }
 
@@ -359,9 +544,21 @@
 ═══════════════════════════════════════ */
 @media (max-width: 768px) {
   .layout { flex-direction: column; }
-  .mobileProfileBtn {
+
+  .mobileTopBar {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 52px;
+    padding: 0 1.25rem;
+    background: #141312;
+    z-index: 99;
   }
+
   .sidebar {
     width: 100%;
     height: auto;
@@ -415,8 +612,13 @@
   .sidebarLinkLabel { font-size: 0.59rem; }
   .linkBadge { display: none; }
 
+  .mobileMoreBtn {
+    display: flex;
+  }
+
   .main {
     padding: 1.25rem;
+    padding-top: calc(52px + 1rem);
     padding-bottom: calc(68px + env(safe-area-inset-bottom));
   }
 }

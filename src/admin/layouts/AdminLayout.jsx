@@ -1,7 +1,8 @@
+import { useState } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import {
   BarChart3, ClipboardList, Receipt,
-  History, Users,
+  History, Users, MoreHorizontal,
   LogOut, ExternalLink, User
 } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
@@ -11,7 +12,7 @@ import styles from './AdminLayout.module.css'
 /* ─── Links principales ─── */
 const mainLinks = [
   { to: '/admin',        icon: <BarChart3 size={17} />,    label: 'Inicio' },
-  { to: '/admin/menu',   icon: <ClipboardList size={17} />, label: 'Mi Menú',  badge: 'IA' },
+  { to: '/admin/menu',   icon: <ClipboardList size={17} />, label: 'Menú',  badge: 'IA' },
   { to: '/admin/gastos', icon: <Receipt size={17} />,       label: 'Gastos' },
 ]
 
@@ -38,6 +39,8 @@ export default function AdminLayout() {
   const navigate   = useNavigate()
   const location   = useLocation()
   const { user, logout } = useAuth()
+  const [showMoreMenu, setShowMoreMenu] = useState(false)
+  const [showProfileMenu, setShowProfileMenu] = useState(false)
 
   const isActive = (to) =>
     to === '/admin'
@@ -54,8 +57,55 @@ export default function AdminLayout() {
   const displayName = user?.name || user?.email?.split('@')[0] || 'Admin'
   const displayRole = user?.role === 'admin' ? 'Administrador' : 'Usuario'
 
+  const closeAll = () => {
+    setShowMoreMenu(false)
+    setShowProfileMenu(false)
+  }
+
+  const handleNav = (to) => {
+    closeAll()
+    navigate(to)
+  }
+
   return (
     <div className={styles.layout}>
+
+      {/* ─── MOBILE TOP BAR ─── */}
+      <div className={styles.mobileTopBar}>
+        <span className={styles.mobileTopBarTitle}>Capitán Grill</span>
+        <button
+          className={styles.mobileAvatarBtn}
+          onClick={() => { setShowProfileMenu(p => !p); setShowMoreMenu(false) }}
+        >
+          {initials}
+        </button>
+
+        {showProfileMenu && (
+          <>
+            <div className={styles.dropdownOverlay} onClick={closeAll} />
+            <div className={styles.profileDropdown}>
+              <div className={styles.pdHeader}>
+                <div className={styles.pdAvatar}>{initials}</div>
+                <div className={styles.pdInfo}>
+                  <span className={styles.pdName}>{displayName}</span>
+                  <span className={styles.pdRole}>{displayRole}</span>
+                </div>
+              </div>
+              <button className={styles.pdItem} onClick={() => handleNav('/admin/perfil')}>
+                <User size={15} />
+                Ver perfil
+              </button>
+              <div className={styles.pdDivider} />
+              <button className={styles.pdItem} onClick={handleLogout}>
+                <LogOut size={15} />
+                Cerrar sesión
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* ─── DESKTOP SIDEBAR ─── */}
       <aside className={styles.sidebar}>
 
         {/* ─── BRAND ─── */}
@@ -83,14 +133,15 @@ export default function AdminLayout() {
               onClick={() => navigate(link.to)}
             />
           ))}
-          
-          {/* ─── BOTÓN DE PERFIL (SOLO MÓVIL) ─── */}
-          <NavLink
-            link={{ to: '/admin/perfil', icon: <User size={17} />, label: 'Perfil' }}
-            isActive={isActive('/admin/perfil')}
-            onClick={() => navigate('/admin/perfil')}
-            className={styles.mobileProfileBtn}
-          />
+
+          {/* ─── BOTÓN "MÁS" (SOLO MÓVIL) ─── */}
+          <button
+            className={`${styles.sidebarLink} ${styles.mobileMoreBtn} ${showMoreMenu ? styles.sidebarLinkActive : ''}`}
+            onClick={() => { setShowMoreMenu(p => !p); setShowProfileMenu(false) }}
+          >
+            <span className={styles.sidebarLinkIcon}><MoreHorizontal size={17} /></span>
+            <span className={styles.sidebarLinkLabel}>Más</span>
+          </button>
         </nav>
 
         {/* ─── NAV SECUNDARIA ─── */}
@@ -147,9 +198,30 @@ export default function AdminLayout() {
 
       </aside>
 
+      {/* ─── MAIN CONTENT ─── */}
       <main className={styles.main}>
         <Outlet />
       </main>
+
+      {/* ─── POPOVER "MÁS" ─── */}
+      {showMoreMenu && (
+        <>
+          <div className={styles.dropdownOverlay} onClick={closeAll} />
+          <div className={styles.morePopover}>
+            {secondaryLinks.map(link => (
+              <button
+                key={link.to}
+                className={`${styles.mpItem} ${isActive(link.to) ? styles.mpItemActive : ''}`}
+                onClick={() => handleNav(link.to)}
+              >
+                <span className={styles.mpIcon}>{link.icon}</span>
+                <span>{link.label}</span>
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+
     </div>
   )
 }

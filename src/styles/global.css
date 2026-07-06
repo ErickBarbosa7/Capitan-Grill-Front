@@ -35,3 +35,24 @@ a {
 button {
   font-family: var(--font-body);
 }
+
+/* ═══════════════════════════════════════
+   TOAST MOBILE
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .app-toast {
+    margin: 0 auto 0.5rem !important;
+    width: calc(100vw - 2rem) !important;
+    border-radius: 14px !important;
+    padding: 0.85rem 1rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .Toastify__close-button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

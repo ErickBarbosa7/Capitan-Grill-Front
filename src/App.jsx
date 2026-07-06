@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -6,6 +7,14 @@ import { MenuProvider } from './contexts/MenuContext'
 import AppRoutes from './router'
 
 export default function App() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768)
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -13,14 +22,18 @@ export default function App() {
           <AppRoutes />
         </MenuProvider>
         <ToastContainer
-          position="top-right"
+          position={isMobile ? 'top-center' : 'top-right'}
           autoClose={2500}
           hideProgressBar
           closeOnClick
           pauseOnFocusLoss={false}
           pauseOnHover
           theme="dark"
-          style={{ '--toastify-color-success': '#C9A87C' }}
+          toastClassName="app-toast"
+          style={{
+            ...(isMobile ? { top: '60px' } : {}),
+            '--toastify-color-success': '#C9A87C',
+          }}
           toastStyle={{
             borderRadius: 12,
             fontFamily: 'Inter, sans-serif',

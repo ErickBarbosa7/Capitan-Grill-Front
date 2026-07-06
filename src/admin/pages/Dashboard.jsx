@@ -115,7 +115,7 @@ export default function Dashboard() {
             {greeting}, <span className={styles.headingName}>{userName}</span>
           </h1>
           <p className={styles.headingSub}>
-            Tu menú se vio <strong>{menuViews}</strong> veces ayer. Aquí está el resumen.
+            Tu menú se vio <strong>{menuViews}</strong> veces.
           </p>
         </div>
 
