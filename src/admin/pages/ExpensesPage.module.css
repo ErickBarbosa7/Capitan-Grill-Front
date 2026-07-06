@@ -20,7 +20,7 @@
 
 .headingSerif {
   font-family: var(--font-serif);
-  font-size: 2.2rem;
+  font-size: 3rem;
   font-weight: 700;
   font-style: italic;
   color: var(--text-primary);

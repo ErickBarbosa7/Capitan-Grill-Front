@@ -126,8 +126,8 @@ export default function MenuTable() {
     <div className={styles.page}>
       <div className={styles.header}>
         <div className={styles.headerLeft}>
-          <span className={styles.headingLabel}>Mi Menú</span>
-          <h1 className={styles.heading}>{filteredItems.length} platillos en la mesa</h1>
+          <span className={styles.headingCount}>{filteredItems.length} productos</span>
+          <h1 className={styles.heading}>Mi Menú</h1>
         </div>
         <button className={styles.addBtn} onClick={() => navigate('/admin/menu/nuevo')}>
           <Plus size={18} />

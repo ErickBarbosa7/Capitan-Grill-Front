@@ -72,6 +72,13 @@
   flex-wrap: wrap;
 }
 
+.headingCount {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.1rem;
+}
+
 .searchWrap {
   position: relative;
   flex: 1;

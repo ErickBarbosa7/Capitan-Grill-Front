@@ -326,7 +326,7 @@
   background: transparent;
   border: none;
   border-radius: 8px;
-  color: rgba(138, 134, 128, 0.55);
+  color: #E85D5D;
   font-family: var(--font-body, 'Inter');
   font-size: 0.78rem;
   font-weight: 500;
@@ -335,8 +335,8 @@
 }
 
 .logoutBtn:hover {
-  color: #E85D5D;
-  background: rgba(232, 93, 93, 0.07);
+  color: #DC2626;
+  background: rgba(220, 38, 38, 0.1);
 }
 
 /* ═══════════════════════════════════════
@@ -474,6 +474,15 @@
 .pdItem:hover {
   background: rgba(255, 255, 255, 0.05);
   color: rgba(247, 245, 240, 0.9);
+}
+
+.pdItemDanger {
+  color: #E85D5D;
+}
+
+.pdItemDanger:hover {
+  color: #DC2626;
+  background: rgba(220, 38, 38, 0.08);
 }
 
 .pdDivider {

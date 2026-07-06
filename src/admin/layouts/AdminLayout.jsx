@@ -96,7 +96,7 @@ export default function AdminLayout() {
                 Ver perfil
               </button>
               <div className={styles.pdDivider} />
-              <button className={styles.pdItem} onClick={handleLogout}>
+              <button className={`${styles.pdItem} ${styles.pdItemDanger}`} onClick={handleLogout}>
                 <LogOut size={15} />
                 Cerrar sesión
               </button>
