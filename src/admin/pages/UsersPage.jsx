@@ -12,6 +12,7 @@ const roleLabels = { admin: 'Administrador', editor: 'Editor' }
 
 export default function UsersPage() {
   const { user: currentUser } = useAuth()
+  const isAdmin = currentUser?.role === 'admin'
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const displayLoading = useMinimumLoading(loading)
@@ -106,6 +107,22 @@ export default function UsersPage() {
   }
 
   if (displayLoading) return <Loader fullScreen={true} size={150} />
+
+  if (!isAdmin) {
+    return (
+      <div className={styles.page}>
+        <div className={styles.header}>
+          <div>
+            <h1 className={styles.headingSerif}>Usuarios</h1>
+            <p className={styles.subheading}>Gestión de cuentas del sistema</p>
+          </div>
+        </div>
+        <div className={styles.tableWrap}>
+          <p className={styles.empty}>No tienes permisos para acceder a esta sección.</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className={styles.page}>

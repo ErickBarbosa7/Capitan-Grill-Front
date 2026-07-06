@@ -150,7 +150,9 @@ export default function AdminLayout() {
         </div>
 
         <nav className={styles.sidebarNavSecondary}>
-          {secondaryLinks.map(link => (
+          {secondaryLinks
+            .filter(link => link.to !== '/admin/usuarios' || user?.role === 'admin')
+            .map(link => (
             <NavLink
               key={link.to}
               link={link}
@@ -208,7 +210,9 @@ export default function AdminLayout() {
         <>
           <div className={styles.dropdownOverlay} onClick={closeAll} />
           <div className={styles.morePopover}>
-            {secondaryLinks.map(link => (
+            {secondaryLinks
+              .filter(link => link.to !== '/admin/usuarios' || user?.role === 'admin')
+              .map(link => (
               <button
                 key={link.to}
                 className={`${styles.mpItem} ${isActive(link.to) ? styles.mpItemActive : ''}`}
