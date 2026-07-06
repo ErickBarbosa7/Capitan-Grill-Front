@@ -46,7 +46,7 @@ export default function LocationSection() {
       </div>
 
       <div className={styles.infoStrip}>
-        <a href="tel:+524152826863" className={styles.infoItem}>
+        <a href="tel:+524621740541" className={styles.infoItem}>
           <div className={styles.infoIcon}>
             <Phone size={16} />
           </div>

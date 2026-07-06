@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, MessageCircle } from 'lucide-react';
 import tb from './TopBar.module.css';
 
-const WHATSAPP_URL = 'https://wa.me/524152826863?text=Hola!%20Quisiera%20informes';
+const WHATSAPP_URL = 'https://wa.me/524621740541?text=Hola!%20Quisiera%20informes';
 
 export default function TopBar() {
   const { t, i18n } = useTranslation();

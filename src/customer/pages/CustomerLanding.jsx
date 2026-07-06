@@ -17,7 +17,7 @@ import { optimizeVideoUrl } from '../../utils/cloudinary';
 const CORTES_VIDEO = optimizeVideoUrl('https://res.cloudinary.com/gn00jygp/video/upload/v1/videos/cortes');
 const UBI_VIDEO = optimizeVideoUrl('https://res.cloudinary.com/gn00jygp/video/upload/v1/videos/ubi');
 
-const WHATSAPP_URL = 'https://wa.me/524152826863?text=Hola!%20Quisiera%20informes';
+const WHATSAPP_URL = 'https://wa.me/524621740541?text=Hola!%20Quisiera%20informes';
 const FACEBOOK_URL = 'https://www.facebook.com/people/Capitangrill/100064038762789/';
 const INSTAGRAM_URL = 'https://www.instagram.com/capitan_grill.sma2026';
 
