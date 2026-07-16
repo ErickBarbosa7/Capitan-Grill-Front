@@ -262,12 +262,12 @@
 .heroText { max-width: 480px; }
 .heroTitle {
   font-family: var(--font-serif);
-  font-size: clamp(3.8rem, 14vw, 7rem);
+  font-size: clamp(4.5rem, 16vw, 8rem);
   font-weight: 600;
   font-style: italic;
   color: var(--text-on-light);
-  line-height: 0.88;
-  letter-spacing: -0.04em;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
   margin: 0 0 1.25rem;
 }
 .heroTitleAccent { color: var(--gold); display: block; }
@@ -281,12 +281,13 @@
 }
 .heroTagline {
   font-family: var(--font-serif);
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
   font-style: italic;
   color: rgba(var(--rgb-text-on-light), 0.55);
   line-height: 1.4;
   margin: 0 0 1.5rem;
   letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 .heroActions {
   display: flex;
