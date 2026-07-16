@@ -1,6 +1,3 @@
-/* ═══════════════════════════════════════════
-   PAGE & LAYOUT BASE
-═══════════════════════════════════════════ */
 .page {
   background: var(--bg-primary);
   min-height: 100dvh;
@@ -12,9 +9,6 @@
   padding: 3.5rem 1.25rem 4rem;
 }
 
-/* ═══════════════════════════════════════════
-   HEADER (Estilo heredado de LugarPage)
-═══════════════════════════════════════════ */
 .pageHeader {
   max-width: 620px;
   margin-bottom: 3.5rem;
@@ -62,18 +56,12 @@
   margin: 0;
 }
 
-/* ═══════════════════════════════════════════
-   MAPA / LOCATION SECTION
-═══════════════════════════════════════════ */
 .locationWrapper {
   margin-bottom: 2.5rem;
   border-radius: 14px;
   overflow: hidden;
 }
 
-/* ═══════════════════════════════════════════
-   BENTO GRID (Adaptado para Video Vertical 9:16)
-═══════════════════════════════════════════ */
 .bentoGrid {
   display: grid;
   grid-template-columns: 1fr;
@@ -82,10 +70,7 @@
 
 @media (min-width: 768px) {
   .bentoGrid {
-    /* 300px es el ancho ideal para un video formato celular.
-       La otra tarjeta toma el resto (1fr). */
     grid-template-columns: 300px 1fr;
-    /* La altura se ajustará basada en la relación 9:16 de los 300px */
   }
 }
 
@@ -101,20 +86,17 @@
 
 .bentoCell:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
+  box-shadow: var(--shadow-card-hover);
 }
 
-/* --- Celda del Video Vertical --- */
 .videoCell {
-  background: var(--text-primary); /* Fondo oscuro por si carga lento */
+  background: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Forzamos la relación de aspecto de TikTok/Reels */
   aspect-ratio: 9 / 16;
   width: 100%;
-  /* En móvil limitamos el ancho para que no se haga un celular gigante */
-  max-width: 380px; 
+  max-width: 380px;
   margin: 0 auto;
 }
 
@@ -125,7 +107,6 @@
   }
 }
 
-/* El video real cuando lo insertes */
 .realVideo {
   position: absolute;
   top: 0;
@@ -137,7 +118,6 @@
   z-index: 1;
 }
 
-/* El placeholder actual */
 .videoPlaceholder {
   position: relative;
   z-index: 2;
@@ -174,7 +154,6 @@
   color: var(--gold);
 }
 
-/* --- Celda de Contacto --- */
 .contactCell {
   padding: 2.5rem;
   background: var(--bg-elevated);
@@ -183,9 +162,6 @@
   justify-content: center;
 }
 
-/* ═══════════════════════════════════════════
-   BOTONES Y REDES SOCIALES
-═══════════════════════════════════════════ */
 .actionsWrapper {
   display: flex;
   align-items: center;
@@ -205,7 +181,7 @@
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid var(--border-accent, rgba(201, 168, 124, 0.4));
+  border: 1px solid var(--border-accent);
   color: var(--text-primary);
   background: transparent;
   transition: all 0.2s ease;
@@ -213,7 +189,7 @@
 
 .socialIcon:hover {
   background: var(--gold);
-  color: #fff;
+  color: var(--text-primary);
   border-color: var(--gold);
   transform: translateY(-2px);
 }
@@ -223,26 +199,24 @@
   align-items: center;
   gap: 0.5rem;
   background: var(--gold);
-  color: var(--text-primary);
+  color: var(--text-on-light);
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.9rem;
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 1rem;
   border-radius: 8px;
   text-decoration: none;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(201, 168, 124, 0.2);
+  box-shadow: 0 4px 12px rgba(var(--rgb-gold), 0.2);
+  width: fit-content;
 }
 
 .btnPrimary:hover {
   background: var(--gold-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(201, 168, 124, 0.3);
+  box-shadow: 0 6px 16px rgba(var(--rgb-gold), 0.3);
 }
 
-/* ═══════════════════════════════════════════
-   MEDIA QUERIES (Desktop Grandes)
-═══════════════════════════════════════════ */
 @media (min-width: 1024px) {
   .content {
     padding: 3.5rem 3rem 6rem;

@@ -80,6 +80,7 @@
       "viewMenu": "Ver Menú",
       "reserve": "Reservar"
     },
+    "topBarTagline": "Cortes de carne • Pollos Asados • Boutique de Carnes",
     "place": {
       "eyebrow": "San Miguel de Allende",
       "title": "Nuestro Lugar",
@@ -101,21 +102,21 @@
       "title": "Cómo llegar",
       "desc": "Estamos sobre la carretera a Atotonilco, a solo 10 minutos del centro de San Miguel de Allende. Sigue el video para llegar sin contratiempos.",
       "videoPlaceholder": "Video de cómo llegar",
-      "reserve": "Reservar"
+      "reserve": "Contáctanos"
     },
     "footer": {
       "tagline": "Cortes elegidos por ti, cocinados al momento en San Miguel de Allende.",
       "explore": "Explorar",
       "visitUs": "Visítanos",
       "address": "Rumbo a Atotonilco, San Miguel de Allende",
-      "reserveWhatsApp": "Reservar por WhatsApp"
+      "reserveWhatsApp": "Más información en WhatsApp"
     }
   },
   "menuPage": {
     "eyebrow": "La Selección",
     "titleBefore": "Nuestro",
     "titleAccent": "Menú",
-    "lead": "Explora nuestra variedad de cortes de primera, guarniciones artesanales y bebidas preparadas para complementar tu experiencia al máximo."
+    "lead": "Explora nuestra variedad de cortes de primera y bebidas preparadas para complementar tu experiencia al máximo."
   },
   "lugarPage": {
     "eyebrow": "El espacio",
@@ -164,8 +165,8 @@
   "location": {
     "title": "Ubicación",
     "address": "37880 Santuario de Atotonilco, San Miguel de Allende, Gto.",
-    "phone": "+52 462-174-0541",
-    "hours": "Miércoles a Domingo 12-9 pm",
+    "phone": "+52 415 158 3036",
+    "hours": "Miércoles a Domingo\n12:00 pm a 9:00 pm",
 "tapToChat": "Escríbenos directo",
     "getDirectionsMaps": "Google Maps",
     "getDirectionsWaze": "Waze",
@@ -223,7 +224,7 @@
   "social": {
     "title": "Síguenos",
 "description": "Visítanos en Facebook para ver fotos, promociones y novedades de Capitán Grill.",
-    "reserveWhatsApp": "Reservar por WhatsApp",
+    "reserveWhatsApp": "Más información en WhatsApp",
     "followInstagram": "Seguir en Instagram",
     "writeUs": "Escríbenos directo",
     "follow": "Síguenos"

@@ -25,6 +25,18 @@ const MAPS_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37
 const MAPS_REDIRECT_URL = 'https://www.google.com/maps/search/?api=1&query=21.020359,-100.793347';
 const WAZE_REDIRECT_URL = 'https://www.waze.com/ul?ll=21.020359,-100.793347&navigate=yes';
 
+function isOpenNow() {
+  const now = new Date();
+  const day = now.getDay();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const totalMinutes = hour * 60 + minute;
+  const openDays = [0, 3, 4, 5, 6];
+  const open = 12 * 60;
+  const close = 21 * 60;
+  return openDays.includes(day) && totalMinutes >= open && totalMinutes < close;
+}
+
 function FbIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
@@ -122,10 +134,6 @@ export default function CustomerLanding() {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleLang = () => {
-    i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
-  };
-
   const goTo = (path) => {
     setMenuOpen(false);
     navigate(path);
@@ -162,24 +170,20 @@ export default function CustomerLanding() {
           <button className={styles.burger} onClick={() => setMenuOpen(o => !o)} aria-label={t('aria.menu')}>
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-          <nav className={styles.desktopNav}>
-            {navItems.map((item) => (
-              <button key={item.path} className={`${styles.navLink} ${item.path === location.pathname ? styles.navLinkActive : ''}`} onClick={() => goTo(item.path)}>
-                {item.label}
-              </button>
-            ))}
-          </nav>
         </div>
-        <span className={styles.topBarLogo}>Capitán Grill</span>
+        <button className={styles.topBarLogo} onClick={() => goTo('/inicio')}>Capitán Grill</button>
+        <nav className={styles.desktopNav}>
+          {navItems.map((item) => (
+            <button key={item.path} className={`${styles.navLink} ${item.path === location.pathname ? styles.navLinkActive : ''}`} onClick={() => goTo(item.path)}>
+              {item.label}
+            </button>
+          ))}
+        </nav>
         <div className={styles.topBarRight}>
-          <button className={styles.langToggle} onClick={toggleLang} aria-label={t('aria.langToggle')}>
-            <span className={`${styles.lang} ${i18n.language === 'es' ? styles.langActive : ''}`}>ES</span>
-            <span className={styles.langSep}>/</span>
-            <span className={`${styles.lang} ${i18n.language === 'en' ? styles.langActive : ''}`}>EN</span>
-          </button>
-          <a href={WHATSAPP_URL} className={styles.topBarWa} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-            <MessageCircle size={18} />
-          </a>
+          <select className={styles.langSelect} value={i18n.language} onChange={(e) => i18n.changeLanguage(e.target.value)} aria-label={t('aria.langToggle')}>
+            <option value="es">ES</option>
+            <option value="en">EN</option>
+          </select>
         </div>
       </header>
 
@@ -199,10 +203,18 @@ export default function CustomerLanding() {
         <div className={styles.heroOverlay} />
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
+              {/* Horario destacado en el hero */}
+              <div className={styles.heroHoursBadge}>
+                <span className={isOpenNow() ? styles.heroHoursDot : `${styles.heroHoursDot} ${styles.heroHoursDotClosed}`} />
+                <Clock size={13} />
+                <span>{isOpenNow() ? 'Abierto ahora' : 'Cerrado'}</span>
+              </div>
+
             <h1 className={styles.heroTitle}>
               Capitán<br />
               <span className={styles.heroTitleAccent}>Grill</span>
             </h1>
+            <p className={styles.heroTagline}>{t('landing.topBarTagline')}</p>
             <p className={styles.heroDesc}>
               {t('landing.hero.desc')}
             </p>
@@ -220,45 +232,41 @@ export default function CustomerLanding() {
       </section>
 
       {/* ─── 2. NUESTRO LUGAR ─── */}
-      <section className={styles.placeSection}>
-        <div className={styles.placeInner}>
+      <section className={`${styles.sectionDark} ${styles.clipA} ${styles.placeSection}`}>
+          <div className={styles.placeInner}>
           <div className={styles.placeMeta}>
             <span className={styles.sectionEyebrow}>{t('landing.place.eyebrow')}</span>
             <h2 className={styles.sectionTitle}>{t('landing.place.title')}</h2>
           </div>
-          <div className={styles.bentoGrid}>
-            <div className={`${styles.gridCell} ${styles.mainCell}`}>
-              <div className={styles.mediaWrapper}>
-                <img src={lugarImg} alt="Capitán Grill" className={styles.mediaItem} />
-              </div>
+          <div className={styles.mosaic}>
+            <div className={styles.mosaicBg}>
+              <img src={lugarImg} alt="Capitán Grill" className={styles.mosaicImg} />
             </div>
-            <div className={`${styles.gridCell} ${styles.textCell}`}>
-              <h3 className={styles.textCellTitle}>{t('landing.place.cardTitle')}</h3>
-              <p className={styles.textCellDesc}>
+            <div className={styles.mosaicCard}>
+              <h3 className={styles.mosaicCardTitle}>{t('landing.place.cardTitle')}</h3>
+              <p className={styles.mosaicCardDesc}>
                 {t('landing.place.cardDesc')}
               </p>
               <button className={styles.btnLink} onClick={() => goTo('/lugar')}>
                 {t('landing.place.viewGallery')}
               </button>
             </div>
-            <div className={styles.gridCell}>
-              <div className={styles.mediaWrapper}>
-                <img src={lugar3Img} alt="Capitán Grill ambiente" className={styles.mediaItem} />
-              </div>
+            <div className={styles.mosaicFloat}>
+              <img src={lugar3Img} alt="Capitán Grill ambiente" className={styles.mosaicFloatImg} />
             </div>
           </div>
         </div>
       </section>
 
       {/* ─── 3. LOS FAVORITOS DEL CAPITÁN ─── */}
-      <section className={styles.favSection}>
+      <section className={`${styles.sectionLight} ${styles.clipB} ${styles.favSection}`}>
         <div className={styles.favInner}>
-          
+
           <div className={styles.favHeaderRow}>
             <span className={styles.sectionEyebrow}>{t('landing.favorites.eyebrow')}</span>
             <h2 className={styles.sectionTitle}>{t('landing.favorites.title')}</h2>
           </div>
-          
+
           <div className={styles.favBtnWrap}>
             <button className={styles.btnPrimary} onClick={() => goTo('/menu')}>
               {t('landing.favorites.viewMenu')}
@@ -269,7 +277,7 @@ export default function CustomerLanding() {
       </section>
 
       {/* ─── 4. UBICACIÓN & CONTACTO ─── */}
-      <section className={styles.wideSection}>
+      <section className={`${styles.sectionDark} ${styles.clipA} ${styles.wideSection}`}>
         <div className={styles.wideInner}>
           <div className={styles.locationLayout}>
             <div className={styles.locationTextCol}>
@@ -277,6 +285,18 @@ export default function CustomerLanding() {
               <p className={styles.locationDesc}>
                 {t('landing.location.desc')}
               </p>
+
+              {/* Horario destacado */}
+              <div className={styles.hoursBadge}>
+                <div className={styles.hoursBadgeIcon}>
+                  <Clock size={18} />
+                </div>
+                <div className={styles.hoursBadgeText}>
+                  <span className={styles.hoursBadgeLabel}>{t('location.hoursLabel')}</span>
+                  <span className={styles.hoursBadgeValue}>{t('location.hours')}</span>
+                </div>
+              </div>
+
               <div className={styles.locationActions}>
                 <a href={MAPS_REDIRECT_URL} target="_blank" rel="noopener noreferrer" className={styles.btnMaps}>
                   Google Maps
@@ -309,7 +329,7 @@ export default function CustomerLanding() {
       </section>
 
       {/* ─── 5. CÓMO LLEGAR ─── */}
-      <section className={styles.locationSectionDark}>
+      <section className={`${styles.sectionLight} ${styles.clipB} ${styles.locationSectionDark}`}>
         <div className={styles.wideInner}>
           <div className={`${styles.locationLayout} ${styles.locationLayoutReverse}`}>
             <div className={styles.videoCol}>
@@ -328,7 +348,7 @@ export default function CustomerLanding() {
               <p className={styles.locationDesc}>
                 {t('landing.directions.desc')}
               </p>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.btnPrimary} style={{ background: 'var(--gold)', color: 'var(--text-primary)' }}>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.btnPrimary} style={{ alignSelf: 'flex-start' }}>
                 <MessageCircle size={18} />
                 {t('landing.directions.reserve')}
               </a>

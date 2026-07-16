@@ -1,15 +1,12 @@
-/* ─── FILA DE PLATILLO — como carta de restaurante, no delivery card ─── */
 .card {
   display: flex;
   flex-direction: column;
   padding: 0.85rem 0;
-  border-bottom: 1px solid rgba(230, 226, 216, 0.7);
+  border-bottom: 1px solid rgba(var(--rgb-text), 0.08);
   gap: 0.2rem;
-  /* Sin background, sin border-radius, sin shadow */
   transition: opacity 0.15s;
 }
 
-/* Última fila sin borde inferior */
 .card:last-child {
   border-bottom: none;
 }
@@ -22,29 +19,28 @@
 }
 
 .name {
-  font-family: var(--font-heading, 'Bricolage Grotesque');
+  font-family: var(--font-heading);
   font-size: 0.92rem;
   font-weight: 600;
-  color: var(--text-primary, #2C2A29);
+  color: var(--text-primary);
   line-height: 1.2;
   margin: 0;
   letter-spacing: -0.01em;
 }
 
-/* Precio: neutro, mismo peso que el nombre — no dorado */
 .price {
-  font-family: var(--font-body, 'Inter');
+  font-family: var(--font-body);
   font-size: 0.88rem;
   font-weight: 600;
-  color: var(--text-secondary, #5E5A56);
+  color: var(--text-secondary);
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .desc {
-  font-family: var(--font-body, 'Inter');
+  font-family: var(--font-body);
   font-size: 0.75rem;
-  color: #8A8680;
+  color: var(--text-muted);
   line-height: 1.55;
   margin: 0;
   max-width: 90%;
@@ -55,13 +51,13 @@
 }
 
 .badge {
-  font-family: var(--font-body, 'Inter');
+  font-family: var(--font-body);
   font-size: 0.58rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   background: transparent;
-  color: #8A8680;
+  color: var(--text-muted);
   padding: 0;
   margin-top: 0.15rem;
 }

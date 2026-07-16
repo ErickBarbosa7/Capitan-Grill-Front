@@ -15,6 +15,7 @@ import EditItemPage from './admin/pages/EditItemPage'
 import CategoryManager from './admin/pages/CategoryManager'
 import ActivityPage from './admin/pages/ActivityPage'
 import ExpensesPage from './admin/pages/ExpensesPage'
+import CashClosePage from './admin/pages/CashClosePage'
 import ProfilePage from './admin/pages/ProfilePage'
 import UsersPage from './admin/pages/UsersPage'
 
@@ -46,6 +47,7 @@ export default function AppRoutes() {
         <Route path="categorias" element={<CategoryManager />} />
         <Route path="actividad" element={<ActivityPage />} />
         <Route path="gastos" element={<ExpensesPage />} />
+        <Route path="cortes" element={<CashClosePage />} />
         <Route path="perfil" element={<ProfilePage />} />
         <Route path="usuarios" element={<UsersPage />} />
       </Route>

@@ -21,7 +21,7 @@
 .heroBg {
   position: absolute;
   inset: 0;
-  background-color: #2C2420;
+  background-color: var(--bg-primary);
   background-image: url('/src/assets/img/Lugar.jpg');
   background-size: cover;
   background-position: center 30%;
@@ -33,9 +33,9 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(20, 17, 14, 0.92) 0%,
-    rgba(20, 17, 14, 0.60) 40%,
-    rgba(20, 17, 14, 0.25) 70%,
+    rgba(var(--rgb-primary), 0.92) 0%,
+    rgba(var(--rgb-primary), 0.60) 40%,
+    rgba(var(--rgb-primary), 0.25) 70%,
     transparent 100%
   );
 }
@@ -58,7 +58,7 @@
   font-size: clamp(3.8rem, 14vw, 7rem);
   font-weight: 600;
   font-style: italic;
-  color: #FFFFFF;
+  color: var(--text-primary);
   line-height: 0.88;
   letter-spacing: -0.04em;
   margin: 0 0 1.25rem;
@@ -72,7 +72,7 @@
 .heroDesc {
   font-family: var(--font-body);
   font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(var(--rgb-text), 0.7);
   line-height: 1.75;
   margin: 0 0 2rem;
   max-width: 40ch;
@@ -117,8 +117,8 @@
   gap: 0.45rem;
   padding: 0.85rem 1.6rem;
   background: transparent;
-  color: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(var(--rgb-text), 0.9);
+  border: 1px solid rgba(var(--rgb-text), 0.3);
   border-radius: 6px;
   font-family: var(--font-body);
   font-size: 0.88rem;
@@ -131,8 +131,8 @@
 }
 
 .btnSecondary:hover {
-  border-color: rgba(255, 255, 255, 0.7);
-  color: #FFFFFF;
+  border-color: rgba(var(--rgb-text), 0.7);
+  color: var(--text-primary);
 }
 
 /* ═══════════════════════════════════════════
@@ -310,7 +310,7 @@
 ═══════════════════════════════════════════ */
 .spaceGrid {
   display: grid;
-  grid-template-columns: 1fr; /* Mobile-first: 1 columna */
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
@@ -378,12 +378,12 @@
 
 .locationGrid {
   display: flex;
-  flex-direction: column; /* Celular por defecto */
+  flex-direction: column;
   gap: 2rem;
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: 12px;
-  padding: 1.5rem; /* Padding ajustado para móvil */
+  padding: 1.5rem;
   overflow: hidden;
   box-shadow: var(--shadow-card);
 }
@@ -399,9 +399,9 @@
 
 .locationHeading {
   font-family: var(--font-heading);
-  font-size: clamp(2.2rem, 8vw, 3.5rem); /* Escala en pantallas grandes */
+  font-size: clamp(2.2rem, 8vw, 3.5rem);
   font-weight: 700;
-  color: #64151C; 
+  color: var(--gold);
   text-transform: uppercase;
   line-height: 1.1;
   margin: 0;
@@ -421,8 +421,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #9A2A2B;
-  color: #FFFFFF;
+  background-color: var(--gold);
+  color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 600;
@@ -437,7 +437,7 @@
 }
 
 .locationButton:hover {
-  background-color: #7A2122;
+  background-color: var(--gold-hover);
   transform: translateY(-1px);
 }
 
@@ -447,7 +447,7 @@
 
 .locationMapColumn {
   width: 100%;
-  min-height: 250px; /* Altura más baja para celular */
+  min-height: 250px;
   position: relative;
   border-radius: 8px;
   overflow: hidden;
@@ -501,14 +501,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--white);
   text-decoration: none;
   transition: opacity 0.2s, transform 0.15s;
 }
 
-.socialIconFb { background: #1877F2; }
-.socialIconIg { background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF); }
-.socialIconWa { background: #25D366; }
+.socialIconFb { background: var(--fb); }
+.socialIconIg { background: linear-gradient(45deg, var(--ig-start), var(--ig-mid), var(--ig-end)); }
+.socialIconWa { background: var(--wa); }
 
 .socialIcon:hover {
   opacity: 0.85;
@@ -582,7 +582,6 @@
   }
   .heroDesc { max-width: 44ch; }
 
-  /* Info Strip a fila */
   .infoStrip {
     flex-direction: row;
   }
@@ -595,12 +594,10 @@
     height: auto;
   }
   
-  /* Space Grid a 2 columnas */
   .spaceGrid {
     grid-template-columns: 1fr 1fr;
   }
 
-  /* Ubicación a fila (lado a lado) */
   .locationGrid {
     flex-direction: row;
     align-items: stretch;
@@ -636,7 +633,6 @@
     padding: 4rem 2.5rem 2rem;
   }
 
-  /* Ajustes finales para Ubicación en portátiles/pantallas grandes */
   .locationGrid {
     padding: 3.5rem;
     gap: 4rem;

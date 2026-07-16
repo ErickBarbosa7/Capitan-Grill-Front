@@ -27,8 +27,8 @@
   background: linear-gradient(
     to bottom,
     transparent 30%,
-    rgba(247, 245, 240, 0.65) 75%,
-    rgba(247, 245, 240, 0.95) 100%
+    rgba(var(--rgb-text), 0.65) 75%,
+    rgba(var(--rgb-text), 0.95) 100%
   );
   pointer-events: none;
 }
@@ -95,12 +95,12 @@
 
 .btnMaps {
   background: var(--text-primary);
-  color: #fff;
+  color: var(--bg-primary);
 }
 
 .btnWaze {
-  background: #33CCFF;
-  color: #fff;
+  background: var(--waze);
+  color: var(--bg-primary);
 }
 
 .btnMaps:hover,
@@ -111,8 +111,8 @@
 .infoStrip {
   display: flex;
   flex-direction: column;
-  background: var(--border-light, #E6E2D8);
-  border: 1px solid var(--border-light, #E6E2D8);
+  background: var(--border-light);
+  border: 1px solid var(--border-light);
   border-radius: 14px;
   overflow: hidden;
 }
@@ -122,24 +122,24 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.1rem;
-  background: #FFFFFF;
+  background: var(--bg-card);
   text-decoration: none;
   transition: background 0.15s;
 }
 
 .infoItem + .infoItem {
-  border-top: 1px solid var(--border-light, #E6E2D8);
+  border-top: 1px solid var(--border-light);
 }
 
 .infoItem:hover {
-  background: rgba(201, 168, 124, 0.04);
+  background: rgba(var(--rgb-gold), 0.04);
 }
 
 .infoIcon {
   width: 36px;
   height: 36px;
   border-radius: 8px;
-  background: rgba(201, 168, 124, 0.1);
+  background: rgba(var(--rgb-gold), 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -159,14 +159,14 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #8A8680;
+  color: var(--text-muted);
 }
 
 .infoValue {
   font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 500;
-  color: var(--text-primary, #2C2A29);
+  color: var(--text-primary);
 }
 
 @media (min-width: 1024px) {
@@ -180,6 +180,6 @@
 
   .infoItem + .infoItem {
     border-top: none;
-    border-left: 1px solid var(--border-light, #E6E2D8);
+    border-left: 1px solid var(--border-light);
   }
 }

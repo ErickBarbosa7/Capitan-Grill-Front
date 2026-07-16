@@ -80,6 +80,7 @@
       "viewMenu": "View Menu",
       "reserve": "Reserve"
     },
+    "topBarTagline": "Steak cuts • Rotisserie Chicken • Meat Boutique",
     "place": {
       "eyebrow": "San Miguel de Allende",
       "title": "Our Place",
@@ -101,21 +102,21 @@
       "title": "How to get here",
       "desc": "We are on the road to Atotonilco, just 10 minutes from downtown San Miguel de Allende. Follow the video to arrive without trouble.",
       "videoPlaceholder": "Video on how to get here",
-      "reserve": "Reserve"
+      "reserve": "Contact us"
     },
     "footer": {
       "tagline": "Cuts chosen by you, cooked on the spot in San Miguel de Allende.",
       "explore": "Explore",
       "visitUs": "Visit Us",
       "address": "Road to Atotonilco, San Miguel de Allende",
-      "reserveWhatsApp": "Reserve via WhatsApp"
+      "reserveWhatsApp": "More info on WhatsApp"
     }
   },
   "menuPage": {
     "eyebrow": "The Selection",
     "titleBefore": "Our",
     "titleAccent": "Menu",
-    "lead": "Explore our variety of prime cuts, artisan sides, and prepared drinks to complement your experience to the fullest."
+    "lead": "Explore our variety of prime cuts and prepared drinks to complement your experience to the fullest."
   },
   "lugarPage": {
     "eyebrow": "The Space",
@@ -164,8 +165,8 @@
   "location": {
     "title": "Location",
     "address": "37880 Santuario de Atotonilco, San Miguel de Allende, Gto.",
-    "phone": "+52 462-174-0541",
-    "hours": "Wednesday to Sunday 12-9 pm",
+    "phone": "+52 415 158 3036",
+    "hours": "Wednesday to Sunday\n12:00 pm to 9:00 pm",
 "tapToChat": "Write us directly",
     "getDirectionsMaps": "Google Maps",
     "getDirectionsWaze": "Waze",
@@ -223,7 +224,7 @@
   "social": {
     "title": "Follow Us",
 "description": "Visit us on Facebook to see photos, promotions and news from Capitán Grill.",
-    "reserveWhatsApp": "Reserve via WhatsApp",
+    "reserveWhatsApp": "More info on WhatsApp",
     "followInstagram": "Follow on Instagram",
     "writeUs": "Write us directly",
     "follow": "Follow Us"

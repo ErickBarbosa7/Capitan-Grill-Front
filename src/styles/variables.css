@@ -3,22 +3,68 @@
   --font-heading: 'Bricolage Grotesque', sans-serif;
   --font-serif: 'Playfair Display', serif;
 
-  --bg-primary: #F7F5F0;
-  --bg-card: #FFFFFF;
-  --bg-elevated: #F0EDE6;
+  /* Fondos (Ahora claros y orgánicos) */
+  --bg-primary: #F4EFE8;     /* Un crema cálido estilo papel o pergamino */
+  --bg-card: #FFFFFF;        /* Blanco puro para que las tarjetas resalten y brillen */
+  --bg-elevated: #EBE3D7;    /* Un beige un pelín más oscuro para contraste suave */
 
-  --text-primary: #2C2A29;
-  --text-secondary: #5E5A56;
-  --text-muted: #8A8680;
+  /* Texto (Ahora oscuros para legibilidad sobre claro) */
+  --text-primary: #2B2320;   /* Café espresso, casi negro, muy elegante */
+  --text-secondary: #5A4E46; /* Café medio para descripciones */
+  --text-muted: #8A7C6E;     /* Taupe/Grisáceo cálido para etiquetas secundarias */
 
-  --gold: #C9A87C;
-  --gold-hover: #B8956A;
+  /* Café cuero / Acentos (Ajustado para vibrar sobre fondos claros) */
+  --gold: #8c5d41;           /* Tono óxido/cuero vibrante, abre el apetito (corte de carne) */
+  --gold-hover: #b67857;
 
-  --green: #3A5A40;
+  /* Verde bosque (Excelente acento para parrilla/campo) */
+  --green: #405C48;
+  --green-dark: #2F4535;
 
-  --border-light: #E6E2D8;
-  --border-accent: rgba(201, 168, 124, 0.25);
+  /* Bordes sutiles adaptados a fondo claro */
+  --border-light: #DFD5C6;
+  --border-accent: rgba(176, 93, 45, 0.25); /* Tono cuero semitransparente */
 
-  --shadow-card: 0 4px 20px rgba(44, 42, 41, 0.08);
-  --shadow-card-hover: 0 8px 32px rgba(44, 42, 41, 0.14);
+  /* Sombras adaptadas a fondos claros (mucho más suaves y difuminadas) */
+  --shadow-card: 0 10px 30px rgba(43, 35, 32, 0.06);
+  --shadow-card-hover: 0 16px 40px rgba(43, 35, 32, 0.12);
+
+  /* Componentes RGB para usar con rgba() en tu código */
+  --rgb-primary: 244, 239, 232;
+  --rgb-text: 43, 35, 32;
+  --rgb-gold: 176, 93, 45;
+  --rgb-elevated: 235, 227, 215;
+
+  /* Marcas redes sociales */
+  --fb: #1877F2;
+  --ig-start: #F58529;
+  --ig-mid: #DD2A7B;
+  --ig-end: #8134AF;
+  --wa: #25D366;
+  --waze: #33CCFF;
+
+  /* Estados */
+  --status-green: #22C55E; /* Ligeramente más oscuro para leerse bien sobre claro */
+  --status-red: #EF4444;
+
+  /* Secciones alternadas (INVERTIDO: Aquí guardamos tonos oscuros para 
+     que las secciones que rompen el diseño sigan contrastando) */
+  --bg-light: #241E1A; 
+  --text-on-light: #F6F2EC;
+  --text-muted-on-light: #D6C8B8;
+  --border-on-light: #3B332E;
+  --bg-card-light: #2F2823;
+
+  /* Neutro */
+  --white: #FFFFFF;
+
+  /* RGB de Secciones alternadas */
+  --rgb-light: 36, 30, 26;
+  --rgb-text-on-light: 246, 242, 236;
+
+  /* RGB de marcas y estados */
+  --rgb-wa: 37, 211, 102;
+  --rgb-waze: 51, 204, 255;
+  --rgb-status-green: 34, 197, 94;
+  --rgb-status-red: 239, 68, 68;
 }

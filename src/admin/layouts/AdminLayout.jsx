@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import {
-  BarChart3, ClipboardList, Receipt,
+  BarChart3, ClipboardList, Calculator, Receipt,
   History, Users, MoreHorizontal,
   LogOut, ExternalLink, User
 } from 'lucide-react'
@@ -12,8 +12,9 @@ import styles from './AdminLayout.module.css'
 /* ─── Links principales ─── */
 const mainLinks = [
   { to: '/admin',        icon: <BarChart3 size={17} />,    label: 'Inicio' },
-  { to: '/admin/menu',   icon: <ClipboardList size={17} />, label: 'Menú',  badge: 'IA' },
-  { to: '/admin/gastos', icon: <Receipt size={17} />,       label: 'Gastos' },
+  { to: '/admin/menu',   icon: <ClipboardList size={17} />,  label: 'Menú',  badge: 'IA' },
+  { to: '/admin/cortes', icon: <Calculator size={17} />,     label: 'Cortes' },
+  { to: '/admin/gastos', icon: <Receipt size={17} />,        label: 'Gastos' },
 ]
 
 /* ─── Links secundarios ─── */

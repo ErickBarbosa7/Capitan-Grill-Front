@@ -3,15 +3,14 @@
   flex-direction: column;
 }
 
-/* ─── CHIP BAR — más pegada al top bar (52px) ─── */
 .chipBar {
   position: sticky;
-  top: 52px;
+  top: 56px;
   z-index: 50;
-  background: rgba(247, 245, 240, 0.95);
+  background: rgba(var(--rgb-primary), 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-light, #E6E2D8);
+  border-bottom: 1px solid var(--border-light);
   padding: 0.55rem 1rem;
 }
 
@@ -28,12 +27,11 @@
 
 .chip {
   background: transparent;
-  border: 1px solid rgba(44, 42, 41, 0.15);
-  color: var(--text-secondary, #5E5A56);
+  border: 1px solid rgba(var(--rgb-text), 0.15);
+  color: var(--text-secondary);
   padding: 0.4rem 1rem;
-  /* Recto en lugar de píldora — más rústico */
   border-radius: 6px;
-  font-family: var(--font-body, 'Inter');
+  font-family: var(--font-body);
   font-weight: 500;
   font-size: 0.78rem;
   cursor: pointer;
@@ -46,23 +44,21 @@
 }
 
 .chip:hover {
-  border-color: var(--gold, #C9A87C);
-  color: var(--text-primary, #2C2A29);
+  border-color: var(--gold);
+  color: var(--text-primary);
 }
 
-/* Activo: oscuro con fondo carbón — no dorado */
 .activeChip {
-  background: var(--text-primary, #2C2A29);
-  color: #F7F5F0;
-  border-color: var(--text-primary, #2C2A29);
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
 }
 
 .activeChip:hover {
-  background: var(--text-primary, #2C2A29);
-  color: #F7F5F0;
+  background: var(--text-primary);
+  color: var(--bg-primary);
 }
 
-/* ─── MAIN ─── */
 .main {
   padding: 1.5rem 1rem 2.5rem;
   max-width: 600px;
